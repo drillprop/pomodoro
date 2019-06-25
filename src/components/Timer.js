@@ -19,7 +19,7 @@ const Time = styled.h1`
   display: center;
   font-size: 6rem;
   margin: 0;
-  line-height: 0.7em;
+  line-height: 0.75em;
 `;
 
 const Timer = () => {
