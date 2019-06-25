@@ -7,7 +7,9 @@ const GlobalStyle = createGlobalStyle`
 body {
   background: ${background};
   color: ${primary};
-  font-family:${primFont}
+  font-family:${primFont};
+  margin:0;
+  padding:0;
 }
 `;
 
