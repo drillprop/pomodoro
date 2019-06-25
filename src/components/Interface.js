@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Timer from './Timer';
 
 const InterfaceWrapper = styled.main`
   display: grid;
@@ -8,7 +9,11 @@ const InterfaceWrapper = styled.main`
 `;
 
 const Interface = () => {
-  return <InterfaceWrapper />;
+  return (
+    <InterfaceWrapper>
+      <Timer />
+    </InterfaceWrapper>
+  );
 };
 
 export default Interface;
