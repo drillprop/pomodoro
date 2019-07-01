@@ -14,7 +14,7 @@ const ControlsWrapper = styled.div`
   grid-row: 4/5;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 100px;
+  grid-template-rows: 60px;
 `;
 const ResetandRetryButtons = styled.button`
   border: none;
@@ -25,19 +25,18 @@ const ResetandRetryButtons = styled.button`
   font-family: ${secondFont};
   font-weight: 700;
   text-transform: uppercase;
-  grid-row: 1;
   align-self: center;
   grid-row: 1;
-  grid-column: 3;
 `;
 const ResetButton = styled(ResetandRetryButtons)`
   grid-column: 1;
   border-radius: 21px 0px 0px 21px;
+  padding-right: 1em;
 `;
 const RetryButtton = styled(ResetandRetryButtons)`
   border-radius: 0 21px 21px 0;
   grid-column: 3;
-  align-self: center;
+  padding-left: 1em;
 `;
 const PlayButton = styled.button`
   position: relative;
