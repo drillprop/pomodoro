@@ -17,18 +17,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts(x?)$/,
-        exclude: /(node_modules)/,
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
         options: {
           getCustomTransformers: () => ({
             before: [styledComponentsTransformer]
           })
-        },
-        use: [
-          {
-            loader: 'awesome-typescript-loader'
-          }
-        ]
+        }
       },
       {
         test: /\.js$/,
