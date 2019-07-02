@@ -3,13 +3,25 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
   module: {
     rules: [
+      {
+        test: /\.ts(x?)$/,
+        exclude: /(node_modules)/,
+        use: [
+          {
+            loader: 'awesome-typescript-loader'
+          }
+        ]
+      },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
