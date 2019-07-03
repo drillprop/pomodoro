@@ -23,7 +23,7 @@ const Time = styled.h1`
   line-height: 0.75em;
 `;
 
-const Timer = () => {
+const Timer: React.FC = () => {
   return (
     <TimerWrapper>
       <TimerFaze>interval</TimerFaze>

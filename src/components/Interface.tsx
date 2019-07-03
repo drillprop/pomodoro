@@ -10,7 +10,7 @@ const InterfaceWrapper = styled.main`
   height: 100vh;
 `;
 
-const Interface = () => {
+const Interface: React.FC = () => {
   return (
     <InterfaceWrapper>
       <Timer />

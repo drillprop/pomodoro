@@ -1,6 +1,11 @@
 import React from 'react';
 
-const Icon = ({ name, color }) => {
+interface IconProps {
+  name: string;
+  color: string;
+}
+
+const Icon = ({ name, color }: IconProps) => {
   switch (name) {
     case 'play':
       return (
@@ -13,6 +18,8 @@ const Icon = ({ name, color }) => {
           />
         </svg>
       );
+    default:
+      return null;
   }
 };
 

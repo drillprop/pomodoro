@@ -51,7 +51,7 @@ const PlayButton = styled.button`
   border-radius: 100%;
 `;
 
-const Controls = () => {
+const Controls: React.FC = () => {
   return (
     <ControlsWrapper>
       <ResetButton>Reset</ResetButton>
