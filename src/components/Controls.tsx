@@ -8,6 +8,7 @@ import {
 } from '../utils/colors';
 import { secondFont } from '../utils/fonts';
 import Icon from '../elements/Icon';
+import useTimer from '../hooks/useTimer';
 
 const ControlsWrapper = styled.div`
   grid-column: 3;
@@ -52,8 +53,11 @@ const PlayButton = styled.button`
 `;
 
 const Controls: React.FC = () => {
+  const [timeAsString, seconds, updateTimer] = useTimer(20);
+  console.log(timeAsString);
   return (
     <ControlsWrapper>
+      <button onClick={() => updateTimer(seconds - 2)} />
       <ResetButton>Reset</ResetButton>
       <RetryButtton>Retry</RetryButtton>
       <PlayButton>
