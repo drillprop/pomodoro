@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import moment = require('moment');
 
-const useTimer = (
-  inputValue: number
-): [string, number, (num: number) => void] => {
+const useTimer = (inputValue = 0): [string, number, (num: number) => void] => {
   const [seconds, setSeconds] = useState(inputValue);
 
   const convertSeconds = (seconds: number): string => {
