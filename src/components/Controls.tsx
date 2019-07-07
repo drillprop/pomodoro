@@ -53,11 +53,8 @@ const PlayButton = styled.button`
 `;
 
 const Controls: React.FC = () => {
-  const [timeAsString, seconds, updateTimer] = useTimer(20);
-  console.log(timeAsString);
   return (
     <ControlsWrapper>
-      <button onClick={() => updateTimer(seconds - 2)} />
       <ResetButton>Reset</ResetButton>
       <RetryButtton>Retry</RetryButtton>
       <PlayButton>
