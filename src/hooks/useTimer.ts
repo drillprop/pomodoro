@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import moment = require('moment');
 import { useDispatch, useSelector } from 'react-redux';
 import { setTimer } from '../duck/actions';
