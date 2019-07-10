@@ -1,13 +1,24 @@
+import { SET_TIMER } from './types';
+
 interface Timer {
   seconds: number;
-  timeString: string;
+  timeAsString: string;
 }
 
 const initialState: Timer = {
   seconds: 0,
-  timeString: ''
+  timeAsString: ''
 };
 
-export default (state = initialState) => {
-  return state;
+export default (state = initialState, action: any) => {
+  switch (action.type) {
+    case SET_TIMER:
+      return {
+        ...state,
+        seconds: action.seconds,
+        timeAsString: action.timeAsString
+      };
+    default:
+      return state;
+  }
 };
