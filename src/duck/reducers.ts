@@ -5,7 +5,7 @@ interface Timer {
 }
 
 const initialState: Timer = {
-  seconds: 0
+  seconds: 60 * 30
 };
 
 export default (state = initialState, action: any) => {
