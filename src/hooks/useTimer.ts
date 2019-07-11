@@ -18,11 +18,14 @@ const useTimer = (inputValue = 0): [string, number, (num: number) => void] => {
       .toString()
       .padStart(2, '0');
     const timerDurationHours = moment
-      .duration(seconds, 'hours')
-      .seconds()
+      .duration(seconds, 'seconds')
+      .hours()
       .toString()
       .padStart(2, '0');
-    return `${timerDurationHours}:${timerDurationMinutes}:${timerDurationSeconds}`;
+    if (seconds < 60 * 60)
+      return `${timerDurationMinutes}:${timerDurationSeconds}`;
+    else
+      return `${timerDurationHours}:${timerDurationMinutes}:${timerDurationSeconds}`;
   };
   const timeAsString = convertSeconds(seconds);
 
