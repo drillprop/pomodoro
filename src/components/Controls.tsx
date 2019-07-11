@@ -14,7 +14,8 @@ const ControlsWrapper = styled.div`
   grid-column: 3;
   grid-row: 4/5;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  grid-template-columns: repeat(2, 150px);
   grid-template-rows: 60px;
 `;
 const ResetandRetryButtons = styled.button`
@@ -36,7 +37,7 @@ const ResetButton = styled(ResetandRetryButtons)`
 `;
 const RetryButtton = styled(ResetandRetryButtons)`
   border-radius: 0 21px 21px 0;
-  grid-column: 3;
+  grid-column: 2;
   padding-left: 1em;
 `;
 const PlayButton = styled.button`
