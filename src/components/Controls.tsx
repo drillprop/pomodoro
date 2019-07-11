@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   secondaryBackground,
@@ -53,11 +53,20 @@ const PlayButton = styled.button`
 `;
 
 const Controls: React.FC = () => {
+  const [, seconds, updateTimer] = useTimer();
+  const [isRuning, startTimer] = useState(false);
+
+  useEffect(() => {
+    let timeout: any;
+    if (isRuning) timeout = setTimeout(() => updateTimer(seconds - 1), 1000);
+    return () => clearTimeout(timeout);
+  });
+
   return (
     <ControlsWrapper>
       <ResetButton>Reset</ResetButton>
       <RetryButtton>Retry</RetryButtton>
-      <PlayButton>
+      <PlayButton onClick={() => startTimer(!isRuning)}>
         <Icon name='play' color={primary} />
       </PlayButton>
     </ControlsWrapper>
