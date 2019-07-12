@@ -1,11 +1,13 @@
-import { SET_TIMER } from './types';
+import { SET_TIMER, TOGGLE_TIMER } from './types';
 
 interface Timer {
   seconds: number;
+  isTimerStart: boolean;
 }
 
 const initialState: Timer = {
-  seconds: 60 * 30
+  seconds: 60 * 30,
+  isTimerStart: false
 };
 
 export default (state = initialState, action: any) => {
@@ -14,6 +16,11 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         seconds: action.seconds
+      };
+    case TOGGLE_TIMER:
+      return {
+        ...state,
+        isTimerStart: action.isTimerStart
       };
     default:
       return state;
