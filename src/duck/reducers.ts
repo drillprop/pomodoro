@@ -3,11 +3,13 @@ import { UPDATE_TIMER, START_PAUSE_TIMER, RESET_RETRY_TIMER } from './types';
 interface Timer {
   seconds: number;
   isTimerStart: boolean;
+  isInterval: boolean;
 }
 
 const initialState: Timer = {
   seconds: 60 * 30,
-  isTimerStart: false
+  isTimerStart: false,
+  isInterval: true
 };
 
 export default (state = initialState, action: any) => {

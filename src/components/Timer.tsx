@@ -25,10 +25,10 @@ const Time = styled.h1`
 `;
 
 const Timer: React.FC = () => {
-  const [, timeString] = useTimerState();
+  const [, timeString, , timerFaze] = useTimerState();
   return (
     <TimerWrapper>
-      <TimerFaze>interval</TimerFaze>
+      <TimerFaze>{timerFaze}</TimerFaze>
       <Time>{timeString}</Time>
     </TimerWrapper>
   );
