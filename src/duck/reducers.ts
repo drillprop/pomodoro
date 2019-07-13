@@ -1,4 +1,4 @@
-import { SET_TIMER, START_PAUSE_TIMER } from './types';
+import { UPDATE_TIMER, START_PAUSE_TIMER } from './types';
 
 interface Timer {
   seconds: number;
@@ -12,7 +12,7 @@ const initialState: Timer = {
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
-    case SET_TIMER:
+    case UPDATE_TIMER:
       return {
         ...state,
         seconds: action.seconds

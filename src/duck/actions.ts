@@ -1,8 +1,8 @@
-import { SET_TIMER, START_PAUSE_TIMER } from './types';
+import { UPDATE_TIMER, START_PAUSE_TIMER } from './types';
 
-export const setTimer = (seconds: number) => {
+export const updateTimer = (seconds: number) => {
   return {
-    type: SET_TIMER,
+    type: UPDATE_TIMER,
     seconds
   };
 };
