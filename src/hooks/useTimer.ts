@@ -23,12 +23,19 @@ const useTimer = (): [any, any, any] => {
   const startPause = () => {
     dispatch(startPauseTimer(isTimerStart));
   };
+
   const reset = () => {
     dispatch(resetRetryTimer(false));
+    if (!isInterval) {
+      updateSeconds(0);
+      swiitch();
+    }
   };
+
   const retry = () => {
     dispatch(resetRetryTimer(isTimerStart));
   };
+
   const swiitch = () => {
     dispatch(switchFaze(isInterval));
   };

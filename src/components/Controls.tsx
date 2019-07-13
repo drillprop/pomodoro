@@ -9,6 +9,7 @@ import {
 import { secondFont } from '../utils/fonts';
 import Icon from '../elements/Icon';
 import useTimer from '../hooks/useTimer';
+import useTimerState from '../hooks/useTimerState';
 
 const ControlsWrapper = styled.div`
   grid-column: 3;
@@ -55,10 +56,13 @@ const PlayButton = styled.button`
 
 const Controls: React.FC = () => {
   const [startPauseTimer, resetTimer, retryTimer] = useTimer();
+  const [, , , isInterval] = useTimerState();
 
   return (
     <ControlsWrapper>
-      <ResetButton onClick={resetTimer}>Reset</ResetButton>
+      <ResetButton onClick={resetTimer}>
+        {isInterval ? 'Reset' : 'Skip'}
+      </ResetButton>
       <RetryButtton onClick={retryTimer}>Retry</RetryButtton>
       <PlayButton onClick={startPauseTimer}>
         <Icon name='play' color={primary} />
