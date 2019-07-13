@@ -1,4 +1,4 @@
-import { UPDATE_TIMER, START_PAUSE_TIMER } from './types';
+import { UPDATE_TIMER, START_PAUSE_TIMER, RESET_RETRY_TIMER } from './types';
 
 interface Timer {
   seconds: number;
@@ -21,6 +21,12 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isTimerStart: action.isTimerStart
+      };
+    case RESET_RETRY_TIMER:
+      return {
+        ...state,
+        isTimerStart: action.isTimerStart,
+        seconds: initialState.seconds
       };
     default:
       return state;

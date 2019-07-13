@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateTimer, startPauseTimer } from '../duck/actions';
+import { updateTimer, startPauseTimer, resetRetryTimer } from '../duck/actions';
 import useTimerState from './useTimerState';
 
-const useTimer = (): [any] => {
+const useTimer = (): [any, any, any] => {
   const [seconds, , isTimerStart] = useTimerState();
   const dispatch = useDispatch();
 
@@ -16,6 +16,12 @@ const useTimer = (): [any] => {
   const startPause = () => {
     dispatch(startPauseTimer(isTimerStart));
   };
+  const reset = () => {
+    dispatch(resetRetryTimer(false));
+  };
+  const retry = () => {
+    dispatch(resetRetryTimer(isTimerStart));
+  };
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -25,7 +31,7 @@ const useTimer = (): [any] => {
     return () => clearTimeout(timeout);
   });
 
-  return [startPause];
+  return [startPause, reset, retry];
 };
 
 export default useTimer;

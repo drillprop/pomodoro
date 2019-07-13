@@ -54,20 +54,13 @@ const PlayButton = styled.button`
 `;
 
 const Controls: React.FC = () => {
-  const [, seconds, updateTimer] = useTimer();
-  const [isRuning, startTimer] = useState(false);
-
-  useEffect(() => {
-    let timeout: any;
-    if (isRuning) timeout = setTimeout(() => updateTimer(seconds - 1), 1000);
-    return () => clearTimeout(timeout);
-  });
+  const [startPauseTimer, resetTimer, retryTimer] = useTimer();
 
   return (
     <ControlsWrapper>
-      <ResetButton>Reset</ResetButton>
-      <RetryButtton>Retry</RetryButtton>
-      <PlayButton onClick={() => startTimer(!isRuning)}>
+      <ResetButton onClick={resetTimer}>Reset</ResetButton>
+      <RetryButtton onClick={retryTimer}>Retry</RetryButtton>
+      <PlayButton onClick={startPauseTimer}>
         <Icon name='play' color={primary} />
       </PlayButton>
     </ControlsWrapper>
