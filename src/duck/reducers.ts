@@ -7,7 +7,7 @@ interface Timer {
 }
 
 const initialState: Timer = {
-  seconds: 60 * 30,
+  seconds: 2,
   isTimerStart: false,
   isInterval: true
 };
