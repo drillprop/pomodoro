@@ -1,4 +1,4 @@
-import { SET_TIMER, TOGGLE_TIMER } from './types';
+import { SET_TIMER, START_PAUSE_TIMER } from './types';
 
 export const setTimer = (seconds: number) => {
   return {
@@ -9,7 +9,7 @@ export const setTimer = (seconds: number) => {
 
 export const toggleTimer = (isTimerStart: boolean) => {
   return {
-    type: TOGGLE_TIMER,
+    type: START_PAUSE_TIMER,
     isTimerStart: !isTimerStart
   };
 };

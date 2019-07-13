@@ -1,4 +1,4 @@
-import { SET_TIMER, TOGGLE_TIMER } from './types';
+import { SET_TIMER, START_PAUSE_TIMER } from './types';
 
 interface Timer {
   seconds: number;
@@ -17,7 +17,7 @@ export default (state = initialState, action: any) => {
         ...state,
         seconds: action.seconds
       };
-    case TOGGLE_TIMER:
+    case START_PAUSE_TIMER:
       return {
         ...state,
         isTimerStart: action.isTimerStart
