@@ -7,7 +7,7 @@ export const setTimer = (seconds: number) => {
   };
 };
 
-export const toggleTimer = (isTimerStart: boolean) => {
+export const startPauseTimer = (isTimerStart: boolean) => {
   return {
     type: START_PAUSE_TIMER,
     isTimerStart: !isTimerStart
