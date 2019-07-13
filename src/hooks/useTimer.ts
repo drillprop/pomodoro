@@ -14,9 +14,9 @@ const useTimer = (): [any, any, any] => {
 
   const updateSeconds = (num: number) => {
     if (num >= 0) {
-      dispatch(updateTimer(num));
+      dispatch(updateTimer(num, isInterval));
     } else {
-      dispatch(updateTimer(0));
+      dispatch(updateTimer(0, isInterval));
     }
   };
 

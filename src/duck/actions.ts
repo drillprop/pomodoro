@@ -5,10 +5,12 @@ import {
   SWITCH_FAZE
 } from './types';
 
-export const updateTimer = (seconds: number) => {
+export const updateTimer = (seconds: number, isInterval: boolean) => {
+  let field = isInterval ? 'intervalTime' : 'breakTime';
   return {
     type: UPDATE_TIMER,
-    seconds
+    field,
+    [field]: seconds
   };
 };
 

@@ -6,13 +6,15 @@ import {
 } from './types';
 
 interface Timer {
-  seconds: number;
+  breakTime: number;
+  intervalTime: number;
   isTimerStart: boolean;
   isInterval: boolean;
 }
 
 const initialState: Timer = {
-  seconds: 2,
+  breakTime: 2,
+  intervalTime: 4,
   isTimerStart: false,
   isInterval: true
 };
@@ -22,7 +24,7 @@ export default (state = initialState, action: any) => {
     case UPDATE_TIMER:
       return {
         ...state,
-        seconds: action.seconds
+        [action.field]: action[action.field]
       };
     case START_PAUSE_TIMER:
       return {
@@ -33,13 +35,15 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isTimerStart: action.isTimerStart,
-        seconds: initialState.seconds
+        breakTime: initialState.breakTime,
+        intervalTime: initialState.intervalTime
       };
     case SWITCH_FAZE:
       return {
         ...state,
         isInterval: !action.isInterval,
-        seconds: initialState.seconds
+        breakTime: initialState.breakTime,
+        intervalTime: initialState.intervalTime
       };
     default:
       return state;
