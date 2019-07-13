@@ -7,9 +7,7 @@ const useTimerState = () => {
   const timeAsString = convertSeconds(seconds);
   const isTimerStart = useSelector((state: any) => state.isTimerStart);
 
-  const faze = isInterval ? 'interval' : 'break';
-
-  return [seconds, timeAsString, isTimerStart, faze];
+  return [seconds, timeAsString, isTimerStart, isInterval];
 };
 
 export default useTimerState;
