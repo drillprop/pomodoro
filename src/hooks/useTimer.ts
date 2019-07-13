@@ -1,32 +1,16 @@
-import moment = require('moment');
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTimer } from '../duck/actions';
+import { setTimer, toggleTimer } from '../duck/actions';
+import { convertSeconds } from '../utils/helpers';
 
-const useTimer = (inputValue = 0): [string, number, (num: number) => void] => {
+const useTimer = (): [string, number, (num: number) => void, any] => {
   const dispatch = useDispatch();
   const seconds = useSelector((state: any) => state.seconds);
+  const isTimerStart = useSelector((state: any) => state.isTimerStart);
 
-  const convertSeconds = (seconds: number): string => {
-    const timerDurationSeconds = moment
-      .duration(seconds, 'seconds')
-      .seconds()
-      .toString()
-      .padStart(2, '0');
-    const timerDurationMinutes = moment
-      .duration(seconds, 'seconds')
-      .minutes()
-      .toString()
-      .padStart(2, '0');
-    const timerDurationHours = moment
-      .duration(seconds, 'seconds')
-      .hours()
-      .toString()
-      .padStart(2, '0');
-    if (seconds < 60 * 60)
-      return `${timerDurationMinutes}:${timerDurationSeconds}`;
-    else
-      return `${timerDurationHours}:${timerDurationMinutes}:${timerDurationSeconds}`;
-  };
+  // useTimer - to pause, play, stop, reset timer!
+  // useConfigTimer - to set length of interval and break
+
   const timeAsString = convertSeconds(seconds);
 
   const updateTimer = (num: number) => {
@@ -35,7 +19,19 @@ const useTimer = (inputValue = 0): [string, number, (num: number) => void] => {
     } else dispatch(setTimer(0));
   };
 
-  return [timeAsString, seconds, updateTimer];
+  const startTimer = () => {
+    dispatch(toggleTimer(isTimerStart));
+  };
+
+  useEffect(() => {
+    let timeout: any;
+    if (isTimerStart)
+      timeout = setTimeout(() => updateTimer(seconds - 1), 1000);
+    if (seconds === 0 && isTimerStart) startTimer();
+    return () => clearTimeout(timeout);
+  });
+
+  return [timeAsString, seconds, updateTimer, startTimer];
 };
 
 export default useTimer;
