@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { secondFont } from '../utils/fonts';
 import { secondary } from '../utils/colors';
-import useTimer from '../hooks/useTimer';
+import useTimerState from '../hooks/useTimerState';
 
 const TimerWrapper = styled.section`
   grid-row: 3;
@@ -25,7 +25,7 @@ const Time = styled.h1`
 `;
 
 const Timer: React.FC = () => {
-  const [timeString] = useTimer();
+  const [, timeString] = useTimerState();
   return (
     <TimerWrapper>
       <TimerFaze>interval</TimerFaze>
