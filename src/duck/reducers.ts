@@ -10,13 +10,15 @@ interface Timer {
   intervalTime: number;
   isTimerStart: boolean;
   isInterval: boolean;
+  intervals: number;
 }
 
 const initialState: Timer = {
   breakTime: 2,
   intervalTime: 4,
   isTimerStart: false,
-  isInterval: true
+  isInterval: true,
+  intervals: 0
 };
 
 export default (state = initialState, action: any) => {
@@ -43,7 +45,8 @@ export default (state = initialState, action: any) => {
         ...state,
         isInterval: !action.isInterval,
         breakTime: initialState.breakTime,
-        intervalTime: initialState.intervalTime
+        intervalTime: initialState.intervalTime,
+        intervals: !action.isInterval ? state.intervals + 1 : state.intervals
       };
     default:
       return state;
