@@ -1,17 +1,11 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setTimer, toggleTimer } from '../duck/actions';
-import { convertSeconds } from '../utils/helpers';
+import useTimerState from './useTimerState';
 
-const useTimer = (): [string, number, (num: number) => void, any] => {
+const useTimer = (): [any] => {
+  const [seconds, , isTimerStart] = useTimerState();
   const dispatch = useDispatch();
-  const seconds = useSelector((state: any) => state.seconds);
-  const isTimerStart = useSelector((state: any) => state.isTimerStart);
-
-  // useTimer - to pause, play, stop, reset timer!
-  // useConfigTimer - to set length of interval and break
-
-  const timeAsString = convertSeconds(seconds);
 
   const updateTimer = (num: number) => {
     if (num >= 0) {
@@ -19,19 +13,19 @@ const useTimer = (): [string, number, (num: number) => void, any] => {
     } else dispatch(setTimer(0));
   };
 
-  const startTimer = () => {
+  const startPauseTimer = () => {
     dispatch(toggleTimer(isTimerStart));
   };
 
   useEffect(() => {
-    let timeout: any;
+    let timeout: NodeJS.Timeout;
     if (isTimerStart)
       timeout = setTimeout(() => updateTimer(seconds - 1), 1000);
-    if (seconds === 0 && isTimerStart) startTimer();
+    if (seconds === 0 && isTimerStart) startPauseTimer();
     return () => clearTimeout(timeout);
   });
 
-  return [timeAsString, seconds, updateTimer, startTimer];
+  return [startPauseTimer];
 };
 
 export default useTimer;
