@@ -1,16 +1,23 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateTimer, startPauseTimer, resetRetryTimer } from '../duck/actions';
+import {
+  updateTimer,
+  startPauseTimer,
+  resetRetryTimer,
+  switchFaze
+} from '../duck/actions';
 import useTimerState from './useTimerState';
 
 const useTimer = (): [any, any, any] => {
-  const [seconds, , isTimerStart] = useTimerState();
+  const [seconds, , isTimerStart, isInterval] = useTimerState();
   const dispatch = useDispatch();
 
   const updateSeconds = (num: number) => {
     if (num >= 0) {
       dispatch(updateTimer(num));
-    } else dispatch(updateTimer(0));
+    } else {
+      dispatch(updateTimer(0));
+    }
   };
 
   const startPause = () => {
@@ -22,15 +29,22 @@ const useTimer = (): [any, any, any] => {
   const retry = () => {
     dispatch(resetRetryTimer(isTimerStart));
   };
+  const swiitch = () => {
+    dispatch(switchFaze(isInterval));
+  };
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     if (isTimerStart)
-      timeout = setTimeout(() => updateSeconds(seconds - 1), 1000);
-    if (seconds === 0 && isTimerStart) startPause();
-    return () => clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        updateSeconds(seconds - 1);
+        !seconds && startPause();
+        !seconds && swiitch();
+      }, 1000);
+    return () => {
+      clearTimeout(timeout);
+    };
   });
-
   return [startPause, reset, retry];
 };
 
