@@ -6,7 +6,7 @@ import Controls from './Controls';
 const InterfaceWrapper = styled.main`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(10, 1fr);
   height: 100vh;
 `;
 
