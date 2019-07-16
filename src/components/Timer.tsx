@@ -8,7 +8,7 @@ const TimerWrapper = styled.section`
   grid-row: 4;
   text-align: center;
   grid-column: 3/4;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
 `;
 const TimerFaze = styled.h3`
   display: center;
