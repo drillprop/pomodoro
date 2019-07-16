@@ -5,7 +5,7 @@ import { secondary } from '../utils/colors';
 import useTimerState from '../hooks/useTimerState';
 
 const TimerWrapper = styled.section`
-  grid-row: 3;
+  grid-row: 4;
   text-align: center;
   grid-column: 3/4;
   margin-bottom: 2em;

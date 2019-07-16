@@ -13,7 +13,7 @@ import useTimerState from '../hooks/useTimerState';
 
 const ControlsWrapper = styled.div`
   grid-column: 3;
-  grid-row: 4/5;
+  grid-row: 5;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(2, 150px);
