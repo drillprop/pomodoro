@@ -7,7 +7,7 @@ import useTimerState from '../../hooks/useTimerState';
 const TimerWrapper = styled.section`
   grid-row: 4;
   text-align: center;
-  grid-column: 3/4;
+  grid-column: 3;
   margin-bottom: 3em;
 `;
 const TimerFaze = styled.h3`
