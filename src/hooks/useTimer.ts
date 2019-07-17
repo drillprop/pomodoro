@@ -5,7 +5,7 @@ import {
   startPauseTimer,
   resetRetryTimer,
   switchFaze
-} from '../duck/actions';
+} from '../duck/timer/actions';
 import useTimerState from './useTimerState';
 
 const useTimer = (): [any, any, any] => {
