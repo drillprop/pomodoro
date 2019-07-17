@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Timer from './Timer';
 import Controls from './Controls';
+import Hamburger from './HamburgerButton';
 
 const InterfaceWrapper = styled.main`
   display: grid;
@@ -13,6 +14,7 @@ const InterfaceWrapper = styled.main`
 const Interface: React.FC = () => {
   return (
     <InterfaceWrapper>
+      <Hamburger />
       <Timer />
       <Controls />
     </InterfaceWrapper>
