@@ -1,6 +1,6 @@
 import * as React from 'react';
 import GlobalStyle from './utils/GlobalStyle';
-import Interface from './components/Interface';
+import Interface from './components/Timer/Interface';
 
 const App: React.FC = () => {
   return (

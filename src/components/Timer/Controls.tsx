@@ -5,11 +5,11 @@ import {
   primary,
   secondary,
   background
-} from '../utils/colors';
-import { secondFont } from '../utils/fonts';
-import Icon from '../elements/Icon';
-import useTimer from '../hooks/useTimer';
-import useTimerState from '../hooks/useTimerState';
+} from '../../utils/colors';
+import { secondFont } from '../../utils/fonts';
+import Icon from '../../elements/Icon';
+import useTimer from '../../hooks/useTimer';
+import useTimerState from '../../hooks/useTimerState';
 
 const ControlsWrapper = styled.div`
   grid-column: 3;

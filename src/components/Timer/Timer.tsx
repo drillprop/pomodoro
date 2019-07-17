@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { secondFont } from '../utils/fonts';
-import { secondary } from '../utils/colors';
-import useTimerState from '../hooks/useTimerState';
+import { secondFont } from '../../utils/fonts';
+import { secondary } from '../../utils/colors';
+import useTimerState from '../../hooks/useTimerState';
 
 const TimerWrapper = styled.section`
   grid-row: 4;
