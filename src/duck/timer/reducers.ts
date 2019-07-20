@@ -2,18 +2,22 @@ import {
   UPDATE_TIMER,
   START_PAUSE_TIMER,
   RESET_RETRY_TIMER,
-  SWITCH_FAZE
+  SWITCH_FAZE,
+  CREATE_CATEGORY
 } from './types';
 
 interface Timer {
+  categories: Category;
   breakTime: number;
   intervalTime: number;
   isTimerStart: boolean;
   isInterval: boolean;
   intervals: number;
 }
+type Category = { [name: string]: number };
 
 const initialState: Timer = {
+  categories: {},
   breakTime: 2,
   intervalTime: 4,
   isTimerStart: false,
@@ -47,6 +51,14 @@ export default (state = initialState, action: any) => {
         breakTime: initialState.breakTime,
         intervalTime: initialState.intervalTime,
         intervals: !action.isInterval ? state.intervals + 1 : state.intervals
+      };
+    case CREATE_CATEGORY:
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          [action.categoryName]: 0
+        }
       };
     default:
       return state;
