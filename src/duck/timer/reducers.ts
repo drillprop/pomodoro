@@ -3,7 +3,8 @@ import {
   START_PAUSE_TIMER,
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
-  CREATE_CATEGORY
+  CREATE_CATEGORY,
+  DELETE_CATEGORY
 } from './types';
 
 interface Timer {
@@ -17,7 +18,11 @@ interface Timer {
 type Category = { [name: string]: number };
 
 const initialState: Timer = {
-  categories: {},
+  categories: {
+    smth: 2,
+    another: 3,
+    else: 5
+  },
   breakTime: 2,
   intervalTime: 4,
   isTimerStart: false,
@@ -60,6 +65,15 @@ export default (state = initialState, action: any) => {
           [action.categoryName]: 0
         }
       };
+    case DELETE_CATEGORY: {
+      const { [action.categoryName]: toDelete, ...rest } = state.categories;
+      return {
+        ...state,
+        categories: {
+          ...rest
+        }
+      };
+    }
     default:
       return state;
   }
