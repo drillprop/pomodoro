@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import useTimerState from '../../hooks/useTimerState';
 
 const TimerWrapper = styled.section`
-  grid-row: 5;
   text-align: center;
   margin-bottom: 3em;
 `;
 const Time = styled.h1`
   display: center;
-  font-size: 6rem;
+  font-size: 7rem;
   margin: 0;
   line-height: 0.75em;
 `;

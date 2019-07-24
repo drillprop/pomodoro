@@ -4,12 +4,13 @@ import { secondFont } from '../../utils/fonts';
 import { primary } from '../../utils/colors';
 import useTimerState from '../../hooks/useTimerState';
 
-const TimerTitle = styled.h3`
+const TimerTitle = styled.h2`
   font-family: ${secondFont};
-  grid-row: 2;
   text-align: center;
+  font-weight: 600;
   color: ${primary};
-  font-size: 3.5rem;
+  font-size: 3rem;
+  line-height: 0.9;
   margin: 0;
 `;
 

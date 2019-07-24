@@ -4,7 +4,8 @@ import {
   secondaryBackground,
   primary,
   secondary,
-  background
+  background,
+  buttonColors
 } from '../../utils/colors';
 import { secondFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
@@ -12,7 +13,6 @@ import useTimer from '../../hooks/useTimer';
 import useTimerState from '../../hooks/useTimerState';
 
 const ControlsWrapper = styled.div`
-  grid-row: 6;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(2, 150px);
@@ -22,11 +22,12 @@ const ResetandRetryButtons = styled.button`
   border: none;
   background: ${secondaryBackground};
   width: 150px;
-  height: 2.5em;
+  height: 3em;
   font-size: 1rem;
   font-family: ${secondFont};
+  color: ${primary};
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: lowercase;
   align-self: center;
   grid-row: 1;
 `;
@@ -48,7 +49,7 @@ const PlayButton = styled.button`
   grid-column: 1/4;
   grid-row: 1;
   width: 90px;
-  border: 10px solid ${secondary};
+  border: 7px solid ${buttonColors};
   background-color: ${background};
   border-radius: 100%;
 `;
@@ -64,7 +65,7 @@ const Controls: React.FC = () => {
       </ResetButton>
       <RetryButtton onClick={retryTimer}>Retry</RetryButtton>
       <PlayButton onClick={startPauseTimer}>
-        <Icon name='play' color={primary} />
+        <Icon name='play' color={buttonColors} />
       </PlayButton>
     </ControlsWrapper>
   );

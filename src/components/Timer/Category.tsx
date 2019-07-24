@@ -1,19 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import { primFont } from '../../utils/fonts';
-import { secondary } from '../../utils/colors';
+import { primFont, secondFont } from '../../utils/fonts';
+import { secondary, background } from '../../utils/colors';
 
-const Select = styled.h3`
-  text-align: center;
-  margin: 0;
-  grid-row: 3;
-  font-family: ${primFont};
+const Select = styled.select`
+  display: block;
+  margin: 0 auto;
+  font-family: ${secondFont};
+  font-weight: 600;
   color: ${secondary};
-  font-size: 2rem;
+  background-color: ${background};
+  font-size: 1.8rem;
+  border: none;
+  padding: 0.2em 2em;
+  option {
+    text-align: center;
+  }
 `;
 
 const Category = () => {
-  return <Select>default</Select>;
+  return (
+    <Select>
+      <option value='default'>default</option>
+    </Select>
+  );
 };
 
 export default Category;

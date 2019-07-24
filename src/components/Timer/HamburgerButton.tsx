@@ -7,8 +7,8 @@ const HamburgerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 5em;
-  right: 3em;
+  top: 2em;
+  right: 2em;
   div {
     z-index: -1;
     position: absolute;
