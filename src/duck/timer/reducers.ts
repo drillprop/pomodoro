@@ -13,21 +13,17 @@ interface Timer {
   intervalTime: number;
   isTimerStart: boolean;
   isInterval: boolean;
-  intervals: number;
 }
 type Category = { [name: string]: number };
 
 const initialState: Timer = {
   categories: {
-    smth: 2,
-    another: 3,
-    else: 5
+    default: 0
   },
   breakTime: 2,
   intervalTime: 4,
   isTimerStart: false,
-  isInterval: true,
-  intervals: 0
+  isInterval: true
 };
 
 export default (state = initialState, action: any) => {
@@ -55,7 +51,12 @@ export default (state = initialState, action: any) => {
         isInterval: !action.isInterval,
         breakTime: initialState.breakTime,
         intervalTime: initialState.intervalTime,
-        intervals: !action.isInterval ? state.intervals + 1 : state.intervals
+        categories: {
+          ...state.categories,
+          [action.categoryName]: !action.isInterval
+            ? state.categories[action.categoryName] + 1
+            : state.categories[action.categoryName]
+        }
       };
     case CREATE_CATEGORY:
       return {
@@ -66,11 +67,14 @@ export default (state = initialState, action: any) => {
         }
       };
     case DELETE_CATEGORY: {
-      const { [action.categoryName]: toDelete, ...rest } = state.categories;
+      const {
+        [action.categoryName]: toDelete,
+        ...restCategories
+      } = state.categories;
       return {
         ...state,
         categories: {
-          ...rest
+          ...restCategories
         }
       };
     }

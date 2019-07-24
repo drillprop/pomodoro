@@ -30,10 +30,14 @@ export const resetRetryTimer = (isTimerStart: boolean) => {
   };
 };
 
-export const switchFaze = (isInterval: boolean) => {
+export const switchFaze = (
+  isInterval: boolean,
+  categoryName: string = 'default'
+) => {
   return {
     type: SWITCH_FAZE,
-    isInterval
+    isInterval,
+    categoryName
   };
 };
 
