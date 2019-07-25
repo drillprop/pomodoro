@@ -18,11 +18,25 @@ const Select = styled.select`
   }
 `;
 
+const DropDownMenu = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+`;
+const DropDownItem = styled.li`
+  font-family: ${secondFont};
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: ${secondary};
+  padding: 0.2em 2em;
+`;
+
 const Category = () => {
   return (
-    <Select>
-      <option value='default'>default</option>
-    </Select>
+    <DropDownMenu>
+      <DropDownItem>default</DropDownItem>
+    </DropDownMenu>
   );
 };
 
