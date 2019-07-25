@@ -9,7 +9,7 @@ const TimerTitle = styled.h2`
   text-align: center;
   font-weight: 600;
   color: ${primary};
-  font-size: 3rem;
+  font-size: 3.5rem;
   line-height: 0.9;
   margin: 0;
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { primFont, secondFont } from '../../utils/fonts';
+import { secondFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
 
 const Select = styled.select`
@@ -10,7 +10,7 @@ const Select = styled.select`
   font-weight: 600;
   color: ${secondary};
   background-color: ${background};
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   border: none;
   padding: 0.2em 2em;
   option {

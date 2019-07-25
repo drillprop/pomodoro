@@ -1,4 +1,5 @@
 import React from 'react';
+import useTimerState from '../hooks/useTimerState';
 
 interface IconProps {
   name: string;
@@ -6,6 +7,7 @@ interface IconProps {
 }
 
 const Icon = ({ name, color }: IconProps) => {
+  const [seconds] = useTimerState();
   switch (name) {
     case 'play':
       return (
@@ -22,9 +24,9 @@ const Icon = ({ name, color }: IconProps) => {
       return (
         <svg
           enableBackground='new 0 0 50 50'
-          height='150px'
-          viewBox='0 0 50 50'
-          width='150px'
+          height='40px'
+          viewBox={`0 0 50 50`}
+          width='40px'
           fill={color}
         >
           <g id='Layer_23' />

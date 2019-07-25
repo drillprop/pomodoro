@@ -8,7 +8,7 @@ const TimerWrapper = styled.section`
 `;
 const Time = styled.h1`
   display: center;
-  font-size: 7rem;
+  font-size: 5rem;
   margin: 0;
   line-height: 0.75em;
 `;

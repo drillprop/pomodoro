@@ -15,13 +15,13 @@ import useTimerState from '../../hooks/useTimerState';
 const ControlsWrapper = styled.div`
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(2, 150px);
+  grid-template-columns: repeat(2, 140px);
   grid-template-rows: 60px;
 `;
 const ResetandRetryButtons = styled.button`
   border: none;
   background: ${secondaryBackground};
-  width: 150px;
+  width: 140px;
   height: 3em;
   font-size: 1rem;
   font-family: ${secondFont};
