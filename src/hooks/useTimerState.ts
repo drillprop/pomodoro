@@ -8,8 +8,9 @@ const useTimerState = () => {
   const isInterval: boolean = useSelector((state: any) => state.isInterval);
   const timeAsString: any = convertSeconds(seconds);
   const isTimerStart: boolean = useSelector((state: any) => state.isTimerStart);
+  const categories: string = useSelector((state: any) => state.categories);
 
-  return [seconds, timeAsString, isTimerStart, isInterval];
+  return [seconds, timeAsString, isTimerStart, isInterval, categories];
 };
 
 export default useTimerState;
