@@ -1,50 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { secondFont } from '../../utils/fonts';
+import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
 
-const DropDown = styled.div`
-  :hover li {
-    display: block;
+const Select = styled.select`
+  font-family: ${primFont};
+  font-size: 1.5rem;
+  display: block;
+  margin: 0 auto;
+  color: ${secondary};
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: center;
+  padding: 0.3em 1em;
+  text-align-last: center;
+  :focus {
+    outline-color: ${secondary};
   }
-  ul {
-    position: relative;
-    list-style: none;
-    padding: 0;
-    text-align: center;
-  }
-  li {
-    display: none;
-    width: 100%;
-    font-family: ${secondFont};
-    font-weight: 600;
-    font-size: 1.5rem;
-    color: ${secondary};
-  }
-  button {
-    width: 100%;
-    text-align: center;
+
+  option {
+    text-align: left;
+    background-color: ${background};
     border: none;
-    outline: none;
-    background: none;
-    font-family: ${secondFont};
-    font-weight: 600;
-    font-size: 1.5rem;
-    color: ${secondary};
-    :hover {
-      display: block;
-    }
   }
 `;
 
 const Category = () => {
+  const [visibleList, setVisible] = useState<boolean>(false);
+  const [category, setCategory] = useState<string | any>('default');
+  const handlePick = (e: any) => {
+    setCategory(e.currentTarget.textContent);
+    setVisible(false);
+  };
   return (
-    <DropDown>
-      <button>default</button>
-      <ul>
-        <li>default</li>
-      </ul>
-    </DropDown>
+    <Select>
+      <option>first one</option>
+      <option>second one</option>
+      <option>third one</option>
+    </Select>
   );
 };
 
