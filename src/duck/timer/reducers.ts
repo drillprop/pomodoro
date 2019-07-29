@@ -4,7 +4,8 @@ import {
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
   CREATE_CATEGORY,
-  DELETE_CATEGORY
+  DELETE_CATEGORY,
+  SWITCH_CATEGORY
 } from './types';
 
 interface Timer {
@@ -55,9 +56,9 @@ export default (state = initialState, action: any) => {
         intervalTime: initialState.intervalTime,
         categories: {
           ...state.categories,
-          [action.categoryName]: !action.isInterval
-            ? state.categories[action.categoryName] + 1
-            : state.categories[action.categoryName]
+          [state.selectedCategory]: !action.isInterval
+            ? state.categories[state.selectedCategory] + 1
+            : state.categories[state.selectedCategory]
         }
       };
     case CREATE_CATEGORY:
@@ -78,6 +79,12 @@ export default (state = initialState, action: any) => {
         categories: {
           ...restCategories
         }
+      };
+    }
+    case SWITCH_CATEGORY: {
+      return {
+        ...state,
+        selectedCategory: action.categoryName
       };
     }
     default:

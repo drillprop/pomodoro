@@ -4,7 +4,8 @@ import {
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
   CREATE_CATEGORY,
-  DELETE_CATEGORY
+  DELETE_CATEGORY,
+  SWITCH_CATEGORY
 } from './types';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -51,6 +52,13 @@ export const createCategory = (categoryName: string) => {
 export const deleteCategory = (categoryName: string) => {
   return {
     type: DELETE_CATEGORY,
+    categoryName
+  };
+};
+
+export const swtichCategory = (categoryName: string) => {
+  return {
+    type: SWITCH_CATEGORY,
     categoryName
   };
 };
