@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
+import useTimerState from '../../hooks/useTimerState';
 
 const Select = styled.select`
   font-family: ${primFont};
@@ -27,17 +28,12 @@ const Select = styled.select`
 `;
 
 const Category = () => {
-  const [visibleList, setVisible] = useState<boolean>(false);
-  const [category, setCategory] = useState<string | any>('default');
-  const handlePick = (e: any) => {
-    setCategory(e.currentTarget.textContent);
-    setVisible(false);
-  };
+  const [, , , , categories] = useTimerState();
   return (
     <Select>
-      <option>first one</option>
-      <option>second one</option>
-      <option>third one</option>
+      {Object.keys(categories).map(key => (
+        <option key={key}>{key}</option>
+      ))}
     </Select>
   );
 };
