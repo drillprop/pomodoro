@@ -20,7 +20,9 @@ type Category = { [name: string]: number };
 
 const initialState: Timer = {
   categories: {
-    default: 0
+    default: 0,
+    study: 0,
+    work: 0
   },
   selectedCategory: 'default',
   breakTime: 10,
