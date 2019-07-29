@@ -9,6 +9,7 @@ import {
 
 interface Timer {
   categories: Category;
+  selectedCategory: string;
   breakTime: number;
   intervalTime: number;
   isTimerStart: boolean;
@@ -20,6 +21,7 @@ const initialState: Timer = {
   categories: {
     default: 0
   },
+  selectedCategory: 'default',
   breakTime: 2,
   intervalTime: 4,
   isTimerStart: false,
