@@ -23,8 +23,8 @@ const initialState: Timer = {
     default: 0
   },
   selectedCategory: 'default',
-  breakTime: 2,
-  intervalTime: 4,
+  breakTime: 10,
+  intervalTime: 80,
   isTimerStart: false,
   isInterval: true
 };
@@ -84,7 +84,11 @@ export default (state = initialState, action: any) => {
     case SWITCH_CATEGORY: {
       return {
         ...state,
-        selectedCategory: action.categoryName
+        selectedCategory: action.categoryName,
+        isTimerStart: false,
+        isInterval: true,
+        breakTime: initialState.breakTime,
+        intervalTime: initialState.intervalTime
       };
     }
     default:
