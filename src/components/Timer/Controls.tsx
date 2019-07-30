@@ -39,7 +39,7 @@ const RetryButtton = styled(ResetandRetryButtons)`
   grid-column: 2;
   padding-left: 1em;
 `;
-const PlayButton = styled.button`
+const PlayButton = styled.button<{ isTimerStart: boolean }>`
   position: relative;
   height: 90px;
   justify-self: center;
@@ -48,21 +48,44 @@ const PlayButton = styled.button`
   grid-row: 1;
   width: 90px;
   border: 7px solid ${buttonColors};
-  background-color: ${background};
+  background-color: ${({ isTimerStart }) =>
+    isTimerStart ? buttonColors : background};
   border-radius: 100%;
+`;
+
+const Pause = styled.div`
+  width: 11px;
+  position: absolute;
+  top: calc(50% - 13px);
+  left: calc(50% - 16px);
+  height: 27px;
+  background-color: ${background};
+  border-radius: 3px;
+  ::after {
+    content: '';
+    position: absolute;
+    margin-left: 15px;
+    background-color: ${background};
+    border-radius: 3px;
+    width: 11px;
+    height: 27px;
+  }
 `;
 
 const Controls: React.FC = () => {
   const [state, { startPause, reset, retry }] = useTimer();
-
   return (
     <ControlsWrapper>
       <ResetButton onClick={reset}>
         {state.isInterval ? 'Reset' : 'Skip'}
       </ResetButton>
       <RetryButtton onClick={retry}>Retry</RetryButtton>
-      <PlayButton onClick={startPause}>
-        <Icon name='play' color={buttonColors} />
+      <PlayButton isTimerStart={state.isTimerStart} onClick={startPause}>
+        {state.isTimerStart ? (
+          <Pause />
+        ) : (
+          <Icon name='play' color={buttonColors} />
+        )}
       </PlayButton>
     </ControlsWrapper>
   );
