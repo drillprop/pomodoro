@@ -10,14 +10,28 @@ import {
 import { useSelector } from 'react-redux';
 import { convertSeconds } from '../utils/helpers';
 
-const useTimer = (): [any, any] => {
+interface TimerState {
+  seconds: number;
+  isInterval: boolean;
+  timeAsString: string;
+  isTimerStart: boolean;
+  categories: object;
+}
+
+interface TimerMethods {
+  startPause: any;
+  reset: any;
+  retry: any;
+  switchCtg: any;
+}
+const useTimer = (): [TimerState, TimerMethods] => {
   const seconds: number = useSelector((state: any) =>
     state.isInterval ? state.intervalTime : state.breakTime
   );
-  const isInterval: boolean = useSelector((state: any) => state.isInterval);
-  const timeAsString: any = convertSeconds(seconds);
-  const isTimerStart: boolean = useSelector((state: any) => state.isTimerStart);
-  const categories: string = useSelector((state: any) => state.categories);
+  const isInterval = useSelector((state: any) => state.isInterval);
+  const timeAsString = convertSeconds(seconds);
+  const isTimerStart = useSelector((state: any) => state.isTimerStart);
+  const categories = useSelector((state: any) => state.categories);
 
   const dispatch = useDispatch();
 
@@ -45,12 +59,12 @@ const useTimer = (): [any, any] => {
     dispatch(resetRetryTimer(isTimerStart));
   };
 
-  const fazeSwitch = () => {
-    dispatch(switchFaze(isInterval));
-  };
-
   const switchCtg = (categoryName: string) => {
     dispatch(switchCategory(categoryName));
+  };
+
+  const fazeSwitch = () => {
+    dispatch(switchFaze(isInterval));
   };
 
   useEffect(() => {
