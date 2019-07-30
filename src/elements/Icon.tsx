@@ -1,5 +1,4 @@
 import React from 'react';
-import useTimerState from '../hooks/useTimerState';
 
 interface IconProps {
   name: string;
@@ -7,7 +6,6 @@ interface IconProps {
 }
 
 const Icon = ({ name, color }: IconProps) => {
-  const [seconds] = useTimerState();
   switch (name) {
     case 'play':
       return (

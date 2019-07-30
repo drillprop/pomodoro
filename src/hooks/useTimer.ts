@@ -7,10 +7,18 @@ import {
   switchFaze,
   switchCategory
 } from '../duck/timer/actions';
-import useTimerState from './useTimerState';
+import { useSelector } from 'react-redux';
+import { convertSeconds } from '../utils/helpers';
 
-const useTimer = (): [any, any, any, any] => {
-  const [seconds, , isTimerStart, isInterval] = useTimerState();
+const useTimer = (): [any, any] => {
+  const seconds: number = useSelector((state: any) =>
+    state.isInterval ? state.intervalTime : state.breakTime
+  );
+  const isInterval: boolean = useSelector((state: any) => state.isInterval);
+  const timeAsString: any = convertSeconds(seconds);
+  const isTimerStart: boolean = useSelector((state: any) => state.isTimerStart);
+  const categories: string = useSelector((state: any) => state.categories);
+
   const dispatch = useDispatch();
 
   const updateSeconds = (num: number) => {
@@ -41,7 +49,7 @@ const useTimer = (): [any, any, any, any] => {
     dispatch(switchFaze(isInterval));
   };
 
-  const categorySwitch = (categoryName: string) => {
+  const switchCtg = (categoryName: string) => {
     dispatch(switchCategory(categoryName));
   };
 
@@ -57,7 +65,10 @@ const useTimer = (): [any, any, any, any] => {
       clearTimeout(timeout);
     };
   });
-  return [startPause, reset, retry, categorySwitch];
+  return [
+    { seconds, timeAsString, isTimerStart, isInterval, categories },
+    { startPause, reset, retry, switchCtg }
+  ];
 };
 
 export default useTimer;

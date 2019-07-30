@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import useTimerState from '../../hooks/useTimerState';
+import useTimer from '../../hooks/useTimer';
 
 const TimerWrapper = styled.section`
   text-align: center;
@@ -14,10 +14,10 @@ const Time = styled.h1`
 `;
 
 const Timer: React.FC = () => {
-  const [, timeString] = useTimerState();
+  const [state] = useTimer();
   return (
     <TimerWrapper>
-      <Time>{timeString}</Time>
+      <Time>{state.timeAsString}</Time>
     </TimerWrapper>
   );
 };

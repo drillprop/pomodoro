@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { secondFont } from '../../utils/fonts';
 import { primary } from '../../utils/colors';
-import useTimerState from '../../hooks/useTimerState';
+import useTimer from '../../hooks/useTimer';
 
 const TimerTitle = styled.h2`
   font-family: ${secondFont};
@@ -15,8 +15,8 @@ const TimerTitle = styled.h2`
 `;
 
 const TimerFaze = () => {
-  const [, , , isInterval] = useTimerState();
-  return <TimerTitle>{isInterval ? 'interval' : 'break'}</TimerTitle>;
+  const [state] = useTimer();
+  return <TimerTitle>{state.isInterval ? 'interval' : 'break'}</TimerTitle>;
 };
 
 export default TimerFaze;

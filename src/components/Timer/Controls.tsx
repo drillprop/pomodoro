@@ -3,14 +3,12 @@ import styled from 'styled-components';
 import {
   secondaryBackground,
   primary,
-  secondary,
   background,
   buttonColors
 } from '../../utils/colors';
 import { secondFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
 import useTimer from '../../hooks/useTimer';
-import useTimerState from '../../hooks/useTimerState';
 
 const ControlsWrapper = styled.div`
   display: grid;
@@ -55,16 +53,15 @@ const PlayButton = styled.button`
 `;
 
 const Controls: React.FC = () => {
-  const [startPauseTimer, resetTimer, retryTimer] = useTimer();
-  const [, , , isInterval] = useTimerState();
+  const [state, { startPause, reset, retry }] = useTimer();
 
   return (
     <ControlsWrapper>
-      <ResetButton onClick={resetTimer}>
-        {isInterval ? 'Reset' : 'Skip'}
+      <ResetButton onClick={reset}>
+        {state.isInterval ? 'Reset' : 'Skip'}
       </ResetButton>
-      <RetryButtton onClick={retryTimer}>Retry</RetryButtton>
-      <PlayButton onClick={startPauseTimer}>
+      <RetryButtton onClick={retry}>Retry</RetryButtton>
+      <PlayButton onClick={startPause}>
         <Icon name='play' color={buttonColors} />
       </PlayButton>
     </ControlsWrapper>
