@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  secondaryBackground,
-  primary,
-  background,
-  buttonColors
-} from '../../utils/colors';
+import { secondaryBackground, primary, background } from '../../utils/colors';
 import { secondFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
 import useTimer from '../../hooks/useTimer';
@@ -47,9 +42,9 @@ const PlayButton = styled.button<{ isTimerStart: boolean }>`
   grid-column: 1/4;
   grid-row: 1;
   width: 90px;
-  border: 7px solid ${buttonColors};
+  border: 7px solid ${primary};
   background-color: ${({ isTimerStart }) =>
-    isTimerStart ? buttonColors : background};
+    isTimerStart ? primary : background};
   border-radius: 100%;
 `;
 
@@ -81,11 +76,7 @@ const Controls: React.FC = () => {
       </ResetButton>
       <RetryButtton onClick={retry}>Retry</RetryButtton>
       <PlayButton isTimerStart={state.isTimerStart} onClick={startPause}>
-        {state.isTimerStart ? (
-          <Pause />
-        ) : (
-          <Icon name='play' color={buttonColors} />
-        )}
+        {state.isTimerStart ? <Pause /> : <Icon name='play' color={primary} />}
       </PlayButton>
     </ControlsWrapper>
   );
