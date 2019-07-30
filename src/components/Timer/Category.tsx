@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
 import useTimerState from '../../hooks/useTimerState';
+import useTimer from '../../hooks/useTimer';
 
 const Select = styled.select`
   font-family: ${primFont};
@@ -29,8 +30,9 @@ const Select = styled.select`
 
 const Category = () => {
   const [, , , , categories] = useTimerState();
+  const [, , , switchCategory] = useTimer();
   return (
-    <Select>
+    <Select onChange={e => switchCategory(e.currentTarget.value)}>
       {Object.keys(categories).map(key => (
         <option key={key}>{key}</option>
       ))}

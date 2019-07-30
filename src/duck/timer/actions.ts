@@ -56,7 +56,7 @@ export const deleteCategory = (categoryName: string) => {
   };
 };
 
-export const swtichCategory = (categoryName: string) => {
+export const switchCategory = (categoryName: string) => {
   return {
     type: SWITCH_CATEGORY,
     categoryName

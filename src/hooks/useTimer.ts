@@ -4,11 +4,12 @@ import {
   updateTimer,
   startPauseTimer,
   resetRetryTimer,
-  switchFaze
+  switchFaze,
+  switchCategory
 } from '../duck/timer/actions';
 import useTimerState from './useTimerState';
 
-const useTimer = (): [any, any, any] => {
+const useTimer = (): [any, any, any, any] => {
   const [seconds, , isTimerStart, isInterval] = useTimerState();
   const dispatch = useDispatch();
 
@@ -28,7 +29,7 @@ const useTimer = (): [any, any, any] => {
     dispatch(resetRetryTimer(false));
     if (!isInterval) {
       updateSeconds(0);
-      swiitch();
+      fazeSwitch();
     }
   };
 
@@ -36,8 +37,12 @@ const useTimer = (): [any, any, any] => {
     dispatch(resetRetryTimer(isTimerStart));
   };
 
-  const swiitch = () => {
+  const fazeSwitch = () => {
     dispatch(switchFaze(isInterval));
+  };
+
+  const categorySwitch = (categoryName: string) => {
+    dispatch(switchCategory(categoryName));
   };
 
   useEffect(() => {
@@ -46,13 +51,13 @@ const useTimer = (): [any, any, any] => {
       timeout = setTimeout(() => {
         updateSeconds(seconds - 1);
         !seconds && startPause();
-        !seconds && swiitch();
+        !seconds && fazeSwitch();
       }, 1000);
     return () => {
       clearTimeout(timeout);
     };
   });
-  return [startPause, reset, retry];
+  return [startPause, reset, retry, categorySwitch];
 };
 
 export default useTimer;
