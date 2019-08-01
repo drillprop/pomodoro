@@ -1,14 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { secondFont, primFont } from '../../utils/fonts';
-import {
-  primary,
-  secondary,
-  background,
-  secondaryBackground
-} from '../../utils/colors';
-import IntervalConfig from './IntervalConfig';
-import BreakConfig from './BreakConfig';
+import { primary } from '../../utils/colors';
+import ConfigForm from './ConfigForm';
 
 const ConfigWrapper = styled.main`
   display: grid;
@@ -26,47 +20,12 @@ const ConfigTitle = styled.h2`
   margin: 0;
 `;
 
-export const ConfigForm = styled.form`
-  input {
-    font-family: ${primFont};
-    font-size: 1.5rem;
-    margin: 0 auto;
-    width: 45px;
-    color: ${primary};
-    background-color: ${background};
-    border: solid 1px ${secondaryBackground};
-  }
-  h3 {
-    font-size: 2rem;
-    font-family: ${secondFont};
-    color: ${primary};
-    text-align: center;
-  }
-  label {
-    font-size: 1.5rem;
-    margin-right: 20px;
-  }
-  button {
-    border: none;
-    margin-top: 2em;
-    display: block;
-    width: 100%;
-    background: ${secondaryBackground};
-    height: 3em;
-    font-size: 1rem;
-    font-family: ${secondFont};
-    color: ${primary};
-    font-weight: 700;
-    text-transform: lowercase;
-  }
-`;
-
 const Config: FC = () => {
   return (
     <ConfigWrapper>
       <ConfigTitle>config</ConfigTitle>
-      <IntervalConfig />
-      <BreakConfig />
+      <ConfigForm name='interval' />
+      <ConfigForm name='break' />
     </ConfigWrapper>
   );
 };
