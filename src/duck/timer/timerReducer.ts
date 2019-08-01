@@ -11,13 +11,12 @@ import {
 interface Config {
   initialInterval: number;
   initialBreak: number;
+  categories: Array<string>;
 }
-
-type Category = { [name: string]: number };
 
 interface Timer {
   config: Config;
-  categories: Category;
+  categories: any;
   selectedCategory: string;
   breakTime: number;
   intervalTime: number;
@@ -26,17 +25,17 @@ interface Timer {
 }
 
 const config: Config = {
-  initialInterval: 80,
-  initialBreak: 10
+  initialInterval: 5,
+  initialBreak: 2,
+  categories: ['default', 'study', 'work']
 };
 
 const initialState: Timer = {
   config,
-  categories: {
-    default: 0,
-    study: 0,
-    work: 0
-  },
+  categories: config.categories.reduce((acc, ctg) => {
+    const obj = { ...acc, [ctg]: 0 };
+    return obj;
+  }, {}),
   selectedCategory: 'default',
   breakTime: config.initialBreak,
   intervalTime: config.initialInterval,
