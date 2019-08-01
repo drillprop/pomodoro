@@ -64,9 +64,8 @@ export const switchCategory = (categoryName: string) => {
   };
 };
 
-export const showConfig = (isConfigVisible: boolean) => {
+export const showConfig = () => {
   return {
-    type: SHOW_CONFIG,
-    isConfigVisible
+    type: SHOW_CONFIG
   };
 };
