@@ -7,29 +7,22 @@ import Category from './Category';
 
 const InterfaceWrapper = styled.main`
   display: grid;
-  grid-template-rows: 120px 140px 200px 100px;
+  margin-top: 100px;
+  grid-template-rows: 150px 200px;
   justify-content: center;
-  height: 100vh;
-`;
-const FazeAndCategory = styled.section`
-  grid-row: 2;
-`;
-
-const TimerAndControls = styled.section`
-  grid-row: 3;
 `;
 
 const Interface: React.FC = () => {
   return (
     <InterfaceWrapper>
-      <FazeAndCategory>
+      <div>
         <TimerFaze />
         <Category />
-      </FazeAndCategory>
-      <TimerAndControls>
+      </div>
+      <div>
         <Timer />
         <Controls />
-      </TimerAndControls>
+      </div>
     </InterfaceWrapper>
   );
 };
