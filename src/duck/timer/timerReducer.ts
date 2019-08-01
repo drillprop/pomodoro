@@ -5,7 +5,8 @@ import {
   SWITCH_FAZE,
   CREATE_CATEGORY,
   DELETE_CATEGORY,
-  SWITCH_CATEGORY
+  SWITCH_CATEGORY,
+  SHOW_CONFIG
 } from './timerTypes';
 
 interface Config {
@@ -15,6 +16,7 @@ interface Config {
 }
 
 interface Timer {
+  isConfigVisible: boolean;
   config: Config;
   categories: any;
   selectedCategory: string;
@@ -34,6 +36,7 @@ const reduceToObject = (arr: Array<string | number>) =>
   arr.reduce((acc, prop) => ({ ...acc, [prop]: 0 }), {});
 
 const initialState: Timer = {
+  isConfigVisible: false,
   config,
   categories: config.categories.reduce(
     (acc, ctg) => ({ ...acc, [ctg]: 0 }),
@@ -110,6 +113,12 @@ export default (state = initialState, action: any) => {
         isInterval: true,
         breakTime: state.config.initialBreak,
         intervalTime: state.config.initialInterval
+      };
+    }
+    case SHOW_CONFIG: {
+      return {
+        ...state,
+        isConfigVisible: !state.isConfigVisible
       };
     }
     default:

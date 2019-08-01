@@ -5,7 +5,8 @@ import {
   SWITCH_FAZE,
   CREATE_CATEGORY,
   DELETE_CATEGORY,
-  SWITCH_CATEGORY
+  SWITCH_CATEGORY,
+  SHOW_CONFIG
 } from './timerTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -60,5 +61,12 @@ export const switchCategory = (categoryName: string) => {
   return {
     type: SWITCH_CATEGORY,
     categoryName
+  };
+};
+
+export const showConfig = (isConfigVisible: boolean) => {
+  return {
+    type: SHOW_CONFIG,
+    isConfigVisible
   };
 };
