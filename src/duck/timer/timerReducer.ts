@@ -8,7 +8,15 @@ import {
   SWITCH_CATEGORY
 } from './timerTypes';
 
+interface Config {
+  initialInterval: number;
+  initialBreak: number;
+}
+
+type Category = { [name: string]: number };
+
 interface Timer {
+  config: Config;
   categories: Category;
   selectedCategory: string;
   breakTime: number;
@@ -16,17 +24,22 @@ interface Timer {
   isTimerStart: boolean;
   isInterval: boolean;
 }
-type Category = { [name: string]: number };
+
+const config: Config = {
+  initialInterval: 80,
+  initialBreak: 10
+};
 
 const initialState: Timer = {
+  config,
   categories: {
     default: 0,
     study: 0,
     work: 0
   },
   selectedCategory: 'default',
-  breakTime: 10,
-  intervalTime: 80,
+  breakTime: config.initialBreak,
+  intervalTime: config.initialInterval,
   isTimerStart: false,
   isInterval: true
 };
@@ -47,15 +60,15 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isTimerStart: action.isTimerStart,
-        breakTime: initialState.breakTime,
-        intervalTime: initialState.intervalTime
+        breakTime: state.config.initialBreak,
+        intervalTime: state.config.initialInterval
       };
     case SWITCH_FAZE:
       return {
         ...state,
         isInterval: !action.isInterval,
-        breakTime: initialState.breakTime,
-        intervalTime: initialState.intervalTime,
+        breakTime: state.config.initialBreak,
+        intervalTime: state.config.initialInterval,
         categories: {
           ...state.categories,
           [state.selectedCategory]: !action.isInterval
@@ -89,8 +102,8 @@ export default (state = initialState, action: any) => {
         selectedCategory: action.categoryName,
         isTimerStart: false,
         isInterval: true,
-        breakTime: initialState.breakTime,
-        intervalTime: initialState.intervalTime
+        breakTime: state.config.initialBreak,
+        intervalTime: state.config.initialInterval
       };
     }
     default:
