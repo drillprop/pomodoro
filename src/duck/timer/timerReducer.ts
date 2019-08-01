@@ -30,12 +30,15 @@ const config: Config = {
   categories: ['default', 'study', 'work']
 };
 
+const reduceToObject = (arr: Array<string | number>) =>
+  arr.reduce((acc, prop) => ({ ...acc, [prop]: 0 }), {});
+
 const initialState: Timer = {
   config,
-  categories: config.categories.reduce((acc, ctg) => {
-    const obj = { ...acc, [ctg]: 0 };
-    return obj;
-  }, {}),
+  categories: config.categories.reduce(
+    (acc, ctg) => ({ ...acc, [ctg]: 0 }),
+    {}
+  ),
   selectedCategory: 'default',
   breakTime: config.initialBreak,
   intervalTime: config.initialInterval,
@@ -78,6 +81,10 @@ export default (state = initialState, action: any) => {
     case CREATE_CATEGORY:
       return {
         ...state,
+        config: {
+          ...state.config,
+          categories: [...state.config.categories, action.categoryName]
+        },
         categories: {
           ...state.categories,
           [action.categoryName]: 0
