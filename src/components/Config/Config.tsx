@@ -1,17 +1,28 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { secondFont } from '../../utils/fonts';
+import { primary } from '../../utils/colors';
 
 const ConfigWrapper = styled.main`
   display: grid;
-  grid-template-rows: 120px 140px 200px 100px;
+  margin-top: 100px;
+  grid-template-rows: 150px 200px;
   justify-content: center;
-  height: 100vh;
+`;
+const ConfigTitle = styled.h2`
+  font-family: ${secondFont};
+  text-align: center;
+  font-weight: 600;
+  color: ${primary};
+  font-size: 3.5rem;
+  line-height: 0.9;
+  margin: 0;
 `;
 
 const Config: FC = () => {
   return (
     <ConfigWrapper>
-      <h1>Config</h1>
+      <ConfigTitle>config</ConfigTitle>
       <form>
         <h3>Interval Time</h3>
         <input type='number' /> hr
