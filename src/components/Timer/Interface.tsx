@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Timer from './Timer';
 import Controls from './Controls';
-import Hamburger from './HamburgerButton';
 import TimerFaze from './TimerFaze';
 import Category from './Category';
 
@@ -23,7 +22,6 @@ const TimerAndControls = styled.section`
 const Interface: React.FC = () => {
   return (
     <InterfaceWrapper>
-      <Hamburger />
       <FazeAndCategory>
         <TimerFaze />
         <Category />

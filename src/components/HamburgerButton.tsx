@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { primary } from '../../utils/colors';
+import { primary } from '../utils/colors';
 
 const HamburgerWrapper = styled.div`
   position: absolute;
@@ -49,7 +49,7 @@ const HamburgerWrapper = styled.div`
   }
 `;
 
-const Hamburger = () => {
+const HamburgerButton = () => {
   return (
     <HamburgerWrapper>
       <input type='checkbox' onChange={() => console.log('hello')} />
@@ -58,4 +58,4 @@ const Hamburger = () => {
   );
 };
 
-export default Hamburger;
+export default HamburgerButton;
