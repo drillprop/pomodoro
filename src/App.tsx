@@ -3,6 +3,7 @@ import GlobalStyle from './utils/GlobalStyle';
 import Interface from './components/Timer/Interface';
 import HamburgerButton from './components/HamburgerButton';
 import { useSelector } from 'react-redux';
+import Config from './components/Config/Config';
 
 const App: React.FC = () => {
   const isConfigVisible = useSelector((state: any) => state.isConfigVisible);
@@ -10,7 +11,7 @@ const App: React.FC = () => {
     <>
       <GlobalStyle />
       <HamburgerButton />
-      {isConfigVisible ? 'visible' : <Interface />}
+      {isConfigVisible ? <Config /> : <Interface />}
     </>
   );
 };
