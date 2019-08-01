@@ -6,7 +6,7 @@ import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   SWITCH_CATEGORY
-} from './types';
+} from './timerTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
   let field = isInterval ? 'intervalTime' : 'breakTime';

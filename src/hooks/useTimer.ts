@@ -6,7 +6,7 @@ import {
   resetRetryTimer,
   switchFaze,
   switchCategory
-} from '../duck/timer/actions';
+} from '../duck/timer/timerActions';
 import { useSelector } from 'react-redux';
 import { convertSeconds } from '../utils/helpers';
 
