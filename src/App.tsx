@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <>
       <GlobalStyle />
       <HamburgerButton />
-      {isConfigVisible ? <Config /> : <Interface />}
+      {!isConfigVisible ? <Config /> : <Interface />}
     </>
   );
 };
