@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setTimers } from '../duck/timer/timerActions';
 
 const useInput = (initial: any) => {
   const [state, setState] = useState(initial);
+  const dispatch = useDispatch();
 
   const updateState = (e: any) => {
     const { name, max, min, value } = e.target;
+
     const spliced = parseInt(
       value
         .split('')
@@ -22,9 +26,14 @@ const useInput = (initial: any) => {
   };
 
   const submitState = (e: any) => {
+    const { name } = e.target;
     e.preventDefault();
-    console.log('Submited', state);
+
+    const seconds = state.hours * 60 * 60 + state.minutes * 60 + state.seconds;
+    const capitalizeFirst = name.charAt(0).toUpperCase() + name.slice(1);
+    dispatch(setTimers(seconds, `initial${capitalizeFirst}`));
   };
+
   return [updateState, submitState, state];
 };
 

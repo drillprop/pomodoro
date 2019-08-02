@@ -7,8 +7,7 @@ import {
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_CONFIG,
-  SET_BREAK,
-  SET_INTERVAL
+  SET_TIMERS
 } from './timerTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -72,16 +71,10 @@ export const showConfig = () => {
   };
 };
 
-export const setBreak = (seconds: number) => {
+export const setTimers = (seconds: number, timer: string) => {
   return {
-    type: SET_BREAK,
-    seconds
-  };
-};
-
-export const setInt = (seconds: number) => {
-  return {
-    type: SET_INTERVAL,
-    seconds
+    type: SET_TIMERS,
+    seconds,
+    timer
   };
 };

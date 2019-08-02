@@ -50,7 +50,7 @@ const ConfigForm: FC<ConfigFormProps> = ({ name }) => {
     seconds: 0
   });
   return (
-    <StyledForm onSubmit={(e: FormEvent) => submitValues(e)}>
+    <StyledForm onSubmit={(e: FormEvent) => submitValues(e)} name={name}>
       <h3>{name} time</h3>
       <label htmlFor={`${name}-hr`}>
         <input

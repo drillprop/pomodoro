@@ -7,8 +7,7 @@ import {
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_CONFIG,
-  SET_INTERVAL,
-  SET_BREAK
+  SET_TIMERS
 } from './timerTypes';
 
 interface Config {
@@ -123,21 +122,12 @@ export default (state = initialState, action: any) => {
         isConfigVisible: !state.isConfigVisible
       };
     }
-    case SET_INTERVAL: {
+    case SET_TIMERS: {
       return {
         ...state,
         config: {
           ...state.config,
-          initialInterval: action.seconds
-        }
-      };
-    }
-    case SET_BREAK: {
-      return {
-        ...state,
-        config: {
-          ...state.config,
-          initialBreak: action.seconds
+          [action.timer]: action.seconds
         }
       };
     }

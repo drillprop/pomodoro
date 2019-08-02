@@ -6,8 +6,7 @@ const CREATE_CATEGORY: string = 'CREATE_CATEGORY';
 const DELETE_CATEGORY: string = 'DELETE_CATEGORY';
 const SWITCH_CATEGORY: string = 'SWITCH_CATEGORY';
 const SHOW_CONFIG: string = 'SHOW_CONFIG';
-const SET_BREAK: string = 'SET_BREAK';
-const SET_INTERVAL: string = 'SET_INTERVAL';
+const SET_TIMERS: string = 'SET_TIMERS';
 
 export {
   UPDATE_TIMER,
@@ -18,6 +17,5 @@ export {
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_CONFIG,
-  SET_BREAK,
-  SET_INTERVAL
+  SET_TIMERS
 };
