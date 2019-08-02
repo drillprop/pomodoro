@@ -11,8 +11,8 @@ const useInput = (initial: any) => {
         .splice(value.length - 2, 2)
         .join('')
     );
+
     if (spliced < max && spliced > min) {
-      console.log('good');
       setState({ ...state, [name]: spliced });
     } else if (spliced > max) {
       setState({ ...state, [name]: parseInt(max) });
