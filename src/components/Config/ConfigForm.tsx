@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { primary, background, secondaryBackground } from '../../utils/colors';
+import useInput from '../../hooks/useInput';
 
 type ConfigFormProps = {
   name: string;
@@ -43,17 +44,49 @@ export const StyledForm = styled.form`
 `;
 
 const ConfigForm: FC<ConfigFormProps> = ({ name }) => {
+  const [setValue, submitValues, values] = useInput({
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
   return (
-    <StyledForm>
+    <StyledForm onSubmit={(e: FormEvent) => submitValues(e)}>
       <h3>{name} time</h3>
       <label htmlFor={`${name}-hr`}>
-        <input type='number' min={0} max={24} id={`${name}-hr`} /> hr
+        <input
+          value={values.hours}
+          type='number'
+          name='hours'
+          min={0}
+          max={24}
+          id={`${name}-hr`}
+          onChange={(e: ChangeEvent) => setValue(e)}
+        />{' '}
+        hr
       </label>
       <label htmlFor={`${name}-min`}>
-        <input type='number' min={0} max={59} id={`${name}-min`} /> min
+        <input
+          value={values.minutes}
+          type='number'
+          name='minutes'
+          min={0}
+          max={59}
+          id={`${name}-min`}
+          onChange={(e: ChangeEvent) => setValue(e)}
+        />{' '}
+        min
       </label>
       <label htmlFor={`${name}-sec`}>
-        <input type='number' min={0} max={59} id={`${name}-sec`} /> sec
+        <input
+          value={values.seconds}
+          type='number'
+          name='seconds'
+          min={0}
+          max={59}
+          id={`${name}-sec`}
+          onChange={(e: ChangeEvent) => setValue(e)}
+        />{' '}
+        sec
       </label>
       <button type='submit'>save</button>
     </StyledForm>
