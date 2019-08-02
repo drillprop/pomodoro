@@ -79,7 +79,7 @@ export const setBreak = (seconds: number) => {
   };
 };
 
-export const setInterval = (seconds: number) => {
+export const setInt = (seconds: number) => {
   return {
     type: SET_INTERVAL,
     seconds
