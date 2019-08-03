@@ -1,6 +1,6 @@
 import moment = require('moment');
 
-export const convertSeconds = (seconds: number): string => {
+export const convertSecToStr = (seconds: number): string => {
   const timerDurationSeconds = moment
     .duration(seconds, 'seconds')
     .seconds()
@@ -20,4 +20,15 @@ export const convertSeconds = (seconds: number): string => {
     return `${timerDurationMinutes}:${timerDurationSeconds}`;
   else
     return `${timerDurationHours}:${timerDurationMinutes}:${timerDurationSeconds}`;
+};
+
+export const convertSecToObj = (seconds: number): object => {
+  const timerDurationSeconds = moment.duration(seconds, 'seconds').seconds();
+  const timerDurationMinutes = moment.duration(seconds, 'seconds').minutes();
+  const timerDurationHours = moment.duration(seconds, 'seconds').hours();
+  return {
+    hours: timerDurationHours,
+    minutes: timerDurationMinutes,
+    seconds: timerDurationSeconds
+  };
 };
