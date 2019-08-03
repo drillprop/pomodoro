@@ -8,7 +8,7 @@ import {
   switchCategory
 } from '../duck/timer/timerActions';
 import { useSelector } from 'react-redux';
-import { convertSeconds } from '../utils/helpers';
+import { convertSecToStr } from '../utils/helpers';
 
 interface TimerState {
   seconds: number;
@@ -29,7 +29,7 @@ const useTimer = (): [TimerState, TimerMethods] => {
     state.isInterval ? state.intervalTime : state.breakTime
   );
   const isInterval = useSelector((state: any) => state.isInterval);
-  const timeAsString = convertSeconds(seconds);
+  const timeAsString = convertSecToStr(seconds);
   const isTimerStart = useSelector((state: any) => state.isTimerStart);
   const categories = useSelector((state: any) => state.categories);
 
