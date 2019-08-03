@@ -11,6 +11,13 @@ body {
   margin:0;
   padding:0;
 }
+li {
+  list-style: none;
+}
+a {
+  color: ${primary};
+  text-decoration:none;
+}
 `;
 
 export default GlobalStyle;
