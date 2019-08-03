@@ -11,8 +11,8 @@ import {
 } from './timerTypes';
 
 interface Config {
-  initialInterval: number;
-  initialBreak: number;
+  intervalInit: number;
+  breakInit: number;
   categories: Array<string>;
 }
 
@@ -28,13 +28,13 @@ interface Timer {
 }
 
 const config: Config = {
-  initialInterval: 5,
-  initialBreak: 2,
+  intervalInit: 5,
+  breakInit: 2,
   categories: ['default', 'study', 'work']
 };
 
-const reduceToObject = (arr: Array<string | number>) =>
-  arr.reduce((acc, prop) => ({ ...acc, [prop]: 0 }), {});
+// const reduceToObject = (arr: Array<string | number>) =>
+//   arr.reduce((acc, prop) => ({ ...acc, [prop]: 0 }), {});
 
 const initialState: Timer = {
   isConfigVisible: false,
@@ -44,8 +44,8 @@ const initialState: Timer = {
     {}
   ),
   selectedCategory: 'default',
-  breakTime: config.initialBreak,
-  intervalTime: config.initialInterval,
+  breakTime: config.breakInit,
+  intervalTime: config.intervalInit,
   isTimerStart: false,
   isInterval: true
 };
@@ -66,15 +66,15 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isTimerStart: action.isTimerStart,
-        breakTime: state.config.initialBreak,
-        intervalTime: state.config.initialInterval
+        breakTime: state.config.breakInit,
+        intervalTime: state.config.intervalInit
       };
     case SWITCH_FAZE:
       return {
         ...state,
         isInterval: !action.isInterval,
-        breakTime: state.config.initialBreak,
-        intervalTime: state.config.initialInterval,
+        breakTime: state.config.breakInit,
+        intervalTime: state.config.intervalInit,
         categories: {
           ...state.categories,
           [state.selectedCategory]: !action.isInterval
@@ -112,8 +112,8 @@ export default (state = initialState, action: any) => {
         selectedCategory: action.categoryName,
         isTimerStart: false,
         isInterval: true,
-        breakTime: state.config.initialBreak,
-        intervalTime: state.config.initialInterval
+        breakTime: state.config.breakInit,
+        intervalTime: state.config.intervalInit
       };
     }
     case SHOW_CONFIG: {
