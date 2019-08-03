@@ -1,6 +1,6 @@
 import * as React from 'react';
 import GlobalStyle from './utils/GlobalStyle';
-import HamburgerButton from './components/HamburgerButton';
+import HamburgerButton from './components/Menu/HamburgerButton';
 import { useSelector } from 'react-redux';
 import Router from './components/Router';
 

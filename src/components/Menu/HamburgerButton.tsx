@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { primary } from '../utils/colors';
+import { primary } from '../../utils/colors';
 import { useDispatch } from 'react-redux';
-import { showMenu } from '../duck/timer/timerActions';
+import { showMenu } from '../../duck/timer/timerActions';
 
 const HamburgerWrapper = styled.div`
   position: absolute;
