@@ -7,7 +7,7 @@ import ConfigForm from './ConfigForm';
 const ConfigWrapper = styled.main`
   display: grid;
   margin-top: 100px;
-  grid-template-rows: 100px 200px 200px;
+  grid-template-rows: 100px 1fr 1fr;
   justify-content: center;
 `;
 const ConfigTitle = styled.h2`

@@ -9,6 +9,7 @@ type ConfigFormProps = {
 };
 
 export const StyledForm = styled.form`
+  margin-bottom: 16px;
   input {
     font-family: ${primFont};
     font-size: 1.5rem;
@@ -17,6 +18,7 @@ export const StyledForm = styled.form`
     color: ${primary};
     background-color: ${background};
     border: solid 1px ${secondaryBackground};
+    margin-left: 16px;
   }
   h3 {
     font-size: 2rem;
