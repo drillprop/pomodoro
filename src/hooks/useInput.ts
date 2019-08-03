@@ -7,7 +7,10 @@ const useInput = (initial: any) => {
   const dispatch = useDispatch();
 
   const updateState = (e: any) => {
-    const { name, max, min, value } = e.target;
+    let { name, max, min, value } = e.target;
+
+    e.target.value = '';
+    if (e.target.value.length > 2) e.target.value = '0';
 
     const spliced = parseInt(
       value
@@ -16,7 +19,7 @@ const useInput = (initial: any) => {
         .join('')
     );
 
-    if (spliced < max && spliced > min) {
+    if (spliced <= max && spliced >= min) {
       setState({ ...state, [name]: spliced });
     } else if (spliced > max) {
       setState({ ...state, [name]: parseInt(max) });
