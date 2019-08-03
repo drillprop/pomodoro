@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { secondFont, primFont } from '../../utils/fonts';
+import { secondFont } from '../../utils/fonts';
 import { primary } from '../../utils/colors';
 import ConfigForm from './ConfigForm';
 
