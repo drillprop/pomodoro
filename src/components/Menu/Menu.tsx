@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import HamburgerButton from './HamburgerButton';
 
 const StyledNavigation = styled.nav`
   position: absolute;
@@ -8,18 +9,22 @@ const StyledNavigation = styled.nav`
   height: 100vh;
 `;
 
-const Menu = () => {
+const Menu = (props: any) => {
+  const { pathname } = props.location;
   return (
-    <StyledNavigation>
-      <ul>
-        <li>
-          <Link to='/config'>one</Link>
-        </li>
-        <li>
-          <Link to='/'>second</Link>
-        </li>
-      </ul>
-    </StyledNavigation>
+    <>
+      <StyledNavigation>
+        <ul>
+          <li>
+            {pathname === '/config' ? (
+              <Link to='/'>back to app</Link>
+            ) : (
+              <Link to='/config'>config</Link>
+            )}
+          </li>
+        </ul>
+      </StyledNavigation>
+    </>
   );
 };
 
