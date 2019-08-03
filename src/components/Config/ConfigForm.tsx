@@ -13,7 +13,7 @@ export const StyledForm = styled.form`
     font-family: ${primFont};
     font-size: 1.5rem;
     margin: 0 auto;
-    width: 45px;
+    width: 70px;
     color: ${primary};
     background-color: ${background};
     border: solid 1px ${secondaryBackground};
@@ -57,7 +57,7 @@ const ConfigForm: FC<ConfigFormProps> = ({ name }) => {
           type='number'
           name='minutes'
           min={0}
-          max={99}
+          max={999}
           id={`${name}-min`}
           onChange={(e: ChangeEvent) => setValue(e)}
         />{' '}
