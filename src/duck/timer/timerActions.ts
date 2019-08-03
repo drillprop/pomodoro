@@ -65,9 +65,10 @@ export const switchCategory = (categoryName: string) => {
   };
 };
 
-export const showMenu = () => {
+export const showMenu = (isMenuVisible: boolean) => {
   return {
-    type: SHOW_MENU
+    type: SHOW_MENU,
+    isMenuVisible
   };
 };
 

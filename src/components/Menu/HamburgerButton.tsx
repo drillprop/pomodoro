@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { primary } from '../../utils/colors';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, SelectorFactory } from 'react-redux';
 import { showMenu } from '../../duck/timer/timerActions';
 
 const HamburgerWrapper = styled.div`
@@ -51,11 +51,19 @@ const HamburgerWrapper = styled.div`
   }
 `;
 
-const HamburgerButton = () => {
+const HamburgerButton: FC<{ location: any }> = ({ location }) => {
+  const isMenuVisible = useSelector((state: any) => state.isMenuVisible);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(showMenu(false));
+  }, [location]);
   return (
     <HamburgerWrapper>
-      <input type='checkbox' onChange={() => dispatch(showMenu())} />
+      <input
+        type='checkbox'
+        checked={isMenuVisible}
+        onChange={() => dispatch(showMenu(!isMenuVisible))}
+      />
       <div />
     </HamburgerWrapper>
   );

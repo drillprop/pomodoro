@@ -119,7 +119,7 @@ export default (state = initialState, action: any) => {
     case SHOW_MENU: {
       return {
         ...state,
-        isMenuVisible: !state.isMenuVisible
+        isMenuVisible: action.isMenuVisible
       };
     }
     case SET_TIMERS: {
