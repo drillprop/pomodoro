@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { secondFont } from '../../utils/fonts';
 import { primary } from '../../utils/colors';
 import ConfigForm from './ConfigForm';
+import { Link } from 'react-router-dom';
 
 const ConfigWrapper = styled.main`
   display: grid;
   margin-top: 100px;
-  grid-template-rows: 100px 1fr 1fr;
+  grid-template-rows: 100px 1fr 1fr 100px;
   justify-content: center;
 `;
 const ConfigTitle = styled.h2`
@@ -19,6 +20,11 @@ const ConfigTitle = styled.h2`
   line-height: 0.9;
   margin: 0;
 `;
+const GoBackLink = styled.h4`
+  font-family: ${secondFont};
+  text-align: right;
+  margin-right: 16px;
+`;
 
 const Config: FC = () => {
   return (
@@ -26,6 +32,9 @@ const Config: FC = () => {
       <ConfigTitle>config</ConfigTitle>
       <ConfigForm formName='interval' />
       <ConfigForm formName='break' />
+      <GoBackLink>
+        <Link to='/'>back</Link>
+      </GoBackLink>
     </ConfigWrapper>
   );
 };
