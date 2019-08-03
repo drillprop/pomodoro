@@ -48,10 +48,9 @@ export const StyledForm = styled.form`
 const ConfigForm: FC<ConfigFormProps> = ({ name }) => {
   const config = useSelector((state: any) => state.config);
   const secs = config[`${name}Init`];
-  const obj = convertSecToObj(secs);
+  const obj: any = convertSecToObj(secs);
+  obj.minutes = obj.minutes + obj.hours * 60;
   const [setValue, submitValues, values] = useInput(obj);
-
-  console.log(obj);
   return (
     <StyledForm onSubmit={(e: FormEvent) => submitValues(e)} name={name}>
       <h3>{name} time</h3>
