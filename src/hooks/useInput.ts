@@ -10,12 +10,11 @@ const useInput = (initial: any) => {
     let { name, max, min, value } = e.target;
 
     e.target.value = '';
-    if (e.target.value.length > max) e.target.value = '0';
 
     const spliced = parseInt(
       value
         .split('')
-        .splice(value.length - 2, 2)
+        .slice(-2)
         .join('')
     );
 
