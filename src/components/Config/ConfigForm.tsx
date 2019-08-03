@@ -58,7 +58,7 @@ const ConfigForm: FC<ConfigFormProps> = ({ name }) => {
           type='number'
           name='hours'
           min={0}
-          max={24}
+          max={23}
           id={`${name}-hr`}
           onChange={(e: ChangeEvent) => setValue(e)}
         />{' '}
