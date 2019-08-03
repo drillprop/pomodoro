@@ -6,7 +6,7 @@ import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
-  SHOW_CONFIG,
+  SHOW_MENU,
   SET_TIMERS
 } from './timerTypes';
 
@@ -17,7 +17,7 @@ interface Config {
 }
 
 interface Timer {
-  isConfigVisible: boolean;
+  isMenuVisible: boolean;
   config: Config;
   categories: any;
   selectedCategory: string;
@@ -37,7 +37,7 @@ const config: Config = {
 //   arr.reduce((acc, prop) => ({ ...acc, [prop]: 0 }), {});
 
 const initialState: Timer = {
-  isConfigVisible: false,
+  isMenuVisible: false,
   config,
   categories: config.categories.reduce(
     (acc, ctg) => ({ ...acc, [ctg]: 0 }),
@@ -116,10 +116,10 @@ export default (state = initialState, action: any) => {
         intervalTime: state.config.intervalInit
       };
     }
-    case SHOW_CONFIG: {
+    case SHOW_MENU: {
       return {
         ...state,
-        isConfigVisible: !state.isConfigVisible
+        isMenuVisible: !state.isMenuVisible
       };
     }
     case SET_TIMERS: {

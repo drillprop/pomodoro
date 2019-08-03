@@ -5,7 +5,7 @@ const SWITCH_FAZE: string = 'SWITCH_FAZE';
 const CREATE_CATEGORY: string = 'CREATE_CATEGORY';
 const DELETE_CATEGORY: string = 'DELETE_CATEGORY';
 const SWITCH_CATEGORY: string = 'SWITCH_CATEGORY';
-const SHOW_CONFIG: string = 'SHOW_CONFIG';
+const SHOW_MENU: string = 'SHOW_MENU';
 const SET_TIMERS: string = 'SET_TIMERS';
 
 export {
@@ -16,6 +16,6 @@ export {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
-  SHOW_CONFIG,
+  SHOW_MENU,
   SET_TIMERS
 };

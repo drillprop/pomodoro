@@ -6,7 +6,7 @@ import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
-  SHOW_CONFIG,
+  SHOW_MENU,
   SET_TIMERS
 } from './timerTypes';
 
@@ -65,9 +65,9 @@ export const switchCategory = (categoryName: string) => {
   };
 };
 
-export const showConfig = () => {
+export const showMenu = () => {
   return {
-    type: SHOW_CONFIG
+    type: SHOW_MENU
   };
 };
 

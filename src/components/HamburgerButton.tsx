@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { primary } from '../utils/colors';
 import { useDispatch } from 'react-redux';
-import { showConfig } from '../duck/timer/timerActions';
+import { showMenu } from '../duck/timer/timerActions';
 
 const HamburgerWrapper = styled.div`
   position: absolute;
@@ -55,7 +55,7 @@ const HamburgerButton = () => {
   const dispatch = useDispatch();
   return (
     <HamburgerWrapper>
-      <input type='checkbox' onChange={() => dispatch(showConfig())} />
+      <input type='checkbox' onChange={() => dispatch(showMenu())} />
       <div />
     </HamburgerWrapper>
   );
