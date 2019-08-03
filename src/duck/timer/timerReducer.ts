@@ -125,9 +125,10 @@ export default (state = initialState, action: any) => {
     case SET_TIMERS: {
       return {
         ...state,
+        [`${action.timer}Time`]: action.seconds,
         config: {
           ...state.config,
-          [action.timer]: action.seconds
+          [`${action.timer}Init`]: action.seconds
         }
       };
     }

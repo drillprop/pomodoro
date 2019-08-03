@@ -27,11 +27,11 @@ const useInput = (initial: any) => {
 
   const submitState = (e: any) => {
     const { name } = e.target;
+    const seconds = state.hours * 60 * 60 + state.minutes * 60 + state.seconds;
+
     e.preventDefault();
 
-    const seconds = state.hours * 60 * 60 + state.minutes * 60 + state.seconds;
-    const capitalizeFirst = name.charAt(0).toUpperCase() + name.slice(1);
-    dispatch(setTimers(seconds, `initial${capitalizeFirst}`));
+    dispatch(setTimers(seconds, name));
   };
 
   return [updateState, submitState, state];
