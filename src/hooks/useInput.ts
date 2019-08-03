@@ -10,7 +10,7 @@ const useInput = (initial: any) => {
     let { name, max, min, value } = e.target;
 
     e.target.value = '';
-    if (e.target.value.length > 2) e.target.value = '0';
+    if (e.target.value.length > max) e.target.value = '0';
 
     const spliced = parseInt(
       value
@@ -30,7 +30,7 @@ const useInput = (initial: any) => {
 
   const submitState = (e: any) => {
     const { name } = e.target;
-    const seconds = state.hours * 60 * 60 + state.minutes * 60 + state.seconds;
+    const seconds = state.minutes * 60 + state.seconds;
 
     e.preventDefault();
 

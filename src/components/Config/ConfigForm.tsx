@@ -45,32 +45,19 @@ export const StyledForm = styled.form`
 
 const ConfigForm: FC<ConfigFormProps> = ({ name }) => {
   const [setValue, submitValues, values] = useInput({
-    hours: 0,
     minutes: 0,
     seconds: 0
   });
   return (
     <StyledForm onSubmit={(e: FormEvent) => submitValues(e)} name={name}>
       <h3>{name} time</h3>
-      <label htmlFor={`${name}-hr`}>
-        <input
-          value={values.hours}
-          type='number'
-          name='hours'
-          min={0}
-          max={23}
-          id={`${name}-hr`}
-          onChange={(e: ChangeEvent) => setValue(e)}
-        />{' '}
-        hr
-      </label>
       <label htmlFor={`${name}-min`}>
         <input
           value={values.minutes}
           type='number'
           name='minutes'
           min={0}
-          max={59}
+          max={99}
           id={`${name}-min`}
           onChange={(e: ChangeEvent) => setValue(e)}
         />{' '}
