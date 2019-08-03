@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { primary, background, secondaryBackground } from '../../utils/colors';
 import useInput from '../../hooks/useInput';
+import { useSelector } from 'react-redux';
+import { convertSecToObj } from '../../utils/helpers';
 
 type ConfigFormProps = {
   name: string;
@@ -44,10 +46,12 @@ export const StyledForm = styled.form`
 `;
 
 const ConfigForm: FC<ConfigFormProps> = ({ name }) => {
-  const [setValue, submitValues, values] = useInput({
-    minutes: 0,
-    seconds: 0
-  });
+  const config = useSelector((state: any) => state.config);
+  const secs = config[`${name}Init`];
+  const obj = convertSecToObj(secs);
+  const [setValue, submitValues, values] = useInput(obj);
+
+  console.log(obj);
   return (
     <StyledForm onSubmit={(e: FormEvent) => submitValues(e)} name={name}>
       <h3>{name} time</h3>
