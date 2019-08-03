@@ -15,9 +15,11 @@ export const StyledForm = styled.form`
     font-size: 1.5rem;
     margin: 0 auto;
     width: 70px;
+    padding-left: 8px;
     color: ${primary};
     background-color: ${background};
     border: solid 1px ${secondaryBackground};
+    border-radius: 5px;
     margin-left: 16px;
   }
   h3 {
@@ -43,6 +45,7 @@ export const StyledForm = styled.form`
     color: ${primary};
     font-weight: 700;
     text-transform: lowercase;
+    border-radius: 5px;
   }
 `;
 
