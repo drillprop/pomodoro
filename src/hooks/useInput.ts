@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setTimers } from '../duck/timer/timerActions';
 import { convertSecToObj } from '../utils/helpers';
 
-const useInput = (name: string) => {
+const useInput = (formName: string) => {
   const dispatch = useDispatch();
 
-  const secs = useSelector((state: any) => state.config[`${name}Init`]);
+  const secs = useSelector((state: any) => state.config[`${formName}Init`]);
 
   const timeObject: any = convertSecToObj(secs);
   timeObject.minutes = timeObject.minutes + timeObject.hours * 60;

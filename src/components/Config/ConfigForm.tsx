@@ -3,11 +3,9 @@ import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { primary, background, secondaryBackground } from '../../utils/colors';
 import useInput from '../../hooks/useInput';
-import { useSelector } from 'react-redux';
-import { convertSecToObj } from '../../utils/helpers';
 
 type ConfigFormProps = {
-  name: string;
+  formName: string;
 };
 
 export const StyledForm = styled.form`
@@ -26,6 +24,7 @@ export const StyledForm = styled.form`
     color: ${primary};
     text-align: center;
   }
+
   label {
     font-size: 1.5rem;
     margin-right: 20px;
@@ -45,32 +44,32 @@ export const StyledForm = styled.form`
   }
 `;
 
-const ConfigForm: FC<ConfigFormProps> = ({ name }) => {
-  const [setValue, submitValues, values] = useInput(name);
+const ConfigForm: FC<ConfigFormProps> = ({ formName }) => {
+  const [setValue, submitValues, values] = useInput(formName);
 
   return (
-    <StyledForm onSubmit={(e: FormEvent) => submitValues(e)} name={name}>
-      <h3>{name} time</h3>
-      <label htmlFor={`${name}-min`}>
+    <StyledForm onSubmit={(e: FormEvent) => submitValues(e)} name={formName}>
+      <h3>{formName} time</h3>
+      <label htmlFor={`${formName}-min`}>
         <input
           value={values.minutes}
           type='number'
           name='minutes'
           min={0}
           max={999}
-          id={`${name}-min`}
+          id={`${formName}-min`}
           onChange={(e: ChangeEvent) => setValue(e)}
         />{' '}
         min
       </label>
-      <label htmlFor={`${name}-sec`}>
+      <label htmlFor={`${formName}-sec`}>
         <input
           value={values.seconds}
           type='number'
           name='seconds'
           min={0}
           max={59}
-          id={`${name}-sec`}
+          id={`${formName}-sec`}
           onChange={(e: ChangeEvent) => setValue(e)}
         />{' '}
         sec

@@ -24,8 +24,8 @@ const Config: FC = () => {
   return (
     <ConfigWrapper>
       <ConfigTitle>config</ConfigTitle>
-      <ConfigForm name='interval' />
-      <ConfigForm name='break' />
+      <ConfigForm formName='interval' />
+      <ConfigForm formName='break' />
     </ConfigWrapper>
   );
 };
