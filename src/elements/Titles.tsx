@@ -13,6 +13,7 @@ export const MainTitle = styled.h1`
 `;
 
 export const SubTitle = styled.h2`
+  margin: 28px 0;
   font-size: 2rem;
   font-family: ${secondFont};
   color: ${primary};
