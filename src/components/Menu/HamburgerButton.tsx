@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { primary } from '../../utils/colors';
-import { useDispatch, useSelector, SelectorFactory } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { showMenu } from '../../duck/timer/timerActions';
 
 const HamburgerWrapper = styled.div`
