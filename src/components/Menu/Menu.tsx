@@ -51,6 +51,7 @@ const Menu = (props: any) => {
   const itemIconProps = {
     size: 30,
     style: {
+      marginRight: '10px',
       position: 'relative',
       top: '0.25em'
     },
@@ -62,21 +63,29 @@ const Menu = (props: any) => {
         <Profile />
         <LinkList>
           <li>
-            <Icon name='profile' {...itemIconProps} /> profile
-          </li>
-          <li>
-            <Icon name='profile' {...itemIconProps} /> stats
-          </li>
-          <li>
             <Icon name='profile' {...itemIconProps} />
+            profile
+          </li>
+          <li>
+            <Icon name='stats2' {...itemIconProps} />
+            stats
+          </li>
+          <li>
             {pathname === '/config' ? (
-              <Link to='/'>back to app</Link>
+              <>
+                <Icon name='home' {...itemIconProps} />
+                <Link to='/'>back to app</Link>
+              </>
             ) : (
-              <Link to='/config'>config</Link>
+              <>
+                <Icon name='config' {...itemIconProps} />
+                <Link to='/config'>config</Link>
+              </>
             )}
           </li>
           <li>
-            <Icon name='profile' {...itemIconProps} /> logout
+            <Icon name='logout' {...itemIconProps} />
+            logout
           </li>
         </LinkList>
       </StyledNavigation>
