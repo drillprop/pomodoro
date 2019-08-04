@@ -1,45 +1,31 @@
 import React, { FC, FormEvent, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
-import { primary, background, secondaryBackground } from '../../utils/colors';
+import { primary, background, secondary } from '../../utils/colors';
 import useInput from '../../hooks/useInput';
 import { SubTitle } from '../../elements/Titles';
+import { SubmitButtom } from '../../elements/Forms';
 
 type ConfigFormProps = {
   formName: string;
 };
 
 export const StyledForm = styled.form`
-  margin-bottom: 16px;
   input {
     font-family: ${primFont};
-    font-size: 1.5rem;
+    font-size: 20px;
     margin: 0 auto;
     width: 70px;
-    padding-left: 8px;
+    padding: 8px;
     color: ${primary};
     background-color: ${background};
-    border: solid 1px ${secondaryBackground};
+    border: solid 1px ${secondary};
     border-radius: 5px;
     margin-left: 16px;
   }
   label {
     font-size: 1.5rem;
     margin-right: 20px;
-  }
-  button {
-    border: none;
-    margin-top: 2em;
-    display: block;
-    width: 100%;
-    background: ${secondaryBackground};
-    height: 3em;
-    font-size: 1rem;
-    font-family: ${secondFont};
-    color: ${primary};
-    font-weight: 700;
-    text-transform: lowercase;
-    border-radius: 5px;
   }
 `;
 
@@ -73,7 +59,7 @@ const ConfigForm: FC<ConfigFormProps> = ({ formName }) => {
         />{' '}
         sec
       </label>
-      <button type='submit'>save</button>
+      <SubmitButtom type='submit'>save</SubmitButtom>
     </StyledForm>
   );
 };
