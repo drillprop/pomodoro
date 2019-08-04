@@ -1,7 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { secondaryBackground, background, secondary } from '../../utils/colors';
+import {
+  secondaryBackground,
+  background,
+  secondary,
+  primary
+} from '../../utils/colors';
 import { secondFont } from '../../utils/fonts';
+import Icon from '../../elements/Icon';
 
 const ProfileWrapper = styled.div`
   margin-top: 70px;
@@ -40,7 +46,9 @@ const Email = styled.h2`
 const Profile = () => {
   return (
     <ProfileWrapper>
-      <Avatar />
+      <Avatar>
+        <Icon size={100} color={primary} name='profile' />
+      </Avatar>
       <Name>John Doe</Name>
       <Email>john@email.com</Email>
     </ProfileWrapper>
