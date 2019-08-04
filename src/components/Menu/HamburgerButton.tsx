@@ -55,7 +55,7 @@ const HamburgerButton: FC<{ location: any }> = ({ location }) => {
   const isMenuVisible = useSelector((state: any) => state.isMenuVisible);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(showMenu(false));
+    dispatch(showMenu(true));
   }, [location]);
   return (
     <HamburgerWrapper>
