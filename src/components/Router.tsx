@@ -5,6 +5,7 @@ import Config from './Config/Config';
 import Interface from './Timer/Interface';
 import { useSelector } from 'react-redux';
 import HamburgerButton from './Menu/HamburgerButton';
+import Register from './Register/Register';
 
 const Router = () => {
   const isMenuVisible = useSelector((state: any) => state.isMenuVisible);
@@ -13,6 +14,7 @@ const Router = () => {
       {isMenuVisible && <Route component={Menu} />}
       <Route component={HamburgerButton} />
       <Route path='/config' component={Config} />
+      <Route path='/register' component={Register} />
       <Route exact path='/' component={Interface} />
     </HashRouter>
   );
