@@ -15,7 +15,6 @@ li {
   list-style: none;
 }
 a {
-  color: ${primary};
   text-decoration:none;
 }
 `;
