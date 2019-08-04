@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { primary, background, secondaryBackground } from '../../utils/colors';
 import useInput from '../../hooks/useInput';
+import { SubTitle } from '../../elements/Titles';
 
 type ConfigFormProps = {
   formName: string;
@@ -22,13 +23,6 @@ export const StyledForm = styled.form`
     border-radius: 5px;
     margin-left: 16px;
   }
-  h3 {
-    font-size: 2rem;
-    font-family: ${secondFont};
-    color: ${primary};
-    text-align: center;
-  }
-
   label {
     font-size: 1.5rem;
     margin-right: 20px;
@@ -54,7 +48,7 @@ const ConfigForm: FC<ConfigFormProps> = ({ formName }) => {
 
   return (
     <StyledForm onSubmit={(e: FormEvent) => submitValues(e)} name={formName}>
-      <h3>{formName} time</h3>
+      <SubTitle>{formName} time</SubTitle>
       <label htmlFor={`${formName}-min`}>
         <input
           value={values.minutes}

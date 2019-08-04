@@ -3,20 +3,11 @@ import styled from 'styled-components';
 import { secondFont } from '../../utils/fonts';
 import { primary } from '../../utils/colors';
 import useTimer from '../../hooks/useTimer';
-
-const TimerTitle = styled.h2`
-  font-family: ${secondFont};
-  text-align: center;
-  font-weight: 600;
-  color: ${primary};
-  font-size: 3.5rem;
-  line-height: 0.9;
-  margin: 0;
-`;
+import { MainTitle } from '../../elements/Titles';
 
 const TimerFaze = () => {
   const [state] = useTimer();
-  return <TimerTitle>{state.isInterval ? 'interval' : 'break'}</TimerTitle>;
+  return <MainTitle>{state.isInterval ? 'interval' : 'break'}</MainTitle>;
 };
 
 export default TimerFaze;
