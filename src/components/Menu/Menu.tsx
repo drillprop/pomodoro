@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const StyledNavigation = styled.nav`
   position: absolute;
   top: 0;
-  height: 100vh;
 `;
 
 const Menu = (props: any) => {
