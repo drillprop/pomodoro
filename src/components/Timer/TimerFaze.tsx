@@ -1,12 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { secondFont } from '../../utils/fonts';
-import { primary } from '../../utils/colors';
-import useTimer from '../../hooks/useTimer';
 import { MainTitle } from '../../elements/Titles';
+import useTimerState from '../../hooks/useTimerState';
 
 const TimerFaze = () => {
-  const [state] = useTimer();
+  const state = useTimerState();
   return <MainTitle>{state.isInterval ? 'interval' : 'break'}</MainTitle>;
 };
 
