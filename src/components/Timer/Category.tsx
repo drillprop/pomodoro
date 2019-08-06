@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
-import useTimer from '../../hooks/useTimer';
+import useTimerState from '../../hooks/useTimerState';
+import useTimerMethods from '../../hooks/useTimerMethods';
 
 const Select = styled.select`
   font-family: ${primFont};
@@ -28,10 +29,11 @@ const Select = styled.select`
 `;
 
 const Category = () => {
-  const [state, methods] = useTimer();
+  const { switchCtg } = useTimerMethods();
+  const { categories } = useTimerState();
   return (
-    <Select onChange={e => methods.switchCtg(e.currentTarget.value)}>
-      {Object.keys(state.categories).map(key => (
+    <Select onChange={e => switchCtg(e.currentTarget.value)}>
+      {Object.keys(categories).map(key => (
         <option key={key}>{key}</option>
       ))}
     </Select>
