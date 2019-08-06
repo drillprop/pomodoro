@@ -18,30 +18,28 @@ const Time = styled.h1`
 
 const Timer: React.FC = () => {
   const { isTimerStart, seconds, timeAsString } = useTimerState();
-  const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
-  const [count, setCount] = useState(seconds);
-  const now = moment().format('h:mm:s');
-  const calculateSecondLeft = (now: any, endTime: any) => {};
+  // const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
+  // const [count, setCount] = useState(seconds);
 
-  useEffect(() => {
-    let timeout: any;
+  // useEffect(() => {
+  //   let timeout: any;
 
-    if (isTimerStart && count) {
-      timeout = setTimeout(() => {
-        setCount(count - 1);
-      }, 1000);
-    }
+  //   if (isTimerStart && count) {
+  //     timeout = setTimeout(() => {
+  //       setCount(count - 1);
+  //     }, 1000);
+  //   }
 
-    if (!isTimerStart) clearTimeout(timeout);
+  //   if (!isTimerStart) clearTimeout(timeout);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [count, isTimerStart]);
+  //   return () => {
+  //     clearTimeout(timeout);
+  //   };
+  // }, [count, isTimerStart]);
 
   return (
     <TimerWrapper>
-      <Time>{convertSecToStr(count)}</Time>
+      <Time>{timeAsString}</Time>
     </TimerWrapper>
   );
 };
