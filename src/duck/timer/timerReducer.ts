@@ -25,6 +25,7 @@ interface Timer {
   intervalTime: number;
   isTimerStart: boolean;
   isInterval: boolean;
+  endTime: string;
 }
 
 const config: Config = {
@@ -47,7 +48,8 @@ const initialState: Timer = {
   breakTime: config.breakInit,
   intervalTime: config.intervalInit,
   isTimerStart: false,
-  isInterval: true
+  isInterval: true,
+  endTime: 'string'
 };
 
 export default (state = initialState, action: any) => {
