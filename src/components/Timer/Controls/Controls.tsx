@@ -20,22 +20,6 @@ const ControlsWrapper = styled.div`
 `;
 
 const Controls: React.FC = () => {
-  const { isTimerStart, seconds } = useTimerState();
-  const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (isTimerStart)
-      timeout = setTimeout(() => {
-        updateSeconds(seconds - 1);
-        !seconds && startPause();
-        !seconds && fazeSwitch();
-      }, 1000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  });
-
   return (
     <ControlsWrapper>
       <ResetButton />
