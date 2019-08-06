@@ -14,10 +14,10 @@ const Time = styled.h1`
 `;
 
 const Timer: React.FC = () => {
-  const state = useTimerState();
+  const { timeAsString } = useTimerState();
   return (
     <TimerWrapper>
-      <Time>{state.timeAsString}</Time>
+      <Time>{timeAsString}</Time>
     </TimerWrapper>
   );
 };
