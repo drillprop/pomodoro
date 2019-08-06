@@ -20,28 +20,17 @@ const Timer: React.FC = () => {
   const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
   const [count, setCount] = useState(seconds);
 
-  const countTimer = () => {
-    return setTimeout(() => {
-      setCount(count - 1);
-    }, 1000);
-  };
-
   useEffect(() => {
     let timeout: any;
-    if (isTimerStart) {
+
+    if (isTimerStart && count) {
       timeout = setTimeout(() => {
         setCount(count - 1);
       }, 1000);
     }
-    console.log('render');
+
     if (!isTimerStart) clearTimeout(timeout);
-    // let timeout: NodeJS.Timeout;
-    // if (isTimerStart)
-    //   timeout = setTimeout(() => {
-    //     updateSeconds(seconds - 1);
-    // !count && startPause();
-    // !count && fazeSwitch();
-    //   }, 1000);
+
     return () => {
       clearTimeout(timeout);
     };
