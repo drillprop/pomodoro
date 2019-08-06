@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Timer from './Timer';
-import Controls from './Controls';
+import Controls from './Controls/Controls';
 import TimerFaze from './TimerFaze';
 import Category from './Category';
 
