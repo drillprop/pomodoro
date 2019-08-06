@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import useTimerState from '../../hooks/useTimerState';
 import useTimerMethods from '../../hooks/useTimerMethods';
 import { convertSecToStr } from '../../utils/helpers';
+import moment = require('moment');
 
 const TimerWrapper = styled.section`
   text-align: center;
@@ -19,6 +20,8 @@ const Timer: React.FC = () => {
   const { isTimerStart, seconds, timeAsString } = useTimerState();
   const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
   const [count, setCount] = useState(seconds);
+  const now = moment().format('h:mm:s');
+  const calculateSecondLeft = (now: any, endTime: any) => {};
 
   useEffect(() => {
     let timeout: any;

@@ -7,7 +7,8 @@ import {
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_MENU,
-  SET_TIMERS
+  SET_TIMERS,
+  SET_ENDTIME
 } from './timerTypes';
 
 interface Config {
@@ -132,6 +133,12 @@ export default (state = initialState, action: any) => {
           ...state.config,
           [`${action.timer}Init`]: action.seconds
         }
+      };
+    }
+    case SET_ENDTIME: {
+      return {
+        ...state,
+        endTime: action.endTime
       };
     }
     default:
