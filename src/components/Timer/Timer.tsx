@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useTimerState from '../../hooks/useTimerState';
 import useTimerMethods from '../../hooks/useTimerMethods';
+import { convertSecToStr } from '../../utils/helpers';
 
 const TimerWrapper = styled.section`
   text-align: center;
@@ -16,36 +17,39 @@ const Time = styled.h1`
 
 const Timer: React.FC = () => {
   const { isTimerStart, seconds, timeAsString } = useTimerState();
-  // const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
-  const [count, setCount] = useState(0);
+  const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
+  const [count, setCount] = useState(seconds);
 
   const countTimer = () => {
-    let timeout = setTimeout(() => {
-      setCount(count + 1);
+    return setTimeout(() => {
+      setCount(count - 1);
     }, 1000);
-    if (count === seconds) clearTimeout(timeout);
   };
 
   useEffect(() => {
-    countTimer();
-    if (count === seconds) {
-      console.log('done');
+    let timeout: any;
+    if (isTimerStart) {
+      timeout = setTimeout(() => {
+        setCount(count - 1);
+      }, 1000);
     }
+    console.log('render');
+    if (!isTimerStart) clearTimeout(timeout);
     // let timeout: NodeJS.Timeout;
     // if (isTimerStart)
     //   timeout = setTimeout(() => {
     //     updateSeconds(seconds - 1);
-    //     !seconds && startPause();
-    //     !seconds && fazeSwitch();
+    // !count && startPause();
+    // !count && fazeSwitch();
     //   }, 1000);
-    // return () => {
-    //   clearTimeout(timeout);
-    // };
-  }, [count]);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [count, isTimerStart]);
 
   return (
     <TimerWrapper>
-      <Time>{timeAsString}</Time>
+      <Time>{convertSecToStr(count)}</Time>
     </TimerWrapper>
   );
 };
