@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { secondaryBackground, primary, background } from '../../utils/colors';
 import { secondFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
-import useTimer from '../../hooks/useTimer';
+import useTimerState from '../../hooks/useTimerState';
+import useTimerMethods from '../../hooks/useTimerMethods';
 
 const ControlsWrapper = styled.div`
   display: grid;
@@ -68,15 +69,34 @@ const Pause = styled.div`
 `;
 
 const Controls: React.FC = () => {
-  const [state, { startPause, reset, retry }] = useTimer();
+  const { isInterval, isTimerStart, seconds } = useTimerState();
+  const {
+    startPause,
+    reset,
+    retry,
+    fazeSwitch,
+    updateSeconds
+  } = useTimerMethods();
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (isTimerStart)
+      timeout = setTimeout(() => {
+        updateSeconds(seconds - 1);
+        !seconds && startPause();
+        !seconds && fazeSwitch();
+      }, 1000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  });
+
   return (
     <ControlsWrapper>
-      <ResetButton onClick={reset}>
-        {state.isInterval ? 'Reset' : 'Skip'}
-      </ResetButton>
+      <ResetButton onClick={reset}>{isInterval ? 'Reset' : 'Skip'}</ResetButton>
       <RetryButtton onClick={retry}>Retry</RetryButtton>
-      <PlayButton isTimerStart={state.isTimerStart} onClick={startPause}>
-        {state.isTimerStart ? <Pause /> : <Icon name='play' color={primary} />}
+      <PlayButton isTimerStart={isTimerStart} onClick={startPause}>
+        {isTimerStart ? <Pause /> : <Icon name='play' color={primary} />}
       </PlayButton>
     </ControlsWrapper>
   );
