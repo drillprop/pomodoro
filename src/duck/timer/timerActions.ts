@@ -7,7 +7,8 @@ import {
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_MENU,
-  SET_TIMERS
+  SET_TIMERS,
+  SET_ENDTIME
 } from './timerTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -77,5 +78,12 @@ export const setTimers = (seconds: number, timer: string) => {
     type: SET_TIMERS,
     seconds,
     timer
+  };
+};
+
+export const setEndTime = (date: string) => {
+  return {
+    type: SET_ENDTIME,
+    endTime: date
   };
 };
