@@ -1,8 +1,9 @@
 import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { primary } from '../../utils/colors';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { showMenu } from '../../duck/timer/timerActions';
+import useTimerState from '../../hooks/useTimerState';
 
 const HamburgerWrapper = styled.div`
   position: absolute;
@@ -52,7 +53,7 @@ const HamburgerWrapper = styled.div`
 `;
 
 const HamburgerButton: FC<{ location: any }> = ({ location }) => {
-  const isMenuVisible = useSelector((state: any) => state.isMenuVisible);
+  const { isMenuVisible } = useTimerState();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(showMenu(false));
