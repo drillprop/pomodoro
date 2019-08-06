@@ -7,6 +7,7 @@ const DELETE_CATEGORY: string = 'DELETE_CATEGORY';
 const SWITCH_CATEGORY: string = 'SWITCH_CATEGORY';
 const SHOW_MENU: string = 'SHOW_MENU';
 const SET_TIMERS: string = 'SET_TIMERS';
+const SET_ENDTIME: string = 'SET_ENDTIME';
 
 export {
   UPDATE_TIMER,
@@ -17,5 +18,6 @@ export {
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_MENU,
-  SET_TIMERS
+  SET_TIMERS,
+  SET_ENDTIME
 };
