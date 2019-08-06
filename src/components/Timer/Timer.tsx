@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useTimerState from '../../hooks/useTimerState';
 import useTimerMethods from '../../hooks/useTimerMethods';
@@ -16,20 +16,32 @@ const Time = styled.h1`
 
 const Timer: React.FC = () => {
   const { isTimerStart, seconds, timeAsString } = useTimerState();
-  const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
+  // const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
+  const [count, setCount] = useState(0);
+
+  const countTimer = () => {
+    let timeout = setTimeout(() => {
+      setCount(count + 1);
+    }, 1000);
+    if (count === seconds) clearTimeout(timeout);
+  };
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (isTimerStart)
-      timeout = setTimeout(() => {
-        updateSeconds(seconds - 1);
-        !seconds && startPause();
-        !seconds && fazeSwitch();
-      }, 1000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  });
+    countTimer();
+    if (count === seconds) {
+      console.log('done');
+    }
+    // let timeout: NodeJS.Timeout;
+    // if (isTimerStart)
+    //   timeout = setTimeout(() => {
+    //     updateSeconds(seconds - 1);
+    //     !seconds && startPause();
+    //     !seconds && fazeSwitch();
+    //   }, 1000);
+    // return () => {
+    //   clearTimeout(timeout);
+    // };
+  }, [count]);
 
   return (
     <TimerWrapper>
