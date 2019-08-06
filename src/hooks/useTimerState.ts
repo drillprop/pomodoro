@@ -10,5 +10,5 @@ export default () => {
 
   const timeAsString = convertSecToStr(seconds);
 
-  return { ...reduxState, timeAsString };
+  return { ...reduxState, seconds, timeAsString };
 };
