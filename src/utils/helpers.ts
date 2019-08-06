@@ -32,3 +32,12 @@ export const convertSecToObj = (seconds: number): object => {
     seconds: timerDurationSeconds
   };
 };
+
+export const countTimeLeft = (now: number, future: number): number => {
+  const momentNow = moment(now);
+  const momentFuture = moment(future);
+
+  const seconds = momentFuture.diff(momentNow, 'seconds');
+
+  return seconds;
+};
