@@ -81,9 +81,9 @@ export const setTimers = (seconds: number, timer: string) => {
   };
 };
 
-export const setEndTime = (date: string) => {
+export const setEndTime = (endTime: string) => {
   return {
     type: SET_ENDTIME,
-    endTime: date
+    endTime
   };
 };
