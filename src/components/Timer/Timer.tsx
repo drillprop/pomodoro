@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useTimerState from '../../hooks/useTimerState';
 import useTimerMethods from '../../hooks/useTimerMethods';
-import { convertSecToStr } from '../../utils/helpers';
+import { convertSecToStr, countTimeLeft } from '../../utils/helpers';
 import moment = require('moment');
+import { useDispatch } from 'react-redux';
+import { switchFaze } from '../../duck/timer/timerActions';
 
 const TimerWrapper = styled.section`
   text-align: center;
@@ -17,24 +19,45 @@ const Time = styled.h1`
 `;
 
 const Timer: React.FC = () => {
-  const { isTimerStart, seconds, timeAsString } = useTimerState();
+  const dispatch = useDispatch();
+  const {
+    isTimerStart,
+    isInterval,
+    endTime,
+    breakTime,
+    intervalTime
+  } = useTimerState();
+
+  const seconds = isInterval ? intervalTime : breakTime;
 
   const [count, setCount] = useState(seconds);
 
+  const fazeSwitch = () => {
+    dispatch(switchFaze(isInterval));
+  };
+
   useEffect(() => {
     let timeout: any;
+
+    const timeleft = countTimeLeft(Date.now(), endTime);
+
     if (isTimerStart && count) {
       timeout = setTimeout(() => {
-        setCount(count - 1);
+        setCount(timeleft);
       }, 1000);
     }
+
+    if (!count && isTimerStart) {
+      clearTimeout(timeout);
+      fazeSwitch();
+    }
+
     return () => {
       clearTimeout(timeout);
     };
   }, [count, isTimerStart]);
 
-  console.log(count);
-
+  const timeAsString = convertSecToStr(count);
   return (
     <TimerWrapper>
       <Time>{timeAsString}</Time>
