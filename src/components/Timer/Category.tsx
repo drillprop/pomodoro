@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
 import useTimerState from '../../hooks/useTimerState';
-import useTimerMethods from '../../hooks/useTimerMethods';
+import { useDispatch } from 'react-redux';
+import { switchCategory } from '../../duck/timer/timerActions';
 
 const Select = styled.select`
   font-family: ${primFont};
@@ -29,8 +30,13 @@ const Select = styled.select`
 `;
 
 const Category = () => {
-  const { switchCtg } = useTimerMethods();
+  const dispatch = useDispatch();
   const { categories } = useTimerState();
+
+  const switchCtg = (categoryName: string) => {
+    dispatch(switchCategory(categoryName));
+  };
+
   return (
     <Select onChange={e => switchCtg(e.currentTarget.value)}>
       {Object.keys(categories).map(key => (

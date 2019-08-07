@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import useTimerState from '../../../hooks/useTimerState';
-import useTimerMethods from '../../../hooks/useTimerMethods';
 import { secondaryBackground, primary } from '../../../utils/colors';
 import { secondFont } from '../../../utils/fonts';
+import { useDispatch } from 'react-redux';
+import { resetRetryTimer } from '../../../duck/timer/timerActions';
 
 const ResetandRetryButtons = styled.button`
   border: none;
@@ -26,8 +27,10 @@ const StyledButton = styled(ResetandRetryButtons)`
 `;
 
 const ResetButton = () => {
+  const dispatch = useDispatch();
   const { isInterval } = useTimerState();
-  const { reset } = useTimerMethods();
+
+  const reset = () => dispatch(resetRetryTimer(false));
   return (
     <StyledButton onClick={reset}>{isInterval ? 'Reset' : 'Skip'}</StyledButton>
   );

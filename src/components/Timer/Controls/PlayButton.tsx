@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Icon from '../../../elements/Icon';
 import { primary, background } from '../../../utils/colors';
 import useTimerState from '../../../hooks/useTimerState';
-import useTimerMethods from '../../../hooks/useTimerMethods';
+import { useDispatch } from 'react-redux';
+import { startPauseTimer } from '../../../duck/timer/timerActions';
 
 const StyledPlayButton = styled.button<{ isTimerStart: boolean }>`
   position: relative;
@@ -39,8 +40,10 @@ const Pause = styled.div`
 `;
 
 const PlayButton = () => {
+  const dispatch = useDispatch();
   const { isTimerStart } = useTimerState();
-  const { startPause } = useTimerMethods();
+
+  const startPause = () => dispatch(startPauseTimer(isTimerStart));
   return (
     <StyledPlayButton isTimerStart={isTimerStart} onClick={startPause}>
       {isTimerStart ? <Pause /> : <Icon name='play' color={primary} />}
