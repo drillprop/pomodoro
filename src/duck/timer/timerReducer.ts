@@ -59,8 +59,9 @@ export default (state = initialState, action: any) => {
       const seconds = state.isInterval ? intervalInit : breakInit;
       return {
         ...state,
-        isTimerStart: !action.isTimerStart,
-        endTime: action.startTime + seconds * 1000
+        isTimerStart: action.isTimerStart,
+        endTime: action.startTime + seconds * 1000,
+        timeleft: (action.startTime + seconds * 1000 - action.startTime) / 1000
       };
     case RESET_RETRY_TIMER:
       return {
