@@ -7,8 +7,7 @@ import {
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_MENU,
-  SET_TIMERS,
-  SET_ENDTIME
+  SET_TIMERS
 } from './timerTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -20,10 +19,11 @@ export const updateTimer = (seconds: number, isInterval: boolean) => {
   };
 };
 
-export const startPauseTimer = (isTimerStart: boolean) => {
+export const startPauseTimer = (isTimerStart: boolean, startTime: number) => {
   return {
     type: START_PAUSE_TIMER,
-    isTimerStart
+    isTimerStart,
+    startTime
   };
 };
 
@@ -78,12 +78,5 @@ export const setTimers = (seconds: number, timer: string) => {
     type: SET_TIMERS,
     seconds,
     timer
-  };
-};
-
-export const setEndTime = (endTime: string) => {
-  return {
-    type: SET_ENDTIME,
-    endTime
   };
 };

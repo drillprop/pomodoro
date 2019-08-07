@@ -7,8 +7,7 @@ import {
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_MENU,
-  SET_TIMERS,
-  SET_ENDTIME
+  SET_TIMERS
 } from './timerTypes';
 
 interface Config {
@@ -26,7 +25,7 @@ interface Timer {
   intervalTime: number;
   isTimerStart: boolean;
   isInterval: boolean;
-  endTime: string;
+  endTime: number;
 }
 
 const config: Config = {
@@ -47,7 +46,7 @@ const initialState: Timer = {
   intervalTime: config.intervalInit,
   isTimerStart: false,
   isInterval: true,
-  endTime: 'string'
+  endTime: 0
 };
 
 export default (state = initialState, action: any) => {
@@ -58,9 +57,11 @@ export default (state = initialState, action: any) => {
         [action.field]: action[action.field]
       };
     case START_PAUSE_TIMER:
+      const seconds = state.isInterval ? state.intervalTime : state.breakTime;
       return {
         ...state,
-        isTimerStart: !action.isTimerStart
+        isTimerStart: !action.isTimerStart,
+        endTime: action.startTime + seconds * 1000
       };
     case RESET_RETRY_TIMER:
       return {
@@ -131,12 +132,6 @@ export default (state = initialState, action: any) => {
           ...state.config,
           [`${action.timer}Init`]: action.seconds
         }
-      };
-    }
-    case SET_ENDTIME: {
-      return {
-        ...state,
-        endTime: action.endTime
       };
     }
     default:
