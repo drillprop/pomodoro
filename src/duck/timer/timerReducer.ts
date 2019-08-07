@@ -21,11 +21,10 @@ interface Timer {
   config: Config;
   categories: any;
   selectedCategory: string;
-  breakTime: number;
-  intervalTime: number;
   isTimerStart: boolean;
   isInterval: boolean;
   endTime: number;
+  timeleft: number;
 }
 
 const config: Config = {
@@ -42,14 +41,14 @@ const initialState: Timer = {
     {}
   ),
   selectedCategory: 'default',
-  breakTime: config.breakInit,
-  intervalTime: config.intervalInit,
   isTimerStart: false,
   isInterval: true,
-  endTime: 0
+  endTime: 0,
+  timeleft: config.intervalInit
 };
 
 export default (state = initialState, action: any) => {
+  const { intervalInit, breakInit } = state.config;
   switch (action.type) {
     case UPDATE_TIMER:
       return {
@@ -57,7 +56,7 @@ export default (state = initialState, action: any) => {
         [action.field]: action[action.field]
       };
     case START_PAUSE_TIMER:
-      const seconds = state.isInterval ? state.intervalTime : state.breakTime;
+      const seconds = state.isInterval ? intervalInit : breakInit;
       return {
         ...state,
         isTimerStart: !action.isTimerStart,
@@ -67,16 +66,15 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isTimerStart: action.isTimerStart,
-        breakTime: state.config.breakInit,
-        intervalTime: state.config.intervalInit
+        timeleft: state.isInterval ? intervalInit : breakInit
       };
     case SWITCH_FAZE:
       return {
         ...state,
         isInterval: !action.isInterval,
+        endTime: 0,
         isTimerStart: false,
-        breakTime: state.config.breakInit,
-        intervalTime: state.config.intervalInit,
+        timeleft: !action.isInterval ? intervalInit : breakInit,
         categories: {
           ...state.categories,
           [state.selectedCategory]: !action.isInterval

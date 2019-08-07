@@ -18,40 +18,36 @@ const Time = styled.h1`
 
 const Timer: React.FC = () => {
   const dispatch = useDispatch();
-  const {
-    isTimerStart,
-    isInterval,
-    endTime,
-    breakTime,
-    intervalTime
-  } = useTimerState();
+  const { isTimerStart, isInterval, endTime, timeleft } = useTimerState();
 
-  const seconds = isInterval ? intervalTime : breakTime;
-
-  const [count, setCount] = useState(seconds);
+  const [count, setCount] = useState(timeleft);
 
   const fazeSwitch = () => {
     dispatch(switchFaze(isInterval));
   };
 
   useEffect(() => {
-    let timeout: any;
+    let timeoutTimer: any;
+    let timeoutSwitch: any;
 
-    const timeleft = countTimeLeft(Date.now(), endTime);
+    if (!isTimerStart) setCount(timeleft);
+
+    const left = countTimeLeft(Date.now(), endTime);
 
     if (isTimerStart && count) {
-      timeout = setTimeout(() => {
-        setCount(timeleft);
+      timeoutTimer = setTimeout(() => {
+        setCount(left);
       }, 1000);
     }
 
     if (!count && isTimerStart) {
-      clearTimeout(timeout);
-      fazeSwitch();
+      clearTimeout(timeoutTimer);
+      timeoutSwitch = setTimeout(() => fazeSwitch(), 1000);
     }
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(timeoutTimer);
+      clearTimeout(timeoutSwitch);
     };
   }, [count, isTimerStart]);
 
