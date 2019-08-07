@@ -112,8 +112,13 @@ export default (state = initialState, action: any) => {
         selectedCategory: action.categoryName,
         isTimerStart: false,
         isInterval: true,
-        breakTime: state.config.breakInit,
-        intervalTime: state.config.intervalInit
+        timeleft: intervalInit,
+        categories: {
+          ...state.categories,
+          [state.selectedCategory]: !state.isInterval
+            ? state.categories[state.selectedCategory] + 1
+            : state.categories[state.selectedCategory]
+        }
       };
     }
     case SHOW_MENU: {
