@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useTimerState from '../../hooks/useTimerState';
-import useTimerMethods from '../../hooks/useTimerMethods';
 import { convertSecToStr, countTimeLeft } from '../../utils/helpers';
-import moment = require('moment');
 import { useDispatch } from 'react-redux';
 import { switchFaze } from '../../duck/timer/timerActions';
 
