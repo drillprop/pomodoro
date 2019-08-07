@@ -18,24 +18,22 @@ const Time = styled.h1`
 
 const Timer: React.FC = () => {
   const { isTimerStart, seconds, timeAsString } = useTimerState();
-  // const { startPause, fazeSwitch, updateSeconds } = useTimerMethods();
-  // const [count, setCount] = useState(seconds);
 
-  // useEffect(() => {
-  //   let timeout: any;
+  const [count, setCount] = useState(seconds);
 
-  //   if (isTimerStart && count) {
-  //     timeout = setTimeout(() => {
-  //       setCount(count - 1);
-  //     }, 1000);
-  //   }
+  useEffect(() => {
+    let timeout: any;
+    if (isTimerStart && count) {
+      timeout = setTimeout(() => {
+        setCount(count - 1);
+      }, 1000);
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [count, isTimerStart]);
 
-  //   if (!isTimerStart) clearTimeout(timeout);
-
-  //   return () => {
-  //     clearTimeout(timeout);
-  //   };
-  // }, [count, isTimerStart]);
+  console.log(count);
 
   return (
     <TimerWrapper>
