@@ -1,14 +1,10 @@
 import { useDispatch } from 'react-redux';
 import useTimerState from './useTimerState';
-import { updateTimer, switchFaze } from '../duck/timer/timerActions';
+import { updateTimer } from '../duck/timer/timerActions';
 
 export default () => {
   const dispatch = useDispatch();
   const { isInterval } = useTimerState();
-
-  const fazeSwitch = () => {
-    dispatch(switchFaze(isInterval));
-  };
 
   const updateSeconds = (num: number) => {
     if (num >= 0) {
@@ -18,5 +14,5 @@ export default () => {
     }
   };
 
-  return { fazeSwitch, updateSeconds };
+  return { updateSeconds };
 };
