@@ -43,7 +43,10 @@ const PlayButton = () => {
   const dispatch = useDispatch();
   const { isTimerStart } = useTimerState();
 
-  const startPause = () => dispatch(startPauseTimer(isTimerStart));
+  const startPause = () => {
+    dispatch(startPauseTimer(isTimerStart, Date.now()));
+  };
+
   return (
     <StyledPlayButton isTimerStart={isTimerStart} onClick={startPause}>
       {isTimerStart ? <Pause /> : <Icon name='play' color={primary} />}
