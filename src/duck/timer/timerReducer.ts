@@ -35,9 +35,6 @@ const config: Config = {
   categories: ['default', 'study', 'work']
 };
 
-// const reduceToObject = (arr: Array<string | number>) =>
-//   arr.reduce((acc, prop) => ({ ...acc, [prop]: 0 }), {});
-
 const initialState: Timer = {
   isMenuVisible: false,
   config,
@@ -76,6 +73,7 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isInterval: !action.isInterval,
+        isTimerStart: false,
         breakTime: state.config.breakInit,
         intervalTime: state.config.intervalInit,
         categories: {
