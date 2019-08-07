@@ -36,14 +36,6 @@ const Timer: React.FC = () => {
   //     clearTimeout(timeout);
   //   };
   // }, [count, isTimerStart]);
-  const now = moment();
-  const someTimeInFuture = moment('2019-11-22', 'YYYY-MM-DD');
-
-  const countTimeLeft = (now: any, future: any) => {
-    return future.diff(now, 'seconds');
-  };
-
-  console.log(countTimeLeft(now, someTimeInFuture));
 
   return (
     <TimerWrapper>
