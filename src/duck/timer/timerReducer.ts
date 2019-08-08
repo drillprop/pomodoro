@@ -137,7 +137,8 @@ export default (state = initialState, action: any) => {
     case SET_TIMERS: {
       return {
         ...state,
-        [`${action.timer}Time`]: action.seconds,
+        isInterval: true,
+        timeleft: action.timer === 'break' ? state.timeleft : action.seconds,
         config: {
           ...state.config,
           [`${action.timer}Init`]: action.seconds
