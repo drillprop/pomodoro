@@ -32,7 +32,7 @@ const RetryButton = () => {
 
   const retry = async () => {
     await dispatch(resetRetryTimer(false));
-    dispatch(startTimer(isTimerStart, Date.now()));
+    dispatch(startTimer(Date.now()));
   };
 
   return <StyledButton onClick={retry}>Retry</StyledButton>;

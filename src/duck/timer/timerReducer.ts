@@ -60,7 +60,7 @@ export default (state = initialState, action: any) => {
       const seconds = (state.isInterval ? intervalInit : breakInit) * 1000;
       return {
         ...state,
-        isTimerStart: action.isTimerStart,
+        isTimerStart: true,
         endTime: action.startTime + seconds,
         timeleft: (action.startTime + seconds - action.startTime) / 1000
       };

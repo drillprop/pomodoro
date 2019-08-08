@@ -20,10 +20,9 @@ export const updateTimer = (seconds: number, isInterval: boolean) => {
   };
 };
 
-export const startTimer = (isTimerStart: boolean, startTime: number) => {
+export const startTimer = (startTime: number) => {
   return {
     type: START_TIMER,
-    isTimerStart,
     startTime
   };
 };
