@@ -18,7 +18,13 @@ const Time = styled.h1`
 
 const Timer: React.FC = () => {
   const dispatch = useDispatch();
-  const { isTimerStart, isInterval, endTime, timeleft } = useTimerState();
+  const {
+    isTimerStart,
+    isInterval,
+    endTime,
+    timeleft,
+    config
+  } = useTimerState();
 
   const [count, setCount] = useState(timeleft);
 
@@ -45,7 +51,7 @@ const Timer: React.FC = () => {
       clearTimeout(timeoutTimer);
       clearTimeout(timeoutSwitch);
     };
-  }, [count, isTimerStart, isInterval, endTime]);
+  }, [count, isTimerStart, isInterval, endTime, timeleft, config]);
 
   const timeAsString = convertSecToStr(count);
   return (
