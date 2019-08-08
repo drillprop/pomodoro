@@ -1,6 +1,6 @@
 import {
   UPDATE_TIMER,
-  START_PAUSE_TIMER,
+  START_TIMER,
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
   CREATE_CATEGORY,
@@ -55,7 +55,7 @@ export default (state = initialState, action: any) => {
         ...state,
         [action.field]: action[action.field]
       };
-    case START_PAUSE_TIMER:
+    case START_TIMER:
       const seconds = state.isInterval ? intervalInit : breakInit;
       return {
         ...state,

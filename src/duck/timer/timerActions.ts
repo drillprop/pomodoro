@@ -1,13 +1,13 @@
 import {
   UPDATE_TIMER,
-  START_PAUSE_TIMER,
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_MENU,
-  SET_TIMERS
+  SET_TIMERS,
+  START_TIMER
 } from './timerTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -19,9 +19,9 @@ export const updateTimer = (seconds: number, isInterval: boolean) => {
   };
 };
 
-export const startPauseTimer = (isTimerStart: boolean, startTime: number) => {
+export const startTimer = (isTimerStart: boolean, startTime: number) => {
   return {
-    type: START_PAUSE_TIMER,
+    type: START_TIMER,
     isTimerStart,
     startTime
   };
