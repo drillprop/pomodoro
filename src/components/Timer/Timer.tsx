@@ -4,6 +4,7 @@ import useTimerState from '../../hooks/useTimerState';
 import { convertSecToStr, countTimeLeft } from '../../utils/helpers';
 import { useDispatch } from 'react-redux';
 import { switchFaze } from '../../duck/timer/timerActions';
+import useTimer from '../../hooks/useTimer';
 
 const TimerWrapper = styled.section`
   text-align: center;
@@ -17,45 +18,7 @@ const Time = styled.h1`
 `;
 
 const Timer: React.FC = () => {
-  const dispatch = useDispatch();
-  const {
-    isTimerStart,
-    isInterval,
-    endTime,
-    timeleft,
-    config
-  } = useTimerState();
-
-  const initTime: number = endTime
-    ? Math.floor((endTime - Date.now()) / 1000 + 1)
-    : timeleft;
-
-  const [count, setCount] = useState(initTime);
-
-  useEffect(() => {
-    let timeoutTimer: any;
-    let timeoutSwitch: any;
-
-    if (!isTimerStart) setCount(timeleft);
-
-    const left = countTimeLeft(Date.now(), endTime);
-
-    if (isTimerStart && count) {
-      timeoutTimer = setTimeout(() => {
-        setCount(left);
-      }, 1000);
-    }
-
-    if (!count && isTimerStart) {
-      clearTimeout(timeoutTimer);
-      timeoutSwitch = setTimeout(() => dispatch(switchFaze(isInterval)), 1000);
-    }
-
-    return () => {
-      clearTimeout(timeoutTimer);
-      clearTimeout(timeoutSwitch);
-    };
-  }, [count, isTimerStart, isInterval, endTime, timeleft, config]);
+  const count = useTimer();
 
   const timeAsString = convertSecToStr(count);
   return (
