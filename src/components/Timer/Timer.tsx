@@ -26,7 +26,11 @@ const Timer: React.FC = () => {
     config
   } = useTimerState();
 
-  const [count, setCount] = useState(timeleft);
+  const initTime: number = endTime
+    ? Math.floor((endTime - Date.now()) / 1000 + 1)
+    : timeleft;
+
+  const [count, setCount] = useState(initTime);
 
   useEffect(() => {
     let timeoutTimer: any;
