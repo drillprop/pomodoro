@@ -138,6 +138,7 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isInterval: true,
+        isTimerStart: false,
         timeleft: action.timer === 'break' ? state.timeleft : action.seconds,
         config: {
           ...state.config,
