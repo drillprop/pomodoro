@@ -57,18 +57,17 @@ export default (state = initialState, action: any) => {
         [action.field]: action[action.field]
       };
     case START_TIMER:
-      const seconds = (state.isInterval ? intervalInit : breakInit) * 1000;
       return {
         ...state,
         isTimerStart: true,
-        endTime: action.startTime + seconds,
-        timeleft: (action.startTime + seconds - action.startTime) / 1000
+        endTime: state.timeleft * 1000 + action.startTime
       };
     case PAUSE_TIMER:
       return {
         ...state,
         isTimerStart: false,
-        timeleft: (state.endTime - action.pauseTime) / 1000
+        timeleft: Math.floor((state.endTime - action.pauseTime) / 1000 + 1),
+        endTime: 0
       };
     case RESET_RETRY_TIMER:
       return {
