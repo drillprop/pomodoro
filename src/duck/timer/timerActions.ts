@@ -7,7 +7,8 @@ import {
   SWITCH_CATEGORY,
   SHOW_MENU,
   SET_TIMERS,
-  START_TIMER
+  START_TIMER,
+  PAUSE_TIMER
 } from './timerTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -24,6 +25,13 @@ export const startTimer = (isTimerStart: boolean, startTime: number) => {
     type: START_TIMER,
     isTimerStart,
     startTime
+  };
+};
+
+export const pauseTimer = (pauseTime: number) => {
+  return {
+    type: PAUSE_TIMER,
+    pauseTime
   };
 };
 

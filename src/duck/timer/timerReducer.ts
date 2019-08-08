@@ -7,7 +7,8 @@ import {
   DELETE_CATEGORY,
   SWITCH_CATEGORY,
   SHOW_MENU,
-  SET_TIMERS
+  SET_TIMERS,
+  PAUSE_TIMER
 } from './timerTypes';
 
 interface Config {
@@ -56,12 +57,18 @@ export default (state = initialState, action: any) => {
         [action.field]: action[action.field]
       };
     case START_TIMER:
-      const seconds = state.isInterval ? intervalInit : breakInit;
+      const seconds = (state.isInterval ? intervalInit : breakInit) * 1000;
       return {
         ...state,
         isTimerStart: action.isTimerStart,
-        endTime: action.startTime + seconds * 1000,
-        timeleft: (action.startTime + seconds * 1000 - action.startTime) / 1000
+        endTime: action.startTime + seconds,
+        timeleft: (action.startTime + seconds - action.startTime) / 1000
+      };
+    case PAUSE_TIMER:
+      return {
+        ...state,
+        isTimerStart: false,
+        timeleft: (state.endTime - action.pauseTime) / 1000
       };
     case RESET_RETRY_TIMER:
       return {
