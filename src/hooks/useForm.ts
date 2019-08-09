@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { convertSecToObj } from '../utils/helpers';
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { setTimers } from '../duck/timer/timerActions';
 
 export default () => {
@@ -26,7 +26,7 @@ export default () => {
 
   const [timeleft, setTimeleft] = useState(reducedToObj);
 
-  const updateState = (e: any) => {
+  const updateState = (e: ChangeEvent<HTMLInputElement>) => {
     let { name, max, min, value } = e.target;
 
     e.target.value = '';
@@ -41,31 +41,34 @@ export default () => {
     const faze = name.split('-')[0];
     const propertyName = name.includes('min') ? 'minutes' : 'seconds';
 
-    if (spliced <= max && spliced >= min) {
+    const maximum: number = parseInt(max);
+    const minimum: number = parseInt(min);
+
+    if (spliced <= maximum && spliced >= minimum) {
       setTimeleft({
         ...timeleft,
         [faze]: { ...timeleft[faze], [propertyName]: spliced }
       });
-    } else if (spliced > max) {
+    } else if (spliced > maximum) {
       setTimeleft({
         ...timeleft,
-        [faze]: { ...timeleft[faze], [propertyName]: parseInt(max) }
+        [faze]: { ...timeleft[faze], [propertyName]: maximum }
       });
     } else {
       setTimeleft({
         ...timeleft,
-        [faze]: { ...timeleft[faze], [propertyName]: parseInt(min) }
+        [faze]: { ...timeleft[faze], [propertyName]: minimum }
       });
     }
   };
 
-  const submitState = (e: any) => {
+  const submitState = (e: FormEvent) => {
     e.preventDefault();
 
-    const secondsKeys = Object.keys(initialSeconds);
+    const secondsKeys: Array<string> = Object.keys(initialSeconds);
 
     secondsKeys.forEach((key: string) => {
-      let smth = timeleft[key].seconds + timeleft[key].minutes * 60;
+      let smth: number = timeleft[key].seconds + timeleft[key].minutes * 60;
       dispatch(setTimers(smth, key));
     });
   };
