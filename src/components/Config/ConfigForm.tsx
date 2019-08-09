@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { primFont, secondFont } from '../../utils/fonts';
+import { primFont } from '../../utils/fonts';
 import { primary, background, secondary } from '../../utils/colors';
 import useInput from '../../hooks/useInput';
 import { SubTitle } from '../../elements/Titles';
@@ -10,33 +10,31 @@ type ConfigFormProps = {
   formName: string;
 };
 
-export const StyledForm = styled.form`
-  input {
-    font-family: ${primFont};
-    font-size: 20px;
-    margin: 0 auto;
-    width: 70px;
-    padding: 8px;
-    color: ${primary};
-    background-color: ${background};
-    border: solid 1px ${secondary};
-    border-radius: 5px;
-    margin-left: 16px;
-  }
-  label {
-    font-size: 1.5rem;
-    margin-right: 20px;
-  }
+const StyledConfigInput = styled.input`
+  font-family: ${primFont};
+  font-size: 20px;
+  margin: 0 auto;
+  width: 70px;
+  padding: 8px;
+  color: ${primary};
+  background-color: ${background};
+  border: solid 1px ${secondary};
+  border-radius: 5px;
+  margin-left: 16px;
+`;
+const StyledConfigLabel = styled.label`
+  font-size: 1.5rem;
+  margin-right: 20px;
 `;
 
 const ConfigForm: FC<ConfigFormProps> = ({ formName }) => {
   const [setValue, submitValues, values] = useInput(formName);
 
   return (
-    <StyledForm onSubmit={(e: FormEvent) => submitValues(e)} name={formName}>
+    <form onSubmit={(e: FormEvent) => submitValues(e)} name={formName}>
       <SubTitle>{formName} time</SubTitle>
-      <label htmlFor={`${formName}-min`}>
-        <input
+      <StyledConfigLabel htmlFor={`${formName}-min`}>
+        <StyledConfigInput
           value={values.minutes}
           type='number'
           name='minutes'
@@ -46,9 +44,9 @@ const ConfigForm: FC<ConfigFormProps> = ({ formName }) => {
           onChange={(e: ChangeEvent) => setValue(e)}
         />{' '}
         min
-      </label>
-      <label htmlFor={`${formName}-sec`}>
-        <input
+      </StyledConfigLabel>
+      <StyledConfigLabel htmlFor={`${formName}-sec`}>
+        <StyledConfigInput
           value={values.seconds}
           type='number'
           name='seconds'
@@ -58,9 +56,9 @@ const ConfigForm: FC<ConfigFormProps> = ({ formName }) => {
           onChange={(e: ChangeEvent) => setValue(e)}
         />{' '}
         sec
-      </label>
+      </StyledConfigLabel>
       <SubmitButtom type='submit'>save</SubmitButtom>
-    </StyledForm>
+    </form>
   );
 };
 
