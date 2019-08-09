@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setTimers } from '../duck/timer/timerActions';
+import { useSelector } from 'react-redux';
 import { convertSecToObj } from '../utils/helpers';
+import { useState } from 'react';
 
-const useInput = (formName: string) => {
-  const dispatch = useDispatch();
+export default (faze: string) => {
+  // get seconds from config
+  const initSecs = useSelector((state: any) => state.config[`${faze}Init`]);
 
-  const secs = useSelector((state: any) => state.config[`${formName}Init`]);
+  // convert to obj with minutes and seconds
+  const timeleftAsObj: any = convertSecToObj(initSecs);
+  timeleftAsObj.minutes = timeleftAsObj.minutes + timeleftAsObj.hours * 60;
+  delete timeleftAsObj.hours;
 
-  const timeObject: any = convertSecToObj(secs);
-  timeObject.minutes = timeObject.minutes + timeObject.hours * 60;
-
-  const [state, setState] = useState(timeObject);
+  const [timeleft, setTimeleft] = useState(timeleftAsObj);
 
   const updateState = (e: any) => {
     let { name, max, min, value } = e.target;
 
     e.target.value = '';
-    const maxLength = name === 'minutes' ? 3 : 2;
+    const maxLength = name.includes('min') ? 3 : 2;
 
     const spliced = parseInt(
       value
@@ -26,25 +26,16 @@ const useInput = (formName: string) => {
         .join('')
     );
 
+    const propertyName = name.includes('min') ? 'minutes' : 'seconds';
+
     if (spliced <= max && spliced >= min) {
-      setState({ ...state, [name]: spliced });
+      setTimeleft({ ...timeleft, [propertyName]: spliced });
     } else if (spliced > max) {
-      setState({ ...state, [name]: parseInt(max) });
+      setTimeleft({ ...timeleft, [propertyName]: parseInt(max) });
     } else {
-      setState({ ...state, [name]: parseInt(min) });
+      setTimeleft({ ...timeleft, [propertyName]: parseInt(min) });
     }
   };
 
-  const submitState = (e: any) => {
-    const { name } = e.target;
-    const seconds = state.minutes * 60 + state.seconds;
-
-    e.preventDefault();
-
-    dispatch(setTimers(seconds, name));
-  };
-
-  return [updateState, submitState, state];
+  return [timeleft, updateState];
 };
-
-export default useInput;
