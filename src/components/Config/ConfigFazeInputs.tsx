@@ -30,7 +30,7 @@ const StyledConfigLabel = styled.label`
 const ConfigFazeInputs: FC<ConfigFazeInputs> = ({ faze, timeleft, update }) => {
   return (
     <>
-      <SubTitle>{faze} time</SubTitle>
+      <SubTitle>{faze.split('Time')[0]} time</SubTitle>
       <StyledConfigLabel htmlFor={`${faze}-min`}>
         <StyledConfigInput
           value={timeleft.minutes}

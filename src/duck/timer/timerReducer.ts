@@ -11,9 +11,13 @@ import {
   PAUSE_TIMER
 } from './timerTypes';
 
-interface Config {
+interface InitialTimeleft {
   intervalTime: number;
   breakTime: number;
+}
+
+interface Config {
+  initialTimeleft: InitialTimeleft;
   categories: Array<string>;
 }
 
@@ -29,8 +33,10 @@ interface Timer {
 }
 
 const config: Config = {
-  intervalTime: 5,
-  breakTime: 2,
+  initialTimeleft: {
+    intervalTime: 5,
+    breakTime: 2
+  },
   categories: ['default', 'study', 'work']
 };
 
@@ -45,11 +51,11 @@ const initialState: Timer = {
   isTimerStart: false,
   isInterval: true,
   endTime: 0,
-  timeleft: config.intervalTime
+  timeleft: config.initialTimeleft.intervalTime
 };
 
 export default (state = initialState, action: any) => {
-  const { intervalTime, breakTime } = state.config;
+  const { intervalTime, breakTime } = state.config.initialTimeleft;
   switch (action.type) {
     case UPDATE_TIMER:
       return {
@@ -143,7 +149,10 @@ export default (state = initialState, action: any) => {
           action.timer === 'breakTime' ? state.timeleft : action.seconds,
         config: {
           ...state.config,
-          [action.timer]: action.seconds
+          initialTimeleft: {
+            ...state.config.initialTimeleft,
+            [action.timer]: action.seconds
+          }
         }
       };
     }

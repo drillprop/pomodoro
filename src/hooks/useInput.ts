@@ -4,7 +4,9 @@ import { useState } from 'react';
 
 export default (faze: string) => {
   // get seconds from config
-  const initSecs = useSelector((state: any) => state.config[faze]);
+  const initSecs = useSelector(
+    (state: any) => state.config.initialTimeleft[faze]
+  );
 
   // convert to obj with minutes and seconds
   const timeleftAsObj: any = convertSecToObj(initSecs);
@@ -36,6 +38,5 @@ export default (faze: string) => {
       setTimeleft({ ...timeleft, [propertyName]: parseInt(min) });
     }
   };
-
   return [timeleft, updateState];
 };
