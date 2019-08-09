@@ -1,11 +1,15 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { convertSecToObj } from '../utils/helpers';
 import { useState } from 'react';
+import { setTimers } from '../duck/timer/timerActions';
 
 export default () => {
+  const dispatch = useDispatch();
+
   const initialSeconds = useSelector(
     (state: any) => state.config.initialTimeleft
   );
+
   const secondsEntries = Object.entries(initialSeconds);
 
   const reducedToObj = secondsEntries.reduce((acc: any, item: any) => {
@@ -49,5 +53,17 @@ export default () => {
       });
     }
   };
-  return [timeleft, updateState];
+
+  const submitState = (e: any) => {
+    e.preventDefault();
+
+    const secondsKeys = Object.keys(initialSeconds);
+
+    secondsKeys.forEach((key: string) => {
+      let smth = timeleft[key].seconds + timeleft[key].minutes * 60;
+      dispatch(setTimers(smth, key));
+    });
+  };
+
+  return [timeleft, updateState, submitState];
 };
