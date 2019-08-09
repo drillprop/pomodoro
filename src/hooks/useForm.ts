@@ -13,9 +13,14 @@ export default () => {
   const secondsEntries = Object.entries(initialSeconds);
 
   const reducedToObj = secondsEntries.reduce((acc: any, item: any) => {
+    const secondsToObj: any = convertSecToObj(item[1]);
+
+    secondsToObj.minutes = secondsToObj.minutes + secondsToObj.hours * 60;
+    delete secondsToObj.hours;
+
     return {
       ...acc,
-      [item[0]]: convertSecToObj(item[1])
+      [item[0]]: secondsToObj
     };
   }, {});
 
