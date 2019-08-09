@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default (faze: string) => {
   // get seconds from config
-  const initSecs = useSelector((state: any) => state.config[`${faze}Init`]);
+  const initSecs = useSelector((state: any) => state.config[faze]);
 
   // convert to obj with minutes and seconds
   const timeleftAsObj: any = convertSecToObj(initSecs);

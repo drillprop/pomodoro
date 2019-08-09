@@ -12,8 +12,8 @@ import {
 } from './timerTypes';
 
 interface Config {
-  intervalInit: number;
-  breakInit: number;
+  intervalTime: number;
+  breakTime: number;
   categories: Array<string>;
 }
 
@@ -29,8 +29,8 @@ interface Timer {
 }
 
 const config: Config = {
-  intervalInit: 5,
-  breakInit: 2,
+  intervalTime: 5,
+  breakTime: 2,
   categories: ['default', 'study', 'work']
 };
 
@@ -45,11 +45,11 @@ const initialState: Timer = {
   isTimerStart: false,
   isInterval: true,
   endTime: 0,
-  timeleft: config.intervalInit
+  timeleft: config.intervalTime
 };
 
 export default (state = initialState, action: any) => {
-  const { intervalInit, breakInit } = state.config;
+  const { intervalTime, breakTime } = state.config;
   switch (action.type) {
     case UPDATE_TIMER:
       return {
@@ -73,7 +73,7 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isTimerStart: action.isTimerStart,
-        timeleft: state.isInterval ? intervalInit : breakInit
+        timeleft: state.isInterval ? intervalTime : breakTime
       };
     case SWITCH_FAZE:
       return {
@@ -81,7 +81,7 @@ export default (state = initialState, action: any) => {
         isInterval: !action.isInterval,
         endTime: 0,
         isTimerStart: false,
-        timeleft: !action.isInterval ? intervalInit : breakInit,
+        timeleft: !action.isInterval ? intervalTime : breakTime,
         categories: {
           ...state.categories,
           [state.selectedCategory]: !action.isInterval
@@ -119,7 +119,7 @@ export default (state = initialState, action: any) => {
         selectedCategory: action.categoryName,
         isTimerStart: false,
         isInterval: true,
-        timeleft: intervalInit,
+        timeleft: intervalTime,
         categories: {
           ...state.categories,
           [state.selectedCategory]: !state.isInterval
@@ -139,10 +139,11 @@ export default (state = initialState, action: any) => {
         ...state,
         isInterval: true,
         isTimerStart: false,
-        timeleft: action.timer === 'break' ? state.timeleft : action.seconds,
+        timeleft:
+          action.timer === 'breakTime' ? state.timeleft : action.seconds,
         config: {
           ...state.config,
-          [`${action.timer}Init`]: action.seconds
+          [action.timer]: action.seconds
         }
       };
     }

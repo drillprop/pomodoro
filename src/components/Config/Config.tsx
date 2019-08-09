@@ -23,8 +23,8 @@ const GoBackLink = styled.h4`
 `;
 
 const Config: FC = () => {
-  const [intervalTimeleft, updateIntervalTimeleft] = useInput('interval');
-  const [breakTimeleft, updateBreakTimeleft] = useInput('break');
+  const [intervalTimeleft, updateIntervalTimeleft] = useInput('intervalTime');
+  const [breakTimeleft, updateBreakTimeleft] = useInput('breakTime');
   const dispatch = useDispatch();
 
   const handleSubmit = (e: FormEvent) => {
@@ -34,8 +34,8 @@ const Config: FC = () => {
       intervalTimeleft.seconds + intervalTimeleft.minutes * 60;
     const breakSeconds = breakTimeleft.seconds + breakTimeleft.minutes * 60;
 
-    dispatch(setTimers(intervalSeconds, 'interval'));
-    dispatch(setTimers(breakSeconds, 'break'));
+    dispatch(setTimers(intervalSeconds, 'intervalTime'));
+    dispatch(setTimers(breakSeconds, 'breakTime'));
   };
 
   return (
@@ -43,12 +43,12 @@ const Config: FC = () => {
       <MainTitle>config</MainTitle>
       <form onSubmit={handleSubmit}>
         <ConfigForm
-          faze='interval'
+          faze='intervalTime'
           update={updateIntervalTimeleft}
           timeleft={intervalTimeleft}
         />
         <ConfigForm
-          faze='break'
+          faze='breakTime'
           update={updateBreakTimeleft}
           timeleft={breakTimeleft}
         />
