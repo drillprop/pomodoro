@@ -5,6 +5,7 @@ import { primary, background, secondaryBackground } from '../../utils/colors';
 import Profile from './Profile';
 import { secondFont, primFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
+import useRouter from '../../hooks/useRouter';
 
 const StyledNavigation = styled.nav`
   position: fixed;
@@ -46,8 +47,9 @@ const LinkList = styled.ul`
   }
 `;
 
-const Menu = (props: any) => {
-  const { pathname } = props.location;
+const Menu = () => {
+  const router = useRouter();
+  console.log(router);
   const itemIconProps = {
     size: 30,
     style: {
@@ -71,7 +73,7 @@ const Menu = (props: any) => {
             stats
           </li>
           <li>
-            {pathname === '/config' ? (
+            {router.location.pathname === '/config' ? (
               <>
                 <Icon name='home' {...itemIconProps} />
                 <Link to='/'>back to app</Link>

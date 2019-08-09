@@ -4,6 +4,7 @@ import { primary } from '../../utils/colors';
 import { useDispatch } from 'react-redux';
 import { showMenu } from '../../duck/timer/timerActions';
 import useTimerState from '../../hooks/useTimerState';
+import useRouter from '../../hooks/useRouter';
 
 const HamburgerWrapper = styled.div`
   position: absolute;
@@ -52,12 +53,16 @@ const HamburgerWrapper = styled.div`
   }
 `;
 
-const HamburgerButton: FC<{ location: any }> = ({ location }) => {
+const HamburgerButton: FC = () => {
   const { isMenuVisible } = useTimerState();
+
+  const route = useRouter();
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(showMenu(false));
-  }, [location]);
+  }, [route.location]);
   return (
     <HamburgerWrapper>
       <input

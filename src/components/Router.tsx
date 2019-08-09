@@ -10,13 +10,15 @@ import Register from './Register/Register';
 const Router = () => {
   const isMenuVisible = useSelector((state: any) => state.isMenuVisible);
   return (
-    <HashRouter>
-      {isMenuVisible && <Route component={Menu} />}
-      <Route component={HamburgerButton} />
-      <Route path='/config' component={Config} />
-      <Route path='/register' component={Register} />
-      <Route exact path='/' component={Interface} />
-    </HashRouter>
+    <>
+      <HashRouter>
+        <HamburgerButton />
+        {isMenuVisible && <Menu />}
+        <Route path='/config' component={Config} />
+        <Route path='/register' component={Register} />
+        <Route exact path='/' component={Interface} />
+      </HashRouter>
+    </>
   );
 };
 

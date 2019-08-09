@@ -1,6 +1,7 @@
 import * as React from 'react';
 import GlobalStyle from '../utils/GlobalStyle';
 import Router from './Router';
+import HamburgerButton from './Menu/HamburgerButton';
 
 const App: React.FC = () => {
   return (
