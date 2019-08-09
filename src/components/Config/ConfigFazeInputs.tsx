@@ -33,7 +33,7 @@ const ConfigFazeInputs: FC<ConfigFazeInputs> = ({ faze, timeleft, update }) => {
       <SubTitle>{faze.split('Time')[0]} time</SubTitle>
       <StyledConfigLabel htmlFor={`${faze}-min`}>
         <StyledConfigInput
-          value={timeleft.minutes}
+          value={timeleft[faze].minutes}
           type='number'
           name={`${faze}-minutes`}
           min={0}
@@ -45,7 +45,7 @@ const ConfigFazeInputs: FC<ConfigFazeInputs> = ({ faze, timeleft, update }) => {
       </StyledConfigLabel>
       <StyledConfigLabel htmlFor={`${faze}-sec`}>
         <StyledConfigInput
-          value={timeleft.seconds}
+          value={timeleft[faze].seconds}
           type='number'
           name={`${faze}-sec`}
           min={0}
