@@ -49,7 +49,6 @@ const LinkList = styled.ul`
 
 const Menu = () => {
   const router = useRouter();
-  console.log(router);
   const itemIconProps = {
     size: 30,
     style: {
