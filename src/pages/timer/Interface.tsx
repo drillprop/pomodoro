@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Timer from './Timer';
-import Controls from './Controls/Controls';
-import TimerFaze from './TimerFaze';
-import Category from './Category';
+import Timer from '../../components/Timer/Timer';
+import Controls from '../../components/Timer/Controls/Controls';
+import TimerFaze from '../../components/Timer/TimerFaze';
+import Category from '../../components/Timer/Category';
 
 const InterfaceWrapper = styled.main`
   display: grid;

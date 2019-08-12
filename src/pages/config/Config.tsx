@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { secondFont } from '../../utils/fonts';
-import ConfigForm from './ConfigFazeInputs';
+import ConfigForm from '../../components/Config/ConfigForm';
 import { Link } from 'react-router-dom';
 import { MainTitle } from '../../elements/Titles';
 import { SubmitButtom } from '../../elements/Forms';
@@ -21,16 +21,10 @@ const GoBackLink = styled.h4`
 `;
 
 const Config: FC = () => {
-  const [timeleft, update, submit] = useForm();
-
   return (
     <ConfigWrapper>
       <MainTitle>config</MainTitle>
-      <form onSubmit={submit}>
-        <ConfigForm faze='intervalTime' update={update} timeleft={timeleft} />
-        <ConfigForm faze='breakTime' update={update} timeleft={timeleft} />
-        <SubmitButtom type='submit'>save</SubmitButtom>
-      </form>
+      <ConfigForm />
       <GoBackLink>
         <Link to='/'>back</Link>
       </GoBackLink>
