@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Timer from '../../components/Timer/Timer';
 import Controls from '../../components/Timer/Controls/Controls';
 import TimerFaze from '../../components/Timer/TimerFaze';
-import Category from '../../components/Timer/Category';
+import SelectTask from '../../components/Timer/SelectTask';
 
 const InterfaceWrapper = styled.main`
   display: grid;
@@ -17,7 +17,7 @@ const Interface: React.FC = () => {
     <InterfaceWrapper>
       <div>
         <TimerFaze />
-        <Category />
+        <SelectTask />
       </div>
       <div>
         <Timer />

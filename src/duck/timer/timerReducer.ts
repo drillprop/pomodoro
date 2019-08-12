@@ -3,9 +3,9 @@ import {
   START_TIMER,
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
-  CREATE_CATEGORY,
-  DELETE_CATEGORY,
-  SWITCH_CATEGORY,
+  CREATE_TASK,
+  DELETE_TASK,
+  SWITCH_TASK,
   SHOW_MENU,
   SET_TIMERS,
   PAUSE_TIMER
@@ -18,14 +18,14 @@ interface InitialTimeleft {
 
 interface Config {
   initialTimeleft: InitialTimeleft;
-  categories: Array<string>;
+  tasks: Array<string>;
 }
 
 interface Timer {
   isMenuVisible: boolean;
   config: Config;
-  categories: any;
-  selectedCategory: string;
+  tasks: any;
+  selectedTask: string;
   isTimerStart: boolean;
   isInterval: boolean;
   endTime: number;
@@ -37,17 +37,14 @@ const config: Config = {
     intervalTime: 5,
     breakTime: 2
   },
-  categories: ['default', 'study', 'work']
+  tasks: ['default', 'study', 'work']
 };
 
 const initialState: Timer = {
   isMenuVisible: false,
   config,
-  categories: config.categories.reduce(
-    (acc, ctg) => ({ ...acc, [ctg]: 0 }),
-    {}
-  ),
-  selectedCategory: 'default',
+  tasks: config.tasks.reduce((acc, ctg) => ({ ...acc, [ctg]: 0 }), {}),
+  selectedTask: 'default',
   isTimerStart: false,
   isInterval: true,
   endTime: 0,
@@ -88,49 +85,46 @@ export default (state = initialState, action: any) => {
         endTime: 0,
         isTimerStart: false,
         timeleft: !action.isInterval ? intervalTime : breakTime,
-        categories: {
-          ...state.categories,
-          [state.selectedCategory]: !action.isInterval
-            ? state.categories[state.selectedCategory] + 1
-            : state.categories[state.selectedCategory]
+        tasks: {
+          ...state.tasks,
+          [state.selectedTask]: !action.isInterval
+            ? state.tasks[state.selectedTask] + 1
+            : state.tasks[state.selectedTask]
         }
       };
-    case CREATE_CATEGORY:
+    case CREATE_TASK:
       return {
         ...state,
         config: {
           ...state.config,
-          categories: [...state.config.categories, action.categoryName]
+          tasks: [...state.config.tasks, action.taskName]
         },
-        categories: {
-          ...state.categories,
-          [action.categoryName]: 0
+        tasks: {
+          ...state.tasks,
+          [action.taskName]: 0
         }
       };
-    case DELETE_CATEGORY: {
-      const {
-        [action.categoryName]: toDelete,
-        ...restCategories
-      } = state.categories;
+    case DELETE_TASK: {
+      const { [action.taskName]: toDelete, ...tasks } = state.tasks;
       return {
         ...state,
-        categories: {
-          ...restCategories
+        tasks: {
+          ...tasks
         }
       };
     }
-    case SWITCH_CATEGORY: {
+    case SWITCH_TASK: {
       return {
         ...state,
-        selectedCategory: action.categoryName,
+        selectedTask: action.taskName,
         isTimerStart: false,
         isInterval: true,
         timeleft: intervalTime,
-        categories: {
-          ...state.categories,
-          [state.selectedCategory]: !state.isInterval
-            ? state.categories[state.selectedCategory] + 1
-            : state.categories[state.selectedCategory]
+        tasks: {
+          ...state.tasks,
+          [state.selectedTask]: !state.isInterval
+            ? state.tasks[state.selectedTask] + 1
+            : state.tasks[state.selectedTask]
         }
       };
     }

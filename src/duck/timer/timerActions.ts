@@ -2,9 +2,9 @@ import {
   UPDATE_TIMER,
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
-  CREATE_CATEGORY,
-  DELETE_CATEGORY,
-  SWITCH_CATEGORY,
+  CREATE_TASK,
+  DELETE_TASK,
+  SWITCH_TASK,
   SHOW_MENU,
   SET_TIMERS,
   START_TIMER,
@@ -43,33 +43,33 @@ export const resetRetryTimer = (isTimerStart: boolean) => {
 
 export const switchFaze = (
   isInterval: boolean,
-  categoryName: string = 'default'
+  taskName: string = 'default'
 ) => {
   return {
     type: SWITCH_FAZE,
     isInterval,
-    categoryName
+    taskName
   };
 };
 
-export const createCategory = (categoryName: string) => {
+export const createTask = (taskName: string) => {
   return {
-    type: CREATE_CATEGORY,
-    categoryName
+    type: CREATE_TASK,
+    taskName
   };
 };
 
-export const deleteCategory = (categoryName: string) => {
+export const deleteTask = (taskName: string) => {
   return {
-    type: DELETE_CATEGORY,
-    categoryName
+    type: DELETE_TASK,
+    taskName
   };
 };
 
-export const switchCategory = (categoryName: string) => {
+export const switchTask = (taskName: string) => {
   return {
-    type: SWITCH_CATEGORY,
-    categoryName
+    type: SWITCH_TASK,
+    taskName
   };
 };
 
