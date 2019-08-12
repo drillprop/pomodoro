@@ -1,23 +1,15 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
-import Menu from './Menu/Menu';
-import Config from './Config/Config';
-import Interface from './Timer/Interface';
-import { useSelector } from 'react-redux';
-import HamburgerButton from './Menu/HamburgerButton';
-import Register from './Register/Register';
+import { Route } from 'react-router-dom';
+import Config from '../pages/config/Config';
+import Interface from '../pages/timer/Interface';
+import Register from '../pages/registerlogin/Register';
 
 const Router = () => {
-  const isMenuVisible = useSelector((state: any) => state.isMenuVisible);
   return (
     <>
-      <HashRouter>
-        <HamburgerButton />
-        {isMenuVisible && <Menu />}
-        <Route path='/config' component={Config} />
-        <Route path='/register' component={Register} />
-        <Route exact path='/' component={Interface} />
-      </HashRouter>
+      <Route path='/config' component={Config} />
+      <Route path='/register' component={Register} />
+      <Route exact path='/' component={Interface} />
     </>
   );
 };
