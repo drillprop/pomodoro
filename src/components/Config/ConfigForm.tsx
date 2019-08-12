@@ -7,7 +7,7 @@ const ConfigForm = () => {
   const [timeleft, update, submit] = useForm();
 
   return (
-    <form onSubmit={submit}>
+    <form style={{ marginTop: '30px' }} onSubmit={submit}>
       <ConfigFazeInputs
         faze='intervalTime'
         update={update}
