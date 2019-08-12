@@ -23,8 +23,8 @@ const Config: FC = () => {
     <>
       <ConfigWrapper>
         <MainTitle>config</MainTitle>
-        <ConfigForm />
         <Tasks />
+        <ConfigForm />
         <GoBackLink>
           <Link to='/'>back</Link>
         </GoBackLink>
