@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import useTimerState from '../../hooks/useTimerState';
-import { convertSecToStr, countTimeLeft } from '../../utils/helpers';
-import { useDispatch } from 'react-redux';
-import { switchFaze } from '../../duck/timer/timerActions';
+import { convertSecToStr } from '../../utils/helpers';
 import useTimer from '../../hooks/useTimer';
 
 const TimerWrapper = styled.section`
