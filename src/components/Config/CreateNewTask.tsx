@@ -10,7 +10,8 @@ import {
 
 const StyledFormCreateTask = styled.form`
   border: solid 1px ${secondary};
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 140px;
   border-radius: 5px;
   margin-bottom: 16px;
 
@@ -24,6 +25,7 @@ const StyledFormCreateTask = styled.form`
   }
   button {
     border: none;
+    width: 100%;
     cursor: pointer;
     background: ${secondaryBackground};
     font-family: ${secondFont};
