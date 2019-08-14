@@ -15,9 +15,11 @@ const Tasks = () => {
     <>
       <SubTitle>tasks</SubTitle>
       <StyledUl>
-        {tasks.map((task: string) => {
-          return <Task task={task} key={task} />;
-        })}
+        {tasks
+          .filter((task: string) => task !== 'default')
+          .map((task: string) => {
+            return <Task task={task} key={task} />;
+          })}
         <CreateNewTask />
       </StyledUl>
     </>

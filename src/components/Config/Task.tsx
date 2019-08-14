@@ -32,9 +32,11 @@ const StyledButton = styled.button`
 
 const Task: FC<{ task: string }> = ({ task }) => {
   const dispatch = useDispatch();
+
   const handleDelete = () => {
     dispatch(deleteTask(task));
   };
+
   return (
     <StyledTask>
       {task}
