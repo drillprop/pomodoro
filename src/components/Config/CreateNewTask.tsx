@@ -9,6 +9,7 @@ import {
 } from '../../utils/colors';
 import { useDispatch } from 'react-redux';
 import { createTask } from '../../duck/timer/timerActions';
+import useTimerState from '../../hooks/useTimerState';
 
 const StyledFormCreateTask = styled.form`
   border: solid 1px ${secondary};
@@ -40,11 +41,19 @@ const StyledFormCreateTask = styled.form`
 
 const CreateNewTask = () => {
   const dispatch = useDispatch();
+  const { tasks } = useTimerState().config;
+
   const [input, setInput] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(createTask(input));
+
+    if (tasks.includes(input)) {
+      setInput('');
+      throw new Error(`Task ${input} already exists`);
+    }
+
+    dispatch(createTask(input.toLowerCase()));
     setInput('');
   };
 
@@ -53,7 +62,7 @@ const CreateNewTask = () => {
       <input
         maxLength={20}
         value={input}
-        type='search'
+        type='text'
         placeholder='new task'
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setInput(e.target.value)
