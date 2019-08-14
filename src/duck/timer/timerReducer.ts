@@ -105,12 +105,20 @@ export default (state = initialState, action: any) => {
         }
       };
     case DELETE_TASK: {
-      const { [action.taskName]: toDelete, ...tasks } = state.tasks;
+      const { taskName } = action;
+
+      const newTasksState = { ...state.tasks };
+      if (taskName !== 'default') delete newTasksState[taskName];
       return {
         ...state,
-        tasks: {
-          ...tasks
-        }
+        config: {
+          ...state.config,
+          tasks:
+            taskName !== 'default'
+              ? state.config.tasks.filter(task => task !== taskName)
+              : state.config.tasks
+        },
+        tasks: newTasksState
       };
     }
     case SWITCH_TASK: {

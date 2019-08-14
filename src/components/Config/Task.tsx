@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { secondary, secondaryBackground, primary } from '../../utils/colors';
+import { useDispatch } from 'react-redux';
+import { deleteTask } from '../../duck/timer/timerActions';
 
 const StyledTask = styled.li`
   display: grid;
@@ -29,12 +31,16 @@ const StyledButton = styled.button`
 `;
 
 const Task: FC<{ task: string }> = ({ task }) => {
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(deleteTask(task));
+  };
   return (
     <StyledTask>
       {task}
       <div>
         <StyledButton>Edit</StyledButton>
-        <StyledButton>Delete</StyledButton>
+        <StyledButton onClick={handleDelete}>Delete</StyledButton>
       </div>
     </StyledTask>
   );
