@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useTimerState from '../../hooks/useTimerState';
 import { SubTitle } from '../../elements/Titles';
 import styled from 'styled-components';
 import Task from './Task';
+import CreateNewTask from './CreateNewTask';
 
 const StyledUl = styled.ul`
   padding: 0;
@@ -17,7 +18,7 @@ const Tasks = () => {
         {tasks.map((task: string) => {
           return <Task task={task} key={task} />;
         })}
-        <li style={{ cursor: 'pointer' }}>+ add task</li>
+        <CreateNewTask />
       </StyledUl>
     </>
   );
