@@ -1,27 +1,40 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { primFont } from '../../utils/fonts';
-import { secondary } from '../../utils/colors';
+import { primFont, secondFont } from '../../utils/fonts';
+import { secondary, secondaryBackground, primary } from '../../utils/colors';
 
 const StyledTask = styled.li`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  background: ${secondaryBackground};
+  padding-left: 12px;
   justify-content: space-between;
+  align-items: center;
   font-family: ${primFont};
   border: solid 1px ${secondary};
   border-radius: 5px;
   font-size: 20px;
-  padding: 10px 12px;
   margin-bottom: 16px;
 `;
-const DeleteButton = styled.button``;
-const EditButton = styled.button``;
+const StyledButton = styled.button`
+  padding: 10px 12px;
+  width: 50%;
+  border: none;
+  cursor: pointer;
+  background: ${secondaryBackground};
+  font-family: ${secondFont};
+  color: ${primary};
+  font-weight: 700;
+  text-transform: lowercase;
+`;
+
 const Task: FC<{ task: string }> = ({ task }) => {
   return (
     <StyledTask>
       {task}
       <div>
-        <DeleteButton>X</DeleteButton>
-        <EditButton>Edit</EditButton>
+        <StyledButton>Edit</StyledButton>
+        <StyledButton>Delete</StyledButton>
       </div>
     </StyledTask>
   );
