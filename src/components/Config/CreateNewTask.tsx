@@ -52,9 +52,10 @@ const CreateNewTask = () => {
       setInput('');
       throw new Error(`Task ${input} already exists`);
     }
-
-    dispatch(createTask(input.toLowerCase()));
-    setInput('');
+    if (input) {
+      dispatch(createTask(input.toLowerCase()));
+      setInput('');
+    }
   };
 
   return (
