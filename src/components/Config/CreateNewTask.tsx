@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import {
@@ -7,6 +7,8 @@ import {
   secondaryBackground,
   primary
 } from '../../utils/colors';
+import { useDispatch } from 'react-redux';
+import { createTask } from '../../duck/timer/timerActions';
 
 const StyledFormCreateTask = styled.form`
   border: solid 1px ${secondary};
@@ -37,9 +39,26 @@ const StyledFormCreateTask = styled.form`
 `;
 
 const CreateNewTask = () => {
+  const dispatch = useDispatch();
+  const [input, setInput] = useState('');
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    dispatch(createTask(input));
+    setInput('');
+  };
+
   return (
-    <StyledFormCreateTask onSubmit={() => console.log('task created')}>
-      <input type='text' placeholder='new task' />
+    <StyledFormCreateTask onSubmit={handleSubmit}>
+      <input
+        maxLength={20}
+        value={input}
+        type='search'
+        placeholder='new task'
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setInput(e.target.value)
+        }
+      />
       <button type='submit'>+ add task</button>
     </StyledFormCreateTask>
   );
