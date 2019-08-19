@@ -31,9 +31,15 @@ const Select = styled.select`
 const SelectTask = () => {
   const dispatch = useDispatch();
   const tasks = useSelector((state: any) => state.tasksReducer.tasks);
+  const selectedTask = useSelector(
+    (state: any) => state.tasksReducer.selectedTask
+  );
 
   return (
-    <Select onChange={e => dispatch(switchTask(e.currentTarget.value))}>
+    <Select
+      value={selectedTask}
+      onChange={e => dispatch(switchTask(e.currentTarget.value))}
+    >
       {Object.keys(tasks).map(key => (
         <option key={key}>{key}</option>
       ))}
