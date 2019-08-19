@@ -4,6 +4,7 @@ const PAUSE_TIMER: string = 'PAUSE_TIMER';
 const RESET_RETRY_TIMER: string = 'RESET_RETRY_TIMER';
 const SWITCH_FAZE: string = 'SWITCH_FAZE';
 const CREATE_TASK: string = 'CREATE_TASK';
+const EDIT_TASK: string = 'EDIT_TASK';
 const DELETE_TASK: string = 'DELETE_TASK';
 const SWITCH_TASK: string = 'SWITCH_TASK';
 const SHOW_MENU: string = 'SHOW_MENU';
@@ -16,6 +17,7 @@ export {
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
   CREATE_TASK,
+  EDIT_TASK,
   DELETE_TASK,
   SWITCH_TASK,
   SHOW_MENU,
