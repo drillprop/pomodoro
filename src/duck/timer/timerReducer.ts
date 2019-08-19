@@ -7,7 +7,7 @@ import {
   SHOW_MENU,
   SET_TIMERS,
   PAUSE_TIMER
-} from './timerTypes';
+} from '../reduxTypes';
 
 interface InitialTimeleft {
   intervalTime: number;
@@ -93,7 +93,6 @@ export default (state = initialState, action: any) => {
     case SWITCH_TASK: {
       return {
         ...state,
-        selectedTask: action.taskName,
         isTimerStart: false,
         isInterval: true,
         timeleft: intervalTime

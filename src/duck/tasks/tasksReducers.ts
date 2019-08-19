@@ -1,4 +1,9 @@
-import { CREATE_TASK, EDIT_TASK, DELETE_TASK } from './tasksTypes';
+import {
+  CREATE_TASK,
+  EDIT_TASK,
+  DELETE_TASK,
+  SWITCH_TASK
+} from '../reduxTypes';
 import { renameProperty } from '../../utils/helpers';
 
 interface Tasks {
@@ -42,6 +47,11 @@ export default (state = initialState, action: any) => {
         tasks: newTasksState
       };
     }
+    case SWITCH_TASK:
+      return {
+        ...state,
+        selectedTask: action.taskName
+      };
     default:
       return state;
   }

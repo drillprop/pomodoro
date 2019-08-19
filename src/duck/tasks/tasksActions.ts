@@ -1,4 +1,9 @@
-import { CREATE_TASK, EDIT_TASK, DELETE_TASK } from './tasksTypes';
+import {
+  CREATE_TASK,
+  EDIT_TASK,
+  DELETE_TASK,
+  SWITCH_TASK
+} from '../reduxTypes';
 
 export const createTask = (taskName: string) => {
   return {
@@ -18,6 +23,13 @@ export const editTask = (prevTask: string, newTask: string) => {
 export const deleteTask = (taskName: string) => {
   return {
     type: DELETE_TASK,
+    taskName
+  };
+};
+
+export const switchTask = (taskName: string) => {
+  return {
+    type: SWITCH_TASK,
     taskName
   };
 };

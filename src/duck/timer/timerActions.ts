@@ -2,12 +2,11 @@ import {
   UPDATE_TIMER,
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
-  SWITCH_TASK,
   SHOW_MENU,
   SET_TIMERS,
   START_TIMER,
   PAUSE_TIMER
-} from './timerTypes';
+} from '../reduxTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
   let field = isInterval ? 'intervalTime' : 'breakTime';
@@ -46,13 +45,6 @@ export const switchFaze = (
   return {
     type: SWITCH_FAZE,
     isInterval,
-    taskName
-  };
-};
-
-export const switchTask = (taskName: string) => {
-  return {
-    type: SWITCH_TASK,
     taskName
   };
 };

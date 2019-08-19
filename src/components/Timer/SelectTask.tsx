@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { switchTask } from '../../duck/timer/timerActions';
+import { switchTask } from '../../duck/tasks/tasksActions';
 
 const Select = styled.select`
   font-family: ${primFont};
