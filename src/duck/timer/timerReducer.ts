@@ -8,7 +8,8 @@ import {
   SWITCH_TASK,
   SHOW_MENU,
   SET_TIMERS,
-  PAUSE_TIMER
+  PAUSE_TIMER,
+  EDIT_TASK
 } from './timerTypes';
 
 interface InitialTimeleft {
@@ -103,6 +104,23 @@ export default (state = initialState, action: any) => {
           ...state.tasks,
           [action.taskName]: 0
         }
+      };
+    case EDIT_TASK:
+      const { prevTask, newTask } = action;
+      const { tasks } = state.config;
+      const newTasksArray = [...tasks];
+      newTasksArray[tasks.indexOf(prevTask)] = newTask;
+
+      const newTasksObject = { ...state.tasks };
+      if (prevTask !== 'default') delete newTasksObject[prevTask];
+
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          tasks: [...newTasksArray]
+        },
+        tasks: { ...newTasksObject, [newTask]: state.tasks[prevTask] }
       };
     case DELETE_TASK: {
       const { taskName } = action;
