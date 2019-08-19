@@ -2,14 +2,11 @@ import {
   UPDATE_TIMER,
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
-  CREATE_TASK,
-  DELETE_TASK,
   SWITCH_TASK,
   SHOW_MENU,
   SET_TIMERS,
   START_TIMER,
-  PAUSE_TIMER,
-  EDIT_TASK
+  PAUSE_TIMER
 } from './timerTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -49,28 +46,6 @@ export const switchFaze = (
   return {
     type: SWITCH_FAZE,
     isInterval,
-    taskName
-  };
-};
-
-export const createTask = (taskName: string) => {
-  return {
-    type: CREATE_TASK,
-    taskName
-  };
-};
-
-export const editTask = (prevTask: string, newTask: string) => {
-  return {
-    type: EDIT_TASK,
-    prevTask,
-    newTask
-  };
-};
-
-export const deleteTask = (taskName: string) => {
-  return {
-    type: DELETE_TASK,
     taskName
   };
 };

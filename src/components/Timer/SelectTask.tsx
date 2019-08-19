@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
-import useTimerState from '../../hooks/useTimerState';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { switchTask } from '../../duck/timer/timerActions';
 
 const Select = styled.select`
@@ -31,7 +30,7 @@ const Select = styled.select`
 
 const SelectTask = () => {
   const dispatch = useDispatch();
-  const { tasks } = useTimerState();
+  const tasks = useSelector((state: any) => state.tasksReducer.tasks);
 
   return (
     <Select onChange={e => dispatch(switchTask(e.currentTarget.value))}>
