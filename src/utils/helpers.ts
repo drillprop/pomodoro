@@ -42,13 +42,16 @@ export const countTimeLeft = (now: number, future: number): number => {
   return seconds;
 };
 
-export const renameProperty = (
-  oldProp: string,
-  newProp: string,
-  { [oldProp]: old, ...others }
-) => {
-  return {
-    [newProp]: old,
-    ...others
-  };
+export const renameProperty = (oldProp: string, newProp: string, obj: any) => {
+  // convert obj to array to keep order of properties in tasks
+  const objEntries = Object.entries(obj);
+
+  const arrWithChangedProp = objEntries.map(arr => {
+    if (arr.includes(oldProp)) {
+      arr[0] = newProp;
+    }
+    return arr;
+  });
+
+  return Object.fromEntries(arrWithChangedProp);
 };
