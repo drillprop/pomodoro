@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
   StyledForm,
   StyledLabel,
   StyledInput,
   SubmitButtom
 } from '../../elements/Forms';
+import { loginWithGoogle } from '../../utils/firebase/auth';
 
 const RegisterForm = () => {
   return (
@@ -16,7 +16,13 @@ const RegisterForm = () => {
       <StyledInput type='email' id='email' placeholder='email' />
       <StyledLabel htmlFor='password'>Password</StyledLabel>
       <StyledInput type='password' id='password' placeholder='password' />
-      <SubmitButtom>sign up</SubmitButtom>
+      <SubmitButtom>register</SubmitButtom>
+      <h3>Already have account?</h3>
+      <span>log in here</span>
+      <br />
+      <span style={{ cursor: 'pointer' }} onClick={loginWithGoogle}>
+        or sign in with Google
+      </span>
     </StyledForm>
   );
 };
