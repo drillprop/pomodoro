@@ -7,7 +7,7 @@ export default () => {
   const dispatch = useDispatch();
 
   const initialSeconds = useSelector(
-    (state: any) => state.config.initialTimeleft
+    (state: any) => state.timerReducer.config.initialTimeleft
   );
 
   const secondsEntries = Object.entries(initialSeconds);

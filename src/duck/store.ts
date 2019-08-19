@@ -1,7 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import reducer from './timer/timerReducer';
+import timerReducer from './timer/timerReducer';
+import tasksReducer from './tasks/tasksReducers';
+
+const reducer = combineReducers({ timerReducer, tasksReducer });
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 

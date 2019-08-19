@@ -6,7 +6,9 @@ import { useSelector } from 'react-redux';
 import Menu from './Menu/Menu';
 
 const App: React.FC = () => {
-  const isMenuVisible = useSelector((state: any) => state.isMenuVisible);
+  const isMenuVisible = useSelector(
+    (state: any) => state.timerReducer.isMenuVisible
+  );
   return (
     <>
       <HamburgerButton />

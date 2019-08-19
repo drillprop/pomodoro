@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { convertSecToStr } from '../utils/helpers';
 
 export default () => {
-  const reduxState = useSelector((state: any) => state);
+  const reduxState = useSelector((state: any) => state.timerReducer);
 
   const seconds = reduxState.isInterval
     ? reduxState.intervalTime
