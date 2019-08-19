@@ -1,7 +1,6 @@
 import { FormEvent, useState, ChangeEvent } from 'react';
-import { createTask, editTask } from '../duck/timer/timerActions';
-import { useDispatch } from 'react-redux';
-import useTimerState from './useTimerState';
+import { createTask, editTask } from '../duck/tasks/tasksActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useSubmitTask = (
   initInput: string = '',
@@ -11,7 +10,7 @@ const useSubmitTask = (
 
   const [input, setInput] = useState(initInput);
 
-  const { tasks } = useTimerState().config;
+  const tasks = useSelector((state: any) => state.tasksReducer.tasks);
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) =>
     setInput(e.target.value);
@@ -21,7 +20,7 @@ const useSubmitTask = (
 
     if (input) {
       if (!edit) {
-        if (tasks.includes(input)) {
+        if (Object.keys(tasks).includes(input)) {
           setInput('');
           throw new Error(`Task ${input} already exists`);
         }

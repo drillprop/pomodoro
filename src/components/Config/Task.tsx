@@ -1,14 +1,9 @@
 import React, { FC, useState, FormEvent } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
-import {
-  secondary,
-  secondaryBackground,
-  primary,
-  background
-} from '../../utils/colors';
+import { secondary, secondaryBackground, primary } from '../../utils/colors';
 import { useDispatch } from 'react-redux';
-import { deleteTask } from '../../duck/timer/timerActions';
+import { deleteTask } from '../../duck/tasks/tasksActions';
 import useSubmitTask from '../../hooks/useSubmitTask';
 import { EditCreateTask } from '../../elements/Forms';
 
