@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import {
@@ -7,9 +7,7 @@ import {
   secondaryBackground,
   primary
 } from '../../utils/colors';
-import { useDispatch } from 'react-redux';
-import { createTask } from '../../duck/timer/timerActions';
-import useTimerState from '../../hooks/useTimerState';
+import useSubmitTask from '../../hooks/useSubmitTask';
 
 const StyledFormCreateTask = styled.form`
   border: solid 1px ${secondary};
@@ -40,23 +38,7 @@ const StyledFormCreateTask = styled.form`
 `;
 
 const CreateNewTask = () => {
-  const dispatch = useDispatch();
-  const { tasks } = useTimerState().config;
-
-  const [input, setInput] = useState('');
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    if (tasks.includes(input)) {
-      setInput('');
-      throw new Error(`Task ${input} already exists`);
-    }
-    if (input) {
-      dispatch(createTask(input.toLowerCase()));
-      setInput('');
-    }
-  };
+  const [input, handleInput, handleSubmit] = useSubmitTask('');
 
   return (
     <StyledFormCreateTask onSubmit={handleSubmit}>
@@ -65,9 +47,7 @@ const CreateNewTask = () => {
         value={input}
         type='text'
         placeholder='new task'
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setInput(e.target.value)
-        }
+        onChange={handleInput}
       />
       <button type='submit'>+ add task</button>
     </StyledFormCreateTask>
