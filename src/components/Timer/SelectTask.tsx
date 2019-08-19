@@ -33,12 +33,8 @@ const SelectTask = () => {
   const dispatch = useDispatch();
   const { tasks } = useTimerState();
 
-  const switchCtg = (taskName: string) => {
-    dispatch(switchTask(taskName));
-  };
-
   return (
-    <Select onChange={e => switchCtg(e.currentTarget.value)}>
+    <Select onChange={e => dispatch(switchTask(e.currentTarget.value))}>
       {Object.keys(tasks).map(key => (
         <option key={key}>{key}</option>
       ))}

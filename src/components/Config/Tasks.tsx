@@ -10,12 +10,12 @@ const StyledUl = styled.ul`
 `;
 
 const Tasks = () => {
-  const { tasks } = useTimerState().config;
+  const { tasks } = useTimerState();
   return (
     <>
       <SubTitle>tasks</SubTitle>
       <StyledUl>
-        {tasks
+        {Object.keys(tasks)
           .filter((task: string) => task !== 'default')
           .map((task: string) => {
             return <Task task={task} key={task} />;
