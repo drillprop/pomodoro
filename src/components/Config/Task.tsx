@@ -1,9 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, useState, FormEvent } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
-import { secondary, secondaryBackground, primary } from '../../utils/colors';
+import {
+  secondary,
+  secondaryBackground,
+  primary,
+  background
+} from '../../utils/colors';
 import { useDispatch } from 'react-redux';
 import { deleteTask } from '../../duck/timer/timerActions';
+import useSubmitTask from '../../hooks/useSubmitTask';
+import { EditCreateTask } from '../../elements/Forms';
 
 const StyledTask = styled.li`
   display: grid;
@@ -31,17 +38,31 @@ const StyledButton = styled.button`
 `;
 
 const Task: FC<{ task: string }> = ({ task }) => {
+  const [editable, setAsEditable] = useState(false);
+
+  const [input, editTask, saveTask] = useSubmitTask(task, true);
+
   const dispatch = useDispatch();
 
   const handleDelete = () => {
     dispatch(deleteTask(task));
   };
 
-  return (
+  const handleSubmit = (e: FormEvent) => {
+    saveTask(e);
+    setAsEditable(false);
+  };
+
+  return editable ? (
+    <EditCreateTask onSubmit={handleSubmit}>
+      <input type='text' value={input} onChange={editTask} />
+      <button type='submit'>Save</button>
+    </EditCreateTask>
+  ) : (
     <StyledTask>
       {task}
       <div>
-        <StyledButton>Edit</StyledButton>
+        <StyledButton onClick={() => setAsEditable(true)}>Edit</StyledButton>
         <StyledButton onClick={handleDelete}>Delete</StyledButton>
       </div>
     </StyledTask>
