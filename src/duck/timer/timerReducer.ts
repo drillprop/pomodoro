@@ -82,13 +82,7 @@ export default (state = initialState, action: any) => {
         isInterval: !action.isInterval,
         endTime: 0,
         isTimerStart: false,
-        timeleft: !action.isInterval ? intervalTime : breakTime,
-        tasks: {
-          ...state.tasks,
-          [state.selectedTask]: !action.isInterval
-            ? state.tasks[state.selectedTask] + 1
-            : state.tasks[state.selectedTask]
-        }
+        timeleft: !action.isInterval ? intervalTime : breakTime
       };
     case SWITCH_TASK: {
       return {
