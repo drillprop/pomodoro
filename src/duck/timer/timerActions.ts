@@ -8,7 +8,8 @@ import {
   SHOW_MENU,
   SET_TIMERS,
   START_TIMER,
-  PAUSE_TIMER
+  PAUSE_TIMER,
+  EDIT_TASK
 } from './timerTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -56,6 +57,14 @@ export const createTask = (taskName: string) => {
   return {
     type: CREATE_TASK,
     taskName
+  };
+};
+
+export const editTask = (prevTask: string, newTask: string) => {
+  return {
+    type: EDIT_TASK,
+    prevTask,
+    newTask
   };
 };
 
