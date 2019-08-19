@@ -16,14 +16,11 @@ interface InitialTimeleft {
 
 interface Config {
   initialTimeleft: InitialTimeleft;
-  tasks: Array<string>;
 }
 
 interface Timer {
   isMenuVisible: boolean;
   config: Config;
-  tasks: any;
-  selectedTask: string;
   isTimerStart: boolean;
   isInterval: boolean;
   endTime: number;
@@ -34,15 +31,12 @@ const config: Config = {
   initialTimeleft: {
     intervalTime: 5,
     breakTime: 2
-  },
-  tasks: ['default', 'study', 'work']
+  }
 };
 
 const initialState: Timer = {
   isMenuVisible: false,
   config,
-  tasks: config.tasks.reduce((acc, ctg) => ({ ...acc, [ctg]: 0 }), {}),
-  selectedTask: 'default',
   isTimerStart: false,
   isInterval: true,
   endTime: 0,
