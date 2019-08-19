@@ -41,3 +41,14 @@ export const countTimeLeft = (now: number, future: number): number => {
 
   return seconds;
 };
+
+export const renameProperty = (
+  oldProp: string,
+  newProp: string,
+  { [oldProp]: old, ...others }
+) => {
+  return {
+    [newProp]: old,
+    ...others
+  };
+};

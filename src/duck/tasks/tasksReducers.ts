@@ -1,4 +1,5 @@
 import { CREATE_TASK, EDIT_TASK, DELETE_TASK } from './tasksTypes';
+import { renameProperty } from '../../utils/helpers';
 
 interface Tasks {
   tasks: any;
@@ -26,13 +27,10 @@ export default (state = initialState, action: any) => {
       };
     case EDIT_TASK:
       const { prevTask, newTask } = action;
-
-      const newTasksObject = { ...state.tasks };
-      if (prevTask !== 'default') delete newTasksObject[prevTask];
-
+      const newTasksObj = renameProperty(prevTask, newTask, state.tasks);
       return {
         ...state,
-        tasks: { ...newTasksObject, [newTask]: state.tasks[prevTask] }
+        tasks: { ...newTasksObj }
       };
     case DELETE_TASK: {
       const { taskName } = action;
