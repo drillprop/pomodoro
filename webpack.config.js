@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DotEnv = require('dotenv-webpack');
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
   .default;
 const styledComponentsTransformer = createStyledComponentsTransformer();
@@ -44,7 +45,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    })
+    }),
+    new DotEnv()
   ],
   devtool: 'cheap-module-source-map'
 };
