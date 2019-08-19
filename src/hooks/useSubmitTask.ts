@@ -18,17 +18,19 @@ const useSubmitTask = (
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
+    if (Object.keys(tasks).includes(input) && input !== initInput) {
+      throw new Error(`Task ${input} already exists`);
+    }
+
     if (input) {
       if (!edit) {
-        if (Object.keys(tasks).includes(input)) {
-          setInput('');
-          throw new Error(`Task ${input} already exists`);
-        }
         dispatch(createTask(input.toLowerCase()));
         setInput('');
       } else {
         dispatch(editTask(initInput, input.toLowerCase()));
       }
+    } else {
+      setInput(initInput);
     }
   };
   return [input, handleInput, handleSubmit];
