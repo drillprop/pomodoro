@@ -6,6 +6,7 @@ import Profile from './Profile';
 import { secondFont, primFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
 import useRouter from '../../hooks/useRouter';
+import { logout } from '../../utils/firebase/auth';
 
 const StyledNavigation = styled.nav`
   position: fixed;
@@ -27,6 +28,7 @@ const LinkList = styled.ul`
   li {
     margin-bottom: 20px;
     opacity: 0.6;
+    cursor: pointer;
     font-family: ${secondFont};
     font-size: 16px;
     font-weight: 400;
@@ -84,7 +86,7 @@ const Menu = () => {
               </>
             )}
           </li>
-          <li>
+          <li onClick={logout}>
             <Icon name='logout' {...itemIconProps} />
             logout
           </li>
