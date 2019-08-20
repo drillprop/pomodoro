@@ -1,16 +1,39 @@
 import React from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
-import { loginWithGoogle } from '../../utils/firebase/auth';
+import useForm from '../../hooks/useForm';
 
 const RegisterForm = () => {
+  const [values, handleInput, submit] = useForm({
+    username: '',
+    email: '',
+    password: ''
+  });
   return (
-    <form>
+    <form onSubmit={submit}>
       <StyledLabel htmlFor='username'>Nick</StyledLabel>
-      <StyledInput type='text' id='username' placeholder='nick' />
+      <StyledInput
+        value={values.username}
+        onChange={handleInput}
+        type='text'
+        id='username'
+        placeholder='nick'
+      />
       <StyledLabel htmlFor='email'>Email</StyledLabel>
-      <StyledInput type='email' id='email' placeholder='email' />
+      <StyledInput
+        value={values.email}
+        onChange={handleInput}
+        type='email'
+        id='email'
+        placeholder='email'
+      />
       <StyledLabel htmlFor='password'>Password</StyledLabel>
-      <StyledInput type='password' id='password' placeholder='password' />
+      <StyledInput
+        value={values.password}
+        onChange={handleInput}
+        type='password'
+        id='password'
+        placeholder='password'
+      />
       <SubmitButtom>register</SubmitButtom>
     </form>
   );

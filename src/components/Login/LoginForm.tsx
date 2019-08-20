@@ -1,13 +1,32 @@
 import React from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
+import useForm from '../../hooks/useForm';
 
 const LoginForm = () => {
+  const [values, handleInput, submit] = useForm({
+    email: '',
+    password: ''
+  });
   return (
-    <form>
+    <form onSubmit={submit}>
       <StyledLabel htmlFor='email'>email</StyledLabel>
-      <StyledInput type='email' id='email' placeholder='email' />
+      <StyledInput
+        value={values.email}
+        onChange={handleInput}
+        type='email'
+        id='email'
+        placeholder='email'
+        required
+      />
       <StyledLabel htmlFor='password'>password</StyledLabel>
-      <StyledInput type='password' id='password' placeholder='password' />
+      <StyledInput
+        value={values.password}
+        onChange={handleInput}
+        type='password'
+        id='password'
+        placeholder='password'
+        required
+      />
       <SubmitButtom>login</SubmitButtom>
     </form>
   );
