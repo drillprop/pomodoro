@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-  StyledForm,
-  StyledLabel,
-  StyledInput,
-  SubmitButtom
-} from '../../elements/Forms';
+import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import { loginWithGoogle } from '../../utils/firebase/auth';
 
 const RegisterForm = () => {
   return (
-    <StyledForm>
+    <form>
       <StyledLabel htmlFor='username'>Nick</StyledLabel>
       <StyledInput type='text' id='username' placeholder='nick' />
       <StyledLabel htmlFor='email'>Email</StyledLabel>
@@ -23,7 +18,7 @@ const RegisterForm = () => {
       <span style={{ cursor: 'pointer' }} onClick={loginWithGoogle}>
         or sign in with Google
       </span>
-    </StyledForm>
+    </form>
   );
 };
 

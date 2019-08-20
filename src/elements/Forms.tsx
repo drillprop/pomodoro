@@ -7,7 +7,12 @@ import {
   secondaryBackground
 } from '../utils/colors';
 
-export const StyledForm = styled.form``;
+export const FormWrapper = styled.main`
+  display: grid;
+  margin-top: 100px;
+  grid-template-rows: 100px 1fr;
+  justify-content: center;
+`;
 
 export const StyledLabel = styled.label`
   font-family: ${primFont};
