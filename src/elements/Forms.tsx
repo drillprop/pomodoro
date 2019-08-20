@@ -14,6 +14,10 @@ export const FormWrapper = styled.main`
   justify-content: center;
 `;
 
+export const FormParagraph = styled.p`
+  cursor: pointer;
+`;
+
 export const StyledLabel = styled.label`
   font-family: ${primFont};
   font-size: 14px;
