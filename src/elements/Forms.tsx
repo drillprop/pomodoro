@@ -16,7 +16,7 @@ export const FormWrapper = styled.main`
 
 export const StyledLabel = styled.label`
   font-family: ${primFont};
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   margin-right: 20px;
 `;
@@ -24,7 +24,7 @@ export const StyledLabel = styled.label`
 export const StyledInput = styled.input`
   display: block;
   font-family: ${primFont};
-  font-size: 20px;
+  font-size: 18px;
   margin: 0 auto;
   padding: 8px;
   margin-bottom: 32px;
@@ -33,6 +33,7 @@ export const StyledInput = styled.input`
   background-color: ${background};
   border: solid 1px ${secondary};
   border-radius: 5px;
+  width: 270px;
   ::placeholder {
     color: ${secondary};
   }
