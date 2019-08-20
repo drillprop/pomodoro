@@ -8,6 +8,7 @@ import {
 } from '../../utils/colors';
 import { secondFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
+import { useSelector } from 'react-redux';
 
 const ProfileWrapper = styled.div`
   margin-top: 70px;
