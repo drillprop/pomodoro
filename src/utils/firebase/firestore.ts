@@ -1,6 +1,6 @@
 import { firestore } from './firebase';
 
-export const createUser = async (usr: any) => {
+export const createUserRef = async (usr: any) => {
   if (!usr) return;
 
   const userRef = firestore.doc(`users/${usr.uid}`);
