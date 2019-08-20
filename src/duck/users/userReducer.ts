@@ -1,4 +1,4 @@
-import { GET_USER } from '../reduxTypes';
+import { GET_USER, REGISTER } from '../reduxTypes';
 
 const initialState = {
   user: null
@@ -11,6 +11,12 @@ export default (state: any = initialState, action: any) => {
         ...state,
         user: action.user
       };
+    case REGISTER: {
+      return {
+        ...state,
+        user: action.user
+      };
+    }
     default:
       return state;
   }

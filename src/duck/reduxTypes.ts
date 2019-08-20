@@ -10,6 +10,7 @@ const SWITCH_FAZE: string = 'SWITCH_FAZE';
 const SHOW_MENU: string = 'SHOW_MENU';
 const SET_TIMERS: string = 'SET_TIMERS';
 const GET_USER: string = 'GET_USER';
+const REGISTER: string = 'REGISTER';
 
 export {
   CREATE_TASK,
@@ -23,5 +24,6 @@ export {
   SWITCH_FAZE,
   SHOW_MENU,
   SET_TIMERS,
-  GET_USER
+  GET_USER,
+  REGISTER
 };
