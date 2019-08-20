@@ -14,6 +14,7 @@ const LoginForm = () => {
         value={values.email}
         onChange={handleInput}
         type='email'
+        name='email'
         id='email'
         placeholder='email'
         required
@@ -23,6 +24,7 @@ const LoginForm = () => {
         value={values.password}
         onChange={handleInput}
         type='password'
+        name='password'
         id='password'
         placeholder='password'
         required

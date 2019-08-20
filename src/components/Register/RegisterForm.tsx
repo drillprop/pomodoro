@@ -4,7 +4,7 @@ import useForm from '../../hooks/useForm';
 
 const RegisterForm = () => {
   const [values, handleInput, submit] = useForm({
-    username: '',
+    displayName: '',
     email: '',
     password: ''
   });
@@ -15,6 +15,7 @@ const RegisterForm = () => {
         value={values.username}
         onChange={handleInput}
         type='text'
+        name='displayName'
         id='username'
         placeholder='nick'
       />
@@ -22,6 +23,7 @@ const RegisterForm = () => {
       <StyledInput
         value={values.email}
         onChange={handleInput}
+        name='email'
         type='email'
         id='email'
         placeholder='email'
