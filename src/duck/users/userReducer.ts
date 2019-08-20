@@ -9,9 +9,7 @@ export default (state: any = initialState, action: any) => {
     case GET_USER:
       return {
         ...state,
-        user: {
-          ...action.user
-        }
+        user: action.user
       };
     default:
       return state;
