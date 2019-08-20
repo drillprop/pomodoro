@@ -32,6 +32,7 @@ const RegisterForm = () => {
       <StyledInput
         value={values.password}
         onChange={handleInput}
+        name='password'
         type='password'
         id='password'
         placeholder='password'
