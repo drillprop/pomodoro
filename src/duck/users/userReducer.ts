@@ -1,7 +1,7 @@
 import { GET_USER } from '../reduxTypes';
 
 const initialState = {
-  user: {}
+  user: null
 };
 
 export default (state: any = initialState, action: any) => {
