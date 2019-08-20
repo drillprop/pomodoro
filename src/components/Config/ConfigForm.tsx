@@ -1,10 +1,10 @@
 import React from 'react';
 import ConfigFazeInputs from './ConfigFazeInputs';
-import useForm from '../../hooks/useForm';
+import useChangeTime from '../../hooks/useChangeTime';
 import { SubmitButtom } from '../../elements/Forms';
 
 const ConfigForm = () => {
-  const [timeleft, update, submit] = useForm();
+  const [timeleft, update, submit] = useChangeTime();
 
   return (
     <form style={{ marginTop: '30px' }} onSubmit={submit}>
