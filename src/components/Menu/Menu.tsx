@@ -7,6 +7,7 @@ import { secondFont, primFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
 import useRouter from '../../hooks/useRouter';
 import { logout } from '../../utils/firebase/auth';
+import { useSelector } from 'react-redux';
 
 const StyledNavigation = styled.nav`
   position: fixed;
@@ -60,6 +61,9 @@ const Menu = () => {
     },
     color: background
   };
+
+  const user = useSelector((state: any) => state.usersReducer.user);
+
   return (
     <>
       <StyledNavigation>
@@ -86,10 +90,17 @@ const Menu = () => {
               </>
             )}
           </li>
-          <li onClick={logout}>
-            <Icon name='logout' {...itemIconProps} />
-            logout
-          </li>
+          {user ? (
+            <li onClick={logout}>
+              <Icon name='logout' {...itemIconProps} />
+              logout
+            </li>
+          ) : (
+            <li>
+              <Icon name='profile' {...itemIconProps} />
+              <Link to='/register'>register</Link>
+            </li>
+          )}
         </LinkList>
       </StyledNavigation>
     </>
