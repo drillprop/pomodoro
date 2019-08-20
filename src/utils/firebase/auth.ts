@@ -1,6 +1,5 @@
 import * as firebase from 'firebase/app';
 import { auth } from './firebase';
-import { createUser } from './firestore';
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -8,18 +7,19 @@ provider.setCustomParameters({ prompt: 'select_account' });
 
 export const loginWithGoogle = () => auth.signInWithPopup(provider);
 
-export const registerAccount = async (obj: any) => {
-  const { email, password, displayName } = obj;
+type RegisterParams = {
+  email: string;
+  password: string;
+  displayName: string;
+};
+
+export const registerAccount = async (registerParams: RegisterParams) => {
+  const { email, password } = registerParams;
   try {
     const newUser = await auth.createUserWithEmailAndPassword(email, password);
-    const user = await newUser.user;
-    if (user) {
-      user.updateProfile({
-        displayName
-      });
-    }
+    return newUser;
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 
@@ -31,7 +31,3 @@ export const logout = async () => {
     console.log(err);
   }
 };
-
-export const user = auth.onAuthStateChanged(usr => {
-  createUser(usr);
-});
