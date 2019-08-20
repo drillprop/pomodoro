@@ -9,6 +9,7 @@ const RESET_RETRY_TIMER: string = 'RESET_RETRY_TIMER';
 const SWITCH_FAZE: string = 'SWITCH_FAZE';
 const SHOW_MENU: string = 'SHOW_MENU';
 const SET_TIMERS: string = 'SET_TIMERS';
+const GET_USER: string = 'GET_USER';
 
 export {
   CREATE_TASK,
@@ -21,5 +22,6 @@ export {
   RESET_RETRY_TIMER,
   SWITCH_FAZE,
   SHOW_MENU,
-  SET_TIMERS
+  SET_TIMERS,
+  GET_USER
 };
