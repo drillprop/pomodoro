@@ -12,12 +12,6 @@ const RegisterForm = () => {
       <StyledLabel htmlFor='password'>Password</StyledLabel>
       <StyledInput type='password' id='password' placeholder='password' />
       <SubmitButtom>register</SubmitButtom>
-      <h3>Already have account?</h3>
-      <span>log in here</span>
-      <br />
-      <span style={{ cursor: 'pointer' }} onClick={loginWithGoogle}>
-        or sign in with Google
-      </span>
     </form>
   );
 };

@@ -98,7 +98,7 @@ const Menu = () => {
           ) : (
             <li>
               <Icon name='profile' {...itemIconProps} />
-              <Link to='/register'>register</Link>
+              <Link to='/sign'>login</Link>
             </li>
           )}
         </LinkList>
