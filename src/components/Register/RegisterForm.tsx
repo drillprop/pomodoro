@@ -2,7 +2,7 @@ import React, { FormEvent } from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
 import { useDispatch } from 'react-redux';
-import { register } from '../../duck/users/userActions';
+import { registerAction } from '../../duck/users/userActions';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const RegisterForm = () => {
 
   const handleSubmit = (e: FormEvent) => {
     submit(e);
-    dispatch(register({ ...values }));
+    dispatch(registerAction({ ...values }));
   };
 
   return (
