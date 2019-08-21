@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
+import { useDispatch } from 'react-redux';
+import { register } from '../../duck/users/userActions';
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
+
   const [values, handleInput, submit] = useForm({
     displayName: '',
     email: '',
     password: ''
   });
+
+  const handleSubmit = (e: FormEvent) => {
+    submit(e);
+    dispatch(register({ ...values }));
+  };
+
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={handleSubmit}>
       <StyledLabel htmlFor='username'>Nick</StyledLabel>
       <StyledInput
         value={values.username}
