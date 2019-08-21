@@ -29,6 +29,8 @@ export const registerAction = (
         displayName
       }
     });
+  } else {
+    console.log(registeredUser);
   }
 };
 
@@ -47,5 +49,7 @@ export const loginAction = (loginParams: RegisterAndLoginParams) => async (
         displayName
       }
     });
+  } else {
+    console.log(loggedUser);
   }
 };
