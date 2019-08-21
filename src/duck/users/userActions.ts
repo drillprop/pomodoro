@@ -19,12 +19,14 @@ export const register = (registerParams: RegisterParams) => async (
 ) => {
   const registeredUser = await registerAccount({ ...registerParams });
   const { user } = await registeredUser;
-  const { uid, email } = user;
-  await dispatch({
-    type: REGISTER,
-    user: {
-      uid,
-      email
-    }
-  });
+  if (user) {
+    const { uid, email } = user;
+    dispatch({
+      type: REGISTER,
+      user: {
+        uid,
+        email
+      }
+    });
+  }
 };
