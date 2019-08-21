@@ -67,7 +67,7 @@ const Menu = () => {
   return (
     <>
       <StyledNavigation>
-        <Profile />
+        <Profile user={user} />
         <LinkList>
           <li>
             <Icon name='profile' {...itemIconProps} />

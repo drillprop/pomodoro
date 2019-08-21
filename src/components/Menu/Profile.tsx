@@ -1,14 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import {
-  secondaryBackground,
-  background,
-  secondary,
-  primary
-} from '../../utils/colors';
+import { secondaryBackground, background, primary } from '../../utils/colors';
 import { secondFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
-import { useSelector } from 'react-redux';
 
 const ProfileWrapper = styled.div`
   margin-top: 70px;
@@ -44,14 +38,19 @@ const Email = styled.h2`
   text-align: center;
 `;
 
-const Profile = () => {
+const Profile: FC<{
+  user: {
+    displayName: string;
+    email: string;
+  } | null;
+}> = ({ user }) => {
   return (
     <ProfileWrapper>
       <Avatar>
         <Icon size={100} color={primary} name='profile' />
       </Avatar>
-      <Name>John Doe</Name>
-      <Email>john@email.com</Email>
+      <Name>{user && user.displayName}</Name>
+      <Email>{user && user.email}</Email>
     </ProfileWrapper>
   );
 };
