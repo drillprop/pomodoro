@@ -20,12 +20,13 @@ export const registerAction = (
   const registeredUser = await registerAccount({ ...registerParams });
   const { user } = await registeredUser;
   if (user) {
-    const { uid, email } = user;
+    const { uid, email, displayName } = user;
     dispatch({
       type: GET_USER,
       user: {
         uid,
-        email
+        email,
+        displayName
       }
     });
   }
@@ -37,12 +38,13 @@ export const loginAction = (loginParams: RegisterAndLoginParams) => async (
   const loggedUser = await loginToAccount({ ...loginParams });
   const { user } = await loggedUser;
   if (user) {
-    const { uid, email } = user;
+    const { uid, email, displayName } = user;
     dispatch({
       type: GET_USER,
       user: {
         uid,
-        email
+        email,
+        displayName
       }
     });
   }
