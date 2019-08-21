@@ -23,8 +23,8 @@ export const registerAccount = async (
 export const loginToAccount = async (loginParams: RegisterAndLoginParams) => {
   const { email, password } = loginParams;
   try {
-    const login = await auth.signInWithEmailAndPassword(email, password);
-    return login;
+    const loggedUser = await auth.signInWithEmailAndPassword(email, password);
+    return loggedUser;
   } catch (err) {
     return err;
   }
