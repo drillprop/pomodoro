@@ -8,13 +8,13 @@ export const getUser = (user: any) => {
   };
 };
 
-type RegisterParams = {
+export type RegisterAndLoginParams = {
   email: string;
   password: string;
-  displayName: string;
+  displayName?: string;
 };
 
-export const register = (registerParams: RegisterParams) => async (
+export const register = (registerParams: RegisterAndLoginParams) => async (
   dispatch: any
 ) => {
   const registeredUser = await registerAccount({ ...registerParams });
