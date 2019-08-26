@@ -6,7 +6,6 @@ const UPDATE_TIMER: string = 'UPDATE_TIMER';
 const START_TIMER: string = 'START_TIMER';
 const PAUSE_TIMER: string = 'PAUSE_TIMER';
 const RESET_TIMER: string = 'RESET_TIMER';
-const SWITCH_FAZE: string = 'SWITCH_FAZE';
 const SHOW_MENU: string = 'SHOW_MENU';
 const SET_TIMERS: string = 'SET_TIMERS';
 const SKIP_BREAK = 'SKIP_BREAK';
@@ -25,7 +24,6 @@ export {
   RESET_TIMER,
   SKIP_BREAK,
   STOP_AND_SWITCH_FAZE,
-  SWITCH_FAZE,
   SHOW_MENU,
   SET_TIMERS,
   GET_USER,

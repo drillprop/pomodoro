@@ -2,7 +2,6 @@ import {
   UPDATE_TIMER,
   START_TIMER,
   RESET_TIMER,
-  SWITCH_FAZE,
   SWITCH_TASK,
   SHOW_MENU,
   SET_TIMERS,
@@ -79,14 +78,6 @@ export default (state: TimerState = initialState, action: any) => {
         isInterval: true,
         endTime: 0,
         timeleft: intervalTime
-      };
-    case SWITCH_FAZE:
-      return {
-        ...state,
-        isInterval: !action.isInterval,
-        endTime: 0,
-        isTimerStart: false,
-        timeleft: !action.isInterval ? intervalTime : breakTime
       };
     case STOP_AND_SWITCH_FAZE:
       return {
