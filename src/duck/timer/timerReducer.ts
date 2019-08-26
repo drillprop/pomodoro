@@ -1,7 +1,7 @@
 import {
   UPDATE_TIMER,
   START_TIMER,
-  RESET_RETRY_TIMER,
+  RESET_TIMER,
   SWITCH_FAZE,
   SWITCH_TASK,
   SHOW_MENU,
@@ -65,10 +65,10 @@ export default (state: TimerState = initialState, action: any) => {
         timeleft: Math.floor((state.endTime - action.pauseTime) / 1000 + 1),
         endTime: 0
       };
-    case RESET_RETRY_TIMER:
+    case RESET_TIMER:
       return {
         ...state,
-        isTimerStart: action.isTimerStart,
+        isTimerStart: false,
         timeleft: state.isInterval ? intervalTime : breakTime
       };
     case SWITCH_FAZE:

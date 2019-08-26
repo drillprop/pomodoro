@@ -1,6 +1,6 @@
 import {
   UPDATE_TIMER,
-  RESET_RETRY_TIMER,
+  RESET_TIMER,
   SWITCH_FAZE,
   SHOW_MENU,
   SET_TIMERS,
@@ -48,11 +48,10 @@ export const pauseTimer = (pauseTime: number) => {
   };
 };
 
-export const resetTimer = (isTimerStart: boolean) => {
+export const resetTimer = () => {
   clearTimeout(timeout);
   return {
-    type: RESET_RETRY_TIMER,
-    isTimerStart
+    type: RESET_TIMER
   };
 };
 

@@ -35,7 +35,7 @@ const ResetButton = () => {
 
   const reset = () => {
     isInterval
-      ? dispatch(resetTimer(false))
+      ? dispatch(resetTimer())
       : dispatch(stopAndSwitchFaze(timeleft, isInterval));
   };
   return (
