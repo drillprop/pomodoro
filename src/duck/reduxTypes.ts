@@ -11,6 +11,7 @@ const SHOW_MENU: string = 'SHOW_MENU';
 const SET_TIMERS: string = 'SET_TIMERS';
 const GET_USER: string = 'GET_USER';
 const REGISTER: string = 'REGISTER';
+const STOP_AND_SWITCH_FAZE: string = 'STOP_AND_SWITCH_FAZE';
 
 export {
   CREATE_TASK,
@@ -21,6 +22,7 @@ export {
   START_TIMER,
   PAUSE_TIMER,
   RESET_RETRY_TIMER,
+  STOP_AND_SWITCH_FAZE,
   SWITCH_FAZE,
   SHOW_MENU,
   SET_TIMERS,
