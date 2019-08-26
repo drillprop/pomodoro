@@ -17,7 +17,6 @@ export default () => {
   useEffect(() => {
     let timeoutTimer: any;
     let timeoutSwitch: any;
-
     const left = countTimeLeft(Date.now(), endTime);
 
     if (isTimerStart) {
@@ -26,7 +25,8 @@ export default () => {
       }, 1000);
     }
 
-    if (!count && isTimerStart) {
+    if (count <= 0 && isTimerStart) {
+      setCount(0);
       clearTimeout(timeoutTimer);
       timeoutSwitch = setTimeout(() => dispatch(switchFaze(isInterval)), 1000);
     }
