@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import Task from './Task';
 import CreateNewTask from './CreateNewTask';
 import { useSelector } from 'react-redux';
+import { ReduxState } from '../../duck/store';
 
 const StyledUl = styled.ul`
   padding: 0;
 `;
 
 const Tasks = () => {
-  const tasks = useSelector((state: any) => state.tasksReducer.tasks);
+  const tasks = useSelector(({ tasks }: ReduxState) => tasks.tasks);
   return (
     <>
       <SubTitle>tasks</SubTitle>

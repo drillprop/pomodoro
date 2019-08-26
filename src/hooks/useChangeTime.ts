@@ -2,12 +2,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { convertSecToObj } from '../utils/helpers';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { setTimers } from '../duck/timer/timerActions';
+import { ReduxState } from '../duck/store';
 
 export default () => {
   const dispatch = useDispatch();
 
   const initialSeconds = useSelector(
-    (state: any) => state.timerReducer.config.initialTimeleft
+    ({ timer }: ReduxState) => timer.config.initialTimeleft
   );
 
   const secondsEntries = Object.entries(initialSeconds);

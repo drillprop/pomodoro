@@ -7,12 +7,12 @@ import {
 } from '../reduxTypes';
 import { renameProperty } from '../../utils/helpers';
 
-interface Tasks {
+export interface TasksState {
   tasks: any;
   selectedTask: string;
 }
 
-const initialState: Tasks = {
+const initialState: TasksState = {
   tasks: {
     default: 0,
     study: 0,
@@ -21,7 +21,7 @@ const initialState: Tasks = {
   selectedTask: 'default'
 };
 
-export default (state = initialState, action: any) => {
+export default (state: TasksState = initialState, action: any) => {
   switch (action.type) {
     case CREATE_TASK:
       return {

@@ -6,12 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import Menu from './Menu/Menu';
 import { auth } from '../utils/firebase/firebase';
 import { getUser } from '../duck/users/userActions';
+import { ReduxState } from '../duck/store';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
 
   const isMenuVisible = useSelector(
-    (state: any) => state.timerReducer.isMenuVisible
+    (state: ReduxState) => state.timer.isMenuVisible
   );
 
   useEffect(() => {

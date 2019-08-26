@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { secondaryBackground, background, primary } from '../../utils/colors';
 import { secondFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
+import { User } from 'firebase';
 
 const ProfileWrapper = styled.div`
   margin-top: 70px;
@@ -39,10 +40,7 @@ const Email = styled.h2`
 `;
 
 const Profile: FC<{
-  user: {
-    displayName: string;
-    email: string;
-  } | null;
+  user: User | null;
 }> = ({ user }) => {
   return (
     <ProfileWrapper>

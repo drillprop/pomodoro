@@ -9,16 +9,16 @@ import {
   PAUSE_TIMER
 } from '../reduxTypes';
 
-interface InitialTimeleft {
+type InitialTimeleft = {
   intervalTime: number;
   breakTime: number;
-}
+};
 
-interface Config {
+type Config = {
   initialTimeleft: InitialTimeleft;
-}
+};
 
-interface Timer {
+export interface TimerState {
   isMenuVisible: boolean;
   config: Config;
   isTimerStart: boolean;
@@ -34,7 +34,7 @@ const config: Config = {
   }
 };
 
-const initialState: Timer = {
+const initialState: TimerState = {
   isMenuVisible: false,
   config,
   isTimerStart: false,
@@ -43,7 +43,7 @@ const initialState: Timer = {
   timeleft: config.initialTimeleft.intervalTime
 };
 
-export default (state = initialState, action: any) => {
+export default (state: TimerState = initialState, action: any) => {
   const { intervalTime, breakTime } = state.config.initialTimeleft;
   switch (action.type) {
     case UPDATE_TIMER:

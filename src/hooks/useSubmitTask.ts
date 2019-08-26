@@ -1,6 +1,7 @@
 import { FormEvent, useState, ChangeEvent } from 'react';
 import { createTask, editTask } from '../duck/tasks/tasksActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { ReduxState } from '../duck/store';
 
 const useSubmitTask = (
   initInput: string = '',
@@ -10,7 +11,7 @@ const useSubmitTask = (
 
   const [input, setInput] = useState(initInput);
 
-  const tasks = useSelector((state: any) => state.tasksReducer.tasks);
+  const tasks = useSelector(({ tasks }: ReduxState) => tasks.tasks);
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) =>
     setInput(e.target.value);

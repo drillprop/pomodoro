@@ -8,6 +8,7 @@ import Icon from '../../elements/Icon';
 import useRouter from '../../hooks/useRouter';
 import { logout } from '../../utils/firebase/auth';
 import { useSelector } from 'react-redux';
+import { ReduxState } from '../../duck/store';
 
 const StyledNavigation = styled.nav`
   position: fixed;
@@ -62,7 +63,7 @@ const Menu = () => {
     color: background
   };
 
-  const user = useSelector((state: any) => state.usersReducer.user);
+  const user = useSelector(({ user }: ReduxState) => user.user);
 
   return (
     <>

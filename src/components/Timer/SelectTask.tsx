@@ -4,6 +4,7 @@ import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { switchTask } from '../../duck/tasks/tasksActions';
+import { ReduxState } from '../../duck/store';
 
 const Select = styled.select`
   font-family: ${primFont};
@@ -30,9 +31,9 @@ const Select = styled.select`
 
 const SelectTask = () => {
   const dispatch = useDispatch();
-  const tasks = useSelector((state: any) => state.tasksReducer.tasks);
+  const tasks = useSelector(({ tasks }: ReduxState) => tasks.tasks);
   const selectedTask = useSelector(
-    (state: any) => state.tasksReducer.selectedTask
+    ({ tasks }: ReduxState) => tasks.selectedTask
   );
 
   return (

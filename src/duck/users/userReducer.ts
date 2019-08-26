@@ -1,10 +1,15 @@
 import { GET_USER, REGISTER } from '../reduxTypes';
+import { User } from 'firebase';
 
-const initialState = {
+export type UserState = {
+  user: null | User;
+};
+
+const initialState: UserState = {
   user: null
 };
 
-export default (state: any = initialState, action: any) => {
+export default (state: UserState = initialState, action: any) => {
   switch (action.type) {
     case GET_USER:
       return {

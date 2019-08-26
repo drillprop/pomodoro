@@ -1,14 +1,8 @@
 import { useSelector } from 'react-redux';
-import { convertSecToStr } from '../utils/helpers';
+import { ReduxState } from '../duck/store';
 
 export default () => {
-  const reduxState = useSelector((state: any) => state.timerReducer);
+  const reduxState = useSelector(({ timer }: ReduxState) => timer);
 
-  const seconds = reduxState.isInterval
-    ? reduxState.intervalTime
-    : reduxState.breakTime;
-
-  const timeAsString = convertSecToStr(seconds);
-
-  return { ...reduxState, seconds, timeAsString };
+  return { ...reduxState };
 };
