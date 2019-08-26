@@ -4,11 +4,7 @@ import Icon from '../../../elements/Icon';
 import { primary, background } from '../../../utils/colors';
 import useTimerState from '../../../hooks/useTimerState';
 import { useDispatch } from 'react-redux';
-import {
-  startTimer,
-  pauseTimer,
-  stopAndSwitchFaze
-} from '../../../duck/timer/timerActions';
+import { startTimer, pauseTimer } from '../../../duck/timer/timerActions';
 
 const StyledPlayButton = styled.button<{ isTimerStart: boolean }>`
   position: relative;
@@ -48,10 +44,9 @@ const PlayButton = () => {
   const { isTimerStart, timeleft, isInterval } = useTimerState();
 
   const startPause = () => {
-    dispatch(stopAndSwitchFaze(timeleft, isInterval));
     isTimerStart
       ? dispatch(pauseTimer(Date.now()))
-      : dispatch(startTimer(Date.now()));
+      : dispatch(startTimer(Date.now(), isTimerStart, isInterval, timeleft));
   };
 
   return (

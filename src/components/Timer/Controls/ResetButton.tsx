@@ -5,7 +5,7 @@ import { secondaryBackground, primary } from '../../../utils/colors';
 import { secondFont } from '../../../utils/fonts';
 import { useDispatch } from 'react-redux';
 import {
-  resetRetryTimer,
+  resetTimer,
   stopAndSwitchFaze
 } from '../../../duck/timer/timerActions';
 
@@ -35,7 +35,7 @@ const ResetButton = () => {
 
   const reset = () => {
     isInterval
-      ? dispatch(resetRetryTimer(false))
+      ? dispatch(resetTimer(false))
       : dispatch(stopAndSwitchFaze(timeleft, isInterval));
   };
   return (

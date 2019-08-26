@@ -18,20 +18,6 @@ export const updateTimer = (seconds: number, isInterval: boolean) => {
   };
 };
 
-// export const startTimer = (startTime: number) => {
-//   return {
-//     type: START_TIMER,
-//     startTime
-//   };
-// };
-
-export const resetRetryTimer = (isTimerStart: boolean) => {
-  return {
-    type: RESET_RETRY_TIMER,
-    isTimerStart
-  };
-};
-
 let timeout: any = 0;
 
 export const startTimer = (
@@ -59,6 +45,14 @@ export const pauseTimer = (pauseTime: number) => {
   return {
     type: PAUSE_TIMER,
     pauseTime
+  };
+};
+
+export const resetTimer = (isTimerStart: boolean) => {
+  clearTimeout(timeout);
+  return {
+    type: RESET_RETRY_TIMER,
+    isTimerStart
   };
 };
 
