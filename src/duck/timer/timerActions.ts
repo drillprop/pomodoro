@@ -18,24 +18,47 @@ export const updateTimer = (seconds: number, isInterval: boolean) => {
   };
 };
 
-export const startTimer = (startTime: number) => {
-  return {
-    type: START_TIMER,
-    startTime
-  };
-};
-
-export const pauseTimer = (pauseTime: number) => {
-  return {
-    type: PAUSE_TIMER,
-    pauseTime
-  };
-};
+// export const startTimer = (startTime: number) => {
+//   return {
+//     type: START_TIMER,
+//     startTime
+//   };
+// };
 
 export const resetRetryTimer = (isTimerStart: boolean) => {
   return {
     type: RESET_RETRY_TIMER,
     isTimerStart
+  };
+};
+
+let timeout: any = 0;
+
+export const startTimer = (
+  startTime: number,
+  isTimerStart: boolean,
+  isInterval: boolean,
+  timeleft: number
+) => {
+  return async (dispatch: any) => {
+    if (!isTimerStart) {
+      dispatch({
+        type: START_TIMER,
+        startTime
+      });
+      timeout = setTimeout(
+        () => dispatch({ type: STOP_AND_SWITCH_FAZE, isInterval }),
+        timeleft * 1000 + 1000
+      );
+    }
+  };
+};
+
+export const pauseTimer = (pauseTime: number) => {
+  clearTimeout(timeout);
+  return {
+    type: PAUSE_TIMER,
+    pauseTime
   };
 };
 
