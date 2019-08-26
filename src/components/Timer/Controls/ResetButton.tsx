@@ -4,11 +4,7 @@ import useTimerState from '../../../hooks/useTimerState';
 import { secondaryBackground, primary } from '../../../utils/colors';
 import { secondFont } from '../../../utils/fonts';
 import { useDispatch } from 'react-redux';
-import {
-  resetTimer,
-  stopAndSwitchFaze,
-  skipBreak
-} from '../../../duck/timer/timerActions';
+import { resetTimer, skipBreak } from '../../../duck/timer/timerActions';
 
 const ResetandRetryButtons = styled.button`
   border: none;
@@ -32,7 +28,7 @@ const StyledButton = styled(ResetandRetryButtons)`
 
 const ResetButton = () => {
   const dispatch = useDispatch();
-  const { isInterval, timeleft } = useTimerState();
+  const { isInterval } = useTimerState();
 
   const reset = () => {
     isInterval ? dispatch(resetTimer()) : dispatch(skipBreak());
