@@ -3,7 +3,7 @@ import {
   EDIT_TASK,
   DELETE_TASK,
   SWITCH_TASK,
-  SWITCH_FAZE
+  STOP_AND_SWITCH_FAZE
 } from '../reduxTypes';
 import { renameProperty } from '../../utils/helpers';
 
@@ -53,7 +53,7 @@ export default (state: TasksState = initialState, action: any) => {
         ...state,
         selectedTask: action.taskName
       };
-    case SWITCH_FAZE: {
+    case STOP_AND_SWITCH_FAZE: {
       return {
         ...state,
         tasks: {

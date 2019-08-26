@@ -6,7 +6,8 @@ import {
   SWITCH_TASK,
   SHOW_MENU,
   SET_TIMERS,
-  PAUSE_TIMER
+  PAUSE_TIMER,
+  STOP_AND_SWITCH_FAZE
 } from '../reduxTypes';
 
 type InitialTimeleft = {
@@ -77,6 +78,14 @@ export default (state: TimerState = initialState, action: any) => {
         endTime: 0,
         isTimerStart: false,
         timeleft: !action.isInterval ? intervalTime : breakTime
+      };
+    case STOP_AND_SWITCH_FAZE:
+      return {
+        ...state,
+        isInterval: !state.isInterval,
+        endTime: 0,
+        isTimerStart: false,
+        timeleft: !state.isInterval ? intervalTime : breakTime
       };
     case SWITCH_TASK: {
       return {

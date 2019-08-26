@@ -5,7 +5,8 @@ import {
   SHOW_MENU,
   SET_TIMERS,
   START_TIMER,
-  PAUSE_TIMER
+  PAUSE_TIMER,
+  STOP_AND_SWITCH_FAZE
 } from '../reduxTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -38,15 +39,17 @@ export const resetRetryTimer = (isTimerStart: boolean) => {
   };
 };
 
-export const switchFaze = (
-  isInterval: boolean,
-  taskName: string = 'default'
-) => {
-  return {
-    type: SWITCH_FAZE,
-    isInterval,
-    taskName
-  };
+export const stopAndSwitchFaze = (
+  timeleft: number,
+  isInterval: boolean
+) => async (dispatch: any) => {
+  setTimeout(() => {
+    dispatch({
+      type: STOP_AND_SWITCH_FAZE,
+      timeleft,
+      isInterval
+    });
+  }, timeleft * 1000 + 1000);
 };
 
 export const showMenu = (isMenuVisible: boolean) => {
