@@ -9,6 +9,7 @@ const RESET_TIMER: string = 'RESET_TIMER';
 const SWITCH_FAZE: string = 'SWITCH_FAZE';
 const SHOW_MENU: string = 'SHOW_MENU';
 const SET_TIMERS: string = 'SET_TIMERS';
+const SKIP_BREAK = 'SKIP_BREAK';
 const GET_USER: string = 'GET_USER';
 const REGISTER: string = 'REGISTER';
 const STOP_AND_SWITCH_FAZE: string = 'STOP_AND_SWITCH_FAZE';
@@ -22,6 +23,7 @@ export {
   START_TIMER,
   PAUSE_TIMER,
   RESET_TIMER,
+  SKIP_BREAK,
   STOP_AND_SWITCH_FAZE,
   SWITCH_FAZE,
   SHOW_MENU,

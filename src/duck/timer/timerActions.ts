@@ -6,7 +6,8 @@ import {
   SET_TIMERS,
   START_TIMER,
   PAUSE_TIMER,
-  STOP_AND_SWITCH_FAZE
+  STOP_AND_SWITCH_FAZE,
+  SKIP_BREAK
 } from '../reduxTypes';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -18,7 +19,7 @@ export const updateTimer = (seconds: number, isInterval: boolean) => {
   };
 };
 
-let timeout: any = 0;
+let timeoutId: any = 0;
 
 export const startTimer = (
   startTime: number,
@@ -32,7 +33,7 @@ export const startTimer = (
         type: START_TIMER,
         startTime
       });
-      timeout = setTimeout(
+      timeoutId = setTimeout(
         () => dispatch({ type: STOP_AND_SWITCH_FAZE, isInterval }),
         timeleft * 1000 + 1000
       );
@@ -41,7 +42,7 @@ export const startTimer = (
 };
 
 export const pauseTimer = (pauseTime: number) => {
-  clearTimeout(timeout);
+  clearTimeout(timeoutId);
   return {
     type: PAUSE_TIMER,
     pauseTime
@@ -49,9 +50,16 @@ export const pauseTimer = (pauseTime: number) => {
 };
 
 export const resetTimer = () => {
-  clearTimeout(timeout);
+  clearTimeout(timeoutId);
   return {
     type: RESET_TIMER
+  };
+};
+
+export const skipBreak = () => {
+  clearTimeout(timeoutId);
+  return {
+    type: SKIP_BREAK
   };
 };
 

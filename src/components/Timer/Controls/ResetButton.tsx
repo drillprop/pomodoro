@@ -6,7 +6,8 @@ import { secondFont } from '../../../utils/fonts';
 import { useDispatch } from 'react-redux';
 import {
   resetTimer,
-  stopAndSwitchFaze
+  stopAndSwitchFaze,
+  skipBreak
 } from '../../../duck/timer/timerActions';
 
 const ResetandRetryButtons = styled.button`
@@ -34,9 +35,7 @@ const ResetButton = () => {
   const { isInterval, timeleft } = useTimerState();
 
   const reset = () => {
-    isInterval
-      ? dispatch(resetTimer())
-      : dispatch(stopAndSwitchFaze(timeleft, isInterval));
+    isInterval ? dispatch(resetTimer()) : dispatch(skipBreak());
   };
   return (
     <StyledButton onClick={reset}>{isInterval ? 'Reset' : 'Skip'}</StyledButton>
