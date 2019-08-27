@@ -15,9 +15,7 @@ export interface TasksState {
 
 const initialState: TasksState = {
   tasks: {
-    default: 0,
-    study: 0,
-    work: 0
+    default: 0
   },
   selectedTask: 'default'
 };
