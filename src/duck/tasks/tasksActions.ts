@@ -7,7 +7,8 @@ import {
 } from '../reduxTypes';
 import {
   saveTasksInFirestore,
-  firestoreData
+  firestoreData,
+  deleteTaskFromFirestore
 } from '../../utils/firebase/firestore';
 
 export const fetchTasks = (user: any) => {
@@ -39,10 +40,13 @@ export const editTask = (prevTask: string, newTask: string) => {
   };
 };
 
-export const deleteTask = (taskName: string) => {
-  return {
-    type: DELETE_TASK,
-    taskName
+export const deleteTask = (usr: any, taskName: string) => {
+  return async (dispatch: any) => {
+    await deleteTaskFromFirestore(usr, taskName);
+    dispatch({
+      type: DELETE_TASK,
+      taskName
+    });
   };
 };
 

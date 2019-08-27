@@ -1,4 +1,4 @@
-import { firestore } from './firebase';
+import { firestore, FieldValue } from './firebase';
 import { User } from 'firebase';
 
 export const addUserToFirestore = async (usr: User) => {
@@ -76,4 +76,14 @@ export const firestoreData = async (usr: any) => {
   const data = await doc.data();
 
   return data;
+};
+
+export const deleteTaskFromFirestore = async (usr: any, task: string) => {
+  if (!usr) return;
+  const usrRef = firestore.doc(`users/${usr.uid}`);
+  console.log(usrRef);
+  const remove = await usrRef.update({
+    [`tasks.${task}`]: FieldValue.delete()
+  });
+  console.log(remove);
 };

@@ -2,10 +2,11 @@ import React, { FC, useState, FormEvent } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { secondary, secondaryBackground, primary } from '../../utils/colors';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteTask } from '../../duck/tasks/tasksActions';
 import useSubmitTask from '../../hooks/useSubmitTask';
 import { EditCreateTask } from '../../elements/Forms';
+import { ReduxState } from '../../duck/store';
 
 const StyledTask = styled.li`
   display: grid;
@@ -33,6 +34,7 @@ const StyledButton = styled.button`
 `;
 
 const Task: FC<{ task: string }> = ({ task }) => {
+  const user = useSelector(({ user }: ReduxState) => user.user);
   const [editable, setAsEditable] = useState(false);
 
   const [input, editTask, saveTask] = useSubmitTask(task, true);
@@ -40,7 +42,7 @@ const Task: FC<{ task: string }> = ({ task }) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteTask(task));
+    dispatch(deleteTask(user, task));
   };
 
   const handleSubmit = (e: FormEvent) => {
