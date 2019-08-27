@@ -1,7 +1,9 @@
 import { GET_USER } from '../reduxTypes';
 import { registerAccount, loginToAccount } from '../../utils/firebase/auth';
+import { addUserToFirestore } from '../../utils/firebase/firestore';
 
 export const getUser = (user: any) => {
+  if (user) addUserToFirestore(user);
   return {
     type: GET_USER,
     user
