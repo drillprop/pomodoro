@@ -15,7 +15,10 @@ export const addUserToFirestore = async (usr: User) => {
       userRef.set({
         displayName,
         email,
-        createdAt
+        createdAt,
+        tasks: {
+          default: 0
+        }
       });
     } catch (err) {
       console.log(err);
@@ -40,15 +43,27 @@ export const getUsrDataFromFirestore = async (usr: any) => {
 
 export const saveTasksInFirestore = async (usr: any, task: any) => {
   if (!usr) return;
+
   const usrRef = firestore.doc(`users/${usr.uid}`);
-  usrRef.set(
-    {
-      tasks: {
-        [task]: 0
+  const doc = await usrRef.get();
+  const data = await doc.data();
+
+  if (data) {
+    if (!data.tasks.hasOwnProperty(task)) {
+      try {
+        usrRef.set(
+          {
+            tasks: {
+              [task]: 0
+            }
+          },
+          { merge: true }
+        );
+      } catch (err) {
+        console.error(err);
       }
-    },
-    { merge: true }
-  );
-  const snapshot = await usrRef.get();
-  console.log(snapshot, task);
+    } else {
+      console.log(`${task} already exists`);
+    }
+  }
 };
