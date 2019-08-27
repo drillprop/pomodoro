@@ -80,10 +80,30 @@ export const firestoreData = async (usr: any) => {
 
 export const deleteTaskFromFirestore = async (usr: any, task: string) => {
   if (!usr) return;
+
   const usrRef = firestore.doc(`users/${usr.uid}`);
-  console.log(usrRef);
-  const remove = await usrRef.update({
+
+  await usrRef.update({
     [`tasks.${task}`]: FieldValue.delete()
   });
-  console.log(remove);
+};
+
+export const updateTaskInFirestore = async (
+  usr: any,
+  oldTask: string,
+  newTask: string
+) => {
+  if (!usr) return;
+
+  const usrRef = firestore.doc(`users/${usr.uid}`);
+  const doc = await usrRef.get();
+  const data = await doc.data();
+
+  const tasks = data ? data.tasks : data;
+  const savedTask = tasks[oldTask];
+
+  await usrRef.update({
+    [`tasks.${oldTask}`]: FieldValue.delete(),
+    [`tasks.${newTask}`]: savedTask
+  });
 };

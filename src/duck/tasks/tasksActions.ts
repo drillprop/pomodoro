@@ -8,7 +8,8 @@ import {
 import {
   saveTasksInFirestore,
   firestoreData,
-  deleteTaskFromFirestore
+  deleteTaskFromFirestore,
+  updateTaskInFirestore
 } from '../../utils/firebase/firestore';
 
 export const fetchTasks = (user: any) => {
@@ -32,11 +33,14 @@ export const createTask = (taskName: string, user: any) => {
   };
 };
 
-export const editTask = (prevTask: string, newTask: string) => {
-  return {
-    type: EDIT_TASK,
-    prevTask,
-    newTask
+export const editTask = (prevTask: string, newTask: string, user: any) => {
+  return async (dispatch: any) => {
+    await updateTaskInFirestore(user, prevTask, newTask);
+    dispatch({
+      type: EDIT_TASK,
+      prevTask,
+      newTask
+    });
   };
 };
 

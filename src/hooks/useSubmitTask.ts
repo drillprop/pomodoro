@@ -29,7 +29,7 @@ const useSubmitTask = (
         dispatch(createTask(input.toLowerCase(), user));
         setInput('');
       } else {
-        dispatch(editTask(initInput, input.toLowerCase()));
+        dispatch(editTask(initInput, input.toLowerCase(), user));
       }
     } else {
       setInput(initInput);
