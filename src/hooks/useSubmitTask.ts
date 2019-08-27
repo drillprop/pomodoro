@@ -2,6 +2,7 @@ import { FormEvent, useState, ChangeEvent } from 'react';
 import { createTask, editTask } from '../duck/tasks/tasksActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../duck/store';
+import { saveTasksInFirestore } from '../utils/firebase/firestore';
 
 const useSubmitTask = (
   initInput: string = '',
@@ -12,6 +13,7 @@ const useSubmitTask = (
   const [input, setInput] = useState(initInput);
 
   const tasks = useSelector(({ tasks }: ReduxState) => tasks.tasks);
+  const user = useSelector(({ user }: ReduxState) => user.user);
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) =>
     setInput(e.target.value);
@@ -34,6 +36,7 @@ const useSubmitTask = (
       setInput(initInput);
     }
   };
+  saveTasksInFirestore(user, tasks);
   return [input, handleInput, handleSubmit];
 };
 

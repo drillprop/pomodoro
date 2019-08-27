@@ -24,3 +24,12 @@ export const addUserToFirestore = async (usr: User) => {
 
   return userRef;
 };
+
+export const saveTasksInFirestore = async (usr: any, obj: any) => {
+  if (!usr) return;
+
+  const usrRef = firestore.doc(`users/${usr.uid}`);
+  usrRef.update({ tasks: obj });
+  const snapshot = await usrRef.get();
+  console.log(snapshot, obj);
+};
