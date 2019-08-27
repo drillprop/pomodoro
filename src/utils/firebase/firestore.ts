@@ -25,6 +25,19 @@ export const addUserToFirestore = async (usr: User) => {
   return userRef;
 };
 
+export const getUsrDataFromFirestore = async (usr: any) => {
+  if (!usr) return;
+
+  const user = firestore.collection('users').doc(`${usr.uid}`);
+  const doc = await user.get();
+  if (doc.exists) {
+    const data = await doc.data();
+    return data;
+  } else {
+    return null;
+  }
+};
+
 export const saveTasksInFirestore = async (usr: any, obj: any) => {
   if (!usr) return;
 
