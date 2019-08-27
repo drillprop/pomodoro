@@ -4,7 +4,8 @@ import {
   DELETE_TASK,
   SWITCH_TASK,
   STOP_AND_SWITCH_FAZE,
-  SKIP_BREAK
+  SKIP_BREAK,
+  FETCH_TASKS
 } from '../reduxTypes';
 import { renameProperty } from '../../utils/helpers';
 
@@ -22,6 +23,11 @@ const initialState: TasksState = {
 
 export default (state: TasksState = initialState, action: any) => {
   switch (action.type) {
+    case FETCH_TASKS:
+      return {
+        ...state,
+        tasks: action.tasks
+      };
     case CREATE_TASK:
       return {
         ...state,

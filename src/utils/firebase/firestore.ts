@@ -67,3 +67,13 @@ export const saveTasksInFirestore = async (usr: any, task: any) => {
     }
   }
 };
+
+export const firestoreData = async (usr: any) => {
+  if (!usr) return;
+
+  const usrRef = firestore.doc(`users/${usr.uid}`);
+  const doc = await usrRef.get();
+  const data = await doc.data();
+
+  return data;
+};

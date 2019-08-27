@@ -1,10 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { secondFont } from '../../utils/fonts';
 import ConfigForm from '../../components/Config/ConfigForm';
 import { Link } from 'react-router-dom';
 import { MainTitle } from '../../elements/Titles';
 import Tasks from '../../components/Config/Tasks';
+import { useSelector, useDispatch } from 'react-redux';
+import { ReduxState } from '../../duck/store';
+import { fetchTasks } from '../../duck/tasks/tasksActions';
+import { firestoreData } from '../../utils/firebase/firestore';
 
 const ConfigWrapper = styled.main`
   display: grid;
@@ -19,6 +23,13 @@ const GoBackLink = styled.h4`
 `;
 
 const Config: FC = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(({ user }: ReduxState) => user.user);
+
+  useEffect(() => {
+    dispatch(fetchTasks(user));
+  }, [user]);
+
   return (
     <>
       <ConfigWrapper>
