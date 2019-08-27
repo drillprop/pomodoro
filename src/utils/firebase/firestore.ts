@@ -38,11 +38,17 @@ export const getUsrDataFromFirestore = async (usr: any) => {
   }
 };
 
-export const saveTasksInFirestore = async (usr: any, obj: any) => {
+export const saveTasksInFirestore = async (usr: any, task: any) => {
   if (!usr) return;
-
   const usrRef = firestore.doc(`users/${usr.uid}`);
-  usrRef.update({ tasks: obj });
+  usrRef.set(
+    {
+      tasks: {
+        [task]: 0
+      }
+    },
+    { merge: true }
+  );
   const snapshot = await usrRef.get();
-  console.log(snapshot, obj);
+  console.log(snapshot, task);
 };
