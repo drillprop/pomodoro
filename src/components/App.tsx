@@ -18,6 +18,8 @@ const App: React.FC = () => {
   useEffect(() => {
     auth.onAuthStateChanged(usr => {
       if (usr) {
+        localStorage.setItem('usr', JSON.stringify(usr));
+
         const { uid, email, displayName } = usr;
         dispatch(getUser({ uid, email, displayName }));
       } else {
