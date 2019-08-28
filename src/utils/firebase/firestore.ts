@@ -51,7 +51,7 @@ export const saveTasksInFirestore = async (task: any) => {
   const data = await doc.data();
 
   if (data) {
-    if (!data.tasks.hasOwnProperty(task)) {
+    if (!data.tasks || !data.tasks.hasOwnProperty(task)) {
       try {
         usrRef.set(
           {
@@ -97,6 +97,7 @@ export const updateTaskInFirestore = async (
 ) => {
   if (!usr) return;
 
+  // update in firestore
   const usrRef = firestore.doc(`users/${usr.uid}`);
   const doc = await usrRef.get();
   const data = await doc.data();
@@ -107,6 +108,15 @@ export const updateTaskInFirestore = async (
   await usrRef.update({
     [`tasks.${oldTask}`]: FieldValue.delete(),
     [`tasks.${newTask}`]: savedTask
+  });
+
+  // update in tasksByDay
+  const today = getToday();
+
+  const todayRef = firestore.doc(`users/${usr.uid}/tasksByDay/${today}`);
+  await todayRef.update({
+    [oldTask]: FieldValue.delete(),
+    [newTask]: savedTask
   });
 };
 
