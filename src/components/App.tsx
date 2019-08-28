@@ -7,6 +7,7 @@ import Menu from './Menu/Menu';
 import { auth } from '../utils/firebase/firebase';
 import { getUser } from '../duck/users/userActions';
 import { ReduxState } from '../duck/store';
+import { fetchTasks } from '../duck/tasks/tasksActions';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -23,9 +24,11 @@ const App: React.FC = () => {
     }
     auth.onAuthStateChanged(usr => {
       if (usr) {
+        const { uid, email, displayName } = usr;
+
         localStorage.setItem('usr', JSON.stringify(usr));
 
-        const { uid, email, displayName } = usr;
+        dispatch(fetchTasks(usr));
         dispatch(getUser({ uid, email, displayName }));
       } else {
         localStorage.removeItem('usr');
