@@ -23,6 +23,7 @@ const App: React.FC = () => {
         const { uid, email, displayName } = usr;
         dispatch(getUser({ uid, email, displayName }));
       } else {
+        localStorage.removeItem('usr');
         dispatch(getUser(null));
       }
     });
