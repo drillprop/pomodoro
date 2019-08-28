@@ -1,20 +1,32 @@
 import { firestore, FieldValue } from './firebase';
 import { getStorageUser, getToday } from '../helpers';
 
+// Globals
 const usr = getStorageUser();
+const today = getToday();
+
+export const dataAndRef = async (): Promise<any> => {
+  if (!usr) return;
+
+  const usrRef = await firestore.doc(`users/${usr.uid}`);
+
+  const doc = await usrRef.get();
+  const data = await doc.data();
+
+  return [data, usrRef, doc];
+};
 
 export const addUserToFirestore = async () => {
   if (!usr) return;
 
-  const userRef = firestore.doc(`users/${usr.uid}`);
-  const snapshot = await userRef.get();
+  const [, usrRef, doc] = await dataAndRef();
 
-  if (!snapshot.exists) {
+  if (!doc.exists) {
     const { displayName, email } = usr;
     const createdAt = new Date();
 
     try {
-      userRef.set({
+      usrRef.set({
         displayName,
         email,
         createdAt,
@@ -27,28 +39,13 @@ export const addUserToFirestore = async () => {
     }
   }
 
-  return userRef;
-};
-
-export const getUsrDataFromFirestore = async () => {
-  if (!usr) return;
-
-  const user = firestore.collection('users').doc(`${usr.uid}`);
-  const doc = await user.get();
-  if (doc.exists) {
-    const data = await doc.data();
-    return data;
-  } else {
-    return null;
-  }
+  return usrRef;
 };
 
 export const saveTasksInFirestore = async (task: any) => {
   if (!usr) return;
 
-  const usrRef = firestore.doc(`users/${usr.uid}`);
-  const doc = await usrRef.get();
-  const data = await doc.data();
+  const [data, usrRef] = await dataAndRef();
 
   if (data) {
     if (!data.tasks || !data.tasks.hasOwnProperty(task)) {
@@ -70,21 +67,10 @@ export const saveTasksInFirestore = async (task: any) => {
   }
 };
 
-export const firestoreData = async () => {
-  if (!usr) return;
-
-  const usrRef = firestore.doc(`users/${usr.uid}`);
-
-  const doc = await usrRef.get();
-  const data = await doc.data();
-
-  return data;
-};
-
 export const deleteTaskFromFirestore = async (task: string) => {
   if (!usr) return;
 
-  const usrRef = firestore.doc(`users/${usr.uid}`);
+  const [, usrRef] = await dataAndRef();
 
   await usrRef.update({
     [`tasks.${task}`]: FieldValue.delete()
@@ -98,9 +84,7 @@ export const updateTaskInFirestore = async (
   if (!usr) return;
 
   // update in firestore
-  const usrRef = firestore.doc(`users/${usr.uid}`);
-  const doc = await usrRef.get();
-  const data = await doc.data();
+  const [data, usrRef] = await dataAndRef();
 
   const tasks = data ? data.tasks : data;
   const savedTask = tasks[oldTask];
@@ -111,41 +95,21 @@ export const updateTaskInFirestore = async (
   });
 
   // update in tasksByDay
-  const today = getToday();
 
-  const todayRef = firestore.doc(`users/${usr.uid}/tasksByDay/${today}`);
+  const todayRef = usrRef.collection('tasksByDay').doc(today);
+
   await todayRef.update({
     [oldTask]: FieldValue.delete(),
     [newTask]: savedTask
   });
 };
 
-export const incrementDailyIntrv = async (selectedTask: string) => {
-  if (!usr) return;
-
-  const today = getToday();
-
-  const todayRef = firestore.doc(`users/${usr.uid}/tasksByDay/${today}`);
-  const todayTasks = await todayRef.get();
-
-  if (!todayTasks.exists) {
-    await todayRef.set({ [selectedTask]: 1 });
-  }
-  const tasks = await todayTasks.data();
-  if (tasks) {
-    const presentTask = tasks[selectedTask];
-    await todayRef.update({
-      [selectedTask]: presentTask ? presentTask + 1 : 1
-    });
-  }
-};
-
 export const incIntervalInFirestore = async (selectedTask: string) => {
   if (!usr) return;
 
-  const usrRef = firestore.doc(`users/${usr.uid}`);
-  const doc = await usrRef.get();
-  const data = await doc.data();
+  const [data, usrRef] = await dataAndRef();
+
+  // inc in tasks
 
   if (data) {
     const { tasks } = data;
@@ -166,5 +130,22 @@ export const incIntervalInFirestore = async (selectedTask: string) => {
       });
     }
   }
-  incrementDailyIntrv(selectedTask);
+
+  // inc in taskByDay
+
+  const todayRef = usrRef.collection('tasksByDay').doc(today);
+  const todayTasks = await todayRef.get();
+
+  if (!todayTasks.exists) {
+    await todayRef.set({ [selectedTask]: 1 });
+  }
+
+  const tasks = await todayTasks.data();
+
+  if (tasks) {
+    const presentTask = tasks[selectedTask];
+    await todayRef.update({
+      [selectedTask]: presentTask ? presentTask + 1 : 1
+    });
+  }
 };
