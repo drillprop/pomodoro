@@ -8,6 +8,7 @@ import { auth } from '../utils/firebase/firebase';
 import { getUser } from '../duck/users/userActions';
 import { ReduxState } from '../duck/store';
 import { fetchTasks } from '../duck/tasks/tasksActions';
+import { incrementDailyIntrv } from '../utils/firebase/firestore';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();

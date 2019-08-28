@@ -56,6 +56,10 @@ export const renameProperty = (oldProp: string, newProp: string, obj: any) => {
   return Object.fromEntries(arrWithChangedProp);
 };
 
+export const getToday = () => {
+  return moment().format('DD-MM-YY');
+};
+
 export const getStorageUser = () => {
   const user = localStorage.getItem('usr');
   if (user) return JSON.parse(user);

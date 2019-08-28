@@ -15,11 +15,13 @@ import {
 export const fetchTasks = () => {
   return async (dispatch: any) => {
     const data = await firestoreData();
-    const tasks = data ? data.tasks : { default: 0 };
-    dispatch({
-      type: FETCH_TASKS,
-      tasks
-    });
+
+    if (data) {
+      dispatch({
+        type: FETCH_TASKS,
+        tasks: data.tasks || { default: 0 }
+      });
+    }
   };
 };
 

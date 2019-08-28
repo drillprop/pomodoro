@@ -1,6 +1,5 @@
 import { firestore, FieldValue } from './firebase';
-import { User } from 'firebase';
-import { getStorageUser } from '../helpers';
+import { getStorageUser, getToday } from '../helpers';
 
 const usr = getStorageUser();
 
@@ -75,6 +74,7 @@ export const firestoreData = async () => {
   if (!usr) return;
 
   const usrRef = firestore.doc(`users/${usr.uid}`);
+
   const doc = await usrRef.get();
   const data = await doc.data();
 
@@ -110,6 +110,26 @@ export const updateTaskInFirestore = async (
   });
 };
 
+export const incrementDailyIntrv = async (selectedTask: string) => {
+  if (!usr) return;
+
+  const today = getToday();
+
+  const todayRef = firestore.doc(`users/${usr.uid}/tasksByDay/${today}`);
+  const todayTasks = await todayRef.get();
+
+  if (!todayTasks.exists) {
+    await todayRef.set({ [selectedTask]: 1 });
+  }
+  const tasks = await todayTasks.data();
+  if (tasks) {
+    const presentTask = tasks[selectedTask];
+    await todayRef.update({
+      [selectedTask]: presentTask ? presentTask + 1 : 1
+    });
+  }
+};
+
 export const incIntervalInFirestore = async (selectedTask: string) => {
   if (!usr) return;
 
@@ -119,11 +139,22 @@ export const incIntervalInFirestore = async (selectedTask: string) => {
 
   if (data) {
     const { tasks } = data;
-
-    const savedTask = tasks[selectedTask];
-    console.log(savedTask);
-    usrRef.update({
-      [`tasks.${selectedTask}`]: savedTask + 1
-    });
+    if (!tasks) {
+      usrRef.set(
+        {
+          tasks: {
+            [selectedTask]: 1
+          }
+        },
+        { merge: true }
+      );
+    } else {
+      const savedTask = tasks[selectedTask];
+      console.log(savedTask);
+      usrRef.update({
+        [`tasks.${selectedTask}`]: savedTask + 1
+      });
+    }
   }
+  incrementDailyIntrv(selectedTask);
 };

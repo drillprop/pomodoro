@@ -36,7 +36,6 @@ export const startTimer = (
       });
       timeoutId = setTimeout(() => {
         !isInterval && incIntervalInFirestore(selectedTask);
-
         dispatch({ type: STOP_AND_SWITCH_FAZE, isInterval });
       }, timeleft * 1000 + 1000);
     }
