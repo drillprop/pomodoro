@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import useTimerState from '../../../hooks/useTimerState';
 import { secondaryBackground, primary } from '../../../utils/colors';
 import { secondFont } from '../../../utils/fonts';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetTimer, skipBreak } from '../../../duck/timer/timerActions';
+import { ReduxState } from '../../../duck/store';
+import { incIntervalInFirestore } from '../../../utils/firebase/firestore';
 
 const ResetandRetryButtons = styled.button`
   border: none;
@@ -28,10 +30,17 @@ const StyledButton = styled(ResetandRetryButtons)`
 
 const ResetButton = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector(({ user }: ReduxState) => user);
+  const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
   const { isInterval } = useTimerState();
 
+  const skip = () => {
+    dispatch(skipBreak());
+    incIntervalInFirestore(user, selectedTask);
+  };
+
   const reset = () => {
-    isInterval ? dispatch(resetTimer()) : dispatch(skipBreak());
+    isInterval ? dispatch(resetTimer()) : skip();
   };
   return (
     <StyledButton onClick={reset}>{isInterval ? 'Reset' : 'Skip'}</StyledButton>

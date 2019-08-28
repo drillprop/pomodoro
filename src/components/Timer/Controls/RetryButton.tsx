@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { secondaryBackground, primary } from '../../../utils/colors';
 import { secondFont } from '../../../utils/fonts';
 import { startTimer, resetTimer } from '../../../duck/timer/timerActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useTimerState from '../../../hooks/useTimerState';
+import { ReduxState } from '../../../duck/store';
 
 const ResetandRetryButtons = styled.button`
   border: none;
@@ -29,10 +30,21 @@ const StyledButton = styled(ResetandRetryButtons)`
 const RetryButton = () => {
   const dispatch = useDispatch();
   const { isTimerStart, isInterval, timeleft } = useTimerState();
+  const { user } = useSelector(({ user }: ReduxState) => user);
+  const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
 
   const retry = async () => {
     await dispatch(resetTimer());
-    dispatch(startTimer(Date.now(), !isTimerStart, isInterval, timeleft));
+    dispatch(
+      startTimer(
+        Date.now(),
+        !isTimerStart,
+        isInterval,
+        timeleft,
+        user,
+        selectedTask
+      )
+    );
   };
 
   return <StyledButton onClick={retry}>Retry</StyledButton>;

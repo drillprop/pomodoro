@@ -8,6 +8,7 @@ import {
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK
 } from '../reduxTypes';
+import { incIntervalInFirestore } from '../../utils/firebase/firestore';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
   let field = isInterval ? 'intervalTime' : 'breakTime';
@@ -24,7 +25,9 @@ export const startTimer = (
   startTime: number,
   isTimerStart: boolean,
   isInterval: boolean,
-  timeleft: number
+  timeleft: number,
+  usr: any,
+  selectedTask: string
 ) => {
   return async (dispatch: any) => {
     if (!isTimerStart) {
@@ -32,10 +35,11 @@ export const startTimer = (
         type: START_TIMER,
         startTime
       });
-      timeoutId = setTimeout(
-        () => dispatch({ type: STOP_AND_SWITCH_FAZE, isInterval }),
-        timeleft * 1000 + 1000
-      );
+      timeoutId = setTimeout(() => {
+        !isInterval && incIntervalInFirestore(usr, selectedTask);
+
+        dispatch({ type: STOP_AND_SWITCH_FAZE, isInterval });
+      }, timeleft * 1000 + 1000);
     }
   };
 };
