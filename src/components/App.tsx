@@ -16,6 +16,11 @@ const App: React.FC = () => {
   );
 
   useEffect(() => {
+    const localStUser = localStorage.getItem('usr');
+    if (localStUser) {
+      const { uid, email, displayName } = JSON.parse(localStUser);
+      dispatch(getUser({ uid, email, displayName }));
+    }
     auth.onAuthStateChanged(usr => {
       if (usr) {
         localStorage.setItem('usr', JSON.stringify(usr));
