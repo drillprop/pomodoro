@@ -107,3 +107,24 @@ export const updateTaskInFirestore = async (
     [`tasks.${newTask}`]: savedTask
   });
 };
+
+export const incIntervalInFirestore = async (
+  usr: any,
+  selectedTask: string
+) => {
+  if (!usr) return;
+
+  const usrRef = firestore.doc(`users/${usr.uid}`);
+  const doc = await usrRef.get();
+  const data = await doc.data();
+
+  if (data) {
+    const { tasks } = data;
+
+    const savedTask = tasks[selectedTask];
+    console.log(savedTask);
+    usrRef.update({
+      [`tasks.${selectedTask}`]: savedTask + 1
+    });
+  }
+};
