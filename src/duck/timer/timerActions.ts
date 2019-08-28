@@ -26,7 +26,6 @@ export const startTimer = (
   isTimerStart: boolean,
   isInterval: boolean,
   timeleft: number,
-  usr: any,
   selectedTask: string
 ) => {
   return async (dispatch: any) => {
@@ -36,7 +35,7 @@ export const startTimer = (
         startTime
       });
       timeoutId = setTimeout(() => {
-        !isInterval && incIntervalInFirestore(usr, selectedTask);
+        !isInterval && incIntervalInFirestore(selectedTask);
 
         dispatch({ type: STOP_AND_SWITCH_FAZE, isInterval });
       }, timeleft * 1000 + 1000);

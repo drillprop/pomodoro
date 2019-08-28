@@ -34,7 +34,6 @@ const StyledButton = styled.button`
 `;
 
 const Task: FC<{ task: string }> = ({ task }) => {
-  const user = useSelector(({ user }: ReduxState) => user.user);
   const [editable, setAsEditable] = useState(false);
 
   const [input, editTask, saveTask] = useSubmitTask(task, true);
@@ -42,7 +41,7 @@ const Task: FC<{ task: string }> = ({ task }) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteTask(user, task));
+    dispatch(deleteTask(task));
   };
 
   const handleSubmit = (e: FormEvent) => {

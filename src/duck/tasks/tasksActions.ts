@@ -12,9 +12,9 @@ import {
   updateTaskInFirestore
 } from '../../utils/firebase/firestore';
 
-export const fetchTasks = (user: any) => {
+export const fetchTasks = () => {
   return async (dispatch: any) => {
-    const data = await firestoreData(user);
+    const data = await firestoreData();
     const tasks = data ? data.tasks : { default: 0 };
     dispatch({
       type: FETCH_TASKS,
@@ -23,9 +23,9 @@ export const fetchTasks = (user: any) => {
   };
 };
 
-export const createTask = (taskName: string, user: any) => {
+export const createTask = (taskName: string) => {
   return async (dispatch: any) => {
-    await saveTasksInFirestore(user, taskName);
+    await saveTasksInFirestore(taskName);
     dispatch({
       type: CREATE_TASK,
       taskName
@@ -33,9 +33,9 @@ export const createTask = (taskName: string, user: any) => {
   };
 };
 
-export const editTask = (prevTask: string, newTask: string, user: any) => {
+export const editTask = (prevTask: string, newTask: string) => {
   return async (dispatch: any) => {
-    await updateTaskInFirestore(user, prevTask, newTask);
+    await updateTaskInFirestore(prevTask, newTask);
     dispatch({
       type: EDIT_TASK,
       prevTask,
@@ -44,9 +44,9 @@ export const editTask = (prevTask: string, newTask: string, user: any) => {
   };
 };
 
-export const deleteTask = (usr: any, taskName: string) => {
+export const deleteTask = (taskName: string) => {
   return async (dispatch: any) => {
-    await deleteTaskFromFirestore(usr, taskName);
+    await deleteTaskFromFirestore(taskName);
     dispatch({
       type: DELETE_TASK,
       taskName

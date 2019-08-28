@@ -1,7 +1,10 @@
 import { firestore, FieldValue } from './firebase';
 import { User } from 'firebase';
+import { getStorageUser } from '../helpers';
 
-export const addUserToFirestore = async (usr: User) => {
+const usr = getStorageUser();
+
+export const addUserToFirestore = async () => {
   if (!usr) return;
 
   const userRef = firestore.doc(`users/${usr.uid}`);
@@ -28,7 +31,7 @@ export const addUserToFirestore = async (usr: User) => {
   return userRef;
 };
 
-export const getUsrDataFromFirestore = async (usr: any) => {
+export const getUsrDataFromFirestore = async () => {
   if (!usr) return;
 
   const user = firestore.collection('users').doc(`${usr.uid}`);
@@ -41,7 +44,7 @@ export const getUsrDataFromFirestore = async (usr: any) => {
   }
 };
 
-export const saveTasksInFirestore = async (usr: any, task: any) => {
+export const saveTasksInFirestore = async (task: any) => {
   if (!usr) return;
 
   const usrRef = firestore.doc(`users/${usr.uid}`);
@@ -68,7 +71,7 @@ export const saveTasksInFirestore = async (usr: any, task: any) => {
   }
 };
 
-export const firestoreData = async (usr: any) => {
+export const firestoreData = async () => {
   if (!usr) return;
 
   const usrRef = firestore.doc(`users/${usr.uid}`);
@@ -78,7 +81,7 @@ export const firestoreData = async (usr: any) => {
   return data;
 };
 
-export const deleteTaskFromFirestore = async (usr: any, task: string) => {
+export const deleteTaskFromFirestore = async (task: string) => {
   if (!usr) return;
 
   const usrRef = firestore.doc(`users/${usr.uid}`);
@@ -89,7 +92,6 @@ export const deleteTaskFromFirestore = async (usr: any, task: string) => {
 };
 
 export const updateTaskInFirestore = async (
-  usr: any,
   oldTask: string,
   newTask: string
 ) => {
@@ -108,10 +110,7 @@ export const updateTaskInFirestore = async (
   });
 };
 
-export const incIntervalInFirestore = async (
-  usr: any,
-  selectedTask: string
-) => {
+export const incIntervalInFirestore = async (selectedTask: string) => {
   if (!usr) return;
 
   const usrRef = firestore.doc(`users/${usr.uid}`);

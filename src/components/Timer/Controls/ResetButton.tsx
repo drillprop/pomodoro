@@ -30,13 +30,12 @@ const StyledButton = styled(ResetandRetryButtons)`
 
 const ResetButton = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector(({ user }: ReduxState) => user);
   const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
   const { isInterval } = useTimerState();
 
   const skip = () => {
     dispatch(skipBreak());
-    incIntervalInFirestore(user, selectedTask);
+    incIntervalInFirestore(selectedTask);
   };
 
   const reset = () => {

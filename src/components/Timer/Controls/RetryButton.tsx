@@ -30,20 +30,12 @@ const StyledButton = styled(ResetandRetryButtons)`
 const RetryButton = () => {
   const dispatch = useDispatch();
   const { isTimerStart, isInterval, timeleft } = useTimerState();
-  const { user } = useSelector(({ user }: ReduxState) => user);
   const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
 
   const retry = async () => {
     await dispatch(resetTimer());
     dispatch(
-      startTimer(
-        Date.now(),
-        !isTimerStart,
-        isInterval,
-        timeleft,
-        user,
-        selectedTask
-      )
+      startTimer(Date.now(), !isTimerStart, isInterval, timeleft, selectedTask)
     );
   };
 

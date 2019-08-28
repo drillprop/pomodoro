@@ -55,3 +55,9 @@ export const renameProperty = (oldProp: string, newProp: string, obj: any) => {
 
   return Object.fromEntries(arrWithChangedProp);
 };
+
+export const getStorageUser = () => {
+  const user = localStorage.getItem('usr');
+  if (user) return JSON.parse(user);
+  return null;
+};

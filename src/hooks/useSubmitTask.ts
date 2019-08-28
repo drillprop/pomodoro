@@ -12,7 +12,6 @@ const useSubmitTask = (
   const [input, setInput] = useState(initInput);
 
   const tasks = useSelector(({ tasks }: ReduxState) => tasks.tasks);
-  const user = useSelector(({ user }: ReduxState) => user.user);
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) =>
     setInput(e.target.value);
@@ -26,10 +25,10 @@ const useSubmitTask = (
 
     if (input) {
       if (!edit) {
-        dispatch(createTask(input.toLowerCase(), user));
+        dispatch(createTask(input.toLowerCase()));
         setInput('');
       } else {
-        dispatch(editTask(initInput, input.toLowerCase(), user));
+        dispatch(editTask(initInput, input.toLowerCase()));
       }
     } else {
       setInput(initInput);

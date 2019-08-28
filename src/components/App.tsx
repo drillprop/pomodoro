@@ -28,10 +28,11 @@ const App: React.FC = () => {
 
         localStorage.setItem('usr', JSON.stringify(usr));
 
-        dispatch(fetchTasks(usr));
+        dispatch(fetchTasks());
         dispatch(getUser({ uid, email, displayName }));
       } else {
         localStorage.removeItem('usr');
+
         dispatch(getUser(null));
       }
     });

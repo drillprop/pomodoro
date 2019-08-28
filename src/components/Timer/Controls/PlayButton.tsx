@@ -43,7 +43,6 @@ const Pause = styled.div`
 const PlayButton = () => {
   const dispatch = useDispatch();
   const { isTimerStart, timeleft, isInterval } = useTimerState();
-  const { user } = useSelector(({ user }: ReduxState) => user);
   const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
 
   const startPause = () => {
@@ -55,7 +54,6 @@ const PlayButton = () => {
             isTimerStart,
             isInterval,
             timeleft,
-            user,
             selectedTask
           )
         );
