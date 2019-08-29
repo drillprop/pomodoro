@@ -8,6 +8,7 @@ import { auth } from '../utils/firebase/firebase';
 import { getUser } from '../duck/users/userActions';
 import { ReduxState } from '../duck/store';
 import { fetchTasks } from '../duck/tasks/tasksActions';
+import { addUserToFirestore } from '../utils/firebase/firestore';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,24 +18,38 @@ const App: React.FC = () => {
   );
 
   useEffect(() => {
+    // leave, good code
     const localStUser = localStorage.getItem('usr');
     if (localStUser) {
       const { uid, email, displayName } = JSON.parse(localStUser);
       dispatch(getUser({ uid, email, displayName }));
     }
-    auth.onAuthStateChanged(usr => {
+    ///
+
+    let unsubscribeFromAuth: any = auth.onAuthStateChanged(async usr => {
       if (usr) {
-        const { uid, email, displayName } = usr;
+        const userRef = await addUserToFirestore(usr, null);
 
         localStorage.setItem('usr', JSON.stringify(usr));
 
-        dispatch(fetchTasks());
-        dispatch(getUser({ uid, email, displayName }));
+        if (userRef) {
+          userRef.onSnapshot((snapshot: any) => {
+            dispatch(
+              getUser({
+                id: snapshot.id,
+                ...snapshot.data()
+              })
+            );
+          });
+        }
       } else {
         localStorage.removeItem('usr');
 
-        dispatch(getUser(null));
+        dispatch(getUser(usr));
       }
+      return () => {
+        unsubscribeFromAuth();
+      };
     });
   }, []);
 

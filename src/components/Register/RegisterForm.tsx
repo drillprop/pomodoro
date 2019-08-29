@@ -14,11 +14,14 @@ const RegisterForm = () => {
   const handleSubmit = async (e: FormEvent) => {
     try {
       submit(e);
-      const user = await auth.createUserWithEmailAndPassword(
+      const userAuth = await auth.createUserWithEmailAndPassword(
         values.email,
         values.password
       );
-      addUserToFirestore(user, { displayName: values.displayName });
+      if (userAuth) {
+        const { user } = userAuth;
+        addUserToFirestore(user, { displayName: values.displayName });
+      }
     } catch (err) {
       console.log(err);
     }

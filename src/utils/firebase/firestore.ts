@@ -19,10 +19,10 @@ export const dataAndRef = async (): Promise<any> => {
 export const addUserToFirestore = async (user: any, additionalData: any) => {
   if (!user) return;
   console.log(user);
-  const userRef = firestore.doc(`users/${user.user.uid}`);
+  const userRef = firestore.doc(`users/${user.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
-    const { displayName, email } = user.user;
+    const { displayName, email } = user;
     const createdAt = new Date();
 
     try {
