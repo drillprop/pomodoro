@@ -2,10 +2,11 @@ import { firestore, FieldValue } from './firebase';
 import { getStorageUser, getToday } from '../helpers';
 
 // Globals
-const usr = getStorageUser();
+
 const today = getToday();
 
 export const dataAndRef = async (): Promise<any> => {
+  const usr = getStorageUser();
   if (!usr) return;
 
   const usrRef = await firestore.doc(`users/${usr.uid}`);
@@ -18,7 +19,7 @@ export const dataAndRef = async (): Promise<any> => {
 
 export const addUserToFirestore = async (user: any, additionalData: any) => {
   if (!user) return;
-  console.log(user);
+
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
@@ -40,6 +41,7 @@ export const addUserToFirestore = async (user: any, additionalData: any) => {
 };
 
 export const saveTasksInFirestore = async (task: any) => {
+  const usr = getStorageUser();
   if (!usr) return;
 
   const [data, usrRef] = await dataAndRef();
@@ -65,6 +67,7 @@ export const saveTasksInFirestore = async (task: any) => {
 };
 
 export const deleteTaskFromFirestore = async (task: string) => {
+  const usr = getStorageUser();
   if (!usr) return;
 
   const [, usrRef] = await dataAndRef();
@@ -78,6 +81,7 @@ export const updateTaskInFirestore = async (
   oldTask: string,
   newTask: string
 ) => {
+  const usr = getStorageUser();
   if (!usr) return;
 
   // update in firestore
@@ -102,6 +106,7 @@ export const updateTaskInFirestore = async (
 };
 
 export const incIntervalInFirestore = async (selectedTask: string) => {
+  const usr = getStorageUser();
   if (!usr) return;
 
   const [data, usrRef] = await dataAndRef();
@@ -151,6 +156,7 @@ export const saveInitialTimelefts = async (
   isInterval: boolean,
   seconds: number
 ) => {
+  const usr = getStorageUser();
   if (!usr) return;
 
   const timer = isInterval ? 'intervalTime' : 'breakTime';

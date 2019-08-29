@@ -67,7 +67,7 @@ export default () => {
     e.preventDefault();
 
     const secondsKeys: Array<string> = Object.keys(initialSeconds);
-
+    console.log(secondsKeys);
     secondsKeys.forEach((key: string) => {
       let smth: number = timeleft[key].seconds + timeleft[key].minutes * 60;
       dispatch(setTimers(smth, key));

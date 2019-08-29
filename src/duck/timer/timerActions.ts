@@ -8,7 +8,10 @@ import {
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK
 } from '../reduxTypes';
-import { incIntervalInFirestore } from '../../utils/firebase/firestore';
+import {
+  incIntervalInFirestore,
+  saveInitialTimelefts
+} from '../../utils/firebase/firestore';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
   let field = isInterval ? 'intervalTime' : 'breakTime';
@@ -85,9 +88,11 @@ export const showMenu = (isMenuVisible: boolean) => {
 };
 
 export const setTimers = (seconds: number, timer: string) => {
-  return {
-    type: SET_TIMERS,
-    seconds,
-    timer
+  return async (dispatch: any) => {
+    const isInterval = timer === 'breakTime' ? false : true;
+
+    await saveInitialTimelefts(isInterval, seconds);
+
+    dispatch({ type: SET_TIMERS, seconds, timer });
   };
 };
