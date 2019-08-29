@@ -1,4 +1,4 @@
-import { GET_USER, REGISTER } from '../reduxTypes';
+import { GET_USER } from '../reduxTypes';
 import { User } from 'firebase';
 
 export type UserState = {
@@ -16,12 +16,6 @@ export default (state: UserState = initialState, action: any) => {
         ...state,
         user: action.user
       };
-    case REGISTER: {
-      return {
-        ...state,
-        user: action.user
-      };
-    }
     default:
       return state;
   }

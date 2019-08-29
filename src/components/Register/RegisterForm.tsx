@@ -1,12 +1,9 @@
 import React, { FormEvent } from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
-import { useDispatch } from 'react-redux';
-import { registerAction } from '../../duck/users/userActions';
+import { auth } from '../../utils/firebase/firebase';
 
 const RegisterForm = () => {
-  const dispatch = useDispatch();
-
   const [values, handleInput, submit] = useForm({
     displayName: '',
     email: '',
@@ -15,7 +12,7 @@ const RegisterForm = () => {
 
   const handleSubmit = (e: FormEvent) => {
     submit(e);
-    dispatch(registerAction({ ...values }));
+    auth.createUserWithEmailAndPassword(values.email, values.password);
   };
 
   return (

@@ -10,7 +10,6 @@ const SHOW_MENU: string = 'SHOW_MENU';
 const SET_TIMERS: string = 'SET_TIMERS';
 const SKIP_BREAK = 'SKIP_BREAK';
 const GET_USER: string = 'GET_USER';
-const REGISTER: string = 'REGISTER';
 const STOP_AND_SWITCH_FAZE: string = 'STOP_AND_SWITCH_FAZE';
 const FETCH_TASKS: string = 'FETCH_TASKS';
 
@@ -28,6 +27,5 @@ export {
   SHOW_MENU,
   SET_TIMERS,
   GET_USER,
-  REGISTER,
   FETCH_TASKS
 };
