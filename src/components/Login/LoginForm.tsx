@@ -1,20 +1,21 @@
 import React, { FormEvent } from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
-import { useDispatch } from 'react-redux';
 import { auth } from '../../utils/firebase/firebase';
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
-
   const [values, handleInput, submit] = useForm({
     email: '',
     password: ''
   });
 
   const handleSubmit = async (e: FormEvent) => {
-    submit(e);
-    auth.signInWithEmailAndPassword(values.email, values.password);
+    try {
+      submit(e);
+      auth.signInWithEmailAndPassword(values.email, values.password);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
