@@ -17,6 +17,36 @@ export const dataAndRef = async (): Promise<any> => {
   return [data, usrRef, doc];
 };
 
+export const getTasksFromFirestore = async (usr: any) => {
+  if (!usr) return;
+
+  const usrRef = await firestore.doc(`users/${usr.uid}`);
+
+  const doc = await usrRef.get();
+  const data = await doc.data();
+  console.log(data);
+  if (data) {
+    const { tasks } = data;
+    return tasks || {};
+  }
+  return {};
+};
+
+export const getConfigFromFirestore = async (usr: any) => {
+  if (!usr) return;
+
+  const usrRef = await firestore.doc(`users/${usr.uid}`);
+
+  const doc = await usrRef.get();
+  const data = await doc.data();
+  console.log(data);
+  if (data) {
+    const { config } = data;
+    return config || {};
+  }
+  return {};
+};
+
 export const addUserToFirestore = async (user: any, additionalData: any) => {
   if (!user) return;
 
