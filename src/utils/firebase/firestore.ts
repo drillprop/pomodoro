@@ -146,3 +146,22 @@ export const incIntervalInFirestore = async (selectedTask: string) => {
     });
   }
 };
+
+export const saveInitialTimelefts = async (
+  isInterval: boolean,
+  seconds: number
+) => {
+  if (!usr) return;
+
+  const timer = isInterval ? 'intervalTime' : 'breakTime';
+  const [data, userRef] = await dataAndRef();
+
+  if (data) {
+    if (!data.config || !data.config[timer]) {
+      await userRef.set({ config: { [timer]: seconds } }, { merge: true });
+    } else {
+      await userRef.update({ [`config.${timer}`]: seconds });
+    }
+  }
+  console.log(data);
+};
