@@ -18,18 +18,16 @@ const App: React.FC = () => {
   );
 
   useEffect(() => {
-    // leave, good code
     const localStUser = localStorage.getItem('usr');
     if (localStUser) {
       const { uid, email, displayName } = JSON.parse(localStUser);
       dispatch(getUser({ uid, email, displayName }));
     }
-    ///
 
     let unsubscribeFromAuth: any = auth.onAuthStateChanged(async usr => {
       if (usr) {
+        dispatch(fetchTasks());
         const userRef = await addUserToFirestore(usr, null);
-
         localStorage.setItem('usr', JSON.stringify(usr));
 
         if (userRef) {
@@ -44,7 +42,7 @@ const App: React.FC = () => {
         }
       } else {
         localStorage.removeItem('usr');
-
+        dispatch(fetchTasks());
         dispatch(getUser(usr));
       }
       return () => {
