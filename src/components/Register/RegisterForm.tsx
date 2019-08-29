@@ -2,6 +2,7 @@ import React, { FormEvent } from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
 import { auth } from '../../utils/firebase/firebase';
+import { addUserToFirestore } from '../../utils/firebase/firestore';
 
 const RegisterForm = () => {
   const [values, handleInput, submit] = useForm({
@@ -10,9 +11,17 @@ const RegisterForm = () => {
     password: ''
   });
 
-  const handleSubmit = (e: FormEvent) => {
-    submit(e);
-    auth.createUserWithEmailAndPassword(values.email, values.password);
+  const handleSubmit = async (e: FormEvent) => {
+    try {
+      submit(e);
+      const user = await auth.createUserWithEmailAndPassword(
+        values.email,
+        values.password
+      );
+      addUserToFirestore(user, { displayName: values.displayName });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

@@ -16,30 +16,27 @@ export const dataAndRef = async (): Promise<any> => {
   return [data, usrRef, doc];
 };
 
-export const addUserToFirestore = async () => {
-  if (!usr) return;
-
-  const [, usrRef, doc] = await dataAndRef();
-
-  if (!doc.exists) {
-    const { displayName, email } = usr;
+export const addUserToFirestore = async (user: any, additionalData: any) => {
+  if (!user) return;
+  console.log(user);
+  const userRef = firestore.doc(`users/${user.user.uid}`);
+  const snapShot = await userRef.get();
+  if (!snapShot.exists) {
+    const { displayName, email } = user.user;
     const createdAt = new Date();
 
     try {
-      usrRef.set({
+      await userRef.set({
         displayName,
         email,
         createdAt,
-        tasks: {
-          default: 0
-        }
+        ...additionalData
       });
     } catch (err) {
-      console.log(err);
+      console.log('error creating user', err.message);
     }
   }
-
-  return usrRef;
+  return userRef;
 };
 
 export const saveTasksInFirestore = async (task: any) => {
