@@ -7,20 +7,18 @@ import {
 } from '../reduxTypes';
 import {
   saveTasksInFirestore,
-  dataAndRef,
   deleteTaskFromFirestore,
-  updateTaskInFirestore
+  updateTaskInFirestore,
+  getTasksFromFirestore
 } from '../../utils/firebase/firestore';
 
-export const fetchTasks = () => {
+export const fetchTasks = (usr: any) => {
   return async (dispatch: any) => {
-    const [data] = await dataAndRef();
-    if (data) {
-      dispatch({
-        type: FETCH_TASKS,
-        tasks: data.tasks || { default: 0 }
-      });
-    }
+    const tasks = await getTasksFromFirestore(usr);
+    dispatch({
+      type: FETCH_TASKS,
+      tasks: tasks || { default: 0 }
+    });
   };
 };
 

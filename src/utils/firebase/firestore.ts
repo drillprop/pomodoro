@@ -27,9 +27,9 @@ export const getTasksFromFirestore = async (usr: any) => {
   console.log(data);
   if (data) {
     const { tasks } = data;
-    return tasks || {};
+    return tasks;
   }
-  return {};
+  return null;
 };
 
 export const getConfigFromFirestore = async (usr: any) => {

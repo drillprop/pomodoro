@@ -26,9 +26,9 @@ const App: React.FC = () => {
 
     let unsubscribeFromAuth: any = auth.onAuthStateChanged(async usr => {
       if (usr) {
-        dispatch(fetchTasks());
         const userRef = await addUserToFirestore(usr, null);
         localStorage.setItem('usr', JSON.stringify(usr));
+        dispatch(fetchTasks(usr));
 
         if (userRef) {
           userRef.onSnapshot((snapshot: any) => {
@@ -42,7 +42,7 @@ const App: React.FC = () => {
         }
       } else {
         localStorage.removeItem('usr');
-        dispatch(fetchTasks());
+        dispatch(fetchTasks(usr));
         dispatch(getUser(usr));
       }
       return () => {
