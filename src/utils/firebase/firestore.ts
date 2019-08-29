@@ -115,7 +115,7 @@ export const incIntervalInFirestore = async (selectedTask: string) => {
 
   if (data) {
     const { tasks } = data;
-    if (!tasks) {
+    if (!tasks || !tasks[selectedTask]) {
       usrRef.set(
         {
           tasks: {
@@ -169,5 +169,4 @@ export const saveInitialTimelefts = async (
       await userRef.update({ [`config.${timer}`]: seconds });
     }
   }
-  console.log(data);
 };
