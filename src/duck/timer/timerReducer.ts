@@ -8,7 +8,6 @@ import {
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
-  FETCH_TIMELEFTS,
   GET_INITIAL_STATE
 } from '../reduxTypes';
 
