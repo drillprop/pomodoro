@@ -13,6 +13,7 @@ const GET_USER: string = 'GET_USER';
 const STOP_AND_SWITCH_FAZE: string = 'STOP_AND_SWITCH_FAZE';
 const FETCH_TASKS: string = 'FETCH_TASKS';
 const FETCH_TIMELEFTS: string = 'FETCH_TIMELEFTS';
+const GET_INITIAL_STATE: string = 'GET_INITIAL_STATE';
 
 export {
   CREATE_TASK,
@@ -28,6 +29,7 @@ export {
   SHOW_MENU,
   SET_TIMERS,
   GET_USER,
+  GET_INITIAL_STATE,
   FETCH_TASKS,
   FETCH_TIMELEFTS
 };

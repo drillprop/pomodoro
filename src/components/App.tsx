@@ -7,13 +7,13 @@ import Menu from './Menu/Menu';
 import { auth } from '../utils/firebase/firebase';
 import { getUser } from '../duck/users/userActions';
 import { ReduxState } from '../duck/store';
-import { fetchTasks } from '../duck/tasks/tasksActions';
+// import { fetchTasks } from '../duck/tasks/tasksActions';
 import {
-  addUserToFirestore,
-  getTimeleftFromFirestore,
-  dataAndRef
+  addUserToFirestore
+  // getTimeleftFromFirestore,
+  // dataAndRef
 } from '../utils/firebase/firestore';
-import { fetchTimers } from '../duck/timer/timerActions';
+// import { fetchTimers } from '../duck/timer/timerActions';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -33,8 +33,8 @@ const App: React.FC = () => {
       if (usr) {
         const userRef = await addUserToFirestore(usr, null);
         localStorage.setItem('usr', JSON.stringify(usr));
-        dispatch(fetchTasks(usr));
-        dispatch(fetchTimers(usr));
+        // dispatch(fetchTasks(usr));
+        // dispatch(fetchTimers(usr));
         if (userRef) {
           userRef.onSnapshot((snapshot: any) => {
             dispatch(
@@ -47,7 +47,7 @@ const App: React.FC = () => {
         }
       } else {
         localStorage.removeItem('usr');
-        dispatch(fetchTasks(usr));
+        // dispatch(fetchTasks(usr));
         dispatch(getUser(usr));
       }
       return () => {
