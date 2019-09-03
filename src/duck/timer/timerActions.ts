@@ -7,13 +7,12 @@ import {
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
-  FETCH_TIMELEFTS,
   GET_INITIAL_STATE
 } from '../reduxTypes';
 import {
   incIntervalInFirestore,
   saveInitialTimelefts,
-  getTimeleftFromFirestore
+  fetchInitialState
 } from '../../utils/firebase/firestore';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -100,21 +99,9 @@ export const setTimers = (seconds: number, timer: string) => {
   };
 };
 
-// export const fetchTimers = (usr: any) => {
-//   return async (dispatch: any) => {
-//     const initialTimeleft = await getTimeleftFromFirestore(usr);
-//     const { breakTime, intervalTime } = initialTimeleft;
-//     dispatch({
-//       type: FETCH_TIMELEFTS,
-//       breakTime,
-//       intervalTime
-//     });
-//   };
-// };
-
 export const getInitialState = (usr: any) => {
   return async (dispatch: any) => {
-    const initial = await getInitialState(usr);
+    const initial = await fetchInitialState(usr);
     dispatch({
       type: GET_INITIAL_STATE,
       initial

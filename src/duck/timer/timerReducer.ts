@@ -8,7 +8,8 @@ import {
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
-  FETCH_TIMELEFTS
+  FETCH_TIMELEFTS,
+  GET_INITIAL_STATE
 } from '../reduxTypes';
 
 type InitialTimeleft = {
@@ -115,20 +116,22 @@ export default (state: TimerState = initialState, action: any) => {
           }
         }
       };
-    case FETCH_TIMELEFTS:
-      const intv: number =
-        action.intervalTime || state.config.initialTimeleft.intervalTime;
-      const brk: number =
-        action.breakTime || state.config.initialTimeleft.breakTime;
+    case GET_INITIAL_STATE:
+      const actionBreakTime: number = action.initial.config.breakTime;
+      const actionIntervalTime: number = action.initial.config.intervalTime;
+
+      const interval: number = actionIntervalTime || intervalTime;
+      const breakK: number = actionBreakTime || breakTime;
+
       return {
         ...state,
-        timeleft: state.isInterval ? intv : brk,
+        timeleft: state.isInterval ? interval : breakK,
         config: {
           ...state.config,
           initialTimeleft: {
             ...state.config.initialTimeleft,
-            intervalTime: intv,
-            breakTime: brk
+            intervalTime: interval,
+            breakTime: breakK
           }
         }
       };
