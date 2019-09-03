@@ -2,26 +2,14 @@ import {
   CREATE_TASK,
   EDIT_TASK,
   DELETE_TASK,
-  SWITCH_TASK,
-  FETCH_TASKS
+  SWITCH_TASK
 } from '../reduxTypes';
 import {
   saveTasksInFirestore,
   deleteTaskFromFirestore,
   updateTaskInFirestore,
-  getTasksFromFirestore,
   saveSelectedTask
 } from '../../utils/firebase/firestore';
-
-// export const fetchTasks = (usr: any) => {
-//   return async (dispatch: any) => {
-//     const tasks = await getTasksFromFirestore(usr);
-//     dispatch({
-//       type: FETCH_TASKS,
-//       tasks: tasks || { default: 0 }
-//     });
-//   };
-// };
 
 export const createTask = (taskName: string) => {
   return async (dispatch: any) => {
