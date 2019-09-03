@@ -70,10 +70,12 @@ export const deleteTaskFromFirestore = async (task: string) => {
   const usr = getStorageUser();
   if (!usr) return;
 
-  const [, usrRef] = await dataAndRef(usr);
+  const [data, usrRef] = await dataAndRef(usr);
+  const { selectedTask } = await data;
 
   await usrRef.update({
-    [`tasks.${task}`]: FieldValue.delete()
+    [`tasks.${task}`]: FieldValue.delete(),
+    selectedTask: selectedTask === task ? 'default' : selectedTask
   });
 };
 
@@ -86,13 +88,15 @@ export const updateTaskInFirestore = async (
 
   // update in firestore
   const [data, usrRef] = await dataAndRef(usr);
+  const { selectedTask } = await data;
 
   const tasks = data ? data.tasks : data;
   const savedTask = tasks[oldTask];
 
   await usrRef.update({
     [`tasks.${oldTask}`]: FieldValue.delete(),
-    [`tasks.${newTask}`]: savedTask
+    [`tasks.${newTask}`]: savedTask,
+    selectedTask: selectedTask === oldTask ? newTask : selectedTask
   });
 
   // update in tasksByDay
