@@ -200,3 +200,18 @@ export const saveInitialTimelefts = async (
     }
   }
 };
+
+export const saveSelectedTask = async (selectedTask: string) => {
+  const usr = getStorageUser();
+
+  if (!usr) return;
+
+  const [data, userRef] = await dataAndRef(usr);
+  if (data) {
+    if (data.selectedTask) {
+      await userRef.set({ selectedTask }, { merge: true });
+    } else {
+      await userRef.update({ selectedTask });
+    }
+  }
+};

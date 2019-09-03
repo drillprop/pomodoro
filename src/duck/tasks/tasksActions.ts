@@ -9,7 +9,8 @@ import {
   saveTasksInFirestore,
   deleteTaskFromFirestore,
   updateTaskInFirestore,
-  getTasksFromFirestore
+  getTasksFromFirestore,
+  saveSelectedTask
 } from '../../utils/firebase/firestore';
 
 export const fetchTasks = (usr: any) => {
@@ -54,8 +55,8 @@ export const deleteTask = (taskName: string) => {
 };
 
 export const switchTask = (taskName: string) => {
-  return {
-    type: SWITCH_TASK,
-    taskName
+  return async (dispatch: any) => {
+    await saveSelectedTask(taskName);
+    dispatch({ type: SWITCH_TASK, taskName });
   };
 };

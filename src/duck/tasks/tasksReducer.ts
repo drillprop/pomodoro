@@ -26,7 +26,10 @@ export default (state: TasksState = initialState, action: any) => {
     case FETCH_TASKS:
       return {
         ...state,
-        tasks: action.tasks
+        tasks: {
+          ...state.tasks,
+          ...action.tasks
+        }
       };
     case CREATE_TASK:
       return {
