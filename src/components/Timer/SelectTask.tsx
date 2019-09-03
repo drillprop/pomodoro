@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
@@ -29,7 +29,7 @@ const Select = styled.select`
   }
 `;
 
-const SelectTask = () => {
+const SelectTask: FC = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(({ tasks }: ReduxState) => tasks.tasks);
   const selectedTask = useSelector(

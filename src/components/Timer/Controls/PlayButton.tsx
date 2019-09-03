@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import Icon from '../../../elements/Icon';
 import { primary, background } from '../../../utils/colors';
@@ -40,7 +40,7 @@ const Pause = styled.div`
   }
 `;
 
-const PlayButton = () => {
+const PlayButton: FC = () => {
   const dispatch = useDispatch();
   const { isTimerStart, timeleft, isInterval } = useTimerState();
   const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);

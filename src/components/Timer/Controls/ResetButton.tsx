@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import useTimerState from '../../../hooks/useTimerState';
 import { secondaryBackground, primary } from '../../../utils/colors';
@@ -28,7 +28,7 @@ const StyledButton = styled(ResetandRetryButtons)`
   padding-right: 1em;
 `;
 
-const ResetButton = () => {
+const ResetButton: FC = () => {
   const dispatch = useDispatch();
   const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
   const { isInterval } = useTimerState();

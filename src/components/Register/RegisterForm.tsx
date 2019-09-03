@@ -1,10 +1,10 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, FC } from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
 import { auth } from '../../utils/firebase/firebase';
 import { addUserToFirestore } from '../../utils/firebase/firestore';
 
-const RegisterForm = () => {
+const RegisterForm: FC = () => {
   const [values, handleInput, submit] = useForm({
     displayName: '',
     email: '',

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import ResetButton from './ResetButton';
 import RetryButton from './RetryButton';
@@ -11,7 +11,7 @@ const ControlsWrapper = styled.div`
   grid-template-rows: 60px;
 `;
 
-const Controls: React.FC = () => {
+const Controls: FC = () => {
   return (
     <ControlsWrapper>
       <ResetButton />

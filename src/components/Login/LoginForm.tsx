@@ -1,9 +1,9 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, FC } from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
 import { auth } from '../../utils/firebase/firebase';
 
-const LoginForm = () => {
+const LoginForm: FC = () => {
   const [values, handleInput, submit] = useForm({
     email: '',
     password: ''

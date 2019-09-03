@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { SubTitle } from '../../elements/Titles';
 import styled from 'styled-components';
 import Task from './Task';
@@ -10,7 +10,7 @@ const StyledUl = styled.ul`
   padding: 0;
 `;
 
-const Tasks = () => {
+const Tasks: FC = () => {
   const tasks = useSelector(({ tasks }: ReduxState) => tasks.tasks);
   return (
     <>

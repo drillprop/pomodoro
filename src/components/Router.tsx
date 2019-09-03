@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Config from '../pages/config/Config';
 import Interface from '../pages/timer/Interface';
@@ -6,7 +6,7 @@ import Sign from '../pages/sign/Sign';
 import { useSelector } from 'react-redux';
 import { ReduxState } from '../duck/store';
 
-const Router = () => {
+const Router: FC = () => {
   const user = useSelector(({ user }: ReduxState) => user.user);
   return (
     <>

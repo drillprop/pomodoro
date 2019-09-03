@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { MainTitle } from '../../elements/Titles';
 import { FormWrapper, FormParagraph } from '../../elements/Forms';
 import LoginForm from '../../components/Login/LoginForm';
 import RegisterForm from '../../components/Register/RegisterForm';
 import { loginWithGoogle } from '../../utils/firebase/auth';
 
-const Sign = () => {
+const Sign: FC = () => {
   const [isLogin, switchForm] = useState(true);
   return (
     <>

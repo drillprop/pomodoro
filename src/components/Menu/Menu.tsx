@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { primary, background, secondaryBackground } from '../../utils/colors';
@@ -51,7 +51,7 @@ const LinkList = styled.ul`
   }
 `;
 
-const Menu = () => {
+const Menu: FC = () => {
   const router = useRouter();
   const itemIconProps = {
     size: 30,

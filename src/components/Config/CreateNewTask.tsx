@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import useSubmitTask from '../../hooks/useSubmitTask';
 import { EditCreateTask } from '../../elements/Forms';
 
-const CreateNewTask = () => {
+const CreateNewTask: FC = () => {
   const [input, handleInput, handleSubmit] = useSubmitTask('');
 
   return (
