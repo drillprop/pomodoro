@@ -16,36 +16,6 @@ export const dataAndRef = async (usr: any): Promise<any> => {
   return [data, usrRef, doc];
 };
 
-export const getTasksFromFirestore = async (usr: any) => {
-  if (!usr) return;
-
-  const usrRef = await firestore.doc(`users/${usr.uid}`);
-
-  const doc = await usrRef.get();
-  const data = await doc.data();
-
-  if (data) {
-    const { tasks } = data;
-    return tasks;
-  }
-  return null;
-};
-
-export const getTimeleftFromFirestore = async (usr: any) => {
-  if (!usr) return;
-
-  const usrRef = await firestore.doc(`users/${usr.uid}`);
-
-  const doc = await usrRef.get();
-  const data = await doc.data();
-
-  if (data) {
-    const { config } = data;
-    return config || {};
-  }
-  return {};
-};
-
 export const addUserToFirestore = async (user: any, additionalData: any) => {
   if (!user) return;
 
@@ -216,7 +186,7 @@ export const saveSelectedTask = async (selectedTask: string) => {
   }
 };
 
-export const getInitialState = async (usr: any) => {
+export const fetchInitialState = async (usr: any) => {
   const usrRef = await firestore.doc(`users/${usr.uid}`);
 
   const doc = await usrRef.get();
