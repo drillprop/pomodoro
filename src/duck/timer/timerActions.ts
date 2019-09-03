@@ -6,11 +6,13 @@ import {
   START_TIMER,
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
-  SKIP_BREAK
+  SKIP_BREAK,
+  FETCH_TIMELEFTS
 } from '../reduxTypes';
 import {
   incIntervalInFirestore,
-  saveInitialTimelefts
+  saveInitialTimelefts,
+  getTimeleftFromFirestore
 } from '../../utils/firebase/firestore';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
@@ -94,5 +96,17 @@ export const setTimers = (seconds: number, timer: string) => {
     await saveInitialTimelefts(isInterval, seconds);
 
     dispatch({ type: SET_TIMERS, seconds, timer });
+  };
+};
+
+export const fetchTimers = (usr: any) => {
+  return async (dispatch: any) => {
+    const initialTimeleft = await getTimeleftFromFirestore(usr);
+    const { breakTime, intervalTime } = initialTimeleft;
+    dispatch({
+      type: FETCH_TIMELEFTS,
+      breakTime,
+      intervalTime
+    });
   };
 };
