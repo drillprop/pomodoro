@@ -32,7 +32,7 @@ export const getTasksFromFirestore = async (usr: any) => {
   return null;
 };
 
-export const getConfigFromFirestore = async (usr: any) => {
+export const getTimeleftFromFirestore = async (usr: any) => {
   if (!usr) return;
 
   const usrRef = await firestore.doc(`users/${usr.uid}`);
