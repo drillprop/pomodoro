@@ -5,8 +5,7 @@ import { getStorageUser, getToday } from '../helpers';
 
 const today = getToday();
 
-export const dataAndRef = async (): Promise<any> => {
-  const usr = getStorageUser();
+export const dataAndRef = async (usr: any): Promise<any> => {
   if (!usr) return;
 
   const usrRef = await firestore.doc(`users/${usr.uid}`);
@@ -53,13 +52,14 @@ export const addUserToFirestore = async (user: any, additionalData: any) => {
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
-    const { displayName, email } = user;
+    const { displayName, email, uid } = user;
     const createdAt = new Date();
 
     try {
       await userRef.set({
         displayName,
         email,
+        uid,
         createdAt,
         ...additionalData
       });
@@ -74,7 +74,7 @@ export const saveTasksInFirestore = async (task: any) => {
   const usr = getStorageUser();
   if (!usr) return;
 
-  const [data, usrRef] = await dataAndRef();
+  const [data, usrRef] = await dataAndRef(usr);
 
   if (data) {
     if (!data.tasks || !data.tasks.hasOwnProperty(task)) {
@@ -100,7 +100,7 @@ export const deleteTaskFromFirestore = async (task: string) => {
   const usr = getStorageUser();
   if (!usr) return;
 
-  const [, usrRef] = await dataAndRef();
+  const [, usrRef] = await dataAndRef(usr);
 
   await usrRef.update({
     [`tasks.${task}`]: FieldValue.delete()
@@ -115,7 +115,7 @@ export const updateTaskInFirestore = async (
   if (!usr) return;
 
   // update in firestore
-  const [data, usrRef] = await dataAndRef();
+  const [data, usrRef] = await dataAndRef(usr);
 
   const tasks = data ? data.tasks : data;
   const savedTask = tasks[oldTask];
@@ -139,7 +139,7 @@ export const incIntervalInFirestore = async (selectedTask: string) => {
   const usr = getStorageUser();
   if (!usr) return;
 
-  const [data, usrRef] = await dataAndRef();
+  const [data, usrRef] = await dataAndRef(usr);
 
   // inc in tasks
 
@@ -190,7 +190,7 @@ export const saveInitialTimelefts = async (
   if (!usr) return;
 
   const timer = isInterval ? 'intervalTime' : 'breakTime';
-  const [data, userRef] = await dataAndRef();
+  const [data, userRef] = await dataAndRef(usr);
 
   if (data) {
     if (!data.config || !data.config[timer]) {
