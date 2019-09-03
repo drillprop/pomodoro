@@ -24,7 +24,7 @@ export const getTasksFromFirestore = async (usr: any) => {
 
   const doc = await usrRef.get();
   const data = await doc.data();
-  console.log(data);
+
   if (data) {
     const { tasks } = data;
     return tasks;
@@ -39,7 +39,7 @@ export const getTimeleftFromFirestore = async (usr: any) => {
 
   const doc = await usrRef.get();
   const data = await doc.data();
-  console.log(data);
+
   if (data) {
     const { config } = data;
     return config || {};
@@ -156,7 +156,7 @@ export const incIntervalInFirestore = async (selectedTask: string) => {
       );
     } else {
       const savedTask = tasks[selectedTask];
-      console.log(savedTask);
+
       usrRef.update({
         [`tasks.${selectedTask}`]: savedTask + 1
       });
