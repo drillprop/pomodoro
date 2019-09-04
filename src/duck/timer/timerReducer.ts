@@ -8,7 +8,10 @@ import {
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
-  GET_INITIAL_STATE
+  GET_INITIAL_STATE,
+  FETCH_INITIAL_STATE_START,
+  FETCH_INITIAL_STATE_SUCCES,
+  FETCH_INITIAL_STATE_FAILURE
 } from '../reduxTypes';
 
 type InitialTimeleft = {
@@ -27,6 +30,8 @@ export interface TimerState {
   isInterval: boolean;
   endTime: number;
   timeleft: number;
+  isFetching: boolean;
+  errorMessage: string;
 }
 
 const config: Config = {
@@ -42,7 +47,9 @@ const initialState: TimerState = {
   isTimerStart: false,
   isInterval: true,
   endTime: 0,
-  timeleft: config.initialTimeleft.intervalTime
+  timeleft: config.initialTimeleft.intervalTime,
+  isFetching: false,
+  errorMessage: ''
 };
 
 export default (state: TimerState = initialState, action: any) => {
@@ -115,15 +122,20 @@ export default (state: TimerState = initialState, action: any) => {
           }
         }
       };
-    case GET_INITIAL_STATE:
+    case FETCH_INITIAL_STATE_START:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case FETCH_INITIAL_STATE_SUCCES:
       const actionBreakTime: number = action.initial.config.breakTime;
       const actionIntervalTime: number = action.initial.config.intervalTime;
 
       const interval: number = actionIntervalTime || intervalTime;
       const breakK: number = actionBreakTime || breakTime;
-
       return {
         ...state,
+        isFetching: false,
         timeleft: state.isInterval ? interval : breakK,
         config: {
           ...state.config,
@@ -133,6 +145,12 @@ export default (state: TimerState = initialState, action: any) => {
             breakTime: breakK
           }
         }
+      };
+    case FETCH_INITIAL_STATE_FAILURE:
+      return {
+        ...state,
+        isFetching: true,
+        errorMessage: action.errorMessage
       };
     default:
       return state;
