@@ -33,6 +33,7 @@ export default (state: UserState = initialState, action: any) => {
     case GET_CURRENT_USER_SUCCES:
       return {
         ...state,
+        isGettingUser: false,
         user: action.user
       };
     case GET_CURRENT_USER_FAILURE:
