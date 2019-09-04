@@ -1,14 +1,36 @@
-import { GET_USER } from '../reduxTypes';
-
-export const getUser = (user: any) => {
-  return {
-    type: GET_USER,
-    user
-  };
-};
+import {
+  GET_CURRENT_USER_START,
+  GET_CURRENT_USER_SUCCES,
+  GET_CURRENT_USER_FAILURE
+} from '../reduxTypes';
+import { auth } from '../../utils/firebase/firebase';
 
 export type RegisterAndLoginParams = {
   email: string;
   password: string;
   displayName?: string;
+};
+
+export const getCurrentUserStart = () => ({
+  type: GET_CURRENT_USER_START
+});
+
+export const getCurrentUserSuccess = (user: any) => ({
+  type: GET_CURRENT_USER_SUCCES,
+  user
+});
+
+export const getCurrentUserFailure = (error: any) => ({
+  type: GET_CURRENT_USER_FAILURE,
+  error
+});
+
+export const getCurrentUser = () => {
+  return (dispatch: any) => {
+    dispatch(getCurrentUserStart());
+    auth.onAuthStateChanged(
+      usr => dispatch(getCurrentUserSuccess(usr)),
+      error => dispatch(getCurrentUserFailure(error))
+    );
+  };
 };
