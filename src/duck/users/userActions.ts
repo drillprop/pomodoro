@@ -4,6 +4,7 @@ import {
   GET_CURRENT_USER_FAILURE
 } from '../reduxTypes';
 import { auth } from '../../utils/firebase/firebase';
+import { addUserToFirestore } from '../../utils/firebase/firestore';
 
 export type RegisterAndLoginParams = {
   email: string;
@@ -29,7 +30,12 @@ export const getCurrentUser = () => {
   return (dispatch: any) => {
     dispatch(getCurrentUserStart());
     auth.onAuthStateChanged(
-      usr => dispatch(getCurrentUserSuccess(usr)),
+      usr => {
+        if (usr) {
+          addUserToFirestore(usr, null);
+        }
+        dispatch(getCurrentUserSuccess(usr));
+      },
       error => dispatch(getCurrentUserFailure(error))
     );
   };
