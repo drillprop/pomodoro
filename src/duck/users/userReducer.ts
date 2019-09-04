@@ -14,7 +14,7 @@ export type UserState = {
 
 const initialState: UserState = {
   user: null,
-  isGettingUser: false,
+  isGettingUser: true,
   error: null
 };
 
