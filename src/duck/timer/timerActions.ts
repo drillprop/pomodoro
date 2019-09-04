@@ -7,7 +7,10 @@ import {
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
-  GET_INITIAL_STATE
+  GET_INITIAL_STATE,
+  FETCH_INITIAL_STATE_START,
+  FETCH_INITIAL_STATE_SUCCES,
+  FETCH_INITIAL_STATE_FAILURE
 } from '../reduxTypes';
 import {
   incIntervalInFirestore,
@@ -99,12 +102,27 @@ export const setTimers = (seconds: number, timer: string) => {
   };
 };
 
+export const fetchInitialStateStart = () => ({
+  type: FETCH_INITIAL_STATE_START
+});
+
+export const fetchInitialStateSucces = (initial: any) => ({
+  type: FETCH_INITIAL_STATE_SUCCES,
+  initial
+});
+
+export const fetchInitialStateFailure = (errorMessage: string) => ({
+  type: FETCH_INITIAL_STATE_FAILURE,
+  errorMessage
+});
+
 export const getInitialState = (usr: any) => {
   return async (dispatch: any) => {
-    const initial = await fetchInitialState(usr);
-    dispatch({
-      type: GET_INITIAL_STATE,
-      initial
-    });
+    dispatch(fetchInitialStateStart());
+    fetchInitialState(usr)
+      .then((initial: any) => dispatch(fetchInitialStateSucces(initial)))
+      .catch((errorMessage: string) =>
+        dispatch(fetchInitialStateFailure(errorMessage))
+      );
   };
 };
