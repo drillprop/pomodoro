@@ -1,13 +1,24 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Config from '../pages/config/Config';
 import Interface from '../pages/timer/Interface';
 import Sign from '../pages/sign/Sign';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReduxState } from '../duck/store';
+import { getCurrentUser } from '../duck/users/userActions';
+import withLoading from './withLoading';
+
+const WithLoadingInterface = withLoading(Interface);
 
 const Router: FC = () => {
   const user = useSelector(({ user }: ReduxState) => user.user);
+  const dispatch = useDispatch();
+  const { isGettingUser } = useSelector(({ user }: ReduxState) => user);
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, []);
+
   return (
     <>
       <Route
@@ -21,7 +32,13 @@ const Router: FC = () => {
       <Route
         exact
         path='/'
-        render={() => (user ? <Interface /> : <Redirect to='/sign' />)}
+        render={() =>
+          !user && !isGettingUser ? (
+            <Redirect to='/sign' />
+          ) : (
+            <WithLoadingInterface isLoading={isGettingUser} />
+          )
+        }
       />
     </>
   );
