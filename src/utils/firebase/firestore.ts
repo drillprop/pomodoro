@@ -1,9 +1,18 @@
-import { firestore, FieldValue } from './firebase';
+import { firestore, FieldValue, auth } from './firebase';
 import { getStorageUser, getToday } from '../helpers';
 
 // Globals
 
 const today = getToday();
+
+function getCurrentUser() {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      unsubscribe();
+      resolve(user);
+    }, reject);
+  });
+}
 
 export const dataAndRef = async (usr: any): Promise<any> => {
   if (!usr) return;
@@ -41,7 +50,7 @@ export const addUserToFirestore = async (user: any, additionalData: any) => {
 };
 
 export const saveTasksInFirestore = async (task: any) => {
-  const usr = getStorageUser();
+  const usr = await getCurrentUser();
   if (!usr) return;
 
   const [data, usrRef] = await dataAndRef(usr);
@@ -67,7 +76,7 @@ export const saveTasksInFirestore = async (task: any) => {
 };
 
 export const deleteTaskFromFirestore = async (task: string) => {
-  const usr = getStorageUser();
+  const usr = await getCurrentUser();
   if (!usr) return;
 
   const [data, usrRef] = await dataAndRef(usr);
@@ -83,7 +92,7 @@ export const updateTaskInFirestore = async (
   oldTask: string,
   newTask: string
 ) => {
-  const usr = getStorageUser();
+  const usr = await getCurrentUser();
   if (!usr) return;
 
   // update in firestore
@@ -110,7 +119,7 @@ export const updateTaskInFirestore = async (
 };
 
 export const incIntervalInFirestore = async (selectedTask: string) => {
-  const usr = getStorageUser();
+  const usr = await getCurrentUser();
   if (!usr) return;
 
   const [data, usrRef] = await dataAndRef(usr);
@@ -160,7 +169,7 @@ export const saveInitialTimelefts = async (
   isInterval: boolean,
   seconds: number
 ) => {
-  const usr = getStorageUser();
+  const usr = await getCurrentUser();
   if (!usr) return;
 
   const timer = isInterval ? 'intervalTime' : 'breakTime';
@@ -176,7 +185,7 @@ export const saveInitialTimelefts = async (
 };
 
 export const saveSelectedTask = async (selectedTask: string) => {
-  const usr = getStorageUser();
+  const usr = await getCurrentUser();
 
   if (!usr) return;
 
