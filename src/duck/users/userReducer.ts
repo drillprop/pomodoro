@@ -1,12 +1,21 @@
-import { GET_USER } from '../reduxTypes';
+import {
+  GET_USER,
+  GET_CURRENT_USER_START,
+  GET_CURRENT_USER_SUCCES,
+  GET_CURRENT_USER_FAILURE
+} from '../reduxTypes';
 import { User } from 'firebase';
 
 export type UserState = {
   user: null | User;
+  isGettingUser: boolean;
+  error: any;
 };
 
 const initialState: UserState = {
-  user: null
+  user: null,
+  isGettingUser: false,
+  error: null
 };
 
 export default (state: UserState = initialState, action: any) => {
@@ -15,6 +24,22 @@ export default (state: UserState = initialState, action: any) => {
       return {
         ...state,
         user: action.user
+      };
+    case GET_CURRENT_USER_START:
+      return {
+        ...state,
+        isGettingUser: true
+      };
+    case GET_CURRENT_USER_SUCCES:
+      return {
+        ...state,
+        user: action.user
+      };
+    case GET_CURRENT_USER_FAILURE:
+      return {
+        ...state,
+        isGettingUser: false,
+        error: action.error
       };
     default:
       return state;
