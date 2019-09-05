@@ -46,7 +46,9 @@ export default (state: TasksState = initialState, action: any) => {
       const newTasksObj = renameProperty(prevTask, newTask, state.tasks);
       return {
         ...state,
-        tasks: { ...newTasksObj }
+        tasks: { ...newTasksObj },
+        selectedTask:
+          prevTask === state.selectedTask ? action.newTask : state.selectedTask
       };
     case DELETE_TASK: {
       const { taskName } = action;
