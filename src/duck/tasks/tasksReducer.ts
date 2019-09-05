@@ -5,7 +5,7 @@ import {
   SWITCH_TASK,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
-  GET_INITIAL_STATE
+  FETCH_INITIAL_STATE_SUCCES
 } from '../reduxTypes';
 import { renameProperty } from '../../utils/helpers';
 
@@ -23,8 +23,7 @@ const initialState: TasksState = {
 
 export default (state: TasksState = initialState, action: any) => {
   switch (action.type) {
-    case GET_INITIAL_STATE:
-      console.log(action.initial);
+    case FETCH_INITIAL_STATE_SUCCES:
       const { tasks, selectedTask } = action.initial;
       return {
         ...state,
