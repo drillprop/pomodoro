@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { primary, background, secondaryBackground } from '../../utils/colors';
 import Profile from './Profile';
-import { secondFont, primFont } from '../../utils/fonts';
+import { secondFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
 import useRouter from '../../hooks/useRouter';
 import { logout } from '../../utils/firebase/auth';
 import { useSelector } from 'react-redux';
 import { ReduxState } from '../../duck/store';
+import { useTransition, animated, config } from 'react-spring';
 
-const StyledNavigation = styled.nav`
+const StyledNavigation = styled(animated.nav)`
   position: fixed;
   z-index: 5;
   top: 0;
@@ -64,46 +65,62 @@ const Menu: FC = () => {
   };
 
   const user = useSelector(({ user }: ReduxState) => user.user);
+  const toggle = useSelector(({ timer }: ReduxState) => timer.isMenuVisible);
+
+  const transitions = useTransition(toggle, null, {
+    from: {
+      transform: 'translateX(-500px)'
+    },
+    enter: {
+      transform: 'translateX(0)'
+    },
+    leave: { transform: 'translateX(-500px)' }
+  });
 
   return (
     <>
-      <StyledNavigation>
-        <Profile user={user} />
-        <LinkList>
-          <li>
-            <Icon name='profile' {...itemIconProps} />
-            profile
-          </li>
-          <li>
-            <Icon name='stats2' {...itemIconProps} />
-            stats
-          </li>
-          <li>
-            {router.location.pathname === '/config' ? (
-              <>
-                <Icon name='home' {...itemIconProps} />
-                <Link to='/'>back to app</Link>
-              </>
-            ) : (
-              <>
-                <Icon name='config' {...itemIconProps} />
-                <Link to='/config'>config</Link>
-              </>
-            )}
-          </li>
-          {user ? (
-            <li onClick={logout}>
-              <Icon name='logout' {...itemIconProps} />
-              logout
-            </li>
-          ) : (
-            <li>
-              <Icon name='profile' {...itemIconProps} />
-              <Link to='/sign'>login</Link>
-            </li>
-          )}
-        </LinkList>
-      </StyledNavigation>
+      {transitions.map(
+        ({ item, key, props }) =>
+          item && (
+            <StyledNavigation key={key} style={props}>
+              <Profile user={user} />
+              <LinkList>
+                <li>
+                  <Icon name='profile' {...itemIconProps} />
+                  profile
+                </li>
+                <li>
+                  <Icon name='stats2' {...itemIconProps} />
+                  stats
+                </li>
+                <li>
+                  {router.location.pathname === '/config' ? (
+                    <>
+                      <Icon name='home' {...itemIconProps} />
+                      <Link to='/'>back to app</Link>
+                    </>
+                  ) : (
+                    <>
+                      <Icon name='config' {...itemIconProps} />
+                      <Link to='/config'>config</Link>
+                    </>
+                  )}
+                </li>
+                {user ? (
+                  <li onClick={logout}>
+                    <Icon name='logout' {...itemIconProps} />
+                    logout
+                  </li>
+                ) : (
+                  <li>
+                    <Icon name='profile' {...itemIconProps} />
+                    <Link to='/sign'>login</Link>
+                  </li>
+                )}
+              </LinkList>
+            </StyledNavigation>
+          )
+      )}
     </>
   );
 };
