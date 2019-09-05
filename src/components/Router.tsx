@@ -14,8 +14,11 @@ const WithLoadingConfig = withLoading(Config);
 
 const Router: FC = () => {
   const user = useSelector(({ user }: ReduxState) => user.user);
+  const isLoading = useSelector(
+    ({ user, timer }: ReduxState) => user.isGettingUser || timer.isFetching
+  );
+
   const dispatch = useDispatch();
-  const { isGettingUser } = useSelector(({ user }: ReduxState) => user);
 
   useEffect(() => {
     dispatch(getCurrentUser());
@@ -27,10 +30,10 @@ const Router: FC = () => {
       <Route
         path='/config'
         render={() =>
-          !user && !isGettingUser ? (
+          !user && !isLoading ? (
             <Redirect to='/sign' />
           ) : (
-            <WithLoadingConfig isLoading={isGettingUser} />
+            <WithLoadingConfig isLoading={isLoading} />
           )
         }
       />
@@ -42,10 +45,10 @@ const Router: FC = () => {
         exact
         path='/'
         render={() =>
-          !user && !isGettingUser ? (
+          !user && !isLoading ? (
             <Redirect to='/sign' />
           ) : (
-            <WithLoadingInterface isLoading={isGettingUser} />
+            <WithLoadingInterface isLoading={isLoading} />
           )
         }
       />
