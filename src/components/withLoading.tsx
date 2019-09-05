@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { primary } from '../utils/colors';
+import { useTransition, animated } from 'react-spring';
 
 const LoadingWrapper = styled.main`
   display: grid;
@@ -56,12 +57,27 @@ const Spinner = styled.div`
 `;
 
 const withLoading = (Component: FC) => ({ isLoading, ...otherProps }: any) => {
-  return isLoading ? (
-    <LoadingWrapper>
-      <Spinner />
-    </LoadingWrapper>
-  ) : (
-    <Component {...otherProps}></Component>
+  const transitions = useTransition(isLoading, null, {
+    from: { opacity: 0, height: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
+  });
+  return (
+    <>
+      {transitions.map(({ item, key, props }) =>
+        item ? (
+          <animated.div style={props} key={key}>
+            <LoadingWrapper>
+              <Spinner />
+            </LoadingWrapper>
+          </animated.div>
+        ) : (
+          <animated.div style={props} key={key}>
+            <Component {...otherProps}></Component>
+          </animated.div>
+        )
+      )}
+    </>
   );
 };
 
