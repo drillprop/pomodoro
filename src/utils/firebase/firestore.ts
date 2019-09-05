@@ -40,7 +40,11 @@ export const addUserToFirestore = async (user: any, additionalData: any) => {
         email,
         uid,
         createdAt,
-        ...additionalData
+        config: {
+          breakTime: 60 * 10,
+          intervalTime: 60 * 30
+        },
+        selectedTask: 'default'
       });
     } catch (err) {
       console.log('error creating user', err.message);
@@ -58,7 +62,7 @@ export const saveTasksInFirestore = async (task: any) => {
   if (data) {
     if (!data.tasks || !data.tasks.hasOwnProperty(task)) {
       try {
-        usrRef.set(
+        await usrRef.set(
           {
             tasks: {
               [task]: 0
@@ -206,6 +210,10 @@ export const fetchInitialState = async () => {
 
   const doc = await usrRef.get();
   const data = await doc.data();
+
+  if (!data) {
+    await addUserToFirestore(usr, null);
+  }
 
   return data;
 };
