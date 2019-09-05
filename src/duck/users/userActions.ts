@@ -30,9 +30,9 @@ export const getCurrentUser = () => {
   return (dispatch: any) => {
     dispatch(getCurrentUserStart());
     auth.onAuthStateChanged(
-      usr => {
+      async usr => {
         if (usr) {
-          addUserToFirestore(usr, null);
+          await addUserToFirestore(usr, null);
         }
         dispatch(getCurrentUserSuccess(usr));
       },
