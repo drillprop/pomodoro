@@ -9,6 +9,7 @@ import { getCurrentUser } from '../duck/users/userActions';
 import withLoading from './withLoading';
 
 const WithLoadingInterface = withLoading(Interface);
+const WithLoadingConfig = withLoading(Config);
 
 const Router: FC = () => {
   const user = useSelector(({ user }: ReduxState) => user.user);
@@ -23,7 +24,13 @@ const Router: FC = () => {
     <>
       <Route
         path='/config'
-        render={() => (user ? <Config /> : <Redirect to='/sign' />)}
+        render={() =>
+          !user && !isGettingUser ? (
+            <Redirect to='/sign' />
+          ) : (
+            <WithLoadingConfig isLoading={isGettingUser} />
+          )
+        }
       />
       <Route
         path='/sign'
