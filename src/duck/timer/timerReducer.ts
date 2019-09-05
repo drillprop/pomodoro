@@ -149,7 +149,7 @@ export default (state: TimerState = initialState, action: any) => {
     case FETCH_INITIAL_STATE_FAILURE:
       return {
         ...state,
-        isFetching: true,
+        isFetching: false,
         errorMessage: action.errorMessage
       };
     default:
