@@ -199,7 +199,9 @@ export const saveSelectedTask = async (selectedTask: string) => {
   }
 };
 
-export const fetchInitialState = async (usr: any) => {
+export const fetchInitialState = async () => {
+  const usr: any = await getCurrentUser();
+  if (!usr) return;
   const usrRef = await firestore.doc(`users/${usr.uid}`);
 
   const doc = await usrRef.get();
