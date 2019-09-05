@@ -13,38 +13,54 @@ import {
 
 export const createTask = (taskName: string) => {
   return async (dispatch: any) => {
-    await saveTasksInFirestore(taskName);
-    dispatch({
-      type: CREATE_TASK,
-      taskName
-    });
+    try {
+      dispatch({
+        type: CREATE_TASK,
+        taskName
+      });
+      await saveTasksInFirestore(taskName);
+    } catch (err) {
+      console.error(err);
+    }
   };
 };
 
 export const editTask = (prevTask: string, newTask: string) => {
   return async (dispatch: any) => {
-    await updateTaskInFirestore(prevTask, newTask);
-    dispatch({
-      type: EDIT_TASK,
-      prevTask,
-      newTask
-    });
+    try {
+      dispatch({
+        type: EDIT_TASK,
+        prevTask,
+        newTask
+      });
+      await updateTaskInFirestore(prevTask, newTask);
+    } catch (err) {
+      console.error(err);
+    }
   };
 };
 
 export const deleteTask = (taskName: string) => {
   return async (dispatch: any) => {
-    await deleteTaskFromFirestore(taskName);
-    dispatch({
-      type: DELETE_TASK,
-      taskName
-    });
+    try {
+      dispatch({
+        type: DELETE_TASK,
+        taskName
+      });
+      await deleteTaskFromFirestore(taskName);
+    } catch (err) {
+      console.error(err);
+    }
   };
 };
 
 export const switchTask = (taskName: string) => {
   return async (dispatch: any) => {
-    await saveSelectedTask(taskName);
-    dispatch({ type: SWITCH_TASK, taskName });
+    try {
+      dispatch({ type: SWITCH_TASK, taskName });
+      await saveSelectedTask(taskName);
+    } catch (err) {
+      console.error(err);
+    }
   };
 };
