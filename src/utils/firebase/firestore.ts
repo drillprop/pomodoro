@@ -17,10 +17,10 @@ function getCurrentUser() {
 export const dataAndRef = async (usr: any): Promise<any> => {
   if (!usr) return;
 
-  const usrRef = await firestore.doc(`users/${usr.uid}`);
+  const usrRef = firestore.doc(`users/${usr.uid}`);
 
   const doc = await usrRef.get();
-  const data = await doc.data();
+  const data = doc.data();
 
   return [data, usrRef, doc];
 };
@@ -115,11 +115,14 @@ export const updateTaskInFirestore = async (
   // update in tasksByDay
 
   const todayRef = usrRef.collection('tasksByDay').doc(today);
+  const todaySnapshot = await todayRef.get();
 
-  await todayRef.update({
-    [oldTask]: FieldValue.delete(),
-    [newTask]: savedTask
-  });
+  if (todaySnapshot.exists) {
+    await todayRef.update({
+      [oldTask]: FieldValue.delete(),
+      [newTask]: savedTask
+    });
+  }
 };
 
 export const incIntervalInFirestore = async (selectedTask: string) => {
