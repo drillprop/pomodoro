@@ -1,11 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { switchTask } from '../../duck/tasks/tasksActions';
 import { ReduxState } from '../../duck/store';
-import { getInitialState } from '../../duck/timer/timerActions';
 
 const Select = styled.select`
   font-family: ${primFont};
@@ -33,11 +32,6 @@ const Select = styled.select`
 const SelectTask: FC = () => {
   const dispatch = useDispatch();
   const { tasks, selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
-  const user = useSelector(({ user }: ReduxState) => user.user);
-
-  useEffect(() => {
-    dispatch(getInitialState(user));
-  }, []);
 
   return (
     <Select
