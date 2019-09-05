@@ -116,13 +116,15 @@ export const fetchInitialStateFailure = (errorMessage: string) => ({
   errorMessage
 });
 
-export const getInitialState = (usr: any) => {
+export const getInitialState = () => {
   return async (dispatch: any) => {
-    dispatch(fetchInitialStateStart());
-    fetchInitialState(usr)
-      .then((initial: any) => dispatch(fetchInitialStateSucces(initial)))
-      .catch((errorMessage: string) =>
-        dispatch(fetchInitialStateFailure(errorMessage))
-      );
+    await dispatch(fetchInitialStateStart());
+    try {
+      const initial = await fetchInitialState();
+      dispatch(fetchInitialStateSucces(initial));
+    } catch (error) {
+      console.error(error);
+      dispatch(fetchInitialStateFailure(error));
+    }
   };
 };
