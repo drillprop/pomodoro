@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ReduxState } from '../duck/store';
 import { getCurrentUser } from '../duck/users/userActions';
 import withLoading from './withLoading';
+import { getInitialState } from '../duck/timer/timerActions';
 
 const WithLoadingInterface = withLoading(Interface);
 const WithLoadingConfig = withLoading(Config);
@@ -18,6 +19,7 @@ const Router: FC = () => {
 
   useEffect(() => {
     dispatch(getCurrentUser());
+    dispatch(getInitialState());
   }, []);
 
   return (
