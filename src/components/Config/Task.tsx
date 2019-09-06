@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent } from 'react';
+import React, { FC, useState, FormEvent, useEffect, memo } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { secondary, secondaryBackground, primary } from '../../utils/colors';
@@ -6,8 +6,9 @@ import { useDispatch } from 'react-redux';
 import { deleteTask } from '../../duck/tasks/tasksActions';
 import useSubmitTask from '../../hooks/useSubmitTask';
 import { EditCreateTask } from '../../elements/Forms';
+import { animated, useSpring } from 'react-spring';
 
-const StyledTask = styled.li`
+const StyledTask = styled(animated.li)`
   display: grid;
   grid-template-columns: 1fr 140px;
   background: ${secondaryBackground};
@@ -32,7 +33,11 @@ const StyledButton = styled.button`
   text-transform: lowercase;
 `;
 
-const Task: FC<{ task: string }> = ({ task }) => {
+const Task: FC<{
+  task: string;
+  newlyCreated: boolean;
+  setAsNew: React.Dispatch<React.SetStateAction<boolean>>;
+}> = memo(({ task, newlyCreated, setAsNew }) => {
   const [editable, setAsEditable] = useState(false);
 
   const [input, editTask, saveTask] = useSubmitTask(task, true);
@@ -48,13 +53,29 @@ const Task: FC<{ task: string }> = ({ task }) => {
     setAsEditable(false);
   };
 
+  useEffect(() => {
+    console.log('now');
+    setAsNew(true);
+  }, [editable]);
+
+  const springProps = useSpring({
+    from: newlyCreated && {
+      transform: 'translateX(-200px)'
+    },
+    to: newlyCreated && {
+      transform: 'translateX(0)'
+    }
+  });
+
   return editable ? (
     <EditCreateTask onSubmit={handleSubmit}>
       <input type='text' value={input} onChange={editTask} />
-      <button type='submit'>Save</button>
+      <button type='submit' onClick={() => setAsNew(false)}>
+        Save
+      </button>
     </EditCreateTask>
   ) : (
-    <StyledTask>
+    <StyledTask style={springProps}>
       {task}
       <div>
         <StyledButton onClick={() => setAsEditable(true)}>Edit</StyledButton>
@@ -62,6 +83,6 @@ const Task: FC<{ task: string }> = ({ task }) => {
       </div>
     </StyledTask>
   );
-};
+});
 
 export default Task;
