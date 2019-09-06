@@ -22,8 +22,10 @@ const Router: FC = () => {
 
   useEffect(() => {
     dispatch(getCurrentUser());
-    dispatch(getInitialState());
-  }, []);
+    if (user) {
+      dispatch(getInitialState());
+    }
+  }, [user]);
 
   return (
     <>
