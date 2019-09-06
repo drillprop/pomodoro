@@ -1,11 +1,9 @@
-import React, { FC, useState, FormEvent, useEffect, memo, useRef } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { secondary, secondaryBackground, primary } from '../../utils/colors';
 import { useDispatch } from 'react-redux';
 import { deleteTask } from '../../duck/tasks/tasksActions';
-import useSubmitTask from '../../hooks/useSubmitTask';
-import { EditCreateTask } from '../../elements/Forms';
 import { animated, useSpring } from 'react-spring';
 import EditTask from './EditTask';
 
