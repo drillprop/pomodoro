@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import { SubTitle } from '../../elements/Titles';
 import styled from 'styled-components';
 import Task from './Task';
@@ -11,16 +11,17 @@ const StyledUl = styled.ul`
 `;
 
 const Tasks: FC = () => {
-  const tasks = useSelector(({ tasks }: ReduxState) => tasks.tasks);
+  const tasks = useSelector(({ tasks }: ReduxState) =>
+    Object.keys(tasks.tasks).filter((task: string) => task !== 'default')
+  );
+
   return (
     <>
       <SubTitle>tasks</SubTitle>
       <StyledUl>
-        {Object.keys(tasks)
-          .filter((task: string) => task !== 'default')
-          .map((task: string) => {
-            return <Task task={task} key={task} />;
-          })}
+        {tasks.map((task: string) => {
+          return <Task task={task} key={task} />;
+        })}
         <CreateNewTask />
       </StyledUl>
     </>
