@@ -2,11 +2,10 @@ import React, { FC, useState, FormEvent } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { secondary, secondaryBackground, primary } from '../../utils/colors';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deleteTask } from '../../duck/tasks/tasksActions';
 import useSubmitTask from '../../hooks/useSubmitTask';
 import { EditCreateTask } from '../../elements/Forms';
-import { ReduxState } from '../../duck/store';
 
 const StyledTask = styled.li`
   display: grid;
