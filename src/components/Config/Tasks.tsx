@@ -22,14 +22,7 @@ const Tasks: FC = () => {
       <SubTitle>tasks</SubTitle>
       <StyledUl>
         {tasks.map((task: string) => {
-          return (
-            <Task
-              task={task}
-              key={task}
-              newlyCreated={newlyCreated}
-              setAsNew={setAsNew}
-            />
-          );
+          return <Task task={task} key={task} newlyCreated={newlyCreated} />;
         })}
         <CreateNewTask setAsNew={setAsNew} />
       </StyledUl>

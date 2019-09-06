@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent, useEffect, memo } from 'react';
+import React, { FC, useState, FormEvent, useEffect, memo, useRef } from 'react';
 import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { secondary, secondaryBackground, primary } from '../../utils/colors';
@@ -36,13 +36,11 @@ const StyledButton = styled.button`
 const Task: FC<{
   task: string;
   newlyCreated: boolean;
-  setAsNew: React.Dispatch<React.SetStateAction<boolean>>;
-}> = memo(({ task, newlyCreated, setAsNew }) => {
+}> = ({ task, newlyCreated }) => {
   const [editable, setAsEditable] = useState(false);
+  const dispatch = useDispatch();
 
   const [input, editTask, saveTask] = useSubmitTask(task, true);
-
-  const dispatch = useDispatch();
 
   const handleDelete = () => {
     dispatch(deleteTask(task));
@@ -53,26 +51,30 @@ const Task: FC<{
     setAsEditable(false);
   };
 
-  useEffect(() => {
-    console.log('now');
-    setAsNew(true);
-  }, [editable]);
+  // fire spring animation only if task is created
+  // if component is just mount dont do anything
+
+  const isCreated = useRef(newlyCreated);
 
   const springProps = useSpring({
-    from: newlyCreated && {
+    from: isCreated.current && {
       transform: 'translateX(-200px)'
     },
-    to: newlyCreated && {
+    to: isCreated.current && {
       transform: 'translateX(0)'
+    }
+  });
+
+  useEffect(() => {
+    if (isCreated.current) {
+      isCreated.current = false;
     }
   });
 
   return editable ? (
     <EditCreateTask onSubmit={handleSubmit}>
       <input type='text' value={input} onChange={editTask} />
-      <button type='submit' onClick={() => setAsNew(false)}>
-        Save
-      </button>
+      <button type='submit'>Save</button>
     </EditCreateTask>
   ) : (
     <StyledTask style={springProps}>
@@ -83,6 +85,6 @@ const Task: FC<{
       </div>
     </StyledTask>
   );
-});
+};
 
 export default Task;
