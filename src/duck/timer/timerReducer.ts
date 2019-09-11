@@ -2,7 +2,6 @@ import {
   UPDATE_TIMER,
   START_TIMER,
   RESET_TIMER,
-  SWITCH_TASK,
   SHOW_MENU,
   SET_TIMERS,
   PAUSE_TIMER,
@@ -11,7 +10,9 @@ import {
   FETCH_INITIAL_STATE_START,
   FETCH_INITIAL_STATE_SUCCES,
   FETCH_INITIAL_STATE_FAILURE
-} from '../reduxTypes';
+} from './timerTypes';
+
+import { SWITCH_TASK } from '../tasks/taskTypes';
 
 type InitialTimeleft = {
   intervalTime: number;

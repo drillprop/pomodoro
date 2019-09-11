@@ -1,9 +1,4 @@
-import {
-  CREATE_TASK,
-  EDIT_TASK,
-  DELETE_TASK,
-  SWITCH_TASK
-} from '../reduxTypes';
+import { CREATE_TASK, EDIT_TASK, DELETE_TASK, SWITCH_TASK } from './taskTypes';
 import {
   saveTasksInFirestore,
   deleteTaskFromFirestore,

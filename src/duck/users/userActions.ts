@@ -2,7 +2,7 @@ import {
   GET_CURRENT_USER_START,
   GET_CURRENT_USER_SUCCES,
   GET_CURRENT_USER_FAILURE
-} from '../reduxTypes';
+} from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
 import { addUserToFirestore } from '../../utils/firebase/firestore';
 

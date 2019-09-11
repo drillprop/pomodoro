@@ -10,7 +10,7 @@ import {
   FETCH_INITIAL_STATE_START,
   FETCH_INITIAL_STATE_SUCCES,
   FETCH_INITIAL_STATE_FAILURE
-} from '../reduxTypes';
+} from './timerTypes';
 import {
   incIntervalInFirestore,
   saveInitialTimelefts,

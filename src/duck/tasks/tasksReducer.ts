@@ -1,13 +1,10 @@
-import {
-  CREATE_TASK,
-  EDIT_TASK,
-  DELETE_TASK,
-  SWITCH_TASK,
-  STOP_AND_SWITCH_FAZE,
-  SKIP_BREAK,
-  FETCH_INITIAL_STATE_SUCCES
-} from '../reduxTypes';
+import { CREATE_TASK, EDIT_TASK, DELETE_TASK, SWITCH_TASK } from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
+import {
+  FETCH_INITIAL_STATE_SUCCES,
+  SKIP_BREAK,
+  STOP_AND_SWITCH_FAZE
+} from '../timer/timerTypes';
 
 export interface TasksState {
   tasks: any;
