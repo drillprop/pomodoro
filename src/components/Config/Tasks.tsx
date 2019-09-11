@@ -5,6 +5,7 @@ import Task from './Task';
 import CreateNewTask from './CreateNewTask';
 import { useSelector } from 'react-redux';
 import { ReduxState } from '../../duck/store';
+import { useTransition, animated } from 'react-spring';
 
 const StyledUl = styled.ul`
   padding: 0;
@@ -15,12 +16,22 @@ const Tasks: FC = () => {
     Object.keys(tasks.tasks).filter((task: string) => task !== 'default')
   );
 
+  const transitions = useTransition(tasks, tasks, {
+    from: { opacity: 0, height: 0 },
+    enter: { opacity: 1, height: 'auto' },
+    leave: { display: 'none' }
+  });
+
   return (
     <>
       <SubTitle>tasks</SubTitle>
       <StyledUl>
-        {tasks.map((task: string) => {
-          return <Task task={task} key={task} />;
+        {transitions.map(({ item, props, key }) => {
+          return (
+            <animated.div key={key} style={props}>
+              <Task task={item} />
+            </animated.div>
+          );
         })}
         <CreateNewTask />
       </StyledUl>
