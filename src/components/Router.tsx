@@ -8,8 +8,10 @@ import { ReduxState } from '../duck/store';
 import { getCurrentUser } from '../duck/users/userActions';
 import withLoading from './withLoading';
 import { getInitialState } from '../duck/timer/timerActions';
+import Stats from '../pages/stats/Stats';
 
 const WithLoadingInterface = withLoading(Interface);
+const WithLoadingStats = withLoading(Stats);
 const WithLoadingConfig = withLoading(Config);
 
 const Router: FC = () => {
@@ -36,6 +38,16 @@ const Router: FC = () => {
             <Redirect to='/sign' />
           ) : (
             <WithLoadingConfig isLoading={isLoading} />
+          )
+        }
+      />
+      <Route
+        path='/stats'
+        render={() =>
+          !user && !isLoading ? (
+            <Redirect to='/sign' />
+          ) : (
+            <WithLoadingStats isLoading={isLoading} />
           )
         }
       />

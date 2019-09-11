@@ -90,8 +90,10 @@ const Menu: FC = () => {
                   profile
                 </li>
                 <li>
-                  <Icon name='stats2' {...itemIconProps} />
-                  stats
+                  <Link to='/stats'>
+                    <Icon name='stats2' {...itemIconProps} />
+                    stats
+                  </Link>
                 </li>
                 <li>
                   {router.location.pathname === '/config' ? (
