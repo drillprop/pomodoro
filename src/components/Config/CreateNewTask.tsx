@@ -2,9 +2,7 @@ import React, { FC } from 'react';
 import useSubmitTask from '../../hooks/useSubmitTask';
 import { EditCreateTask } from '../../elements/Forms';
 
-const CreateNewTask: FC<{
-  setAsNew: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ setAsNew }) => {
+const CreateNewTask: FC<{}> = () => {
   const [input, handleInput, handleSubmit] = useSubmitTask('');
 
   return (
@@ -16,9 +14,7 @@ const CreateNewTask: FC<{
         placeholder='new task'
         onChange={handleInput}
       />
-      <button type='submit' onClick={() => setAsNew(true)}>
-        + add task
-      </button>
+      <button type='submit'>+ add task</button>
     </EditCreateTask>
   );
 };

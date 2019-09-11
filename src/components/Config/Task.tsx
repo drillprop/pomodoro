@@ -7,7 +7,7 @@ import { deleteTask } from '../../duck/tasks/tasksActions';
 import { animated, useSpring } from 'react-spring';
 import EditTask from './EditTask';
 
-const StyledTask = styled(animated.li)`
+const StyledTask = styled.li`
   display: grid;
   grid-template-columns: 1fr 140px;
   background: ${secondaryBackground};
@@ -34,36 +34,15 @@ const StyledButton = styled.button`
 
 const Task: FC<{
   task: string;
-  newlyCreated: boolean;
-}> = ({ task, newlyCreated }) => {
+}> = ({ task }) => {
   const dispatch = useDispatch();
 
   const [editable, setAsEditable] = useState(false);
 
-  // fire spring animation only if task is created
-  // if component is just mount dont do anything
-
-  const isCreated = useRef(newlyCreated);
-
-  const springProps = useSpring({
-    from: isCreated.current && {
-      transform: 'translateX(-200px)'
-    },
-    to: isCreated.current && {
-      transform: 'translateX(0)'
-    }
-  });
-
-  useEffect(() => {
-    if (isCreated.current) {
-      isCreated.current = false;
-    }
-  });
-
   return editable ? (
     <EditTask setAsEditable={setAsEditable} task={task} />
   ) : (
-    <StyledTask style={springProps}>
+    <StyledTask>
       {task}
       <div>
         <StyledButton onClick={() => setAsEditable(true)}>Edit</StyledButton>

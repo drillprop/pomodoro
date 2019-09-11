@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC } from 'react';
 import { SubTitle } from '../../elements/Titles';
 import styled from 'styled-components';
 import Task from './Task';
@@ -15,16 +15,14 @@ const Tasks: FC = () => {
     Object.keys(tasks.tasks).filter((task: string) => task !== 'default')
   );
 
-  const [newlyCreated, setAsNew] = useState(false);
-
   return (
     <>
       <SubTitle>tasks</SubTitle>
       <StyledUl>
         {tasks.map((task: string) => {
-          return <Task task={task} key={task} newlyCreated={newlyCreated} />;
+          return <Task task={task} key={task} />;
         })}
-        <CreateNewTask setAsNew={setAsNew} />
+        <CreateNewTask />
       </StyledUl>
     </>
   );
