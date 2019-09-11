@@ -23,6 +23,10 @@ const useSubmitTask = (
       throw new Error(`Task ${input} already exists`);
     }
 
+    if (input.match(/[,.\/]/g)) {
+      throw new Error('Tasks cannot contains:  . , /');
+    }
+
     if (input) {
       if (!edit) {
         dispatch(createTask(input.toLowerCase()));
