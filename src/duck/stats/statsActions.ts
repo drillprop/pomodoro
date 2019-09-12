@@ -3,20 +3,30 @@ import {
   FETCH_INTERVALS_BY_DAY_START,
   FETCH_INTERVALS_BY_DAY_SUCCESS
 } from './statsTypes';
+import { getIntervalsByDay } from './statsUtils';
 
-export const fetchIntervalsByDayStart = () => {
-  return (dispatch: any) => ({
-    type: FETCH_INTERVALS_BY_DAY_START
-  });
-};
+export const fetchIntervalsByDayStart = () => ({
+  type: FETCH_INTERVALS_BY_DAY_START
+});
 
-export const fetchIntervalsByDaySucces = () => {
-  return (dispatch: any) => ({
-    type: FETCH_INTERVALS_BY_DAY_START
-  });
-};
-export const fetchIntervalsByDayFailure = () => {
-  return (dispatch: any) => ({
-    type: FETCH_INTERVALS_BY_DAY_FAILURE
-  });
+export const fetchIntervalsByDaySuccess = (intervalsByDay: any) => ({
+  type: FETCH_INTERVALS_BY_DAY_SUCCESS,
+  intervalsByDay
+});
+
+export const fetchIntervalsByDayFailure = (error: any) => ({
+  type: FETCH_INTERVALS_BY_DAY_FAILURE,
+  error
+});
+
+export const fetchIntervalsByDay = () => {
+  return async (dispatch: any) => {
+    try {
+      dispatch(fetchIntervalsByDayStart());
+      const intervalsByDay = await getIntervalsByDay();
+      dispatch(fetchIntervalsByDaySuccess(intervalsByDay));
+    } catch (error) {
+      dispatch(fetchIntervalsByDayFailure(error));
+    }
+  };
 };

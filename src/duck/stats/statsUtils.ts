@@ -6,16 +6,18 @@ export const getIntervalsByDay = async () => {
   if (!user) return;
 
   const userId = user ? user.uid : null;
+
   try {
     const intervalsByDayRef = firestore.collection(
       `users/${userId}/intervalsByDay/`
     );
     const intervalsByDaySnapshot = await intervalsByDayRef.get();
     const intervalsByDayDocs = intervalsByDaySnapshot.docs;
-    return intervalsByDayDocs.map(day => ({
-      date: day.id,
-      intervals: { ...day.data() }
-    }));
+
+    return intervalsByDayDocs.reduce((acc: any, day: any) => {
+      acc[day.id] = { ...day.data() };
+      return acc;
+    }, {});
   } catch (error) {
     return error;
   }
