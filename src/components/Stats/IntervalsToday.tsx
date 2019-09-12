@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { SubTitle } from '../../elements/Titles';
 
-const IntervalsToday: FC<{ intervalsToday: any | null }> = ({
+const IntervalsToday: FC<{ intervalsToday: number | null }> = ({
   intervalsToday
 }) => {
   return (
