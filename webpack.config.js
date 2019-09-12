@@ -19,6 +19,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',
+        exclude: /node_modules/,
         options: {
           getCustomTransformers: () => ({
             before: [styledComponentsTransformer]
@@ -38,5 +39,5 @@ module.exports = {
     }),
     new DotEnv()
   ],
-  devtool: 'cheap-module-source-map'
+  devtool: 'eval'
 };
