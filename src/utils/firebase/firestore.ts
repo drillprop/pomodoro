@@ -5,8 +5,8 @@ import { getStorageUser, getToday } from '../helpers';
 
 const today = getToday();
 
-function getCurrentUser() {
-  return new Promise((resolve, reject) => {
+export function getCurrentUser() {
+  return new Promise<firebase.User | null>((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       unsubscribe();
       resolve(user);
