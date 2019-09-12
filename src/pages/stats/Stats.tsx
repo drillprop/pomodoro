@@ -1,8 +1,7 @@
 import React from 'react';
 import { MainTitle } from '../../elements/Titles';
 import styled from 'styled-components';
-import IntervalsToday from '../../components/Stats/IntervalsToday';
-import IntervalsOverall from '../../components/Stats/IntervalsOverall';
+import IntervalsContainer from '../../components/Stats/IntervalsContainer';
 
 const StatsWrapper = styled.main`
   display: grid;
@@ -14,8 +13,7 @@ const Stats = () => {
   return (
     <StatsWrapper>
       <MainTitle>stats</MainTitle>
-      <IntervalsToday />
-      <IntervalsOverall />
+      <IntervalsContainer />
     </StatsWrapper>
   );
 };
