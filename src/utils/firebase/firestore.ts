@@ -112,9 +112,9 @@ export const updateTaskInFirestore = async (
     selectedTask: selectedTask === oldTask ? newTask : selectedTask
   });
 
-  // update in tasksByDay
+  // update in intervalsByDay
 
-  const todayRef = usrRef.collection('tasksByDay').doc(today);
+  const todayRef = usrRef.collection('intervalsByDay').doc(today);
   const todaySnapshot = await todayRef.get();
 
   if (todaySnapshot.exists) {
@@ -155,7 +155,7 @@ export const incIntervalInFirestore = async (selectedTask: string) => {
 
   // inc in taskByDay
 
-  const todayRef = usrRef.collection('tasksByDay').doc(today);
+  const todayRef = usrRef.collection('intervalsByDay').doc(today);
   const todayTasks = await todayRef.get();
 
   if (!todayTasks.exists) {

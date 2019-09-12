@@ -7,12 +7,14 @@ export const getIntervalsByDay = async () => {
 
   const userId = user ? user.uid : null;
   try {
-    const tasksByDayRef = firestore.collection(`users/${userId}/tasksByDay/`);
-    const tasksByDaySnapshot = await tasksByDayRef.get();
-    const tasksByDayDocs = tasksByDaySnapshot.docs;
-    return tasksByDayDocs.map(day => ({
+    const intervalsByDayRef = firestore.collection(
+      `users/${userId}/intervalsByDay/`
+    );
+    const intervalsByDaySnapshot = await intervalsByDayRef.get();
+    const intervalsByDayDocs = intervalsByDaySnapshot.docs;
+    return intervalsByDayDocs.map(day => ({
       date: day.id,
-      tasks: { ...day.data() }
+      intervals: { ...day.data() }
     }));
   } catch (error) {
     return error;
