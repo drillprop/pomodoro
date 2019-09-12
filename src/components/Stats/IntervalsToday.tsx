@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { SubTitle } from '../../elements/Titles';
 
-const IntervalsToday = () => {
+const IntervalsToday: FC<{ intervalsToday: any | null }> = ({
+  intervalsToday
+}) => {
   return (
     <>
       <SubTitle>today</SubTitle>
+      <div>You've made {intervalsToday || 0} intervals today</div>
       <div>Intervals, Minutes, Better Than Yesterday, Better than Average</div>
     </>
   );
