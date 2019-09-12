@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { SubTitle } from '../../elements/Titles';
 
-const IntervalsOverall = () => {
+const IntervalsOverall: FC<{ intervalsOverall: number | null }> = ({
+  intervalsOverall
+}) => {
   return (
     <>
       <SubTitle>overall</SubTitle>
-      <div>Intervals this week, overall, Minutes Overall, Maybe select</div>
+      <div>Overall you've made {intervalsOverall || 0} </div>
     </>
   );
 };

@@ -23,10 +23,22 @@ const IntervalsContainer = () => {
     return null;
   });
 
+  const intervalsOverall: any = useSelector(({ stats }: any) => {
+    if (stats.intervalsByDay) {
+      const values: Array<any> = Object.entries(stats.intervalsByDay);
+      return values.reduce((acc, day) => {
+        const dayOverall: Array<number> = Object.values(day[1]);
+        acc = acc + dayOverall.reduce((acc, item) => acc + item, 0);
+        return acc;
+      }, 0);
+    }
+    return null;
+  });
+
   return (
     <>
       <IntervalsToday intervalsToday={intervalsToday} />
-      <IntervalsOverall />
+      <IntervalsOverall intervalsOverall={intervalsOverall} />
     </>
   );
 };
