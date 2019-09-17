@@ -3,43 +3,39 @@ import { useEffect } from 'react';
 import { fetchIntervalsByDay } from '../../duck/stats/statsActions';
 import IntervalsToday from './IntervalsToday';
 import React from 'react';
-import { getToday } from '../../utils/helpers';
+import { create30daysArray } from '../../utils/helpers';
 
 const IntervalsContainer = () => {
   const dispatch = useDispatch();
-
-  const today = getToday();
 
   useEffect(() => {
     dispatch(fetchIntervalsByDay());
   }, []);
 
-  const intervalsToday: any = useSelector(({ stats }: any) => {
-    if (stats.intervalsByDay && stats.intervalsByDay[today]) {
-      const values: Array<number> = Object.values(stats.intervalsByDay[today]);
-      return values.reduce((acc, item) => acc + item, 0);
-    }
-    return null;
-  });
+  const stats: any = useSelector(({ stats }: any) => {
+    const last30days = create30daysArray();
 
-  const intervalsOverall: any = useSelector(({ stats }: any) => {
     if (stats.intervalsByDay) {
-      const values: Array<any> = Object.entries(stats.intervalsByDay);
-      return values.reduce((acc, day) => {
-        const dayOverall: Array<number> = Object.values(day[1]);
-        acc = acc + dayOverall.reduce((acc, item) => acc + item, 0);
-        return acc;
-      }, 0);
+      const intervals = stats.intervalsByDay;
+      const intKeys = Object.keys(intervals);
+      intKeys.forEach(key => {
+        let index = last30days.findIndex(day => day.date === key);
+        let sumAllInervals: any = Object.values(intervals[key]).reduce(
+          (acc: any, item: any): number => acc + item,
+          0
+        );
+        last30days[index] = {
+          date: key,
+          intervals: sumAllInervals
+        };
+      });
     }
-    return null;
+    return last30days;
   });
 
   return (
     <>
-      <IntervalsToday
-        intervalsToday={intervalsToday}
-        intervalsOverall={intervalsOverall}
-      />
+      <IntervalsToday stats={stats} />
     </>
   );
 };
