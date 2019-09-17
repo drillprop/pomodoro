@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchIntervalsByDay } from '../../duck/stats/statsActions';
 import IntervalsToday from './IntervalsToday';
-import IntervalsOverall from './IntervalsOverall';
 import React from 'react';
 import { getToday } from '../../utils/helpers';
 
@@ -37,8 +36,10 @@ const IntervalsContainer = () => {
 
   return (
     <>
-      <IntervalsToday intervalsToday={intervalsToday} />
-      <IntervalsOverall intervalsOverall={intervalsOverall} />
+      <IntervalsToday
+        intervalsToday={intervalsToday}
+        intervalsOverall={intervalsOverall}
+      />
     </>
   );
 };
