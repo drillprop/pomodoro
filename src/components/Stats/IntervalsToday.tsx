@@ -1,30 +1,28 @@
 import React, { FC } from 'react';
 import { SubTitle } from '../../elements/Titles';
+import {
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  Bar
+} from 'recharts';
 
-const IntervalsToday: FC<{
-  intervalsToday: number | null;
-  intervalsOverall: number | null;
-}> = ({ intervalsToday, intervalsOverall }) => {
+const IntervalsToday: FC<{ stats: any }> = ({ stats }) => {
+  console.log(stats);
   return (
     <>
       <SubTitle>daily statistics</SubTitle>
-      <h3>today you've done:</h3>
-      <ul>
-        <li>{intervalsToday || 0} intervals</li>
-        <li>which is 30 minutes in total</li>
-        <li>which is better/worse than your average</li>
-        <li>and better/worse than yesterday</li>
-      </ul>
-      <h3>this week you've done:</h3>
-      <ul>
-        <li>{intervalsOverall} intervals </li>
-        <li>which is 30 minutes in total</li>
-      </ul>
-      <h3>overall you've done:</h3>
-      <ul>
-        <li>{intervalsOverall} intervals </li>
-        <li>which is 30 minutes in total</li>
-      </ul>
+      <BarChart width={730} height={250} data={stats} layout={'horizontal'}>
+        <CartesianGrid strokeDasharray='3 3' />
+        <Bar dataKey='intervals' fill='#8884d8' />
+        <XAxis dataKey='null' />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+      </BarChart>
     </>
   );
 };
