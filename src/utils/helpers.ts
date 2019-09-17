@@ -68,11 +68,12 @@ export const getStorageUser = () => {
 
 export const create30daysArray = () => {
   const arr = [];
-  for (let i = 30; i > 0; i--) {
+  for (let i = 30; i >= 0; i--) {
     arr.push({
       date: moment()
         .subtract(i, 'days')
-        .format('DD-MM-YY')
+        .format('DD-MM-YY'),
+      intervals: 0
     });
   }
   return arr;
