@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { fetchIntervalsByDay } from '../../duck/stats/statsActions';
 import IntervalsToday from './IntervalsToday';
 import React from 'react';
-import { create30daysArray } from '../../utils/helpers';
+import { createDaysArray } from '../../utils/helpers';
 
 const IntervalsContainer = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,10 @@ const IntervalsContainer = () => {
   }, []);
 
   const stats: any = useSelector(({ stats }: any) => {
-    const last30days = create30daysArray();
+    const last30days = createDaysArray(30).map(day => ({
+      date: day,
+      intervals: 0
+    }));
 
     if (stats.intervalsByDay) {
       const intervals = stats.intervalsByDay;
