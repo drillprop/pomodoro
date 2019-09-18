@@ -12,29 +12,30 @@ const IntervalsContainer = () => {
     dispatch(fetchIntervalsByDay());
   }, []);
 
-  const stats: any = useSelector(({ stats }: any) => {
-    const last30days = createDaysArray(30).map(day => ({
-      date: day,
-      intervals: 0
-    }));
+  const stats: any = (daysBackwards: number) =>
+    useSelector(({ stats }: any) => {
+      const lastdays = createDaysArray(daysBackwards).map(day => ({
+        date: day,
+        intervals: 0
+      }));
 
-    if (stats.intervalsByDay) {
-      const intervals = stats.intervalsByDay;
-      const intKeys = Object.keys(intervals);
-      intKeys.forEach(key => {
-        let index = last30days.findIndex(day => day.date === key);
-        let sumAllInervals: any = Object.values(intervals[key]).reduce(
-          (acc: any, item: any): number => acc + item,
-          0
-        );
-        last30days[index] = {
-          date: key,
-          intervals: sumAllInervals
-        };
-      });
-    }
-    return last30days;
-  });
+      if (stats.intervalsByDay) {
+        const intervals = stats.intervalsByDay;
+        const intKeys = Object.keys(intervals);
+        intKeys.forEach(key => {
+          let index = lastdays.findIndex(day => day.date === key);
+          let sumAllInervals: any = Object.values(intervals[key]).reduce(
+            (acc: any, item: any): number => acc + item,
+            0
+          );
+          lastdays[index] = {
+            date: key,
+            intervals: sumAllInervals
+          };
+        });
+      }
+      return lastdays;
+    });
 
   return (
     <>
