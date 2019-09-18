@@ -1,30 +1,44 @@
 import React, { FC } from 'react';
 import { SubTitle } from '../../elements/Titles';
-import {
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  Bar
-} from 'recharts';
+import { BarChart, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
+import { primary } from '../../utils/colors';
 
 const IntervalsToday: FC<{ stats: any }> = ({ stats }) => {
-  console.log(stats);
   return (
     <>
-      <SubTitle>daily statistics</SubTitle>
-      <BarChart width={730} height={250} data={stats} layout={'horizontal'}>
-        <CartesianGrid strokeDasharray='3 3' />
-        <Bar dataKey='intervals' fill='#8884d8' />
-        <XAxis dataKey='null' />
-        <YAxis />
-        <Tooltip />
+      <SubTitle>last 30 days</SubTitle>
+      <BarChart width={500} height={300} data={stats}>
+        <Bar dataKey='intervals' fill={primary} />
+        <XAxis dataKey='null' name='date' />
+        <YAxis interval={0} />
+        <Tooltip
+          cursor={false}
+          content={MyCustomTooltip}
+          isAnimationActive={false}
+        />
         <Legend />
       </BarChart>
     </>
   );
+};
+
+const MyCustomTooltip: FC = (props: any) => {
+  if (props.payload[0]) {
+    return (
+      <div
+        style={{
+          backgroundColor: 'white',
+          border: `1px solid ${primary}`,
+          padding: 10
+        }}
+      >
+        date: {props.payload[0].payload.date}
+        <br />
+        intervals: {props.payload[0].payload.intervals}
+      </div>
+    );
+  }
+  return null;
 };
 
 export default IntervalsToday;
