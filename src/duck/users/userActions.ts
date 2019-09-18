@@ -4,7 +4,7 @@ import {
   GET_CURRENT_USER_FAILURE
 } from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
-import { addUserToFirestore } from '../../utils/firebase/firestore';
+import { addUserToFirestore } from './userUtils';
 
 export type RegisterAndLoginParams = {
   email: string;

@@ -6,7 +6,7 @@ import { secondFont } from '../../../utils/fonts';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetTimer, skipBreak } from '../../../duck/timer/timerActions';
 import { ReduxState } from '../../../duck/store';
-import { incIntervalInFirestore } from '../../../utils/firebase/firestore';
+import { incIntervalInFirestore } from '../../../duck/timer/timerUtils';
 
 const ResetandRetryButtons = styled.button`
   border: none;

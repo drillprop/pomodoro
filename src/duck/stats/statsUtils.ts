@@ -1,4 +1,4 @@
-import { getCurrentUser } from '../../utils/firebase/firestore';
+import { getCurrentUser } from '../../utils/firebase/auth';
 import { firestore } from '../../utils/firebase/firebase';
 
 export const getIntervalsByDay = async () => {

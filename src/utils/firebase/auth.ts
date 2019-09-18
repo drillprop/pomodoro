@@ -8,6 +8,15 @@ provider.setCustomParameters({ prompt: 'select_account' });
 
 export const loginWithGoogle = () => auth.signInWithPopup(provider);
 
+export function getCurrentUser() {
+  return new Promise<firebase.User | null>((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      unsubscribe();
+      resolve(user);
+    }, reject);
+  });
+}
+
 export const registerAccount = async (
   registerParams: RegisterAndLoginParams
 ) => {

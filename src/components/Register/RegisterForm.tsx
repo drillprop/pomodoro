@@ -2,7 +2,7 @@ import React, { FormEvent, FC } from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
 import { auth } from '../../utils/firebase/firebase';
-import { addUserToFirestore } from '../../utils/firebase/firestore';
+import { addUserToFirestore } from '../../duck/users/userUtils';
 
 const RegisterForm: FC = () => {
   const [values, handleInput, submit] = useForm({

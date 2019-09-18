@@ -4,7 +4,7 @@ import {
   deleteTaskFromFirestore,
   updateTaskInFirestore,
   saveSelectedTask
-} from '../../utils/firebase/firestore';
+} from './tasksUtils';
 
 export const createTask = (taskName: string) => {
   return async (dispatch: any) => {

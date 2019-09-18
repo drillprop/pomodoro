@@ -15,7 +15,7 @@ import {
   incIntervalInFirestore,
   saveInitialTimelefts,
   fetchInitialState
-} from '../../utils/firebase/firestore';
+} from './timerUtils';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
   let field = isInterval ? 'intervalTime' : 'breakTime';
