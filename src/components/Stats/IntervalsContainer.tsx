@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchIntervalsByDay } from '../../duck/stats/statsActions';
 import IntervalsToday from './IntervalsToday';
 import React from 'react';
 import { createDaysArray } from '../../utils/helpers';
+import { fetchIntervalsByDayStart } from '../../duck/stats/statsActions';
 
 const IntervalsContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchIntervalsByDay());
+    dispatch(fetchIntervalsByDayStart());
   }, []);
 
   const stats: any = (daysBackwards: number) =>

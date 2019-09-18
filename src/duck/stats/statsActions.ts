@@ -18,15 +18,3 @@ export const fetchIntervalsByDayFailure = (error: any) => ({
   type: FETCH_INTERVALS_BY_DAY_FAILURE,
   error
 });
-
-export const fetchIntervalsByDay = () => {
-  return async (dispatch: any) => {
-    try {
-      dispatch(fetchIntervalsByDayStart());
-      const intervalsByDay = await getIntervalsByDay();
-      dispatch(fetchIntervalsByDaySuccess(intervalsByDay));
-    } catch (error) {
-      dispatch(fetchIntervalsByDayFailure(error));
-    }
-  };
-};

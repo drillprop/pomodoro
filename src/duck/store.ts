@@ -6,8 +6,9 @@ import timerReducer, { TimerState } from './timer/timerReducer';
 import tasksReducer, { TasksState } from './tasks/tasksReducer';
 import userReducer, { UserState } from './users/userReducer';
 import statsReducer from './stats/statsReducer';
+import rootSaga from './rootSagas';
 
-const sagaMiddleware = createSagaMiddleWare();
+export const sagaMiddleware = createSagaMiddleWare();
 
 const reducer = combineReducers({
   timer: timerReducer,
@@ -18,7 +19,7 @@ const reducer = combineReducers({
 
 const store = createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(thunk, sagaMiddleware))
+  composeWithDevTools(applyMiddleware(sagaMiddleware, thunk))
 );
 
 export interface ReduxState {
@@ -27,6 +28,6 @@ export interface ReduxState {
   user: UserState;
 }
 
-// sagaMiddleware.run();
+sagaMiddleware.run(rootSaga);
 
 export default store;
