@@ -8,10 +8,10 @@ import { ReduxState } from '../duck/store';
 import { getCurrentUser } from '../duck/users/userActions';
 import withLoading from './withLoading';
 import { getInitialState } from '../duck/timer/timerActions';
+import Loading from '../elements/Loading';
 
 const WithLoadingInterface = withLoading(Interface);
 const Stats = lazy(() => import('../pages/stats/Stats'));
-const WithLoadingStats = withLoading(Stats);
 const WithLoadingConfig = withLoading(Config);
 
 const Router: FC = () => {
@@ -31,7 +31,7 @@ const Router: FC = () => {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <Route
           path='/config'
           render={() =>
@@ -45,11 +45,7 @@ const Router: FC = () => {
         <Route
           path='/stats'
           render={() =>
-            !user && !isLoading ? (
-              <Redirect to='/sign' />
-            ) : (
-              <WithLoadingStats isLoading={isLoading} />
-            )
+            !user && !isLoading ? <Redirect to='/sign' /> : <Stats />
           }
         />
         <Route
