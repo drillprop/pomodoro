@@ -3,9 +3,11 @@ import {
   loginFailure,
   loginSuccess,
   registerFailure,
-  registerSuccess
+  registerSuccess,
+  signOutFailure,
+  signOutSuccess
 } from './userActions';
-import { LOGIN_START, REGISTER_START } from './userTypes';
+import { LOGIN_START, REGISTER_START, SIGN_OUT_START } from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
 import { addUserToFirestore } from './userUtils';
 
@@ -56,6 +58,15 @@ export function* register({ email, password, displayName }: any) {
   }
 }
 
+export function* signOut() {
+  try {
+    yield auth.signOut();
+    yield put(signOutSuccess());
+  } catch (err) {
+    yield put(signOutFailure(err));
+  }
+}
+
 export function* onLogin() {
   yield takeLatest(LOGIN_START, login);
 }
@@ -64,6 +75,10 @@ export function* onRegister() {
   yield takeLatest(REGISTER_START, register);
 }
 
+export function* onSignOut() {
+  yield takeLatest(SIGN_OUT_START, signOut);
+}
+
 export function* userSagas() {
-  yield all([call(onLogin), call(onRegister)]);
+  yield all([call(onLogin), call(onRegister), call(onSignOut)]);
 }

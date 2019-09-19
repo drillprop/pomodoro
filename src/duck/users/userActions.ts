@@ -4,7 +4,10 @@ import {
   LOGIN_FAILURE,
   REGISTER_START,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
+  REGISTER_FAILURE,
+  SIGN_OUT_START,
+  SIGN_OUT_SUCCESS,
+  SIGN_OUT_FAILURE
 } from './userTypes';
 
 export type RegisterAndLoginParams = {
@@ -39,11 +42,22 @@ export const registerStart = (
   password,
   displayName
 });
+
 export const registerSuccess = (user: any) => ({
   type: REGISTER_SUCCESS,
   user
 });
+
 export const registerFailure = (error: any) => ({
   type: REGISTER_FAILURE,
+  error
+});
+
+export const signOutStart = () => ({ type: SIGN_OUT_START });
+
+export const signOutSuccess = () => ({ type: SIGN_OUT_SUCCESS });
+
+export const signOutFailure = (error: any) => ({
+  type: SIGN_OUT_FAILURE,
   error
 });

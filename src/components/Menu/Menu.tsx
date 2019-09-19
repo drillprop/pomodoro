@@ -6,10 +6,10 @@ import Profile from './Profile';
 import { secondFont } from '../../utils/fonts';
 import Icon from '../../elements/Icon';
 import useRouter from '../../hooks/useRouter';
-import { logout } from '../../utils/firebase/auth';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReduxState } from '../../duck/store';
 import { useTransition, animated, config } from 'react-spring';
+import { signOutStart } from '../../duck/users/userActions';
 
 const StyledNavigation = styled(animated.nav)`
   position: fixed;
@@ -54,6 +54,8 @@ const LinkList = styled.ul`
 
 const Menu: FC = () => {
   const router = useRouter();
+
+  const dispatch = useDispatch();
   const itemIconProps = {
     size: 30,
     style: {
@@ -109,7 +111,7 @@ const Menu: FC = () => {
                   )}
                 </li>
                 {user ? (
-                  <li onClick={logout}>
+                  <li onClick={() => dispatch(signOutStart())}>
                     <Icon name='logout' {...itemIconProps} />
                     logout
                   </li>

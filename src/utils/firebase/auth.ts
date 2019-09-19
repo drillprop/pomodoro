@@ -48,12 +48,3 @@ export const loginToAccount = async (loginParams: RegisterAndLoginParams) => {
     return err;
   }
 };
-
-export const logout = async () => {
-  try {
-    await auth.signOut();
-    console.log('sign out');
-  } catch (err) {
-    console.log(err);
-  }
-};
