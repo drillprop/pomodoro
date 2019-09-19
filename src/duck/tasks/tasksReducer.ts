@@ -1,4 +1,9 @@
-import { CREATE_TASK, EDIT_TASK, DELETE_TASK, SWITCH_TASK } from './taskTypes';
+import {
+  EDIT_TASK,
+  DELETE_TASK,
+  SWITCH_TASK,
+  CREATE_TASK_SUCCESS
+} from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
 import {
   FETCH_INITIAL_STATE_SUCCES,
@@ -30,7 +35,7 @@ export default (state: TasksState = initialState, action: any) => {
         },
         selectedTask
       };
-    case CREATE_TASK:
+    case CREATE_TASK_SUCCESS:
       return {
         ...state,
         tasks: {
