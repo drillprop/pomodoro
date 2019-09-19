@@ -1,8 +1,8 @@
 import {
-  DELETE_TASK,
   SWITCH_TASK,
   CREATE_TASK_SUCCESS,
-  EDIT_TASK_SUCCESS
+  EDIT_TASK_SUCCESS,
+  DELETE_TASK_SUCCESS
 } from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
 import {
@@ -52,7 +52,7 @@ export default (state: TasksState = initialState, action: any) => {
         selectedTask:
           prevTask === state.selectedTask ? action.newTask : state.selectedTask
       };
-    case DELETE_TASK: {
+    case DELETE_TASK_SUCCESS: {
       const { taskName } = action;
 
       const newTasksState = { ...state.tasks };

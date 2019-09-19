@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { primFont, secondFont } from '../../utils/fonts';
 import { secondary, secondaryBackground, primary } from '../../utils/colors';
 import { useDispatch } from 'react-redux';
-import { deleteTask } from '../../duck/tasks/tasksActions';
+import { deleteTaskStart } from '../../duck/tasks/tasksActions';
 import EditTask from './EditTask';
 
 const StyledTask = styled.li`
@@ -45,7 +45,7 @@ const Task: FC<{
       {task}
       <div>
         <StyledButton onClick={() => setAsEditable(true)}>Edit</StyledButton>
-        <StyledButton onClick={() => dispatch(deleteTask(task))}>
+        <StyledButton onClick={() => dispatch(deleteTaskStart(task))}>
           Delete
         </StyledButton>
       </div>

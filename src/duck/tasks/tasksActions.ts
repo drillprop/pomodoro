@@ -1,14 +1,16 @@
 import {
-  DELETE_TASK,
   SWITCH_TASK,
   CREATE_TASK_START,
   CREATE_TASK_SUCCESS,
   CREATE_TASK_FAILURE,
   EDIT_TASK_START,
   EDIT_TASK_SUCCESS,
-  EDIT_TASK_FAILURE
+  EDIT_TASK_FAILURE,
+  DELETE_TASK_START,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAILURE
 } from './taskTypes';
-import { deleteTaskFromFirestore, saveSelectedTask } from './tasksUtils';
+import { saveSelectedTask } from './tasksUtils';
 
 export const createTaskStart = (taskName: string) => ({
   type: CREATE_TASK_START,
@@ -42,19 +44,20 @@ export const editTaskFailure = (error: any) => ({
   error
 });
 
-export const deleteTask = (taskName: string) => {
-  return async (dispatch: any) => {
-    try {
-      dispatch({
-        type: DELETE_TASK,
-        taskName
-      });
-      await deleteTaskFromFirestore(taskName);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-};
+export const deleteTaskStart = (taskName: string) => ({
+  type: DELETE_TASK_START,
+  taskName
+});
+
+export const deleteTaskSuccess = (taskName: string) => ({
+  type: DELETE_TASK_SUCCESS,
+  taskName
+});
+
+export const deleteTaskFailure = (error: any) => ({
+  type: DELETE_TASK_FAILURE,
+  error
+});
 
 export const switchTask = (taskName: string) => {
   return async (dispatch: any) => {
