@@ -5,7 +5,6 @@ import Interface from '../pages/timer/Interface';
 import Sign from '../pages/sign/Sign';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReduxState } from '../duck/store';
-import { getCurrentUser } from '../duck/users/userActions';
 import withLoading from './withLoading';
 import { getInitialState } from '../duck/timer/timerActions';
 import Loading from '../elements/Loading';
@@ -23,7 +22,6 @@ const Router: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCurrentUser());
     if (user) {
       dispatch(getInitialState());
     }

@@ -18,39 +18,18 @@ export type UserState = {
 
 const initialState: UserState = {
   user: null,
-  isGettingUser: true,
+  isGettingUser: false,
   error: null
 };
 
 export default (state: UserState = initialState, action: any) => {
   switch (action.type) {
-    case GET_USER:
-      return {
-        ...state,
-        user: action.user
-      };
-    case GET_CURRENT_USER_START:
-      return {
-        ...state,
-        isGettingUser: true
-      };
-    case GET_CURRENT_USER_SUCCES:
-      return {
-        ...state,
-        isGettingUser: false,
-        user: action.user
-      };
-    case GET_CURRENT_USER_FAILURE:
-      return {
-        ...state,
-        isGettingUser: false,
-        error: action.error
-      };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       return {
         ...state,
-        user: action.user
+        user: action.user,
+        isGettingUser: false
       };
     case LOGIN_FAILURE:
     case REGISTER_FAILURE:
