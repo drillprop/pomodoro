@@ -2,20 +2,19 @@ import React, { FormEvent, FC } from 'react';
 import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
 import { auth } from '../../utils/firebase/firebase';
+import { useDispatch } from 'react-redux';
+import { loginStart } from '../../duck/users/userActions';
 
 const LoginForm: FC = () => {
+  const dispatch = useDispatch();
   const [values, handleInput, submit] = useForm({
     email: '',
     password: ''
   });
 
-  const handleSubmit = async (e: FormEvent) => {
-    try {
-      submit(e);
-      auth.signInWithEmailAndPassword(values.email, values.password);
-    } catch (err) {
-      console.log(err);
-    }
+  const handleSubmit = (e: FormEvent) => {
+    dispatch(loginStart(values.email, values.password));
+    submit(e);
   };
 
   return (
