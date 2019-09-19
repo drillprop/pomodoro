@@ -3,8 +3,11 @@ import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
 import useForm from '../../hooks/useForm';
 import { auth } from '../../utils/firebase/firebase';
 import { addUserToFirestore } from '../../duck/users/userUtils';
+import { useDispatch } from 'react-redux';
+import { registerStart } from '../../duck/users/userActions';
 
 const RegisterForm: FC = () => {
+  const dispatch = useDispatch();
   const [values, handleInput, submit] = useForm({
     displayName: '',
     email: '',
@@ -12,19 +15,9 @@ const RegisterForm: FC = () => {
   });
 
   const handleSubmit = async (e: FormEvent) => {
-    try {
-      submit(e);
-      const userAuth = await auth.createUserWithEmailAndPassword(
-        values.email,
-        values.password
-      );
-      if (userAuth) {
-        const { user } = userAuth;
-        addUserToFirestore(user, { displayName: values.displayName });
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    const { email, password, displayName } = values;
+    submit(e);
+    dispatch(registerStart(email, password, displayName));
   };
 
   return (
