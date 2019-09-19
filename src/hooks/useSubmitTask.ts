@@ -1,5 +1,5 @@
 import { FormEvent, useState, ChangeEvent } from 'react';
-import { createTaskStart, editTask } from '../duck/tasks/tasksActions';
+import { createTaskStart, editTaskStart } from '../duck/tasks/tasksActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../duck/store';
 
@@ -32,7 +32,7 @@ const useSubmitTask = (
         dispatch(createTaskStart(input.toLowerCase()));
         setInput('');
       } else {
-        dispatch(editTask(initInput, input.toLowerCase()));
+        dispatch(editTaskStart(initInput, input.toLowerCase()));
       }
     } else {
       setInput(initInput);

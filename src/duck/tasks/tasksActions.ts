@@ -1,17 +1,14 @@
 import {
-  EDIT_TASK,
   DELETE_TASK,
   SWITCH_TASK,
   CREATE_TASK_START,
   CREATE_TASK_SUCCESS,
-  CREATE_TASK_FAILURE
+  CREATE_TASK_FAILURE,
+  EDIT_TASK_START,
+  EDIT_TASK_SUCCESS,
+  EDIT_TASK_FAILURE
 } from './taskTypes';
-import {
-  saveTasksInFirestore,
-  deleteTaskFromFirestore,
-  updateTaskInFirestore,
-  saveSelectedTask
-} from './tasksUtils';
+import { deleteTaskFromFirestore, saveSelectedTask } from './tasksUtils';
 
 export const createTaskStart = (taskName: string) => ({
   type: CREATE_TASK_START,
@@ -28,34 +25,22 @@ export const createTaskFailure = (error: any) => ({
   error
 });
 
-// export const createTask = (taskName: string) => {
-//   return async (dispatch: any) => {
-//     try {
-//       dispatch({
-//         type: CREATE_TASK,
-//         taskName
-//       });
-//       await saveTasksInFirestore(taskName);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-// };
+export const editTaskStart = (prevTask: string, newTask: string) => ({
+  type: EDIT_TASK_START,
+  prevTask,
+  newTask
+});
 
-export const editTask = (prevTask: string, newTask: string) => {
-  return async (dispatch: any) => {
-    try {
-      dispatch({
-        type: EDIT_TASK,
-        prevTask,
-        newTask
-      });
-      await updateTaskInFirestore(prevTask, newTask);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-};
+export const editTaskSuccess = (prevTask: string, newTask: string) => ({
+  type: EDIT_TASK_SUCCESS,
+  prevTask,
+  newTask
+});
+
+export const editTaskFailure = (error: any) => ({
+  type: EDIT_TASK_FAILURE,
+  error
+});
 
 export const deleteTask = (taskName: string) => {
   return async (dispatch: any) => {
