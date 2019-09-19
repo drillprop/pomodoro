@@ -7,14 +7,39 @@ import {
 } from './userActions';
 import { LOGIN_START, REGISTER_START } from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
+import { addUserToFirestore } from './userUtils';
+
+export function* updateProfile(displayName: string) {
+  try {
+    const user = yield auth.currentUser;
+    yield user.updateProfile({ displayName });
+  } catch (err) {
+    put(registerFailure(err));
+  }
+}
+
+export function* userData(user: any) {
+  try {
+    const userRef = yield addUserToFirestore(user);
+    const userSnapshot = yield userRef.get();
+    const { displayName, email, uid, createdAt } = yield userSnapshot.data();
+    return {
+      displayName,
+      email,
+      uid,
+      createdAt
+    };
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
 
 export function* login({ email, password }: any) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    //! create user in firestore
-
-    //
-    yield put(loginSuccess(user));
+    const data = yield call(userData, user);
+    yield put(loginSuccess(data));
   } catch (err) {
     yield put(loginFailure(err));
   }
@@ -23,12 +48,11 @@ export function* login({ email, password }: any) {
 export function* register({ email, password, displayName }: any) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    //! create user in firestore
-
-    //
-    yield put(registerSuccess(user));
+    yield call(updateProfile, displayName);
+    const data = yield call(userData, user);
+    yield put(registerSuccess(data));
   } catch (err) {
-    put(registerFailure(err));
+    yield put(registerFailure(err));
   }
 }
 

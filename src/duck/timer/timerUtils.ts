@@ -75,13 +75,13 @@ export const saveInitialTimelefts = async (
 export const fetchInitialState = async () => {
   const usr: any = await getCurrentUser();
   if (!usr) return;
-  const usrRef = await firestore.doc(`users/${usr.uid}`);
+  const usrRef = firestore.doc(`users/${usr.uid}`);
 
   const doc = await usrRef.get();
-  const data = await doc.data();
+  const data = doc.data();
 
   if (!data) {
-    await addUserToFirestore(usr, null);
+    await addUserToFirestore(usr);
   }
 
   return data;
