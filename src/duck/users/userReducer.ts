@@ -2,7 +2,11 @@ import {
   GET_USER,
   GET_CURRENT_USER_START,
   GET_CURRENT_USER_SUCCES,
-  GET_CURRENT_USER_FAILURE
+  GET_CURRENT_USER_FAILURE,
+  LOGIN_SUCCESS,
+  REGISTER_SUCCESS,
+  LOGIN_FAILURE,
+  REGISTER_FAILURE
 } from './userTypes';
 import { User } from 'firebase';
 
@@ -40,6 +44,18 @@ export default (state: UserState = initialState, action: any) => {
       return {
         ...state,
         isGettingUser: false,
+        error: action.error
+      };
+    case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        user: action.user
+      };
+    case LOGIN_FAILURE:
+    case REGISTER_FAILURE:
+      return {
+        ...state,
         error: action.error
       };
     default:
