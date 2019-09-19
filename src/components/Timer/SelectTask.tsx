@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { secondary, background } from '../../utils/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { switchTask } from '../../duck/tasks/tasksActions';
+import { switchTaskStart } from '../../duck/tasks/tasksActions';
 import { ReduxState } from '../../duck/store';
 
 const Select = styled.select`
@@ -36,7 +36,7 @@ const SelectTask: FC = () => {
   return (
     <Select
       value={selectedTask}
-      onChange={e => dispatch(switchTask(e.currentTarget.value))}
+      onChange={e => dispatch(switchTaskStart(e.currentTarget.value))}
     >
       {Object.keys(tasks).map(key => (
         <option key={key}>{key}</option>

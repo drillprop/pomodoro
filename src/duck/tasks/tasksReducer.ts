@@ -1,8 +1,8 @@
 import {
-  SWITCH_TASK,
   CREATE_TASK_SUCCESS,
   EDIT_TASK_SUCCESS,
-  DELETE_TASK_SUCCESS
+  DELETE_TASK_SUCCESS,
+  SWITCH_TASK_SUCCESS
 } from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
 import {
@@ -72,7 +72,7 @@ export default (state: TasksState = initialState, action: any) => {
             : state.tasks[state.selectedTask]
         }
       };
-    case SWITCH_TASK:
+    case SWITCH_TASK_SUCCESS:
       return {
         ...state,
         selectedTask: action.taskName

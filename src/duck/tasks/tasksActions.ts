@@ -1,5 +1,4 @@
 import {
-  SWITCH_TASK,
   CREATE_TASK_START,
   CREATE_TASK_SUCCESS,
   CREATE_TASK_FAILURE,
@@ -8,7 +7,10 @@ import {
   EDIT_TASK_FAILURE,
   DELETE_TASK_START,
   DELETE_TASK_SUCCESS,
-  DELETE_TASK_FAILURE
+  DELETE_TASK_FAILURE,
+  SWITCH_TASK_START,
+  SWITCH_TASK_SUCCESS,
+  SWITCH_TASK_FAILURE
 } from './taskTypes';
 import { saveSelectedTask } from './tasksUtils';
 
@@ -59,13 +61,15 @@ export const deleteTaskFailure = (error: any) => ({
   error
 });
 
-export const switchTask = (taskName: string) => {
-  return async (dispatch: any) => {
-    try {
-      dispatch({ type: SWITCH_TASK, taskName });
-      await saveSelectedTask(taskName);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-};
+export const switchTaskStart = (taskName: string) => ({
+  type: SWITCH_TASK_START,
+  taskName
+});
+export const switchTaskSuccess = (taskName: string) => ({
+  type: SWITCH_TASK_SUCCESS,
+  taskName
+});
+export const switchTaskFailure = (error: any) => ({
+  type: SWITCH_TASK_FAILURE,
+  error
+});

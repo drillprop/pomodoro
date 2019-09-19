@@ -12,7 +12,7 @@ import {
   FETCH_INITIAL_STATE_FAILURE
 } from './timerTypes';
 
-import { SWITCH_TASK } from '../tasks/taskTypes';
+import { SWITCH_TASK_SUCCESS } from '../tasks/taskTypes';
 
 type InitialTimeleft = {
   intervalTime: number;
@@ -95,7 +95,7 @@ export default (state: TimerState = initialState, action: any) => {
         isTimerStart: false,
         timeleft: !state.isInterval ? intervalTime : breakTime
       };
-    case SWITCH_TASK:
+    case SWITCH_TASK_SUCCESS:
       return {
         ...state,
         isTimerStart: false,

@@ -2,7 +2,8 @@ import { call, put, takeLatest, all } from 'redux-saga/effects';
 import {
   CREATE_TASK_START,
   EDIT_TASK_START,
-  DELETE_TASK_START
+  DELETE_TASK_START,
+  SWITCH_TASK_START
 } from './taskTypes';
 import {
   createTaskSuccess,
@@ -10,12 +11,15 @@ import {
   editTaskSuccess,
   editTaskFailure,
   deleteTaskFailure,
-  deleteTaskSuccess
+  deleteTaskSuccess,
+  switchTaskFailure,
+  switchTaskSuccess
 } from './tasksActions';
 import {
   saveTasksInFirestore,
   updateTaskInFirestore,
-  deleteTaskFromFirestore
+  deleteTaskFromFirestore,
+  saveSelectedTask
 } from './tasksUtils';
 
 export function* createTaskAsync({ taskName }: any) {
@@ -45,6 +49,15 @@ export function* deleteTaskAsync({ taskName }: any) {
   }
 }
 
+export function* switchTaskAsync({ taskName }: any) {
+  try {
+    yield call(saveSelectedTask, taskName);
+    yield put(switchTaskSuccess(taskName));
+  } catch (err) {
+    yield put(switchTaskFailure(err));
+  }
+}
+
 export function* onCreateTask() {
   yield takeLatest(CREATE_TASK_START, createTaskAsync);
 }
@@ -57,6 +70,15 @@ export function* onDeleteTask() {
   yield takeLatest(DELETE_TASK_START, deleteTaskAsync);
 }
 
+export function* onSwitchTask() {
+  yield takeLatest(SWITCH_TASK_START, switchTaskAsync);
+}
+
 export function* taskSagas() {
-  yield all([call(onCreateTask), call(onEditTask), call(onDeleteTask)]);
+  yield all([
+    call(onCreateTask),
+    call(onEditTask),
+    call(onDeleteTask),
+    call(onSwitchTask)
+  ]);
 }
