@@ -1,14 +1,12 @@
 import {
-  GET_USER,
-  GET_CURRENT_USER_START,
-  GET_CURRENT_USER_SUCCES,
-  GET_CURRENT_USER_FAILURE,
   LOGIN_SUCCESS,
   REGISTER_SUCCESS,
   LOGIN_FAILURE,
   REGISTER_FAILURE,
   SIGN_OUT_SUCCESS,
-  SIGN_OUT_FAILURE
+  SIGN_OUT_FAILURE,
+  LOGIN_START,
+  REGISTER_START
 } from './userTypes';
 import { User } from 'firebase';
 
@@ -20,12 +18,19 @@ export type UserState = {
 
 const initialState: UserState = {
   user: null,
-  isGettingUser: false,
+  isGettingUser: true,
   error: null
 };
 
 export default (state: UserState = initialState, action: any) => {
   switch (action.type) {
+    case LOGIN_START:
+    case REGISTER_START:
+      return {
+        ...state,
+        isGettingUser: true,
+        error: null
+      };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       return {
@@ -39,6 +44,7 @@ export default (state: UserState = initialState, action: any) => {
     case SIGN_OUT_FAILURE:
       return {
         ...state,
+        isGettingUser: false,
         error: action.error
       };
     case SIGN_OUT_SUCCESS:

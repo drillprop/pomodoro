@@ -7,9 +7,15 @@ import {
   signOutFailure,
   signOutSuccess
 } from './userActions';
-import { LOGIN_START, REGISTER_START, SIGN_OUT_START } from './userTypes';
+import {
+  LOGIN_START,
+  REGISTER_START,
+  SIGN_OUT_START,
+  CHECK_SESSION
+} from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
 import { addUserToFirestore } from './userUtils';
+import { getCurrentUser } from '../../utils/firebase/auth';
 
 export function* updateProfile(displayName: string) {
   try {
@@ -34,6 +40,17 @@ export function* userData(user: any) {
   } catch (err) {
     console.log(err);
     return err;
+  }
+}
+
+export function* isUserLoggedIn() {
+  try {
+    const userAuth = yield call(getCurrentUser);
+    if (!userAuth) return;
+    const user = yield call(userData, userAuth);
+    yield put(loginSuccess(user));
+  } catch (err) {
+    yield put(loginFailure(err));
   }
 }
 
@@ -67,6 +84,10 @@ export function* signOut() {
   }
 }
 
+export function* onCheckSession() {
+  yield takeLatest(CHECK_SESSION, isUserLoggedIn);
+}
+
 export function* onLogin() {
   yield takeLatest(LOGIN_START, login);
 }
@@ -80,5 +101,10 @@ export function* onSignOut() {
 }
 
 export function* userSagas() {
-  yield all([call(onLogin), call(onRegister), call(onSignOut)]);
+  yield all([
+    call(onLogin),
+    call(onRegister),
+    call(onSignOut),
+    call(onCheckSession)
+  ]);
 }

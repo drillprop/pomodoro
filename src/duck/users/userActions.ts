@@ -7,7 +7,8 @@ import {
   REGISTER_FAILURE,
   SIGN_OUT_START,
   SIGN_OUT_SUCCESS,
-  SIGN_OUT_FAILURE
+  SIGN_OUT_FAILURE,
+  CHECK_SESSION
 } from './userTypes';
 
 export type RegisterAndLoginParams = {
@@ -15,6 +16,10 @@ export type RegisterAndLoginParams = {
   password: string;
   displayName?: string;
 };
+
+export const checkSession = () => ({
+  type: CHECK_SESSION
+});
 
 export const loginStart = (email: string, password: string) => ({
   type: LOGIN_START,
