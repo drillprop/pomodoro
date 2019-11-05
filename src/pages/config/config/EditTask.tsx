@@ -1,6 +1,6 @@
-import React, { FormEvent, FC } from 'react';
-import { EditCreateTask } from '../../elements/Forms';
-import useSubmitTask from '../../hooks/useSubmitTask';
+import React, { FC, FormEvent } from 'react';
+import { EditCreateTask } from '../../../elements/Forms';
+import useSubmitTask from '../../../hooks/useSubmitTask';
 
 const EditTask: FC<{
   task: string;

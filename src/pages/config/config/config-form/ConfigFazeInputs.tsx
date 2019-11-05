@@ -1,31 +1,15 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
-import { primFont } from '../../utils/fonts';
-import { primary, background, secondary } from '../../utils/colors';
-import { SubTitle } from '../../elements/Titles';
+import { SubTitle } from '../../../../elements/Titles';
+import {
+  StyledConfigInput,
+  StyledConfigLabel
+} from './ConfigFazeInputs.styles';
 
 type ConfigFazeInputs = {
   faze: string;
   update: any;
   timeleft: any;
 };
-
-const StyledConfigInput = styled.input`
-  font-family: ${primFont};
-  font-size: 20px;
-  margin: 0 auto;
-  width: 70px;
-  padding: 8px;
-  color: ${primary};
-  background-color: ${background};
-  border: solid 1px ${secondary};
-  border-radius: 5px;
-  margin-left: 16px;
-`;
-const StyledConfigLabel = styled.label`
-  font-size: 1.5rem;
-  margin-right: 20px;
-`;
 
 const ConfigFazeInputs: FC<ConfigFazeInputs> = ({ faze, timeleft, update }) => {
   return (

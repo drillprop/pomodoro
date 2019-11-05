@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import ConfigFazeInputs from './ConfigFazeInputs';
-import useChangeTime from '../../hooks/useChangeTime';
-import { SubmitButtom } from '../../elements/Forms';
+import { SubmitButtom } from '../../../elements/Forms';
+import useChangeTime from '../../../hooks/useChangeTime';
+import ConfigFazeInputs from './config-form/ConfigFazeInputs';
 
 const ConfigForm: FC = () => {
   const [timeleft, update, submit] = useChangeTime();

@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { SubTitle } from '../../elements/Titles';
+import { SubTitle } from '../../../elements/Titles';
 import styled from 'styled-components';
-import Task from './Task';
+import Task from './tasks/Task';
 import CreateNewTask from './CreateNewTask';
 import { useSelector } from 'react-redux';
-import { ReduxState } from '../../duck/store';
+import { ReduxState } from '../../../duck/store';
 import { useTransition, animated } from 'react-spring';
 
 const StyledUl = styled.ul`
