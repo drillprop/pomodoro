@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import useTimerState from './useTimerState';
 import { countTimeLeft } from '../utils/helpers';
 
-const sound = new Audio(require('../assets/typewriter.mp3'));
+const sound = new Audio(require('../assets/sounds/typewriter.mp3'));
 
 export default () => {
   const { isTimerStart, isInterval, endTime, timeleft } = useTimerState();
