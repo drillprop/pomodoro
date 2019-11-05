@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../../../../duck/store';
 import { pauseTimer, startTimer } from '../../../../duck/timer/timerActions';
-import Icon from '../../../../elements/Icon';
+import Icon from '../../../../components/Icon/Icon';
 import useTimerState from '../../../../hooks/useTimerState';
 import { primary } from '../../../../utils/colors';
 import { Pause, StyledPlayButton } from './PlayButton.styles';

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { ReduxState } from '../../../duck/store';
 import { getInitialState } from '../../../duck/timer/timerActions';
-import Loading from '../../../elements/Loading';
+import Loading from '../../Loading/Loading';
 import Config from '../../../pages/config/Config';
 import Sign from '../../../pages/sign/Sign';
 import Interface from '../../../pages/timer/Interface';

@@ -1,15 +1,14 @@
-import React from 'react';
 import styled from 'styled-components';
-import { primary } from '../utils/colors';
+import { primary } from '../../utils/colors';
 
-const LoadingWrapper = styled.main`
+export const LoadingWrapper = styled.main`
   display: grid;
   height: 80vh;
   align-content: center;
   justify-content: center;
 `;
 
-const Spinner = styled.div`
+export const Spinner = styled.div`
   background: ${primary};
   animation: load1 1s infinite ease-in-out;
   width: 1em;
@@ -54,13 +53,3 @@ const Spinner = styled.div`
     }
   }
 `;
-
-const Loading = () => {
-  return (
-    <LoadingWrapper>
-      <Spinner />
-    </LoadingWrapper>
-  );
-};
-
-export default Loading;

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useTransition, animated } from 'react-spring';
-import Loading from '../elements/Loading';
+import Loading from './Loading/Loading';
 
 const withLoading = (Component: FC) => ({ isLoading, ...otherProps }: any) => {
   const transitions = useTransition(isLoading, null, {

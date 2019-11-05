@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useTransition } from 'react-spring';
 import { ReduxState } from '../../../duck/store';
 import { signOutStart } from '../../../duck/users/userActions';
-import Icon from '../../../elements/Icon';
+import Icon from '../../Icon/Icon';
 import useRouter from '../../../hooks/useRouter';
 import { background } from '../../../utils/colors';
 import { LinkList, StyledNavigation } from './Menu.styles';

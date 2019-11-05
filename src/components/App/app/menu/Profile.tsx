@@ -1,6 +1,6 @@
 import { User } from 'firebase';
 import React, { FC } from 'react';
-import Icon from '../../../../elements/Icon';
+import Icon from '../../../Icon/Icon';
 import { primary } from '../../../../utils/colors';
 import { Avatar, Email, Name, ProfileWrapper } from './Profile.styles';
 
