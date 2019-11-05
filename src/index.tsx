@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './components/App';
-import store, { sagaMiddleware } from './duck/store';
 import { HashRouter } from 'react-router-dom';
-import rootSaga from './duck/rootSagas';
+import App from './components/App/App';
+import store from './duck/store';
 
 const app = document.getElementById('app');
 

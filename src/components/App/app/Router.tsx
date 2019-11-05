@@ -1,16 +1,16 @@
-import React, { FC, useEffect, lazy, Suspense } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import Config from '../pages/config/Config';
-import Interface from '../pages/timer/Interface';
-import Sign from '../pages/sign/Sign';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReduxState } from '../duck/store';
-import withLoading from './withLoading';
-import { getInitialState } from '../duck/timer/timerActions';
-import Loading from '../elements/Loading';
+import React, { FC, lazy, Suspense, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, Route } from 'react-router-dom';
+import { ReduxState } from '../../../duck/store';
+import { getInitialState } from '../../../duck/timer/timerActions';
+import Loading from '../../../elements/Loading';
+import Config from '../../../pages/config/Config';
+import Sign from '../../../pages/sign/Sign';
+import Interface from '../../../pages/timer/Interface';
+import withLoading from '../../withLoading';
 
 const WithLoadingInterface = withLoading(Interface);
-const Stats = lazy(() => import('../pages/stats/Stats'));
+const Stats = lazy(() => import('../../../pages/stats/Stats'));
 const WithLoadingConfig = withLoading(Config);
 
 const Router: FC = () => {

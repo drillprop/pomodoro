@@ -1,56 +1,14 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { primary, background, secondaryBackground } from '../../utils/colors';
-import Profile from './Profile';
-import { secondFont } from '../../utils/fonts';
-import Icon from '../../elements/Icon';
-import useRouter from '../../hooks/useRouter';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReduxState } from '../../duck/store';
-import { useTransition, animated, config } from 'react-spring';
-import { signOutStart } from '../../duck/users/userActions';
-
-const StyledNavigation = styled(animated.nav)`
-  position: fixed;
-  z-index: 5;
-  top: 0;
-  height: 100%;
-  width: 400px;
-  background-color: ${primary};
-`;
-
-const LinkList = styled.ul`
-  margin-top: 50px;
-  padding: 0;
-  margin-left: 50px;
-  li,
-  a {
-    color: ${secondaryBackground};
-  }
-  li {
-    margin-bottom: 20px;
-    opacity: 0.6;
-    cursor: pointer;
-    font-family: ${secondFont};
-    font-size: 16px;
-    font-weight: 400;
-    :hover {
-      opacity: 1;
-    }
-    ::after {
-      content: '';
-      left: 0;
-      margin-top: 42px;
-      margin-left: 30px;
-      width: calc(100% - 60px);
-      height: 1px;
-      position: absolute;
-      opacity: 0.3;
-      background-color: ${secondaryBackground};
-    }
-  }
-`;
+import { useTransition } from 'react-spring';
+import { ReduxState } from '../../../duck/store';
+import { signOutStart } from '../../../duck/users/userActions';
+import Icon from '../../../elements/Icon';
+import useRouter from '../../../hooks/useRouter';
+import { background } from '../../../utils/colors';
+import { LinkList, StyledNavigation } from './Menu.styles';
+import Profile from './menu/Profile';
 
 const Menu: FC = () => {
   const router = useRouter();
