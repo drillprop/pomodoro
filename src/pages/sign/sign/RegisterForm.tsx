@@ -1,10 +1,12 @@
-import React, { FormEvent, FC } from 'react';
-import { StyledLabel, StyledInput, SubmitButtom } from '../../elements/Forms';
-import useForm from '../../hooks/useForm';
-import { auth } from '../../utils/firebase/firebase';
-import { addUserToFirestore } from '../../duck/users/userUtils';
+import React, { FC, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { registerStart } from '../../duck/users/userActions';
+import { registerStart } from '../../../duck/users/userActions';
+import {
+  StyledInput,
+  StyledLabel,
+  SubmitButtom
+} from '../../../elements/Forms';
+import useForm from '../../../hooks/useForm';
 
 const RegisterForm: FC = () => {
   const dispatch = useDispatch();

@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
-import LoginForm from '../../components/Login/LoginForm';
-import RegisterForm from '../../components/Register/RegisterForm';
 import { FormParagraph, FormWrapper } from '../../elements/Forms';
 import { MainTitle } from '../../elements/Titles';
 import { loginWithGoogle } from '../../utils/firebase/auth';
+import LoginForm from './sign/LoginForm';
+import RegisterForm from './sign/RegisterForm';
 
 const Sign: FC = () => {
   const [isLogin, switchForm] = useState(true);
