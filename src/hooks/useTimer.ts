@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import useTimerState from './useTimerState';
 import { countTimeLeft } from '../utils/helpers';
 
+const sound = new Audio(require('../assets/typewriter.mp3'));
+
 export default () => {
   const { isTimerStart, isInterval, endTime, timeleft } = useTimerState();
 
@@ -24,6 +26,7 @@ export default () => {
     }
 
     if (count <= 0 && isTimerStart) {
+      sound.play();
       setCount(0);
       clearTimeout(timeoutTimer);
     }
