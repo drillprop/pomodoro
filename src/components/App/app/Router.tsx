@@ -18,6 +18,7 @@ const Router: FC = () => {
   const isLoading = useSelector(
     ({ user, timer }: ReduxState) => user.isGettingUser || timer.isFetching
   );
+  console.log(user, isLoading);
 
   const dispatch = useDispatch();
 
@@ -32,7 +33,7 @@ const Router: FC = () => {
       <Route
         path='/config'
         render={() =>
-          !user && !isLoading ? (
+          !user ? (
             <Redirect to='/sign' />
           ) : (
             <WithLoadingConfig isLoading={isLoading} />
@@ -42,9 +43,7 @@ const Router: FC = () => {
       <Suspense fallback={<Loading />}>
         <Route
           path='/stats'
-          render={() =>
-            !user && !isLoading ? <Redirect to='/sign' /> : <Stats />
-          }
+          render={() => (!user ? <Redirect to='/sign' /> : <Stats />)}
         />
       </Suspense>
       <Route
