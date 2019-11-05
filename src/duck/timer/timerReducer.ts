@@ -48,7 +48,7 @@ const initialState: TimerState = {
   isInterval: true,
   endTime: 0,
   timeleft: config.initialTimeleft.intervalTime,
-  isFetching: false,
+  isFetching: true,
   errorMessage: ''
 };
 

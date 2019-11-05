@@ -29,39 +29,39 @@ const Router: FC = () => {
 
   return (
     <>
+      <Route
+        path='/config'
+        render={() =>
+          !user && !isLoading ? (
+            <Redirect to='/sign' />
+          ) : (
+            <WithLoadingConfig isLoading={isLoading} />
+          )
+        }
+      />
       <Suspense fallback={<Loading />}>
-        <Route
-          path='/config'
-          render={() =>
-            !user && !isLoading ? (
-              <Redirect to='/sign' />
-            ) : (
-              <WithLoadingConfig isLoading={isLoading} />
-            )
-          }
-        />
         <Route
           path='/stats'
           render={() =>
             !user && !isLoading ? <Redirect to='/sign' /> : <Stats />
           }
         />
-        <Route
-          path='/sign'
-          render={() => (!user ? <Sign /> : <Redirect to='/' />)}
-        />
-        <Route
-          exact
-          path='/'
-          render={() =>
-            !user && !isLoading ? (
-              <Redirect to='/sign' />
-            ) : (
-              <WithLoadingInterface isLoading={isLoading} />
-            )
-          }
-        />
       </Suspense>
+      <Route
+        path='/sign'
+        render={() => (!user ? <Sign /> : <Redirect to='/' />)}
+      />
+      <Route
+        exact
+        path='/'
+        render={() =>
+          !user && !isLoading ? (
+            <Redirect to='/sign' />
+          ) : (
+            <WithLoadingInterface isLoading={isLoading} />
+          )
+        }
+      />
     </>
   );
 };
