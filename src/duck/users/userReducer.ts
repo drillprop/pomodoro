@@ -50,6 +50,7 @@ export default (state: UserState = initialState, action: any) => {
     case SIGN_OUT_SUCCESS:
       return {
         ...state,
+        isGettingUser: false,
         user: null
       };
     default:
