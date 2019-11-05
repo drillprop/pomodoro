@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { SubTitle } from '../../elements/Titles';
-import IntervalsChart from './IntervalsChart';
+import { SubTitle } from '../../../../elements/Titles';
+import IntervalsChart from '../../../../components/IntervalsChart/IntervalsChart';
 
 const IntervalsToday: FC<{ stats: any }> = ({ stats }) => {
   return (

@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import IntervalsToday from './IntervalsToday';
+import IntervalsDaily from './intervals-chart-container/IntervalsDaily';
 import React from 'react';
-import { createDaysArray } from '../../utils/helpers';
-import { fetchIntervalsByDayStart } from '../../duck/stats/statsActions';
+import { createDaysArray } from '../../../utils/helpers';
+import { fetchIntervalsByDayStart } from '../../../duck/stats/statsActions';
 
-const IntervalsContainer = () => {
+const IntervalsCharts = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,9 +39,9 @@ const IntervalsContainer = () => {
 
   return (
     <>
-      <IntervalsToday stats={stats} />
+      <IntervalsDaily stats={stats} />
     </>
   );
 };
 
-export default IntervalsContainer;
+export default IntervalsCharts;
