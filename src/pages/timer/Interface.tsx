@@ -1,16 +1,9 @@
 import * as React from 'react';
-import styled from 'styled-components';
-import Timer from '../../components/Timer/Timer';
 import Controls from '../../components/Timer/Controls/Controls';
-import TimerFaze from '../../components/Timer/TimerFaze';
 import SelectTask from '../../components/Timer/SelectTask';
-
-const InterfaceWrapper = styled.main`
-  display: grid;
-  margin-top: 100px;
-  grid-template-rows: 150px 200px;
-  justify-content: center;
-`;
+import Timer from '../../components/Timer/Timer';
+import TimerFaze from '../../components/Timer/TimerFaze';
+import { InterfaceWrapper } from './Interface.styles';
 
 const Interface: React.FC = () => {
   return (

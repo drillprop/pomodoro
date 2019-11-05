@@ -1,8 +1,8 @@
-import React, { useState, FC } from 'react';
-import { MainTitle } from '../../elements/Titles';
-import { FormWrapper, FormParagraph } from '../../elements/Forms';
+import React, { FC, useState } from 'react';
 import LoginForm from '../../components/Login/LoginForm';
 import RegisterForm from '../../components/Register/RegisterForm';
+import { FormParagraph, FormWrapper } from '../../elements/Forms';
+import { MainTitle } from '../../elements/Titles';
 import { loginWithGoogle } from '../../utils/firebase/auth';
 
 const Sign: FC = () => {
