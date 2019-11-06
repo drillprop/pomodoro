@@ -3,13 +3,13 @@ import {
   START_TIMER,
   RESET_TIMER,
   SHOW_MENU,
-  SET_TIMERS,
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
   FETCH_INITIAL_STATE_START,
   FETCH_INITIAL_STATE_SUCCES,
-  FETCH_INITIAL_STATE_FAILURE
+  FETCH_INITIAL_STATE_FAILURE,
+  SET_TIMERS_SUCCES
 } from './timerTypes';
 
 import { SWITCH_TASK_SUCCESS } from '../tasks/taskTypes';
@@ -107,19 +107,15 @@ export default (state: TimerState = initialState, action: any) => {
         ...state,
         isMenuVisible: action.isMenuVisible
       };
-    case SET_TIMERS:
+    case SET_TIMERS_SUCCES:
       return {
         ...state,
         isInterval: true,
         isTimerStart: false,
-        timeleft:
-          action.timer === 'breakTime' ? state.timeleft : action.seconds,
+        timeleft: action.timelefts.intervalTime,
         config: {
           ...state.config,
-          initialTimeleft: {
-            ...state.config.initialTimeleft,
-            [action.timer]: action.seconds
-          }
+          initialTimeleft: action.timelefts
         }
       };
     case FETCH_INITIAL_STATE_START:

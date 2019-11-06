@@ -11,10 +11,11 @@ import {
   START_TIMER,
   PAUSE_TIMER,
   RESET_TIMER,
-  SKIP_BREAK
+  SKIP_BREAK,
+  SET_TIMERS_START
 } from './timerTypes';
-import { incIntervalInFirestore } from './timerUtils';
-import { stopTimerAndSwitchFaze } from './timerActions';
+import { incIntervalInFirestore, saveInitialTimelefts } from './timerUtils';
+import { stopTimerAndSwitchFaze, setTimersSuccess } from './timerActions';
 
 export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
   try {
@@ -28,6 +29,14 @@ export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
   }
 }
 
+export function* setTimersSaga({ timelefts }: any) {
+  try {
+    console.log(timelefts);
+    yield call(saveInitialTimelefts, timelefts);
+    yield put(setTimersSuccess(timelefts));
+  } catch (err) {}
+}
+
 export function* onStartTimer() {
   yield takeLatest(START_TIMER, function*(...args) {
     yield race({
@@ -37,6 +46,10 @@ export function* onStartTimer() {
   });
 }
 
+export function* onSettingTimers() {
+  yield takeLatest(SET_TIMERS_START, setTimersSaga);
+}
+
 export function* timerSagas() {
-  yield all([call(onStartTimer)]);
+  yield all([call(onStartTimer), call(onSettingTimers)]);
 }

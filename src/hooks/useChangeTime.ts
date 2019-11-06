@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { convertSecToObj } from '../utils/helpers';
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { setTimers } from '../duck/timer/timerActions';
+import { setTimersStart } from '../duck/timer/timerActions';
 import { ReduxState } from '../duck/store';
 
 export default () => {
@@ -65,14 +65,14 @@ export default () => {
 
   const submitState = (e: FormEvent) => {
     e.preventDefault();
-
     const secondsKeys: Array<string> = Object.keys(initialSeconds);
 
-    secondsKeys.forEach((key: string) => {
-      let totalTimeInSeconds: number =
-        timeleft[key].seconds + timeleft[key].minutes * 60;
-      dispatch(setTimers(totalTimeInSeconds, key));
-    });
+    const newState = secondsKeys.reduce((acc: any, item: any) => {
+      acc[item] = timeleft[item].seconds + timeleft[item].minutes * 60;
+      return acc;
+    }, {});
+
+    dispatch(setTimersStart(newState));
   };
 
   return [timeleft, updateState, submitState];

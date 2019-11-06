@@ -2,14 +2,16 @@ import {
   UPDATE_TIMER,
   RESET_TIMER,
   SHOW_MENU,
-  SET_TIMERS,
   START_TIMER,
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
   FETCH_INITIAL_STATE_START,
   FETCH_INITIAL_STATE_SUCCES,
-  FETCH_INITIAL_STATE_FAILURE
+  FETCH_INITIAL_STATE_FAILURE,
+  SET_TIMERS_START,
+  SET_TIMERS_SUCCES,
+  SET_TIMERS_FAILURE
 } from './timerTypes';
 import { saveInitialTimelefts, fetchInitialState } from './timerUtils';
 
@@ -60,15 +62,20 @@ export const showMenu = (isMenuVisible: boolean) => {
   };
 };
 
-export const setTimers = (seconds: number, timer: string) => {
-  return async (dispatch: any) => {
-    const isInterval = timer === 'breakTime' ? false : true;
+export const setTimersStart = (timelefts: any) => ({
+  type: SET_TIMERS_START,
+  timelefts
+});
 
-    await saveInitialTimelefts(isInterval, seconds);
+export const setTimersSuccess = (timelefts: any) => ({
+  type: SET_TIMERS_SUCCES,
+  timelefts
+});
 
-    dispatch({ type: SET_TIMERS, seconds, timer });
-  };
-};
+export const setTimersFailure = (error: any) => ({
+  type: SET_TIMERS_FAILURE,
+  error
+});
 
 export const fetchInitialStateStart = () => ({
   type: FETCH_INITIAL_STATE_START
