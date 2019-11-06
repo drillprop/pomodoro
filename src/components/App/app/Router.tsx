@@ -18,7 +18,6 @@ const Router: FC = () => {
   const isLoading = useSelector(
     ({ user, timer }: ReduxState) => user.isGettingUser || timer.isFetching
   );
-  console.log(user, isLoading);
 
   const dispatch = useDispatch();
 

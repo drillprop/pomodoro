@@ -19,7 +19,6 @@ import { stopTimerAndSwitchFaze, setTimersSuccess } from './timerActions';
 
 export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
   try {
-    console.log(isInterval);
     yield delay(timeleft * 1000 + 1000);
     yield put(stopTimerAndSwitchFaze(isInterval));
     yield isInterval && call(incIntervalInFirestore, selectedTask);
@@ -31,7 +30,6 @@ export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
 
 export function* setTimersSaga({ timelefts }: any) {
   try {
-    console.log(timelefts);
     yield call(saveInitialTimelefts, timelefts);
     yield put(setTimersSuccess(timelefts));
   } catch (err) {}
