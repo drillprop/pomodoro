@@ -1,11 +1,13 @@
 import React, { FC, useState } from 'react';
 import { FormParagraph, FormWrapper } from '../../elements/Forms';
 import { MainTitle } from '../../elements/Titles';
-import { loginWithGoogle } from '../../utils/firebase/auth';
 import LoginForm from './sign/LoginForm';
 import RegisterForm from './sign/RegisterForm';
+import { useDispatch } from 'react-redux';
+import { loginWithGoogle } from '../../duck/users/userActions';
 
 const Sign: FC = () => {
+  const dispatch = useDispatch();
   const [isLogin, switchForm] = useState(true);
   return (
     <>
@@ -30,7 +32,7 @@ const Sign: FC = () => {
             Already have an account? Sign in
           </FormParagraph>
         )}
-        <FormParagraph onClick={loginWithGoogle}>
+        <FormParagraph onClick={() => dispatch(loginWithGoogle())}>
           or sign in with Google
         </FormParagraph>
       </FormWrapper>

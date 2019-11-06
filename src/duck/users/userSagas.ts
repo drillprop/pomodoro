@@ -11,11 +11,12 @@ import {
   LOGIN_START,
   REGISTER_START,
   SIGN_OUT_START,
-  CHECK_SESSION
+  CHECK_SESSION,
+  LOGIN_WITH_GOOGLE
 } from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
 import { addUserToFirestore } from './userUtils';
-import { getCurrentUser } from '../../utils/firebase/auth';
+import { getCurrentUser, loginWithGoogle } from '../../utils/firebase/auth';
 
 export function* updateProfile(displayName: string) {
   try {
@@ -84,6 +85,16 @@ export function* signOut() {
   }
 }
 
+export function* loginWithGoogleSaga() {
+  try {
+    const { user } = yield loginWithGoogle();
+    const data = yield call(userData, user);
+    yield put(loginSuccess(data));
+  } catch (err) {
+    yield put(loginFailure(err));
+  }
+}
+
 export function* onCheckSession() {
   yield takeLatest(CHECK_SESSION, isUserLoggedIn);
 }
@@ -100,11 +111,16 @@ export function* onSignOut() {
   yield takeLatest(SIGN_OUT_START, signOut);
 }
 
+export function* onGoogleSignIn() {
+  yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
+}
+
 export function* userSagas() {
   yield all([
     call(onLogin),
     call(onRegister),
     call(onSignOut),
-    call(onCheckSession)
+    call(onCheckSession),
+    call(onGoogleSignIn)
   ]);
 }

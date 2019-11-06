@@ -8,7 +8,8 @@ import {
   SIGN_OUT_START,
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
-  CHECK_SESSION
+  CHECK_SESSION,
+  LOGIN_WITH_GOOGLE
 } from './userTypes';
 
 export type RegisterAndLoginParams = {
@@ -35,6 +36,10 @@ export const loginSuccess = (user: any) => ({
 export const loginFailure = (error: any) => ({
   type: LOGIN_FAILURE,
   error
+});
+
+export const loginWithGoogle = () => ({
+  type: LOGIN_WITH_GOOGLE
 });
 
 export const registerStart = (
