@@ -22,56 +22,24 @@ export const updateTimer = (seconds: number, isInterval: boolean) => {
   };
 };
 
-let timeoutId: any = 0;
-
 export const startTimer = (startTime: number, timeleft: number) => ({
   type: START_TIMER,
   startTime,
   timeleft
 });
 
-// export const startTimer = (
-//   startTime: number,
-//   isTimerStart: boolean,
-//   isInterval: boolean,
-//   timeleft: number,
-//   selectedTask: string
-// ) => {
-//   return async (dispatch: any) => {
-//     if (!isTimerStart) {
-//       dispatch({
-//         type: START_TIMER,
-//         startTime
-//       });
-//       timeoutId = setTimeout(() => {
-//         !isInterval && incIntervalInFirestore(selectedTask);
-//         dispatch({ type: STOP_AND_SWITCH_FAZE, isInterval });
-//       }, timeleft * 1000 + 1000);
-//     }
-//   };
-// };
+export const pauseTimer = (pauseTime: number) => ({
+  type: PAUSE_TIMER,
+  pauseTime
+});
 
-export const pauseTimer = (pauseTime: number) => {
-  clearTimeout(timeoutId);
-  return {
-    type: PAUSE_TIMER,
-    pauseTime
-  };
-};
+export const resetTimer = () => ({
+  type: RESET_TIMER
+});
 
-export const resetTimer = () => {
-  clearTimeout(timeoutId);
-  return {
-    type: RESET_TIMER
-  };
-};
-
-export const skipBreak = () => {
-  clearTimeout(timeoutId);
-  return {
-    type: SKIP_BREAK
-  };
-};
+export const skipBreak = () => ({
+  type: SKIP_BREAK
+});
 
 export const stopTimerAndSwitchFaze = (isInterval: boolean) => ({
   type: STOP_AND_SWITCH_FAZE,

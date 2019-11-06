@@ -1,5 +1,13 @@
-import { put, call, takeLatest, all, delay } from 'redux-saga/effects';
-import { START_TIMER } from './timerTypes';
+import {
+  put,
+  call,
+  all,
+  delay,
+  take,
+  takeLatest,
+  race
+} from 'redux-saga/effects';
+import { START_TIMER, PAUSE_TIMER, RESET_TIMER } from './timerTypes';
 import { incIntervalInFirestore } from './timerUtils';
 import { stopTimerAndSwitchFaze } from './timerActions';
 
@@ -15,7 +23,12 @@ export function* startTimer({ isInterval, timeleft, selectedTask }: any) {
 }
 
 export function* onStartTimer() {
-  yield takeLatest(START_TIMER, startTimer);
+  yield takeLatest(START_TIMER, function*(...args) {
+    yield race({
+      task: call(startTimer, ...args),
+      cancel: take([PAUSE_TIMER, RESET_TIMER])
+    });
+  });
 }
 
 export function* timerSagas() {
