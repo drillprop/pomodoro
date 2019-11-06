@@ -1,5 +1,4 @@
 import {
-  UPDATE_TIMER,
   START_TIMER,
   RESET_TIMER,
   SHOW_MENU,
@@ -56,11 +55,6 @@ const initialState: TimerState = {
 export default (state: TimerState = initialState, action: any) => {
   const { intervalTime, breakTime } = state.config.initialTimeleft;
   switch (action.type) {
-    case UPDATE_TIMER:
-      return {
-        ...state,
-        [action.field]: action[action.field]
-      };
     case START_TIMER:
       return {
         ...state,
@@ -133,26 +127,20 @@ export default (state: TimerState = initialState, action: any) => {
       const actionBreakTime: number = action.initial.config.breakTime;
       const actionIntervalTime: number = action.initial.config.intervalTime;
 
-      const interval: number = actionIntervalTime || intervalTime;
-      const breakK: number = actionBreakTime || breakTime;
       return {
         ...state,
         isFetching: false,
-        timeleft: state.isInterval ? interval : breakK,
+        timeleft: state.isInterval ? actionIntervalTime : actionBreakTime,
         config: {
           ...state.config,
-          initialTimeleft: {
-            ...state.config.initialTimeleft,
-            intervalTime: interval,
-            breakTime: breakK
-          }
+          initialTimeleft: action.initial.config
         }
       };
     case FETCH_INITIAL_STATE_FAILURE:
       return {
         ...state,
         isFetching: false,
-        errorMessage: action.errorMessage
+        error: action.error
       };
     default:
       return state;

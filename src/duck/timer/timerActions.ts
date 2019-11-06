@@ -1,5 +1,4 @@
 import {
-  UPDATE_TIMER,
   RESET_TIMER,
   SHOW_MENU,
   START_TIMER,
@@ -13,16 +12,6 @@ import {
   SET_TIMERS_SUCCES,
   SET_TIMERS_FAILURE
 } from './timerTypes';
-import { saveInitialTimelefts, fetchInitialState } from './timerUtils';
-
-export const updateTimer = (seconds: number, isInterval: boolean) => {
-  let field = isInterval ? 'intervalTime' : 'breakTime';
-  return {
-    type: UPDATE_TIMER,
-    field,
-    [field]: seconds
-  };
-};
 
 export const startTimer = (
   startTime: number,
@@ -90,16 +79,3 @@ export const fetchInitialStateFailure = (errorMessage: string) => ({
   type: FETCH_INITIAL_STATE_FAILURE,
   errorMessage
 });
-
-export const getInitialState = () => {
-  return async (dispatch: any) => {
-    await dispatch(fetchInitialStateStart());
-    try {
-      const initial = await fetchInitialState();
-      dispatch(fetchInitialStateSucces(initial));
-    } catch (error) {
-      console.error(error);
-      dispatch(fetchInitialStateFailure(error));
-    }
-  };
-};

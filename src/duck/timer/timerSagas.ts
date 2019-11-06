@@ -12,13 +12,20 @@ import {
   PAUSE_TIMER,
   RESET_TIMER,
   SKIP_BREAK,
-  SET_TIMERS_START
+  SET_TIMERS_START,
+  FETCH_INITIAL_STATE_START
 } from './timerTypes';
-import { incIntervalInFirestore, saveInitialTimelefts } from './timerUtils';
+import {
+  incIntervalInFirestore,
+  saveInitialTimelefts,
+  fetchInitialState
+} from './timerUtils';
 import {
   stopTimerAndSwitchFaze,
   setTimersSuccess,
-  setTimersFailure
+  setTimersFailure,
+  fetchInitialStateSucces,
+  fetchInitialStateFailure
 } from './timerActions';
 
 export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
@@ -41,6 +48,15 @@ export function* setTimersSaga({ timelefts }: any) {
   }
 }
 
+export function* fetchInitialStateSaga() {
+  try {
+    const initialState = yield call(fetchInitialState);
+    yield put(fetchInitialStateSucces(initialState));
+  } catch (err) {
+    yield put(fetchInitialStateFailure(err));
+  }
+}
+
 export function* onStartTimer() {
   yield takeLatest(START_TIMER, function*(...args) {
     yield race({
@@ -54,6 +70,14 @@ export function* onSettingTimers() {
   yield takeLatest(SET_TIMERS_START, setTimersSaga);
 }
 
+export function* onFetchingInitialState() {
+  yield takeLatest(FETCH_INITIAL_STATE_START, fetchInitialStateSaga);
+}
+
 export function* timerSagas() {
-  yield all([call(onStartTimer), call(onSettingTimers)]);
+  yield all([
+    call(onStartTimer),
+    call(onSettingTimers),
+    call(onFetchingInitialState)
+  ]);
 }
