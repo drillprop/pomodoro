@@ -7,12 +7,12 @@ import { StyledRetryButton } from './RetryButton.styles';
 
 const RetryButton: FC = () => {
   const dispatch = useDispatch();
-  const { isTimerStart, isInterval, timeleft } = useTimerState();
+  const { timeleft, isInterval } = useTimerState();
   const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
 
   const retry = async () => {
     await dispatch(resetTimer());
-    dispatch(startTimer(Date.now(), timeleft));
+    dispatch(startTimer(Date.now(), timeleft, selectedTask, isInterval));
   };
 
   return <StyledRetryButton onClick={retry}>Retry</StyledRetryButton>;

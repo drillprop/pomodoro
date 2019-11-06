@@ -8,16 +8,10 @@ import { StyledButton } from './ResetButton.styles';
 
 const ResetButton: FC = () => {
   const dispatch = useDispatch();
-  const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
   const { isInterval } = useTimerState();
 
-  const skip = () => {
-    dispatch(skipBreak());
-    incIntervalInFirestore(selectedTask);
-  };
-
   const reset = () => {
-    isInterval ? dispatch(resetTimer()) : skip();
+    isInterval ? dispatch(resetTimer()) : dispatch(skipBreak());
   };
   return (
     <StyledButton onClick={reset}>{isInterval ? 'Reset' : 'Skip'}</StyledButton>

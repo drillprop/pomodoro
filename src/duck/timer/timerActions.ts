@@ -22,10 +22,17 @@ export const updateTimer = (seconds: number, isInterval: boolean) => {
   };
 };
 
-export const startTimer = (startTime: number, timeleft: number) => ({
+export const startTimer = (
+  startTime: number,
+  timeleft: number,
+  selectedTask: string,
+  isInterval: boolean
+) => ({
   type: START_TIMER,
   startTime,
-  timeleft
+  timeleft,
+  selectedTask,
+  isInterval
 });
 
 export const pauseTimer = (pauseTime: number) => ({
