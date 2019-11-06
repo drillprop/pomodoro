@@ -9,7 +9,8 @@ import {
   FETCH_INITIAL_STATE_START,
   FETCH_INITIAL_STATE_SUCCES,
   FETCH_INITIAL_STATE_FAILURE,
-  SET_TIMERS_SUCCES
+  SET_TIMERS_SUCCES,
+  SET_TIMERS_FAILURE
 } from './timerTypes';
 
 import { SWITCH_TASK_SUCCESS } from '../tasks/taskTypes';
@@ -31,7 +32,7 @@ export interface TimerState {
   endTime: number;
   timeleft: number;
   isFetching: boolean;
-  errorMessage: string;
+  error: any | null;
 }
 
 const config: Config = {
@@ -49,7 +50,7 @@ const initialState: TimerState = {
   endTime: 0,
   timeleft: config.initialTimeleft.intervalTime,
   isFetching: true,
-  errorMessage: ''
+  error: null
 };
 
 export default (state: TimerState = initialState, action: any) => {
@@ -117,6 +118,11 @@ export default (state: TimerState = initialState, action: any) => {
           ...state.config,
           initialTimeleft: action.timelefts
         }
+      };
+    case SET_TIMERS_FAILURE:
+      return {
+        ...state,
+        error: action.error
       };
     case FETCH_INITIAL_STATE_START:
       return {

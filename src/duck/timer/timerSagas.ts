@@ -15,7 +15,11 @@ import {
   SET_TIMERS_START
 } from './timerTypes';
 import { incIntervalInFirestore, saveInitialTimelefts } from './timerUtils';
-import { stopTimerAndSwitchFaze, setTimersSuccess } from './timerActions';
+import {
+  stopTimerAndSwitchFaze,
+  setTimersSuccess,
+  setTimersFailure
+} from './timerActions';
 
 export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
   try {
@@ -32,7 +36,9 @@ export function* setTimersSaga({ timelefts }: any) {
   try {
     yield call(saveInitialTimelefts, timelefts);
     yield put(setTimersSuccess(timelefts));
-  } catch (err) {}
+  } catch (err) {
+    yield put(setTimersFailure(err));
+  }
 }
 
 export function* onStartTimer() {
