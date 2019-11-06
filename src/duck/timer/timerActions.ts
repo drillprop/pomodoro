@@ -11,11 +11,7 @@ import {
   FETCH_INITIAL_STATE_SUCCES,
   FETCH_INITIAL_STATE_FAILURE
 } from './timerTypes';
-import {
-  incIntervalInFirestore,
-  saveInitialTimelefts,
-  fetchInitialState
-} from './timerUtils';
+import { saveInitialTimelefts, fetchInitialState } from './timerUtils';
 
 export const updateTimer = (seconds: number, isInterval: boolean) => {
   let field = isInterval ? 'intervalTime' : 'breakTime';
@@ -28,26 +24,32 @@ export const updateTimer = (seconds: number, isInterval: boolean) => {
 
 let timeoutId: any = 0;
 
-export const startTimer = (
-  startTime: number,
-  isTimerStart: boolean,
-  isInterval: boolean,
-  timeleft: number,
-  selectedTask: string
-) => {
-  return async (dispatch: any) => {
-    if (!isTimerStart) {
-      dispatch({
-        type: START_TIMER,
-        startTime
-      });
-      timeoutId = setTimeout(() => {
-        !isInterval && incIntervalInFirestore(selectedTask);
-        dispatch({ type: STOP_AND_SWITCH_FAZE, isInterval });
-      }, timeleft * 1000 + 1000);
-    }
-  };
-};
+export const startTimer = (startTime: number, timeleft: number) => ({
+  type: START_TIMER,
+  startTime,
+  timeleft
+});
+
+// export const startTimer = (
+//   startTime: number,
+//   isTimerStart: boolean,
+//   isInterval: boolean,
+//   timeleft: number,
+//   selectedTask: string
+// ) => {
+//   return async (dispatch: any) => {
+//     if (!isTimerStart) {
+//       dispatch({
+//         type: START_TIMER,
+//         startTime
+//       });
+//       timeoutId = setTimeout(() => {
+//         !isInterval && incIntervalInFirestore(selectedTask);
+//         dispatch({ type: STOP_AND_SWITCH_FAZE, isInterval });
+//       }, timeleft * 1000 + 1000);
+//     }
+//   };
+// };
 
 export const pauseTimer = (pauseTime: number) => {
   clearTimeout(timeoutId);
@@ -71,18 +73,10 @@ export const skipBreak = () => {
   };
 };
 
-export const stopAndSwitchFaze = (
-  timeleft: number,
-  isInterval: boolean
-) => async (dispatch: any) => {
-  setTimeout(() => {
-    dispatch({
-      type: STOP_AND_SWITCH_FAZE,
-      timeleft,
-      isInterval
-    });
-  }, timeleft * 1000 + 1000);
-};
+export const stopTimerAndSwitchFaze = (isInterval: boolean) => ({
+  type: STOP_AND_SWITCH_FAZE,
+  isInterval
+});
 
 export const showMenu = (isMenuVisible: boolean) => {
   return {
