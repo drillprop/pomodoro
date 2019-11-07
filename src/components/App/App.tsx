@@ -5,6 +5,7 @@ import GlobalStyle from '../../utils/GlobalStyle';
 import HamburgerButton from './app/menu/HamburgerButton';
 import Menu from './app/Menu';
 import Router from './app/Router';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <ProgressBar />
       <HamburgerButton />
       <Menu />
       <GlobalStyle />
