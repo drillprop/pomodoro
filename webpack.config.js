@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const DotEnv = require('dotenv-webpack');
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
   .default;
@@ -41,7 +42,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
-    new DotEnv()
+    new DotEnv(),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
+    })
   ],
   devtool: 'eval'
 };
