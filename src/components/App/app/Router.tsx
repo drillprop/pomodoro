@@ -8,6 +8,7 @@ import Sign from '../../../pages/sign/Sign';
 import Interface from '../../../pages/timer/Interface';
 import withLoading from '../../withLoading';
 import { fetchInitialStateStart } from '../../../duck/timer/timerActions';
+import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
 
 const WithLoadingInterface = withLoading(Interface);
 const Stats = lazy(() => import('../../../pages/stats/Stats'));
@@ -29,23 +30,16 @@ const Router: FC = () => {
 
   return (
     <>
-      <Route
+      <ProtectedRoute
         path='/config'
-        render={() =>
-          !user ? (
-            <Redirect to='/sign' />
-          ) : (
-            <WithLoadingConfig isLoading={isLoading} />
-          )
-        }
+        isAuth={!!user}
+        component={() => <WithLoadingConfig isLoading={isLoading} />}
       />
       <Suspense fallback={<Loading />}>
-        <Route
-          path='/stats'
-          render={() => (!user ? <Redirect to='/sign' /> : <Stats />)}
-        />
+        <ProtectedRoute path='/stats' isAuth={!!user} component={Stats} />
       </Suspense>
       <Route
+        exact
         path='/sign'
         render={() => (!user ? <Sign /> : <Redirect to='/' />)}
       />
