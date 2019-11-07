@@ -13,6 +13,9 @@ export const StyledNavigation = styled(animated.nav)`
   height: 100%;
   width: 400px;
   background-color: ${primary};
+  @media (max-width: 500px) {
+    width: 100vw;
+  }
 `;
 
 export const LinkList = styled.ul`

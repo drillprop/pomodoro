@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primary } from '../../../../utils/colors';
+import { primary, background } from '../../../../utils/colors';
 
 export const HamburgerWrapper = styled.div`
   position: absolute;
@@ -9,7 +9,7 @@ export const HamburgerWrapper = styled.div`
   top: 2em;
   right: 2em;
   div {
-    z-index: -1;
+    z-index: 7;
     position: absolute;
     width: 35px;
     height: 7px;
@@ -33,17 +33,24 @@ export const HamburgerWrapper = styled.div`
     }
   }
   input {
+    z-index: 10;
     margin: 0;
     opacity: 0;
     width: 40px;
     height: 40px;
     :checked + div {
       transform: rotate(135deg);
+      @media (max-width: 500px) {
+        background-color: ${background};
+      }
     }
     :checked + div:after,
     :checked + div:before {
       top: 0;
       transform: rotate(90deg);
+      @media (max-width: 500px) {
+        background-color: ${background};
+      }
     }
   }
 `;
