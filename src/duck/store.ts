@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleWare from 'redux-saga';
-import thunk from 'redux-thunk';
 import timerReducer, { TimerState } from './timer/timerReducer';
 import tasksReducer, { TasksState } from './tasks/tasksReducer';
 import userReducer, { UserState } from './users/userReducer';
@@ -19,7 +18,7 @@ const reducer = combineReducers({
 
 const store = createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware, thunk))
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
 export interface ReduxState {

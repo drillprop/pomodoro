@@ -3,7 +3,6 @@ import {
   FETCH_INTERVALS_BY_DAY_START,
   FETCH_INTERVALS_BY_DAY_SUCCESS
 } from './statsTypes';
-import { getIntervalsByDay } from './statsUtils';
 
 export const fetchIntervalsByDayStart = () => ({
   type: FETCH_INTERVALS_BY_DAY_START

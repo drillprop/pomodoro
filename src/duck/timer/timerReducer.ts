@@ -13,6 +13,7 @@ import {
 } from './timerTypes';
 
 import { SWITCH_TASK_SUCCESS } from '../tasks/taskTypes';
+import { LOGIN_FAILURE } from '../users/userTypes';
 
 type InitialTimeleft = {
   intervalTime: number;
@@ -141,6 +142,11 @@ export default (state: TimerState = initialState, action: any) => {
         ...state,
         isFetching: false,
         error: action.error
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isFetching: false
       };
     default:
       return state;

@@ -47,7 +47,10 @@ export function* userData(user: any) {
 export function* isUserLoggedIn() {
   try {
     const userAuth = yield call(getCurrentUser);
-    if (!userAuth) return;
+    if (!userAuth) {
+      yield put(loginFailure({ message: 'You are not logged in' }));
+      return;
+    }
     const user = yield call(userData, userAuth);
     yield put(loginSuccess(user));
   } catch (err) {

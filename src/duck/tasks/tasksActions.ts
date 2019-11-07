@@ -12,7 +12,6 @@ import {
   SWITCH_TASK_SUCCESS,
   SWITCH_TASK_FAILURE
 } from './taskTypes';
-import { saveSelectedTask } from './tasksUtils';
 
 export const createTaskStart = (taskName: string) => ({
   type: CREATE_TASK_START,

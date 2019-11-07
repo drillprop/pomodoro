@@ -29,10 +29,7 @@ export default (state: TasksState = initialState, action: any) => {
       const { tasks, selectedTask } = action.initial;
       return {
         ...state,
-        tasks: {
-          ...tasks,
-          ...state.tasks
-        },
+        tasks,
         selectedTask
       };
     case CREATE_TASK_SUCCESS:
