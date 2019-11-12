@@ -1,4 +1,4 @@
-import moment = require('moment');
+import moment from 'moment';
 
 export const convertSecToStr = (seconds: number): string => {
   const timerDurationSeconds = moment
