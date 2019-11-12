@@ -1,31 +1,10 @@
 import moment from 'moment';
+import dayjs from 'dayjs';
 
-export const convertSecToStr = (seconds: number): string => {
-  const timerDurationSeconds = moment
-    .duration(seconds, 'seconds')
-    .seconds()
-    .toString()
-    .padStart(2, '0');
-  const timerDurationMinutes = moment
-    .duration(seconds, 'seconds')
-    .minutes()
-    .toString()
-    .padStart(2, '0');
-  const timerDurationHours = moment
-    .duration(seconds, 'seconds')
-    .hours()
-    .toString()
-    .padStart(2, '0');
-  if (seconds < 60 * 60)
-    return `${timerDurationMinutes}:${timerDurationSeconds}`;
-  else
-    return `${timerDurationHours}:${timerDurationMinutes}:${timerDurationSeconds}`;
-};
-
-export const convertSecToObj = (seconds: number): object => {
-  const timerDurationSeconds = moment.duration(seconds, 'seconds').seconds();
-  const timerDurationMinutes = moment.duration(seconds, 'seconds').minutes();
-  const timerDurationHours = moment.duration(seconds, 'seconds').hours();
+export const convertSecToObj = (seconds: number): any => {
+  const timerDurationSeconds = seconds % 60;
+  const timerDurationMinutes = Math.floor((seconds % (60 * 60)) / 60);
+  const timerDurationHours = Math.floor((seconds % (60 * 360)) / 60 / 60);
   return {
     hours: timerDurationHours,
     minutes: timerDurationMinutes,
@@ -33,13 +12,32 @@ export const convertSecToObj = (seconds: number): object => {
   };
 };
 
+export const convertSecToStr = (seconds: number): string => {
+  const timerDurationSeconds = convertSecToObj(seconds)
+    .seconds.toString()
+    .padStart(2, '0');
+
+  const timerDurationMinutes = convertSecToObj(seconds)
+    .minutes.toString()
+    .padStart(2, '0');
+
+  const timerDurationHours = convertSecToObj(seconds)
+    .hours.toString()
+    .padStart(2, '0');
+
+  if (seconds < 60 * 60)
+    return `${timerDurationMinutes}:${timerDurationSeconds}`;
+  else
+    return `${timerDurationHours}:${timerDurationMinutes}:${timerDurationSeconds}`;
+};
+
 export const countTimeLeft = (now: number, future: number): number => {
-  const momentNow = moment(now);
-  const momentFuture = moment(future);
+  const dayJsNow = dayjs(now);
+  const dayJsFuture = dayjs(future);
 
-  const seconds = momentFuture.diff(momentNow, 'seconds');
+  const difference = dayJsFuture.diff(dayJsNow, 'second');
 
-  return seconds;
+  return difference;
 };
 
 export const renameProperty = (oldProp: string, newProp: string, obj: any) => {
