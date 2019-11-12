@@ -1,4 +1,3 @@
-import moment from 'moment';
 import dayjs from 'dayjs';
 
 export const convertSecToObj = (seconds: number): any => {
@@ -55,7 +54,7 @@ export const renameProperty = (oldProp: string, newProp: string, obj: any) => {
 };
 
 export const getToday = () => {
-  return moment().format('DD-MM-YY');
+  return dayjs().format('DD-MM-YY');
 };
 
 export const getStorageUser = () => {
@@ -68,8 +67,8 @@ export const createDaysArray = (daysBackward: number) => {
   const arr = [];
   for (let i = daysBackward; i >= 0; i--) {
     arr.push(
-      moment()
-        .subtract(i, 'days')
+      dayjs()
+        .subtract(i, 'day')
         .format('DD-MM-YY')
     );
   }
