@@ -6,7 +6,8 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 provider.setCustomParameters({ prompt: 'select_account' });
 
-export const loginWithGoogle = () => auth.signInWithPopup(provider);
+export const loginWithGoogle = () =>
+  auth.signInWithPopup(provider).catch(err => console.log(err));
 
 export function getCurrentUser() {
   return new Promise<firebase.User | null>((resolve, reject) => {

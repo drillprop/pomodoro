@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --env.mode development --open --config webpack.dev.js --hot",
+    "build": "webpack --env.mode production --config webpack.prod.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
