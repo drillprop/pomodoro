@@ -1,11 +1,14 @@
 {
   "name": "pommo",
   "version": "1.0.0",
+  "homepage": "https://drillprop.github.io/pommodoro/",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
@@ -37,6 +40,7 @@
     "dayjs": "^1.8.17",
     "dotenv": "^8.1.0",
     "firebase": "^6.4.0",
+    "gh-pages": "^2.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.0",

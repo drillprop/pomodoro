@@ -10,6 +10,6 @@ module.exports = webpackMerge(common, {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()]
-  },
-  plugins: [new WebpackBundleAnalyzer()]
+  }
+  // plugins: [new WebpackBundleAnalyzer()]
 });
