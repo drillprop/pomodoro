@@ -19,11 +19,11 @@ export const StyledTask = styled.li`
   font-size: 20px;
   margin-bottom: 16px;
 `;
-export const StyledTaskButton = styled.button`
+export const StyledTaskButton = styled.button<{ disabled: boolean }>`
   padding: 10px 12px;
   width: 50%;
   border: none;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   background: ${secondaryBackground};
   font-family: ${secondFont};
   color: ${primary};

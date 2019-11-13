@@ -2,7 +2,10 @@ import {
   CREATE_TASK_SUCCESS,
   EDIT_TASK_SUCCESS,
   DELETE_TASK_SUCCESS,
-  SWITCH_TASK_SUCCESS
+  SWITCH_TASK_SUCCESS,
+  EDIT_TASK_START,
+  CREATE_TASK_START,
+  DELETE_TASK_START
 } from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
 import {
@@ -14,17 +17,26 @@ import {
 export interface TasksState {
   tasks: any;
   selectedTask: string;
+  isLoading: boolean;
 }
 
 const initialState: TasksState = {
   tasks: {
     default: 0
   },
-  selectedTask: 'default'
+  selectedTask: 'default',
+  isLoading: false
 };
 
 export default (state: TasksState = initialState, action: any) => {
   switch (action.type) {
+    case EDIT_TASK_START:
+    case CREATE_TASK_START:
+    case DELETE_TASK_START:
+      return {
+        ...state,
+        isLoading: true
+      };
     case FETCH_INITIAL_STATE_SUCCES:
       const { tasks, selectedTask } = action.initial;
       return {
@@ -38,7 +50,8 @@ export default (state: TasksState = initialState, action: any) => {
         tasks: {
           ...state.tasks,
           [action.taskName]: 0
-        }
+        },
+        isLoading: false
       };
     case EDIT_TASK_SUCCESS:
       const { prevTask, newTask } = action;
@@ -47,7 +60,8 @@ export default (state: TasksState = initialState, action: any) => {
         ...state,
         tasks: { ...newTasksObj },
         selectedTask:
-          prevTask === state.selectedTask ? action.newTask : state.selectedTask
+          prevTask === state.selectedTask ? action.newTask : state.selectedTask,
+        isLoading: false
       };
     case DELETE_TASK_SUCCESS: {
       const { taskName } = action;
@@ -56,7 +70,8 @@ export default (state: TasksState = initialState, action: any) => {
       if (taskName !== 'default') delete newTasksState[taskName];
       return {
         ...state,
-        tasks: newTasksState
+        tasks: newTasksState,
+        isLoading: false
       };
     }
     case SKIP_BREAK:

@@ -1,13 +1,15 @@
 import React, { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteTaskStart } from '../../../../duck/tasks/tasksActions';
-import EditTask from '../EditTask';
+import EditTask from './task/EditTask';
 import { StyledTask, StyledTaskButton } from './Task.styles';
+import { ReduxState } from '../../../../duck/store';
 
 const Task: FC<{
   task: string;
 }> = ({ task }) => {
   const dispatch = useDispatch();
+  const { isLoading } = useSelector(({ tasks }: ReduxState) => tasks);
 
   const [editable, setAsEditable] = useState(false);
 
@@ -17,10 +19,16 @@ const Task: FC<{
     <StyledTask>
       {task}
       <div>
-        <StyledTaskButton onClick={() => setAsEditable(true)}>
+        <StyledTaskButton
+          disabled={isLoading}
+          onClick={() => setAsEditable(true)}
+        >
           Edit
         </StyledTaskButton>
-        <StyledTaskButton onClick={() => dispatch(deleteTaskStart(task))}>
+        <StyledTaskButton
+          disabled={isLoading}
+          onClick={() => dispatch(deleteTaskStart(task))}
+        >
           Delete
         </StyledTaskButton>
       </div>
