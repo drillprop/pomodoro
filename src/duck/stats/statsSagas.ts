@@ -1,6 +1,6 @@
 import { FETCH_INTERVALS_BY_DAY_START } from './statsTypes';
 import { takeLatest, put, all, call } from 'redux-saga/effects';
-import { getIntervalsByDay } from './statsUtils';
+// import { getIntervalsByDay } from './statsUtils';
 import {
   fetchIntervalsByDaySuccess,
   fetchIntervalsByDayFailure
@@ -8,8 +8,8 @@ import {
 
 export function* fetchIntervalsByDay() {
   try {
-    const intervalsByDay = yield call(getIntervalsByDay);
-    yield put(fetchIntervalsByDaySuccess(intervalsByDay));
+    // const intervalsByDay = yield call(getIntervalsByDay);
+    // yield put(fetchIntervalsByDaySuccess(intervalsByDay));
   } catch (err) {
     yield put(fetchIntervalsByDayFailure(err));
   }

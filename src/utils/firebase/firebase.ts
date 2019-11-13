@@ -1,8 +1,9 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/firestore';
+import 'firebase/database';
+// import 'firebase/firestore';
 
-export const { FieldValue } = firebase.firestore;
+// export const { FieldValue } = firebase.firestore;
 
 export const firebaseConfig = {
   apiKey: process.env.API_KEY,
@@ -17,4 +18,6 @@ export const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
-export const firestore = firebase.firestore();
+export const database = firebase.database();
+console.log('TCL: database', database);
+// export const firestore = firebase.firestore();

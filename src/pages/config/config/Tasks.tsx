@@ -7,18 +7,19 @@ import { ReduxState } from '../../../duck/store';
 import { StyledUl } from './Tasks.styles';
 
 const Tasks: FC = () => {
-  const tasks = useSelector(({ tasks }: ReduxState) =>
-    Object.keys(tasks.tasks).filter((task: string) => task !== 'default')
-  );
+  const tasks = useSelector(({ tasks }: ReduxState) => {
+    console.log(tasks);
+    return tasks
+      ? Object.keys(tasks.tasks).filter((task: string) => task !== 'default')
+      : [];
+  });
   const { isLoading } = useSelector(({ tasks }: ReduxState) => tasks);
 
   return (
     <>
       <SubTitle>tasks</SubTitle>
       <StyledUl isLoading={isLoading}>
-        {tasks.map(task => (
-          <Task task={task} key={task} />
-        ))}
+        {tasks && tasks.map(task => <Task task={task} key={task} />)}
         <CreateNewTask />
       </StyledUl>
     </>

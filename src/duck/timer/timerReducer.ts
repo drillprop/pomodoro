@@ -127,7 +127,6 @@ export default (state: TimerState = initialState, action: any) => {
     case FETCH_INITIAL_STATE_SUCCES:
       const actionBreakTime: number = action.initial.config.breakTime;
       const actionIntervalTime: number = action.initial.config.intervalTime;
-
       return {
         ...state,
         isFetching: false,

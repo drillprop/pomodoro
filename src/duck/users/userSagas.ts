@@ -15,7 +15,7 @@ import {
   LOGIN_WITH_GOOGLE
 } from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
-import { addUserToFirestore } from './userUtils';
+// import { addUserToFirestore } from './userUtils';
 import { getCurrentUser, loginWithGoogle } from '../../utils/firebase/auth';
 
 export function* updateProfile(displayName: string) {
@@ -27,22 +27,22 @@ export function* updateProfile(displayName: string) {
   }
 }
 
-export function* userData(user: any) {
-  try {
-    const userRef = yield addUserToFirestore(user);
-    const userSnapshot = yield userRef.get();
-    const { displayName, email, uid, createdAt } = yield userSnapshot.data();
-    return {
-      displayName,
-      email,
-      uid,
-      createdAt
-    };
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-}
+// export function* userData(user: any) {
+//   try {
+//     const userRef = yield addUserToFirestore(user);
+//     const userSnapshot = yield userRef.get();
+//     const { displayName, email, uid, createdAt } = yield userSnapshot.data();
+//     return {
+//       displayName,
+//       email,
+//       uid,
+//       createdAt
+//     };
+//   } catch (err) {
+//     console.log(err);
+//     return err;
+//   }
+// }
 
 export function* isUserLoggedIn() {
   try {
@@ -51,8 +51,8 @@ export function* isUserLoggedIn() {
       yield put(loginFailure({ message: 'You are not logged in' }));
       return;
     }
-    const user = yield call(userData, userAuth);
-    yield put(loginSuccess(user));
+    // const user = yield call(userData, userAuth);
+    // yield put(loginSuccess(user));
   } catch (err) {
     yield put(loginFailure(err));
   }
@@ -61,19 +61,17 @@ export function* isUserLoggedIn() {
 export function* login({ email, password }: any) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    const data = yield call(userData, user);
-    yield put(loginSuccess(data));
+    // const data = yield call(userData, user);
+    // yield put(loginSuccess(data));
   } catch (err) {
     yield put(loginFailure(err));
   }
 }
 
-export function* register({ email, password, displayName }: any) {
+export function* registerWithEmail({ email, password, displayName }: any) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield call(updateProfile, displayName);
-    const data = yield call(userData, user);
-    yield put(registerSuccess(data));
+    yield put(registerSuccess(user));
   } catch (err) {
     yield put(registerFailure(err));
   }
@@ -91,8 +89,8 @@ export function* signOut() {
 export function* loginWithGoogleSaga() {
   try {
     const { user } = yield loginWithGoogle();
-    const data = yield call(userData, user);
-    yield put(loginSuccess(data));
+    // const data = yield call(userData, user);
+    // yield put(loginSuccess(data));
   } catch (err) {
     yield put(loginFailure(err));
   }
@@ -107,7 +105,7 @@ export function* onLogin() {
 }
 
 export function* onRegister() {
-  yield takeLatest(REGISTER_START, register);
+  yield takeLatest(REGISTER_START, registerWithEmail);
 }
 
 export function* onSignOut() {

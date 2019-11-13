@@ -15,11 +15,11 @@ import {
   SET_TIMERS_START,
   FETCH_INITIAL_STATE_START
 } from './timerTypes';
-import {
-  incIntervalInFirestore,
-  saveInitialTimelefts,
-  fetchInitialState
-} from './timerUtils';
+// import {
+//   incIntervalInFirestore,
+//   saveInitialTimelefts,
+//   fetchInitialState
+// } from './timerUtils';
 import {
   stopTimerAndSwitchFaze,
   setTimersSuccess,
@@ -32,7 +32,7 @@ export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
   try {
     yield delay(timeleft * 1000 + 1000);
     yield put(stopTimerAndSwitchFaze(isInterval));
-    yield isInterval && call(incIntervalInFirestore, selectedTask);
+    // yield isInterval && call(incIntervalInFirestore, selectedTask);
   } catch (err) {
     console.log(err);
     return err;
@@ -41,7 +41,7 @@ export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
 
 export function* setTimersSaga({ timelefts }: any) {
   try {
-    yield call(saveInitialTimelefts, timelefts);
+    // yield call(saveInitialTimelefts, timelefts);
     yield put(setTimersSuccess(timelefts));
   } catch (err) {
     yield put(setTimersFailure(err));
@@ -50,8 +50,9 @@ export function* setTimersSaga({ timelefts }: any) {
 
 export function* fetchInitialStateSaga() {
   try {
-    const initialState = yield call(fetchInitialState);
-    yield put(fetchInitialStateSucces(initialState));
+    // const initialState = yield call(fetchInitialState);
+    // console.log(initialState);
+    // yield put(fetchInitialStateSucces(initialState));
   } catch (err) {
     yield put(fetchInitialStateFailure(err));
   }

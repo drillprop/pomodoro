@@ -1,80 +1,80 @@
-import { dataAndRef } from '../../utils/firebase/firestore';
+// import { dataAndRef } from '../../utils/firebase/firestore';
 import { getToday } from '../../utils/helpers';
-import { addUserToFirestore } from '../users/userUtils';
-import { firestore } from '../../utils/firebase/firebase';
+// import { addUserToFirestore } from '../users/userUtils';
+// import { firestore } from '../../utils/firebase/firebase';
 import { getCurrentUser } from '../../utils/firebase/auth';
 
-export const incIntervalInFirestore = async (selectedTask: string) => {
-  const today = getToday();
+// export const incIntervalInFirestore = async (selectedTask: string) => {
+//   const today = getToday();
 
-  const usr = await getCurrentUser();
-  if (!usr) return;
+//   const usr = await getCurrentUser();
+//   if (!usr) return;
 
-  const [data, usrRef] = await dataAndRef(usr);
+//   const [data, usrRef] = await dataAndRef(usr);
 
-  // inc in tasks
+//   // inc in tasks
 
-  if (data) {
-    const { tasks } = data;
-    if (!tasks || !tasks[selectedTask]) {
-      usrRef.set(
-        {
-          tasks: {
-            [selectedTask]: 1
-          }
-        },
-        { merge: true }
-      );
-    } else {
-      const savedTask = tasks[selectedTask];
+//   if (data) {
+//     const { tasks } = data;
+//     if (!tasks || !tasks[selectedTask]) {
+//       usrRef.set(
+//         {
+//           tasks: {
+//             [selectedTask]: 1
+//           }
+//         },
+//         { merge: true }
+//       );
+//     } else {
+//       const savedTask = tasks[selectedTask];
 
-      usrRef.update({
-        [`tasks.${selectedTask}`]: savedTask + 1
-      });
-    }
-  }
+//       usrRef.update({
+//         [`tasks.${selectedTask}`]: savedTask + 1
+//       });
+//     }
+//   }
 
-  // inc in taskByDay
+//   // inc in taskByDay
 
-  const todayRef = usrRef.collection('intervalsByDay').doc(today);
-  const todayTasks = await todayRef.get();
+//   const todayRef = usrRef.collection('intervalsByDay').doc(today);
+//   const todayTasks = await todayRef.get();
 
-  if (!todayTasks.exists) {
-    await todayRef.set({ [selectedTask]: 1 });
-  }
+//   if (!todayTasks.exists) {
+//     await todayRef.set({ [selectedTask]: 1 });
+//   }
 
-  const tasks = await todayTasks.data();
+//   const tasks = await todayTasks.data();
 
-  if (tasks) {
-    const presentTask = tasks[selectedTask];
-    await todayRef.update({
-      [selectedTask]: presentTask ? presentTask + 1 : 1
-    });
-  }
-};
+//   if (tasks) {
+//     const presentTask = tasks[selectedTask];
+//     await todayRef.update({
+//       [selectedTask]: presentTask ? presentTask + 1 : 1
+//     });
+//   }
+// };
 
-export const saveInitialTimelefts = async (timelefts: any) => {
-  const usr = await getCurrentUser();
-  if (!usr) return;
+// export const saveInitialTimelefts = async (timelefts: any) => {
+//   const usr = await getCurrentUser();
+//   if (!usr) return;
 
-  const [data, userRef] = await dataAndRef(usr);
+//   const [data, userRef] = await dataAndRef(usr);
 
-  if (data) {
-    await userRef.set({ config: { ...timelefts } }, { merge: true });
-  }
-};
+//   if (data) {
+//     await userRef.set({ config: { ...timelefts } }, { merge: true });
+//   }
+// };
 
-export const fetchInitialState = async () => {
-  const usr: any = await getCurrentUser();
-  if (!usr) return;
-  const usrRef = firestore.doc(`users/${usr.uid}`);
+// export const fetchInitialState = async () => {
+//   const usr: any = await getCurrentUser();
+//   if (!usr) return;
+//   const usrRef = firestore.doc(`users/${usr.uid}`);
 
-  const doc = await usrRef.get();
-  const data = doc.data();
+//   const doc = await usrRef.get();
+//   const data = doc.data();
 
-  if (!data) {
-    await addUserToFirestore(usr);
-  }
+//   if (!data) {
+//     await addUserToFirestore(usr);
+//   }
 
-  return data;
-};
+//   return data;
+// };

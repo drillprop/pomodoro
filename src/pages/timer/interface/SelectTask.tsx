@@ -13,9 +13,7 @@ const SelectTask: FC = () => {
       value={selectedTask}
       onChange={e => dispatch(switchTaskStart(e.currentTarget.value))}
     >
-      {Object.keys(tasks).map(key => (
-        <option key={key}>{key}</option>
-      ))}
+      {tasks && Object.keys(tasks).map(key => <option key={key}>{key}</option>)}
     </Select>
   );
 };

@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../../../../duck/store';
 import { resetTimer, skipBreak } from '../../../../duck/timer/timerActions';
-import { incIntervalInFirestore } from '../../../../duck/timer/timerUtils';
 import useTimerState from '../../../../hooks/useTimerState';
 import { StyledButton } from './ResetButton.styles';
 

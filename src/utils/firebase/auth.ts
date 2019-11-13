@@ -18,28 +18,6 @@ export function getCurrentUser() {
   });
 }
 
-export const registerAccount = async (
-  registerParams: RegisterAndLoginParams
-) => {
-  const { email, password, displayName } = registerParams;
-  try {
-    const newUser = await auth.createUserWithEmailAndPassword(email, password);
-
-    if (newUser) {
-      const { user } = await newUser;
-      if (user) {
-        await user.updateProfile({
-          displayName
-        });
-      }
-    }
-
-    return newUser;
-  } catch (err) {
-    return err;
-  }
-};
-
 export const loginToAccount = async (loginParams: RegisterAndLoginParams) => {
   const { email, password } = loginParams;
   try {
