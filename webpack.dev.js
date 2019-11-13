@@ -1,5 +1,6 @@
 const common = require('./webpack.common');
 const webpackMerge = require('webpack-merge');
+const { EnvironmentPlugin } = require('webpack');
 
 module.exports = webpackMerge(common, {
   mode: 'development',
@@ -8,5 +9,11 @@ module.exports = webpackMerge(common, {
     overlay: true
   },
   stats: 'minimal',
-  devtool: 'eval'
+  devtool: 'eval',
+  plugins: [
+    new EnvironmentPlugin({
+      NODE_ENV: 'development',
+      DEBUG: false
+    })
+  ]
 });
