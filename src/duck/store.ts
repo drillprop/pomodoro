@@ -20,7 +20,6 @@ const store = createStore(
   reducer,
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
-console.log(process);
 
 export interface ReduxState {
   timer: TimerState;
