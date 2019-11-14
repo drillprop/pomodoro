@@ -25,7 +25,7 @@ import {
 
 // Register
 
-export function* onRegisterStart() {
+export function* onRegisterWithEmailStart() {
   yield takeLatest(REGISTER_START, registerWithEmail);
 }
 
@@ -44,7 +44,7 @@ export function* registerWithEmail({ payload }: RegisterStartAction) {
 
 // Login
 
-export function* onLoginStart() {
+export function* onLoginWithEmailStart() {
   yield takeLatest(LOGIN_START, loginWithEmail);
 }
 
@@ -64,11 +64,11 @@ export function* loginWithEmail({ payload }: LoginStartAction) {
 
 // Google Login
 
-export function* onGoogleLoginStart() {
-  yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
+export function* onLoginGoogleStart() {
+  yield takeLatest(LOGIN_WITH_GOOGLE, loginGoogle);
 }
 
-export function* loginWithGoogleSaga() {
+export function* loginGoogle() {
   try {
     const { user } = yield loginWithGoogle();
     // const data = yield call(userData, user);
@@ -97,8 +97,26 @@ export function* signOut() {
   }
 }
 
-//
+// Check Session
 
+export function* onCheckSession() {
+  yield takeLatest(CHECK_SESSION, checkSession);
+}
+
+export function* checkSession() {
+  const user = yield call(getCurrentUser);
+  if (!user) {
+    yield signOut();
+  } else {
+    yield put(loginSuccess({ uid: user.uid, email: user.email }));
+  }
+}
+
+//
+//
+// todo
+//
+//
 export function* updateProfile(displayName: string) {
   try {
     const user = yield auth.currentUser;
@@ -125,34 +143,11 @@ export function* updateProfile(displayName: string) {
 //   }
 // }
 
-export function* isUserLoggedIn() {
-  try {
-    const userAuth = yield call(getCurrentUser);
-    if (!userAuth) {
-      yield put(
-        loginFailure({
-          message: 'You are not logged in',
-          code: 'something-wrong'
-        })
-      );
-      return;
-    }
-    // const user = yield call(userData, userAuth);
-    // yield put(loginSuccess(user));
-  } catch (err) {
-    yield put(loginFailure(err));
-  }
-}
-
-export function* onCheckSession() {
-  yield takeLatest(CHECK_SESSION, isUserLoggedIn);
-}
-
 export function* userSagas() {
   yield all([
-    call(onRegisterStart),
-    call(onLoginStart),
-    call(onGoogleLoginStart),
+    call(onRegisterWithEmailStart),
+    call(onLoginWithEmailStart),
+    call(onLoginGoogleStart),
     call(onSignOutStart),
     call(onCheckSession)
   ]);

@@ -7,7 +7,8 @@ import {
   SIGN_OUT_FAILURE,
   LOGIN_START,
   REGISTER_START,
-  LOGIN_WITH_GOOGLE
+  LOGIN_WITH_GOOGLE,
+  CHECK_SESSION
 } from './userTypes';
 import { UserActionTypes, SignError, UserData } from './userInterfaces';
 
@@ -27,6 +28,7 @@ export default (state = initialState, action: UserActionTypes): UserState => {
   switch (action.type) {
     case LOGIN_START:
     case REGISTER_START:
+    case CHECK_SESSION:
     case LOGIN_WITH_GOOGLE:
       return {
         ...state,

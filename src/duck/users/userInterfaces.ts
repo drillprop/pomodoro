@@ -8,7 +8,8 @@ import {
   SIGN_OUT_START,
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
-  LOGIN_WITH_GOOGLE
+  LOGIN_WITH_GOOGLE,
+  CHECK_SESSION
 } from './userTypes';
 
 export interface UserData {
@@ -75,6 +76,12 @@ export interface LoginWithGoogleAction {
   type: typeof LOGIN_WITH_GOOGLE;
 }
 
+// CHECK SESSION INTERFACE
+
+export interface CheckSessionAction {
+  type: typeof CHECK_SESSION;
+}
+
 export type UserActionTypes =
   | RegisterStartAction
   | RegisterSuccessAction
@@ -85,4 +92,5 @@ export type UserActionTypes =
   | SignOutStartAction
   | SignOutSuccessAction
   | SignOutFailureAction
-  | LoginWithGoogleAction;
+  | LoginWithGoogleAction
+  | CheckSessionAction;

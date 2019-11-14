@@ -11,7 +11,7 @@ export const loginWithGoogle = () =>
 
 export function getCurrentUser() {
   return new Promise<firebase.User | null>((resolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    const unsubscribe: firebase.Unsubscribe = auth.onAuthStateChanged(user => {
       unsubscribe();
       resolve(user);
     }, reject);

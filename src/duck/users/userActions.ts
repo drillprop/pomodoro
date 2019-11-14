@@ -24,7 +24,8 @@ import {
   SignOutStartAction,
   SignOutSuccessAction,
   SignOutFailureAction,
-  LoginWithGoogleAction
+  LoginWithGoogleAction,
+  CheckSessionAction
 } from './userInterfaces';
 
 // REGISTER
@@ -46,6 +47,8 @@ export const registerFailure = (error: SignError): RegisterFailureAction => ({
   payload: error
 });
 
+// LOGIN
+
 export const loginStart = (
   credentials: RegisterAndLoginParams
 ): LoginStartAction => ({
@@ -63,6 +66,8 @@ export const loginFailure = (error: SignError): LoginFailureAction => ({
   payload: error
 });
 
+// SIGN OUT
+
 export const signOutStart = (): SignOutStartAction => ({
   type: SIGN_OUT_START
 });
@@ -76,11 +81,14 @@ export const signOutFailure = (error: SignError): SignOutFailureAction => ({
   payload: error
 });
 
+// LOGIN WITH GOOGLE
+
 export const loginWithGoogle = (): LoginWithGoogleAction => ({
   type: LOGIN_WITH_GOOGLE
 });
 
-// todo
-export const checkSession = () => ({
+// CHECK SESSION
+
+export const checkSession = (): CheckSessionAction => ({
   type: CHECK_SESSION
 });
