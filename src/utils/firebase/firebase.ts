@@ -15,9 +15,6 @@ export const firebaseConfig = {
   appId: process.env.APP_ID
 };
 
-firebase.initializeApp(firebaseConfig);
+export const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-export const auth = firebase.auth();
-export const database = firebase.database();
-console.log('TCL: database', database);
-// export const firestore = firebase.firestore();
+export const auth = firebaseApp.auth();

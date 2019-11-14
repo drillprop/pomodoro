@@ -22,6 +22,7 @@ import {
   RegisterStartAction,
   LoginStartAction
 } from './userInterfaces';
+import { addUserToDB } from './userUtils';
 
 // Register
 
@@ -33,6 +34,7 @@ export function* registerWithEmail({ payload }: RegisterStartAction) {
   try {
     const { email, password } = payload;
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield call(addUserToDB, user.uid, user.email);
     if (user) {
       yield put(registerSuccess({ uid: user.uid, email: user.email }));
     }
@@ -52,7 +54,7 @@ export function* loginWithEmail({ payload }: LoginStartAction) {
   try {
     const { email, password } = payload;
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    // const data = yield call(userData, user);
+    yield call(addUserToDB, user.uid, user.email);
     if (user) {
       const { email, uid } = user;
       yield put(loginSuccess({ email, uid }));

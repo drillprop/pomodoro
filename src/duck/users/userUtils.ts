@@ -1,3 +1,18 @@
+import { database } from '../../utils/firebase/database';
+
+export const addUserToDB = async (uid: string, email: string) => {
+  const userRef = database.ref('users/' + uid);
+  const snapShot = await userRef.once('value').then(snap => snap.val());
+
+  if (!snapShot)
+    await userRef.set({
+      uid,
+      email
+    });
+
+  return snapShot;
+};
+
 // import { firestore } from '../../utils/firebase/firebase';
 
 // export const addUserToFirestore = async (user: any) => {
