@@ -120,12 +120,12 @@ export function* onLoginStart() {
   yield takeLatest(LOGIN_START, loginWithEmail);
 }
 
-export function* onGoogleLoginStart() {
-  yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
-}
-
 export function* onSignOutStart() {
   yield takeLatest(SIGN_OUT_START, signOut);
+}
+
+export function* onGoogleLoginStart() {
+  yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
 }
 
 export function* onCheckSession() {

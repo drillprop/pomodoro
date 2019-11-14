@@ -4,7 +4,10 @@ import {
   REGISTER_FAILURE,
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  SIGN_OUT_START,
+  SIGN_OUT_SUCCESS,
+  SIGN_OUT_FAILURE
 } from './userTypes';
 
 export interface UserData {
@@ -52,10 +55,26 @@ export interface LoginFailureAction {
   payload: SignError;
 }
 
+// SIGN OUT INTERFACES
+
+export interface SignOutStartAction {
+  type: typeof SIGN_OUT_START;
+}
+export interface SignOutSuccessAction {
+  type: typeof SIGN_OUT_SUCCESS;
+}
+export interface SignOutFailureAction {
+  type: typeof SIGN_OUT_FAILURE;
+  payload: SignError;
+}
+
 export type UserActionTypes =
   | RegisterStartAction
   | RegisterSuccessAction
   | RegisterFailureAction
   | LoginStartAction
   | LoginSuccessAction
-  | LoginFailureAction;
+  | LoginFailureAction
+  | SignOutStartAction
+  | SignOutSuccessAction
+  | SignOutFailureAction;

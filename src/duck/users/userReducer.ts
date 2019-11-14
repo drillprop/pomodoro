@@ -22,8 +22,7 @@ const initialState: UserState = {
   error: null
 };
 
-export default (state = initialState, action: UserActionTypes): any => {
-  console.log(state);
+export default (state = initialState, action: UserActionTypes): UserState => {
   switch (action.type) {
     case LOGIN_START:
     case REGISTER_START:
@@ -36,6 +35,7 @@ export default (state = initialState, action: UserActionTypes): any => {
     case REGISTER_SUCCESS:
       return {
         ...state,
+        isGettingUser: false,
         currentUser: { ...action.payload }
       };
     case LOGIN_FAILURE:
@@ -44,7 +44,7 @@ export default (state = initialState, action: UserActionTypes): any => {
       return {
         ...state,
         isGettingUser: false,
-        error: null
+        error: { ...action.payload }
       };
     case SIGN_OUT_SUCCESS:
       return {

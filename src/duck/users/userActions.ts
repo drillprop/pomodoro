@@ -20,7 +20,10 @@ import {
   LoginSuccessAction,
   LoginFailureAction,
   SignError,
-  UserData
+  UserData,
+  SignOutStartAction,
+  SignOutSuccessAction,
+  SignOutFailureAction
 } from './userInterfaces';
 
 // REGISTER
@@ -42,10 +45,6 @@ export const registerFailure = (error: SignError): RegisterFailureAction => ({
   payload: error
 });
 
-export const checkSession = () => ({
-  type: CHECK_SESSION
-});
-
 export const loginStart = (
   credentials: RegisterAndLoginParams
 ): LoginStartAction => ({
@@ -63,15 +62,24 @@ export const loginFailure = (error: SignError): LoginFailureAction => ({
   payload: error
 });
 
-export const loginWithGoogle = () => ({
-  type: LOGIN_WITH_GOOGLE
+export const signOutStart = (): SignOutStartAction => ({
+  type: SIGN_OUT_START
 });
 
-export const signOutStart = () => ({ type: SIGN_OUT_START });
+export const signOutSuccess = (): SignOutSuccessAction => ({
+  type: SIGN_OUT_SUCCESS
+});
 
-export const signOutSuccess = () => ({ type: SIGN_OUT_SUCCESS });
-
-export const signOutFailure = (error: any) => ({
+export const signOutFailure = (error: SignError): SignOutFailureAction => ({
   type: SIGN_OUT_FAILURE,
-  error
+  payload: error
+});
+
+// todo
+export const checkSession = () => ({
+  type: CHECK_SESSION
+});
+
+export const loginWithGoogle = () => ({
+  type: LOGIN_WITH_GOOGLE
 });
