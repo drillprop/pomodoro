@@ -15,7 +15,14 @@ const PlayButton: FC = () => {
   const startPause = () => {
     isTimerStart
       ? dispatch(pauseTimer(Date.now()))
-      : dispatch(startTimer(Date.now(), timeleft, selectedTask, isInterval));
+      : dispatch(
+          startTimer({
+            startTime: Date.now(),
+            timeleft,
+            selectedTask,
+            isInterval
+          })
+        );
   };
 
   return (

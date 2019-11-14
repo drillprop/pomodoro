@@ -7,7 +7,7 @@ import Config from '../../../pages/config/Config';
 import Sign from '../../../pages/sign/Sign';
 import Interface from '../../../pages/timer/Interface';
 import withLoading from '../../withLoading';
-import { fetchInitialStateStart } from '../../../duck/timer/timerActions';
+// import { fetchInitialStateStart } from '../../../duck/timer/timerActions';
 import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
 
 const Stats = lazy(() => import('../../../pages/stats/Stats'));
@@ -22,7 +22,7 @@ const Router: FC = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(fetchInitialStateStart());
+      // dispatch(fetchInitialStateStart());
     }
   }, [user]);
 

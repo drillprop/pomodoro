@@ -12,7 +12,9 @@ const RetryButton: FC = () => {
 
   const retry = async () => {
     await dispatch(resetTimer());
-    dispatch(startTimer(Date.now(), timeleft, selectedTask, isInterval));
+    dispatch(
+      startTimer({ startTime: Date.now(), timeleft, selectedTask, isInterval })
+    );
   };
 
   return <StyledRetryButton onClick={retry}>Retry</StyledRetryButton>;

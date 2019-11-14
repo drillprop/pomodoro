@@ -12,7 +12,7 @@ import {
   PAUSE_TIMER,
   RESET_TIMER,
   SKIP_BREAK,
-  SET_TIMERS_START,
+  SET_TIMERS_DURATION_START,
   FETCH_INITIAL_STATE_START
 } from './timerTypes';
 // import {
@@ -22,10 +22,10 @@ import {
 // } from './timerUtils';
 import {
   stopTimerAndSwitchFaze,
-  setTimersSuccess,
-  setTimersFailure,
-  fetchInitialStateSucces,
-  fetchInitialStateFailure
+  setTimersDurationSuccess,
+  setTimersDurationFailure
+  // fetchInitialStateSucces,
+  // fetchInitialStateFailure
 } from './timerActions';
 
 export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
@@ -39,12 +39,12 @@ export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
   }
 }
 
-export function* setTimersSaga({ timelefts }: any) {
+export function* setTimersDurationSaga({ timelefts }: any) {
   try {
     // yield call(saveInitialTimelefts, timelefts);
-    yield put(setTimersSuccess(timelefts));
+    yield put(setTimersDurationSuccess(timelefts));
   } catch (err) {
-    yield put(setTimersFailure(err));
+    yield put(setTimersDurationFailure(err));
   }
 }
 
@@ -54,7 +54,7 @@ export function* fetchInitialStateSaga() {
     // console.log(initialState);
     // yield put(fetchInitialStateSucces(initialState));
   } catch (err) {
-    yield put(fetchInitialStateFailure(err));
+    // yield put(fetchInitialStateFailure(err));
   }
 }
 
@@ -68,7 +68,7 @@ export function* onStartTimer() {
 }
 
 export function* onSettingTimers() {
-  yield takeLatest(SET_TIMERS_START, setTimersSaga);
+  yield takeLatest(SET_TIMERS_DURATION_START, setTimersDurationSaga);
 }
 
 export function* onFetchingInitialState() {

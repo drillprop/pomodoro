@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { convertSecToObj } from '../utils/helpers';
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { setTimersStart } from '../duck/timer/timerActions';
+import { setTimersDurationStart } from '../duck/timer/timerActions';
 import { ReduxState } from '../duck/store';
 
 export default () => {
@@ -71,8 +71,9 @@ export default () => {
       acc[item] = timeleft[item].seconds + timeleft[item].minutes * 60;
       return acc;
     }, {});
+    console.log(newState);
 
-    dispatch(setTimersStart(newState));
+    dispatch(setTimersDurationStart(newState));
   };
 
   return [timeleft, updateState, submitState];
