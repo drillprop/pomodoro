@@ -10,9 +10,7 @@ import withLoading from '../../withLoading';
 import { fetchInitialStateStart } from '../../../duck/timer/timerActions';
 import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
 
-const WithLoadingInterface = withLoading(Interface);
 const Stats = lazy(() => import('../../../pages/stats/Stats'));
-const WithLoadingConfig = withLoading(Config);
 
 const Router: FC = () => {
   const user = useSelector(({ user }: ReduxState) => user.currentUser);
@@ -33,7 +31,7 @@ const Router: FC = () => {
       <ProtectedRoute
         path='/config'
         isAuth={!!user}
-        component={() => <WithLoadingConfig isLoading={isLoading} />}
+        component={() => <Config />}
       />
       <Suspense fallback={<Loading />}>
         <ProtectedRoute path='/stats' isAuth={!!user} component={Stats} />
@@ -47,11 +45,7 @@ const Router: FC = () => {
         exact
         path='/'
         render={() =>
-          !user && !isLoading ? (
-            <Redirect to='/sign' />
-          ) : (
-            <WithLoadingInterface isLoading={isLoading} />
-          )
+          !user && !isLoading ? <Redirect to='/sign' /> : <Interface />
         }
       />
     </>
