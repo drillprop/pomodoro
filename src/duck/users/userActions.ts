@@ -23,7 +23,8 @@ import {
   UserData,
   SignOutStartAction,
   SignOutSuccessAction,
-  SignOutFailureAction
+  SignOutFailureAction,
+  LoginWithGoogleAction
 } from './userInterfaces';
 
 // REGISTER
@@ -75,11 +76,11 @@ export const signOutFailure = (error: SignError): SignOutFailureAction => ({
   payload: error
 });
 
+export const loginWithGoogle = (): LoginWithGoogleAction => ({
+  type: LOGIN_WITH_GOOGLE
+});
+
 // todo
 export const checkSession = () => ({
   type: CHECK_SESSION
-});
-
-export const loginWithGoogle = () => ({
-  type: LOGIN_WITH_GOOGLE
 });

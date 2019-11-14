@@ -7,7 +7,8 @@ import {
   LOGIN_FAILURE,
   SIGN_OUT_START,
   SIGN_OUT_SUCCESS,
-  SIGN_OUT_FAILURE
+  SIGN_OUT_FAILURE,
+  LOGIN_WITH_GOOGLE
 } from './userTypes';
 
 export interface UserData {
@@ -68,6 +69,12 @@ export interface SignOutFailureAction {
   payload: SignError;
 }
 
+// LOGIN WITH GOOGLE INTERFACES
+
+export interface LoginWithGoogleAction {
+  type: typeof LOGIN_WITH_GOOGLE;
+}
+
 export type UserActionTypes =
   | RegisterStartAction
   | RegisterSuccessAction
@@ -77,4 +84,5 @@ export type UserActionTypes =
   | LoginFailureAction
   | SignOutStartAction
   | SignOutSuccessAction
-  | SignOutFailureAction;
+  | SignOutFailureAction
+  | LoginWithGoogleAction;

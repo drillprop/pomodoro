@@ -23,6 +23,82 @@ import {
   LoginStartAction
 } from './userInterfaces';
 
+// Register
+
+export function* onRegisterStart() {
+  yield takeLatest(REGISTER_START, registerWithEmail);
+}
+
+export function* registerWithEmail({ payload }: RegisterStartAction) {
+  try {
+    const { email, password } = payload;
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    if (user) {
+      yield put(registerSuccess({ uid: user.uid, email: user.email }));
+    }
+  } catch (err) {
+    console.log(err);
+    yield put(registerFailure(err));
+  }
+}
+
+// Login
+
+export function* onLoginStart() {
+  yield takeLatest(LOGIN_START, loginWithEmail);
+}
+
+export function* loginWithEmail({ payload }: LoginStartAction) {
+  try {
+    const { email, password } = payload;
+    const { user } = yield auth.signInWithEmailAndPassword(email, password);
+    // const data = yield call(userData, user);
+    if (user) {
+      const { email, uid } = user;
+      yield put(loginSuccess({ email, uid }));
+    }
+  } catch (err) {
+    yield put(loginFailure(err));
+  }
+}
+
+// Google Login
+
+export function* onGoogleLoginStart() {
+  yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
+}
+
+export function* loginWithGoogleSaga() {
+  try {
+    const { user } = yield loginWithGoogle();
+    // const data = yield call(userData, user);
+    // yield put(loginSuccess(data));
+    if (user) {
+      const { email, uid } = user;
+      yield put(loginSuccess({ email, uid }));
+    }
+  } catch (err) {
+    yield put(loginFailure(err));
+  }
+}
+
+// Sign Out
+
+export function* onSignOutStart() {
+  yield takeLatest(SIGN_OUT_START, signOut);
+}
+
+export function* signOut() {
+  try {
+    yield auth.signOut();
+    yield put(signOutSuccess());
+  } catch (err) {
+    yield put(signOutFailure(err));
+  }
+}
+
+//
+
 export function* updateProfile(displayName: string) {
   try {
     const user = yield auth.currentUser;
@@ -66,66 +142,6 @@ export function* isUserLoggedIn() {
   } catch (err) {
     yield put(loginFailure(err));
   }
-}
-
-export function* signOut() {
-  try {
-    yield auth.signOut();
-    yield put(signOutSuccess());
-  } catch (err) {
-    yield put(signOutFailure(err));
-  }
-}
-
-export function* loginWithGoogleSaga() {
-  try {
-    const { user } = yield loginWithGoogle();
-    // const data = yield call(userData, user);
-    // yield put(loginSuccess(data));
-  } catch (err) {
-    yield put(loginFailure(err));
-  }
-}
-
-export function* registerWithEmail({ payload }: RegisterStartAction) {
-  try {
-    const { email, password } = payload;
-    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    if (user) {
-      yield put(registerSuccess({ uid: user.uid, email: user.email }));
-    }
-  } catch (err) {
-    console.log(err);
-    yield put(registerFailure(err));
-  }
-}
-
-export function* loginWithEmail({ payload }: LoginStartAction) {
-  try {
-    const { email, password } = payload;
-    const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    // const data = yield call(userData, user);
-    console.log(user);
-    yield put(loginSuccess({ uid: user.uid, email: user.email }));
-  } catch (err) {
-    yield put(loginFailure(err));
-  }
-}
-
-export function* onRegisterStart() {
-  yield takeLatest(REGISTER_START, registerWithEmail);
-}
-
-export function* onLoginStart() {
-  yield takeLatest(LOGIN_START, loginWithEmail);
-}
-
-export function* onSignOutStart() {
-  yield takeLatest(SIGN_OUT_START, signOut);
-}
-
-export function* onGoogleLoginStart() {
-  yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
 }
 
 export function* onCheckSession() {
