@@ -4,7 +4,7 @@ import createSagaMiddleWare from 'redux-saga';
 import timerReducer, { TimerState } from './timer/timerReducer';
 import tasksReducer, { TasksState } from './tasks/tasksReducer';
 import userReducer, { UserState } from './users/userReducer';
-import statsReducer from './stats/statsReducer';
+import statsReducer, { StatsState } from './stats/statsReducer';
 import rootSaga from './rootSagas';
 
 export const sagaMiddleware = createSagaMiddleWare();
@@ -25,6 +25,7 @@ export interface ReduxState {
   timer: TimerState;
   tasks: TasksState;
   user: UserState;
+  stats: StatsState;
 }
 
 sagaMiddleware.run(rootSaga);
