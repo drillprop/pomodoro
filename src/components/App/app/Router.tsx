@@ -15,7 +15,7 @@ const Stats = lazy(() => import('../../../pages/stats/Stats'));
 const WithLoadingConfig = withLoading(Config);
 
 const Router: FC = () => {
-  const user = useSelector(({ user }: ReduxState) => user.user);
+  const user = useSelector(({ user }: ReduxState) => user.currentUser);
   const isLoading = useSelector(
     ({ user, timer }: ReduxState) => user.isGettingUser || timer.isFetching
   );

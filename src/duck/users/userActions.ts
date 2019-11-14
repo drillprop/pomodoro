@@ -11,56 +11,60 @@ import {
   CHECK_SESSION,
   LOGIN_WITH_GOOGLE
 } from './userTypes';
+import {
+  RegisterAndLoginParams,
+  RegisterStartAction,
+  RegisterSuccessAction,
+  RegisterFailureAction,
+  LoginStartAction,
+  LoginSuccessAction,
+  LoginFailureAction,
+  SignError,
+  UserData
+} from './userInterfaces';
 
-export type RegisterAndLoginParams = {
-  email: string;
-  password: string;
-  displayName?: string;
-};
+// REGISTER
+
+export const registerStart = (
+  credentials: RegisterAndLoginParams
+): RegisterStartAction => ({
+  type: REGISTER_START,
+  payload: credentials
+});
+
+export const registerSuccess = (user: UserData): RegisterSuccessAction => ({
+  type: REGISTER_SUCCESS,
+  payload: user
+});
+
+export const registerFailure = (error: SignError): RegisterFailureAction => ({
+  type: REGISTER_FAILURE,
+  payload: error
+});
 
 export const checkSession = () => ({
   type: CHECK_SESSION
 });
 
-export const loginStart = (email: string, password: string) => ({
+export const loginStart = (
+  credentials: RegisterAndLoginParams
+): LoginStartAction => ({
   type: LOGIN_START,
-  email,
-  password
+  payload: credentials
 });
 
-export const loginSuccess = (user: any) => ({
+export const loginSuccess = (user: UserData): LoginSuccessAction => ({
   type: LOGIN_SUCCESS,
-  user
+  payload: user
 });
 
-export const loginFailure = (error: any) => ({
+export const loginFailure = (error: SignError): LoginFailureAction => ({
   type: LOGIN_FAILURE,
-  error
+  payload: error
 });
 
 export const loginWithGoogle = () => ({
   type: LOGIN_WITH_GOOGLE
-});
-
-export const registerStart = (
-  email: string,
-  password: string,
-  displayName: string
-) => ({
-  type: REGISTER_START,
-  email,
-  password,
-  displayName
-});
-
-export const registerSuccess = (user: any) => ({
-  type: REGISTER_SUCCESS,
-  user
-});
-
-export const registerFailure = (error: any) => ({
-  type: REGISTER_FAILURE,
-  error
 });
 
 export const signOutStart = () => ({ type: SIGN_OUT_START });

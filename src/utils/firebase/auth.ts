@@ -1,6 +1,6 @@
 import * as firebase from 'firebase/app';
 import { auth } from './firebase';
-import { RegisterAndLoginParams } from '../../duck/users/userActions';
+import { RegisterAndLoginParams } from '../../duck/users/userInterfaces';
 
 const provider = new firebase.auth.GoogleAuthProvider();
 

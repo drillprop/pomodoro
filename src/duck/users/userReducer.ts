@@ -8,21 +8,22 @@ import {
   LOGIN_START,
   REGISTER_START
 } from './userTypes';
-import { User } from 'firebase';
+import { UserActionTypes, SignError, UserData } from './userInterfaces';
 
 export type UserState = {
-  user: null | User;
+  currentUser: UserData | null;
   isGettingUser: boolean;
-  error: any;
+  error: SignError | null;
 };
 
 const initialState: UserState = {
-  user: null,
+  currentUser: null,
   isGettingUser: true,
   error: null
 };
 
-export default (state: UserState = initialState, action: any) => {
+export default (state = initialState, action: UserActionTypes): any => {
+  console.log(state);
   switch (action.type) {
     case LOGIN_START:
     case REGISTER_START:
@@ -35,9 +36,7 @@ export default (state: UserState = initialState, action: any) => {
     case REGISTER_SUCCESS:
       return {
         ...state,
-        user: action.user,
-        isGettingUser: false,
-        error: null
+        currentUser: { ...action.payload }
       };
     case LOGIN_FAILURE:
     case REGISTER_FAILURE:
@@ -45,13 +44,13 @@ export default (state: UserState = initialState, action: any) => {
       return {
         ...state,
         isGettingUser: false,
-        error: action.error
+        error: null
       };
     case SIGN_OUT_SUCCESS:
       return {
         ...state,
         isGettingUser: false,
-        user: null
+        currentUser: null
       };
     default:
       return state;

@@ -17,22 +17,12 @@ const RegisterForm: FC = () => {
   });
 
   const handleSubmit = async (e: FormEvent) => {
-    const { email, password, displayName } = values;
     submit(e);
-    dispatch(registerStart(email, password, displayName));
+    dispatch(registerStart(values));
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <StyledLabel htmlFor='username'>Nick</StyledLabel>
-      <StyledInput
-        value={values.username}
-        onChange={handleInput}
-        type='text'
-        name='displayName'
-        id='username'
-        placeholder='nick'
-      />
       <StyledLabel htmlFor='email'>Email</StyledLabel>
       <StyledInput
         value={values.email}

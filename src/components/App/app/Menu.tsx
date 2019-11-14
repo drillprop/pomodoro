@@ -24,7 +24,7 @@ const Menu: FC = () => {
     color: background
   };
 
-  const user = useSelector(({ user }: ReduxState) => user.user);
+  const user = useSelector(({ user }: ReduxState) => user.currentUser);
   const toggle = useSelector(({ timer }: ReduxState) => timer.isMenuVisible);
 
   const transitions = useTransition(toggle, null, {

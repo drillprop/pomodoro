@@ -16,7 +16,7 @@ const LoginForm: FC = () => {
   });
 
   const handleSubmit = (e: FormEvent) => {
-    dispatch(loginStart(values.email, values.password));
+    dispatch(loginStart(values));
     submit(e);
   };
 

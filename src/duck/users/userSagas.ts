@@ -17,6 +17,11 @@ import {
 import { auth } from '../../utils/firebase/firebase';
 // import { addUserToFirestore } from './userUtils';
 import { getCurrentUser, loginWithGoogle } from '../../utils/firebase/auth';
+import {
+  RegisterAndLoginParams,
+  RegisterStartAction,
+  LoginStartAction
+} from './userInterfaces';
 
 export function* updateProfile(displayName: string) {
   try {
@@ -48,32 +53,18 @@ export function* isUserLoggedIn() {
   try {
     const userAuth = yield call(getCurrentUser);
     if (!userAuth) {
-      yield put(loginFailure({ message: 'You are not logged in' }));
+      yield put(
+        loginFailure({
+          message: 'You are not logged in',
+          code: 'something-wrong'
+        })
+      );
       return;
     }
     // const user = yield call(userData, userAuth);
     // yield put(loginSuccess(user));
   } catch (err) {
     yield put(loginFailure(err));
-  }
-}
-
-export function* login({ email, password }: any) {
-  try {
-    const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    // const data = yield call(userData, user);
-    // yield put(loginSuccess(data));
-  } catch (err) {
-    yield put(loginFailure(err));
-  }
-}
-
-export function* registerWithEmail({ email, password, displayName }: any) {
-  try {
-    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield put(registerSuccess(user));
-  } catch (err) {
-    yield put(registerFailure(err));
   }
 }
 
@@ -96,32 +87,57 @@ export function* loginWithGoogleSaga() {
   }
 }
 
+export function* registerWithEmail({ payload }: RegisterStartAction) {
+  try {
+    const { email, password } = payload;
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    if (user) {
+      yield put(registerSuccess({ uid: user.uid, email: user.email }));
+    }
+  } catch (err) {
+    console.log(err);
+    yield put(registerFailure(err));
+  }
+}
+
+export function* loginWithEmail({ payload }: LoginStartAction) {
+  try {
+    const { email, password } = payload;
+    const { user } = yield auth.signInWithEmailAndPassword(email, password);
+    // const data = yield call(userData, user);
+    console.log(user);
+    yield put(loginSuccess({ uid: user.uid, email: user.email }));
+  } catch (err) {
+    yield put(loginFailure(err));
+  }
+}
+
+export function* onRegisterStart() {
+  yield takeLatest(REGISTER_START, registerWithEmail);
+}
+
+export function* onLoginStart() {
+  yield takeLatest(LOGIN_START, loginWithEmail);
+}
+
+export function* onGoogleLoginStart() {
+  yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
+}
+
+export function* onSignOutStart() {
+  yield takeLatest(SIGN_OUT_START, signOut);
+}
+
 export function* onCheckSession() {
   yield takeLatest(CHECK_SESSION, isUserLoggedIn);
 }
 
-export function* onLogin() {
-  yield takeLatest(LOGIN_START, login);
-}
-
-export function* onRegister() {
-  yield takeLatest(REGISTER_START, registerWithEmail);
-}
-
-export function* onSignOut() {
-  yield takeLatest(SIGN_OUT_START, signOut);
-}
-
-export function* onGoogleSignIn() {
-  yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
-}
-
 export function* userSagas() {
   yield all([
-    call(onLogin),
-    call(onRegister),
-    call(onSignOut),
-    call(onCheckSession),
-    call(onGoogleSignIn)
+    call(onRegisterStart),
+    call(onLoginStart),
+    call(onGoogleLoginStart),
+    call(onSignOutStart),
+    call(onCheckSession)
   ]);
 }

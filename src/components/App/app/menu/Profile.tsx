@@ -1,18 +1,17 @@
-import { User } from 'firebase';
 import React, { FC } from 'react';
 import Icon from '../../../Icon/Icon';
 import { primary } from '../../../../utils/colors';
-import { Avatar, Email, Name, ProfileWrapper } from './Profile.styles';
+import { Avatar, Email, ProfileWrapper } from './Profile.styles';
+import { UserData } from '../../../../duck/users/userInterfaces';
 
 const Profile: FC<{
-  user: User | null;
+  user: any;
 }> = ({ user }) => {
   return (
     <ProfileWrapper>
       <Avatar>
         <Icon size={100} color={primary} name='profile' />
       </Avatar>
-      <Name>{user && user.displayName}</Name>
       <Email>{user && user.email}</Email>
     </ProfileWrapper>
   );
