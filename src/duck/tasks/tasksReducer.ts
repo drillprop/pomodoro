@@ -13,6 +13,7 @@ import {
   SKIP_BREAK,
   STOP_AND_SWITCH_FAZE
 } from '../timer/timerTypes';
+import { TasksActionTypes } from './tasksInterfaces';
 
 export interface TasksState {
   tasks: any;
@@ -28,7 +29,7 @@ const initialState: TasksState = {
   isLoading: false
 };
 
-export default (state: TasksState = initialState, action: any) => {
+export default (state = initialState, action: TasksActionTypes): TasksState => {
   switch (action.type) {
     case EDIT_TASK_START:
     case CREATE_TASK_START:
@@ -37,34 +38,35 @@ export default (state: TasksState = initialState, action: any) => {
         ...state,
         isLoading: true
       };
-    case FETCH_INITIAL_STATE_SUCCES:
-      const { tasks, selectedTask } = action.initial;
-      return {
-        ...state,
-        tasks,
-        selectedTask
-      };
+    // case FETCH_INITIAL_STATE_SUCCES:
+    //   const { tasks, selectedTask } = action.initial;
+    //   return {
+    //     ...state,
+    //     tasks,
+    //     selectedTask
+    //   };
+    // add FetchInitialStateAction to TasksActionTypes
     case CREATE_TASK_SUCCESS:
       return {
         ...state,
         tasks: {
           ...state.tasks,
-          [action.taskName]: 0
+          [action.payload]: 0
         },
         isLoading: false
       };
     case EDIT_TASK_SUCCESS:
-      const { prevTask, newTask } = action;
+      const { prevTask, newTask } = action.payload;
       const newTasksObj = renameProperty(prevTask, newTask, state.tasks);
       return {
         ...state,
         tasks: { ...newTasksObj },
         selectedTask:
-          prevTask === state.selectedTask ? action.newTask : state.selectedTask,
+          prevTask === state.selectedTask ? newTask : state.selectedTask,
         isLoading: false
       };
     case DELETE_TASK_SUCCESS: {
-      const { taskName } = action;
+      const taskName = action.payload;
 
       const newTasksState = { ...state.tasks };
       if (taskName !== 'default') delete newTasksState[taskName];
@@ -74,32 +76,32 @@ export default (state: TasksState = initialState, action: any) => {
         isLoading: false
       };
     }
-    case SKIP_BREAK:
-      return {
-        ...state,
-        tasks: {
-          ...state.tasks,
-          [state.selectedTask]: !action.isInterval
-            ? state.tasks[state.selectedTask] + 1
-            : state.tasks[state.selectedTask]
-        }
-      };
+    // case SKIP_BREAK:
+    //   return {
+    //     ...state,
+    //     tasks: {
+    //       ...state.tasks,
+    //       [state.selectedTask]: !action.payload.isInterval
+    //         ? state.tasks[state.selectedTask] + 1
+    //         : state.tasks[state.selectedTask]
+    //     }
+    //   };
     case SWITCH_TASK_SUCCESS:
       return {
         ...state,
-        selectedTask: action.taskName
+        selectedTask: action.payload
       };
-    case STOP_AND_SWITCH_FAZE: {
-      return {
-        ...state,
-        tasks: {
-          ...state.tasks,
-          [state.selectedTask]: !action.isInterval
-            ? state.tasks[state.selectedTask] + 1
-            : state.tasks[state.selectedTask]
-        }
-      };
-    }
+    // case STOP_AND_SWITCH_FAZE: {
+    //   return {
+    //     ...state,
+    //     tasks: {
+    //       ...state.tasks,
+    //       [state.selectedTask]: !action.isInterval
+    //         ? state.tasks[state.selectedTask] + 1
+    //         : state.tasks[state.selectedTask]
+    //     }
+    //   };
+    // }
     default:
       return state;
   }

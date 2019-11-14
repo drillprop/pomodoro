@@ -27,9 +27,20 @@ import {
   // fetchInitialStateSucces,
   // fetchInitialStateFailure
 } from './timerActions';
+import { SetTimersDurationStartAction } from './timerInterfaces';
 
-export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
+export function* onStartTimer() {
+  yield takeLatest(START_TIMER, function*(...args) {
+    yield race({
+      start: call(startTimer, ...args),
+      cancel: take([PAUSE_TIMER, RESET_TIMER, SKIP_BREAK])
+    });
+  });
+}
+
+export function* startTimer({ payload }: any) {
   try {
+    const { isInterval, timeleft, selectedTask } = payload;
     yield delay(timeleft * 1000 + 1000);
     yield put(stopTimerAndSwitchFaze(isInterval));
     // yield isInterval && call(incIntervalInFirestore, selectedTask);
@@ -38,17 +49,24 @@ export function* startTimerSaga({ isInterval, timeleft, selectedTask }: any) {
     return err;
   }
 }
+export function* onSettingTimers() {
+  yield takeLatest(SET_TIMERS_DURATION_START, setTimersDuration);
+}
 
-export function* setTimersDurationSaga({ timelefts }: any) {
+export function* setTimersDuration({ payload }: SetTimersDurationStartAction) {
   try {
     // yield call(saveInitialTimelefts, timelefts);
-    yield put(setTimersDurationSuccess(timelefts));
+    yield put(setTimersDurationSuccess(payload));
   } catch (err) {
     yield put(setTimersDurationFailure(err));
   }
 }
 
-export function* fetchInitialStateSaga() {
+export function* onFetchingInitialState() {
+  yield takeLatest(FETCH_INITIAL_STATE_START, fetchInitialState);
+}
+
+export function* fetchInitialState() {
   try {
     // const initialState = yield call(fetchInitialState);
     // console.log(initialState);
@@ -56,23 +74,6 @@ export function* fetchInitialStateSaga() {
   } catch (err) {
     // yield put(fetchInitialStateFailure(err));
   }
-}
-
-export function* onStartTimer() {
-  yield takeLatest(START_TIMER, function*(...args) {
-    yield race({
-      task: call(startTimerSaga, ...args),
-      cancel: take([PAUSE_TIMER, RESET_TIMER, SKIP_BREAK])
-    });
-  });
-}
-
-export function* onSettingTimers() {
-  yield takeLatest(SET_TIMERS_DURATION_START, setTimersDurationSaga);
-}
-
-export function* onFetchingInitialState() {
-  yield takeLatest(FETCH_INITIAL_STATE_START, fetchInitialStateSaga);
 }
 
 export function* timerSagas() {

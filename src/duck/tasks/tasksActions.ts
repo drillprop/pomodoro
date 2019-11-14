@@ -12,63 +12,93 @@ import {
   SWITCH_TASK_SUCCESS,
   SWITCH_TASK_FAILURE
 } from './taskTypes';
+import {
+  CreateTaskStartAction,
+  CreateTaskSuccessAction,
+  TaskError,
+  CreateTaskFailureAction,
+  EditTaskParams,
+  EditTaskStartAction,
+  EditTaskSuccessAction,
+  EditTaskFailureAction,
+  DeleteTaskStartAction,
+  DeleteTaskSuccessAction,
+  DeleteTaskFailureAction,
+  SwitchTaskStartAction,
+  SwitchTaskSuccessAction,
+  SwitchTaskFailureAction
+} from './tasksInterfaces';
 
-export const createTaskStart = (taskName: string) => ({
+export const createTaskStart = (taskName: string): CreateTaskStartAction => ({
   type: CREATE_TASK_START,
-  taskName
+  payload: taskName
 });
 
-export const createTaskSuccess = (taskName: string) => ({
+export const createTaskSuccess = (
+  taskName: string
+): CreateTaskSuccessAction => ({
   type: CREATE_TASK_SUCCESS,
-  taskName
+  payload: taskName
 });
 
-export const createTaskFailure = (error: any) => ({
+export const createTaskFailure = (
+  error: TaskError
+): CreateTaskFailureAction => ({
   type: CREATE_TASK_FAILURE,
-  error
+  payload: error
 });
 
-export const editTaskStart = (prevTask: string, newTask: string) => ({
+export const editTaskStart = (
+  editTaskParams: EditTaskParams
+): EditTaskStartAction => ({
   type: EDIT_TASK_START,
-  prevTask,
-  newTask
+  payload: editTaskParams
 });
 
-export const editTaskSuccess = (prevTask: string, newTask: string) => ({
+export const editTaskSuccess = (
+  editTaskParams: EditTaskParams
+): EditTaskSuccessAction => ({
   type: EDIT_TASK_SUCCESS,
-  prevTask,
-  newTask
+  payload: editTaskParams
 });
 
-export const editTaskFailure = (error: any) => ({
+export const editTaskFailure = (error: TaskError): EditTaskFailureAction => ({
   type: EDIT_TASK_FAILURE,
-  error
+  payload: error
 });
 
-export const deleteTaskStart = (taskName: string) => ({
+export const deleteTaskStart = (taskName: string): DeleteTaskStartAction => ({
   type: DELETE_TASK_START,
-  taskName
+  payload: taskName
 });
 
-export const deleteTaskSuccess = (taskName: string) => ({
+export const deleteTaskSuccess = (
+  taskName: string
+): DeleteTaskSuccessAction => ({
   type: DELETE_TASK_SUCCESS,
-  taskName
+  payload: taskName
 });
 
-export const deleteTaskFailure = (error: any) => ({
+export const deleteTaskFailure = (
+  error: TaskError
+): DeleteTaskFailureAction => ({
   type: DELETE_TASK_FAILURE,
-  error
+  payload: error
 });
 
-export const switchTaskStart = (taskName: string) => ({
+export const switchTaskStart = (taskName: string): SwitchTaskStartAction => ({
   type: SWITCH_TASK_START,
-  taskName
+  payload: taskName
 });
-export const switchTaskSuccess = (taskName: string) => ({
+export const switchTaskSuccess = (
+  taskName: string
+): SwitchTaskSuccessAction => ({
   type: SWITCH_TASK_SUCCESS,
-  taskName
+  payload: taskName
 });
-export const switchTaskFailure = (error: any) => ({
+export const switchTaskFailure = (
+  error: TaskError
+): SwitchTaskFailureAction => ({
   type: SWITCH_TASK_FAILURE,
-  error
+  payload: error
 });

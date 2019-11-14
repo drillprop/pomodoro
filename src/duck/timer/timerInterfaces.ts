@@ -12,6 +12,7 @@ import {
   SHOW_MENU,
   START_TIMER
 } from './timerTypes';
+import { SwitchTaskSuccessAction } from '../tasks/tasksInterfaces';
 
 export interface StartTimerParams {
   startTime: number;
@@ -74,6 +75,8 @@ export interface SetTimersDurationFailureAction {
   payload: TimerError;
 }
 
+// Should i move these ones to user?
+
 export interface FetchInitialStateStartAction {
   type: typeof FETCH_INITIAL_STATE_START;
 }
@@ -102,4 +105,5 @@ export type TimerActionTypes =
   | SetTimersDurationFailureAction
   | FetchInitialStateStartAction
   | FetchInitialStateSuccesAction
-  | FetchInitialStateFailureAction;
+  | FetchInitialStateFailureAction
+  | SwitchTaskSuccessAction;

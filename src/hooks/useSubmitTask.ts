@@ -32,7 +32,9 @@ const useSubmitTask = (
         dispatch(createTaskStart(input.toLowerCase()));
         setInput('');
       } else {
-        dispatch(editTaskStart(initInput, input.toLowerCase()));
+        dispatch(
+          editTaskStart({ prevTask: initInput, newTask: input.toLowerCase() })
+        );
       }
     } else {
       setInput(initInput);
