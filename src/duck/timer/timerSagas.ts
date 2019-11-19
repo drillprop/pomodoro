@@ -4,6 +4,7 @@ import {
   all,
   delay,
   take,
+  takeEvery,
   takeLatest,
   race
 } from 'redux-saga/effects';
@@ -23,11 +24,21 @@ import {
 import {
   stopTimerAndSwitchFaze,
   setTimersDurationSuccess,
-  setTimersDurationFailure
+  setTimersDurationFailure,
+  fetchConfigStart,
+  fetchConfigSuccess,
+  fetchConfigFailure
   // fetchInitialStateSucces,
   // fetchInitialStateFailure
 } from './timerActions';
-import { SetTimersDurationStartAction } from './timerInterfaces';
+import {
+  SetTimersDurationStartAction,
+  FetchConfigStartAction,
+  FetchConfigSuccessAction
+} from './timerInterfaces';
+import { LOGIN_START, CHECK_SESSION } from '../users/userTypes';
+import { getCurrentUser } from '../../utils/firebase/auth';
+import { getUserConfig } from './timerUtils';
 
 export function* onStartTimer() {
   yield takeLatest(START_TIMER, function*(...args) {
@@ -62,24 +73,27 @@ export function* setTimersDuration({ payload }: SetTimersDurationStartAction) {
   }
 }
 
-export function* onFetchingConfig() {
-  yield takeLatest(FETCH_CONFIG_START, fetchConfig);
+export function* onLoginStart() {
+  yield takeEvery([CHECK_SESSION, LOGIN_START], fetchConfig);
 }
 
-export function* fetchConfig() {
+export function* fetchConfig({}: FetchConfigStartAction) {
   try {
-    // const initialState = yield call(fetchInitialState);
-    // console.log(initialState);
-    // yield put(fetchInitialStateSucces(initialState));
+    yield put(fetchConfigStart());
+    const { uid } = yield call(getCurrentUser);
+    const config = yield call(getUserConfig, uid);
+    if (config) {
+      yield put(fetchConfigSuccess(config));
+    } else {
+      yield put(
+        fetchConfigFailure({ code: 'no-config', message: 'Cannot find config' })
+      );
+    }
   } catch (err) {
-    // yield put(fetchInitialStateFailure(err));
+    fetchConfigFailure(err);
   }
 }
 
 export function* timerSagas() {
-  yield all([
-    call(onStartTimer),
-    call(onSettingTimers),
-    call(onFetchingConfig)
-  ]);
+  yield all([call(onStartTimer), call(onSettingTimers), call(onLoginStart)]);
 }

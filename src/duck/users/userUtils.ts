@@ -11,21 +11,8 @@ export const addUserToDB = async (uid: string, email: string) => {
       });
     return snapShot;
   } catch (error) {
-    console.error(error);
+    return error;
   }
-};
-
-export const getUserConfig = async (uid: string) => {
-  const userRef = database.ref(`users/${uid}/config`);
-  const snapShot = await userRef.once('value');
-  return await snapShot.val();
-};
-
-export const saveTimersInDB = async (uid: string) => {
-  const isConfig = await getUserConfig(uid);
-  // if no config, create config with new timer settings
-
-  // if config update that config with new timer settings
 };
 
 // import { firestore } from '../../utils/firebase/firebase';
