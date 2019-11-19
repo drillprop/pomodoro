@@ -8,7 +8,6 @@ import { StyledUl } from './Tasks.styles';
 
 const Tasks: FC = () => {
   const tasks = useSelector(({ tasks }: ReduxState) => {
-    console.log(tasks);
     return tasks
       ? Object.keys(tasks.tasks).filter((task: string) => task !== 'default')
       : [];
