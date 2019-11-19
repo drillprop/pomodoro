@@ -6,9 +6,9 @@ import {
   SET_TIMERS_DURATION_START,
   SET_TIMERS_DURATION_SUCCES,
   SET_TIMERS_DURATION_FAILURE,
-  FETCH_INITIAL_STATE_START,
-  FETCH_INITIAL_STATE_SUCCES,
-  FETCH_INITIAL_STATE_FAILURE,
+  FETCH_CONFIG_START,
+  FETCH_CONFIG_SUCCESS,
+  FETCH_CONFIG_FAILURE,
   SHOW_MENU,
   START_TIMER
 } from './timerTypes';
@@ -77,20 +77,18 @@ export interface SetTimersDurationFailureAction {
 
 // Should i move these ones to user?
 
-export interface FetchInitialStateStartAction {
-  type: typeof FETCH_INITIAL_STATE_START;
+export interface FetchConfigStartAction {
+  type: typeof FETCH_CONFIG_START;
 }
 
-export interface FetchInitialStateSuccesAction {
-  type: typeof FETCH_INITIAL_STATE_SUCCES;
-  payload: string;
-  // initial;
+export interface FetchConfigSuccessAction {
+  type: typeof FETCH_CONFIG_SUCCESS;
+  payload: TimeleftsParams;
 }
 
-export interface FetchInitialStateFailureAction {
-  type: typeof FETCH_INITIAL_STATE_FAILURE;
-  payload: string;
-  // errorMessage;
+export interface FetchConfigFailureAction {
+  type: typeof FETCH_CONFIG_FAILURE;
+  payload: TimerError;
 }
 
 export type TimerActionTypes =
@@ -103,7 +101,7 @@ export type TimerActionTypes =
   | SetTimersDurationStartAction
   | SetTimersDurationSuccessAction
   | SetTimersDurationFailureAction
-  | FetchInitialStateStartAction
-  | FetchInitialStateSuccesAction
-  | FetchInitialStateFailureAction
+  | FetchConfigStartAction
+  | FetchConfigSuccessAction
+  | FetchConfigFailureAction
   | SwitchTaskSuccessAction;

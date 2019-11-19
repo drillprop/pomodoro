@@ -5,9 +5,9 @@ import {
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
-  FETCH_INITIAL_STATE_START,
-  FETCH_INITIAL_STATE_SUCCES,
-  FETCH_INITIAL_STATE_FAILURE,
+  FETCH_CONFIG_START,
+  FETCH_CONFIG_SUCCESS,
+  FETCH_CONFIG_FAILURE,
   SET_TIMERS_DURATION_START,
   SET_TIMERS_DURATION_SUCCES,
   SET_TIMERS_DURATION_FAILURE
@@ -24,7 +24,10 @@ import {
   SetTimersDurationStartAction,
   SetTimersDurationSuccessAction,
   TimerError,
-  SetTimersDurationFailureAction
+  SetTimersDurationFailureAction,
+  FetchConfigStartAction,
+  FetchConfigSuccessAction,
+  FetchConfigFailureAction
 } from './timerInterfaces';
 
 export const startTimer = (
@@ -82,19 +85,20 @@ export const setTimersDurationFailure = (
   payload: error
 });
 
-// Should its be user actions?
-// userconfig?
+export const fetchConfigStart = (): FetchConfigStartAction => ({
+  type: FETCH_CONFIG_START
+});
 
-// export const fetchInitialStateStart = () => ({
-//   type: FETCH_INITIAL_STATE_START
-// });
+export const fetchConfigSuccess = (
+  config: TimeleftsParams
+): FetchConfigSuccessAction => ({
+  type: FETCH_CONFIG_SUCCESS,
+  payload: config
+});
 
-// export const fetchInitialStateSucces = (initial: any) => ({
-//   type: FETCH_INITIAL_STATE_SUCCES,
-//   initial
-// });
-
-// export const fetchInitialStateFailure = (errorMessage: string) => ({
-//   type: FETCH_INITIAL_STATE_FAILURE,
-//   errorMessage
-// });
+export const fetchConfigFailure = (
+  error: TimerError
+): FetchConfigFailureAction => ({
+  type: FETCH_CONFIG_FAILURE,
+  payload: error
+});

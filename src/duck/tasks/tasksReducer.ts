@@ -9,7 +9,7 @@ import {
 } from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
 import {
-  FETCH_INITIAL_STATE_SUCCES,
+  FETCH_CONFIG_SUCCESS,
   SKIP_BREAK,
   STOP_AND_SWITCH_FAZE
 } from '../timer/timerTypes';
@@ -38,7 +38,7 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
         ...state,
         isLoading: true
       };
-    // case FETCH_INITIAL_STATE_SUCCES:
+    // case FETCH_CONFIG_SUCCESS:
     //   const { tasks, selectedTask } = action.initial;
     //   return {
     //     ...state,

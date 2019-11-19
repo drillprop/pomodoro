@@ -5,9 +5,9 @@ import {
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
-  FETCH_INITIAL_STATE_START,
-  FETCH_INITIAL_STATE_SUCCES,
-  FETCH_INITIAL_STATE_FAILURE,
+  FETCH_CONFIG_START,
+  FETCH_CONFIG_SUCCESS,
+  FETCH_CONFIG_FAILURE,
   SET_TIMERS_DURATION_SUCCES,
   SET_TIMERS_DURATION_FAILURE
 } from './timerTypes';
@@ -16,13 +16,9 @@ import { SWITCH_TASK_SUCCESS } from '../tasks/taskTypes';
 import { LOGIN_FAILURE } from '../users/userTypes';
 import { TimerActionTypes } from './timerInterfaces';
 
-type InitialTimeleft = {
+type Config = {
   intervalTime: number;
   breakTime: number;
-};
-
-type Config = {
-  initialTimeleft: InitialTimeleft;
 };
 
 export interface TimerState {
@@ -37,10 +33,8 @@ export interface TimerState {
 }
 
 const config: Config = {
-  initialTimeleft: {
-    intervalTime: 5,
-    breakTime: 2
-  }
+  intervalTime: 5,
+  breakTime: 2
 };
 
 const initialState: TimerState = {
@@ -49,13 +43,13 @@ const initialState: TimerState = {
   isTimerStart: false,
   isInterval: true,
   endTime: 0,
-  timeleft: config.initialTimeleft.intervalTime,
+  timeleft: config.intervalTime,
   isFetching: true,
   error: null
 };
 
 export default (state = initialState, action: TimerActionTypes): TimerState => {
-  const { intervalTime, breakTime } = state.config.initialTimeleft;
+  const { intervalTime, breakTime } = state.config;
   switch (action.type) {
     case START_TIMER:
       return {
@@ -112,7 +106,7 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         timeleft: action.payload.intervalTime,
         config: {
           ...state.config,
-          initialTimeleft: { ...action.payload }
+          ...action.payload
         }
       };
     case SET_TIMERS_DURATION_FAILURE:
@@ -120,29 +114,26 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         ...state,
         error: action.payload
       };
-    // case FETCH_INITIAL_STATE_START:
-    //   return {
-    //     ...state,
-    //     isFetching: true
-    //   };
-    // case FETCH_INITIAL_STATE_SUCCES:
-    //   const actionBreakTime: number = action.initial.config.breakTime;
-    //   const actionIntervalTime: number = action.initial.config.intervalTime;
-    //   return {
-    //     ...state,
-    //     isFetching: false,
-    //     timeleft: state.isInterval ? actionIntervalTime : actionBreakTime,
-    //     config: {
-    //       ...state.config,
-    //       initialTimeleft: action.initial.config
-    //     }
-    //   };
-    // case FETCH_INITIAL_STATE_FAILURE:
-    //   return {
-    //     ...state,
-    //     isFetching: false,
-    //     error: action.error
-    //   };
+    case FETCH_CONFIG_START:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case FETCH_CONFIG_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        timeleft: state.isInterval
+          ? action.payload.intervalTime
+          : action.payload.breakTime,
+        config: { ...action.payload }
+      };
+    case FETCH_CONFIG_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: { ...action.payload }
+      };
     // case LOGIN_FAILURE:
     //   return {
     //     ...state,

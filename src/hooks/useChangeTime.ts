@@ -7,9 +7,7 @@ import { ReduxState } from '../duck/store';
 export default () => {
   const dispatch = useDispatch();
 
-  const initialSeconds = useSelector(
-    ({ timer }: ReduxState) => timer.config.initialTimeleft
-  );
+  const initialSeconds = useSelector(({ timer }: ReduxState) => timer.config);
 
   const secondsEntries = Object.entries(initialSeconds);
 

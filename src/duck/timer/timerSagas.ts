@@ -13,7 +13,7 @@ import {
   RESET_TIMER,
   SKIP_BREAK,
   SET_TIMERS_DURATION_START,
-  FETCH_INITIAL_STATE_START
+  FETCH_CONFIG_START
 } from './timerTypes';
 // import {
 //   incIntervalInFirestore,
@@ -62,11 +62,11 @@ export function* setTimersDuration({ payload }: SetTimersDurationStartAction) {
   }
 }
 
-export function* onFetchingInitialState() {
-  yield takeLatest(FETCH_INITIAL_STATE_START, fetchInitialState);
+export function* onFetchingConfig() {
+  yield takeLatest(FETCH_CONFIG_START, fetchConfig);
 }
 
-export function* fetchInitialState() {
+export function* fetchConfig() {
   try {
     // const initialState = yield call(fetchInitialState);
     // console.log(initialState);
@@ -80,6 +80,6 @@ export function* timerSagas() {
   yield all([
     call(onStartTimer),
     call(onSettingTimers),
-    call(onFetchingInitialState)
+    call(onFetchingConfig)
   ]);
 }
