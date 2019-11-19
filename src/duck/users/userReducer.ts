@@ -12,11 +12,11 @@ import {
 } from './userTypes';
 import { UserActionTypes, SignError, UserData } from './userInterfaces';
 
-export type UserState = {
+export interface UserState {
   currentUser: UserData | null;
   isGettingUser: boolean;
   error: SignError | null;
-};
+}
 
 const initialState: UserState = {
   currentUser: null,
