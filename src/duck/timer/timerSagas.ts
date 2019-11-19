@@ -4,23 +4,17 @@ import {
   all,
   delay,
   take,
-  takeEvery,
   takeLatest,
-  race
+  race,
+  select
 } from 'redux-saga/effects';
 import {
   START_TIMER,
   PAUSE_TIMER,
   RESET_TIMER,
   SKIP_BREAK,
-  SET_TIMERS_DURATION_START,
-  FETCH_CONFIG_START
+  SET_TIMERS_DURATION_START
 } from './timerTypes';
-// import {
-//   incIntervalInFirestore,
-//   saveInitialTimelefts,
-//   fetchInitialState
-// } from './timerUtils';
 import {
   stopTimerAndSwitchFaze,
   setTimersDurationSuccess,
@@ -28,17 +22,13 @@ import {
   fetchConfigStart,
   fetchConfigSuccess,
   fetchConfigFailure
-  // fetchInitialStateSucces,
-  // fetchInitialStateFailure
 } from './timerActions';
-import {
-  SetTimersDurationStartAction,
-  FetchConfigStartAction,
-  FetchConfigSuccessAction
-} from './timerInterfaces';
-import { LOGIN_START, CHECK_SESSION } from '../users/userTypes';
-import { getCurrentUser } from '../../utils/firebase/auth';
-import { getUserConfig } from './timerUtils';
+import { SetTimersDurationStartAction } from './timerInterfaces';
+import { LOGIN_SUCCESS } from '../users/userTypes';
+import { getUserConfig, saveTimersInDB } from './timerUtils';
+import { ReduxState } from '../store';
+
+const userUid = ({ user }: ReduxState) => user.currentUser;
 
 export function* onStartTimer() {
   yield takeLatest(START_TIMER, function*(...args) {
@@ -51,22 +41,24 @@ export function* onStartTimer() {
 
 export function* startTimer({ payload }: any) {
   try {
-    const { isInterval, timeleft, selectedTask } = payload;
+    console.log(payload);
+    const { isInterval, timeleft } = payload;
     yield delay(timeleft * 1000 + 1000);
     yield put(stopTimerAndSwitchFaze(isInterval));
-    // yield isInterval && call(incIntervalInFirestore, selectedTask);
   } catch (err) {
     console.log(err);
     return err;
   }
 }
+
 export function* onSettingTimers() {
   yield takeLatest(SET_TIMERS_DURATION_START, setTimersDuration);
 }
 
 export function* setTimersDuration({ payload }: SetTimersDurationStartAction) {
   try {
-    // yield call(saveInitialTimelefts, timelefts);
+    const { uid } = yield select(userUid);
+    yield call(saveTimersInDB, uid, payload);
     yield put(setTimersDurationSuccess(payload));
   } catch (err) {
     yield put(setTimersDurationFailure(err));
@@ -74,13 +66,13 @@ export function* setTimersDuration({ payload }: SetTimersDurationStartAction) {
 }
 
 export function* onLoginStart() {
-  yield takeEvery([CHECK_SESSION, LOGIN_START], fetchConfig);
+  yield takeLatest(LOGIN_SUCCESS, fetchConfig);
 }
 
-export function* fetchConfig({}: FetchConfigStartAction) {
+export function* fetchConfig() {
   try {
     yield put(fetchConfigStart());
-    const { uid } = yield call(getCurrentUser);
+    const { uid } = yield select(userUid);
     const config = yield call(getUserConfig, uid);
     if (config) {
       yield put(fetchConfigSuccess(config));

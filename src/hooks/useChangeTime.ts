@@ -69,7 +69,6 @@ export default () => {
       acc[item] = timeleft[item].seconds + timeleft[item].minutes * 60;
       return acc;
     }, {});
-    console.log(newState);
 
     dispatch(setTimersDurationStart(newState));
   };

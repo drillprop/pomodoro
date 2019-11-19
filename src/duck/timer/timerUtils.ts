@@ -4,6 +4,7 @@ import { getToday } from '../../utils/helpers';
 // import { firestore } from '../../utils/firebase/firebase';
 import { getCurrentUser } from '../../utils/firebase/auth';
 import { database } from '../../utils/firebase/database';
+import { TimeleftsParams } from './timerInterfaces';
 
 export const getUserConfig = async (uid: string) => {
   try {
@@ -15,11 +16,14 @@ export const getUserConfig = async (uid: string) => {
   }
 };
 
-export const saveTimersInDB = async (uid: string) => {
-  const isConfig = await getUserConfig(uid);
-  // if no config, create config with new timer settings
-
-  // if config update that config with new timer settings
+export const saveTimersInDB = async (uid: string, config: TimeleftsParams) => {
+  try {
+    await database.ref(`users/${uid}`).set({
+      config: { ...config }
+    });
+  } catch (error) {
+    return error;
+  }
 };
 
 // export const incIntervalInFirestore = async (selectedTask: string) => {
