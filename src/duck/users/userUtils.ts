@@ -1,16 +1,31 @@
 import { database } from '../../utils/firebase/database';
 
 export const addUserToDB = async (uid: string, email: string) => {
-  const userRef = database.ref('users/' + uid);
-  const snapShot = await userRef.once('value').then(snap => snap.val());
+  try {
+    const userRef = database.ref('users/' + uid);
+    const snapShot = await userRef.once('value').then(snap => snap.val());
+    if (!snapShot)
+      await userRef.set({
+        uid,
+        email
+      });
+    return snapShot;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  if (!snapShot)
-    await userRef.set({
-      uid,
-      email
-    });
+export const getUserConfig = async (uid: string) => {
+  const userRef = database.ref(`users/${uid}/config`);
+  const snapShot = await userRef.once('value');
+  return await snapShot.val();
+};
 
-  return snapShot;
+export const saveTimersInDB = async (uid: string) => {
+  const isConfig = await getUserConfig(uid);
+  // if no config, create config with new timer settings
+
+  // if config update that config with new timer settings
 };
 
 // import { firestore } from '../../utils/firebase/firebase';
