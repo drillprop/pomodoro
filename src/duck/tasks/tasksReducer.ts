@@ -10,7 +10,7 @@ import {
 import { renameProperty } from '../../utils/helpers';
 import { SKIP_BREAK, STOP_AND_SWITCH_FAZE } from '../timer/timerTypes';
 import { TasksActionTypes } from './tasksInterfaces';
-import { LOGIN_SUCCESS } from '../users/userTypes';
+import { LOGIN_SUCCESS, SIGN_OUT_SUCCESS } from '../users/userTypes';
 
 export interface TasksState {
   tasks: any;
@@ -96,6 +96,14 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
         ...state,
         tasks: { ...state.tasks, ...action.payload.tasks },
         selectedTask: action.payload.selectedTask
+      };
+    case SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        tasks: {
+          default: 0
+        },
+        selectedTask: 'default'
       };
     default:
       return state;

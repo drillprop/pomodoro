@@ -45,7 +45,6 @@ const initialState: TimerState = {
 };
 
 export default (state = initialState, action: TimerActionTypes): TimerState => {
-  const { intervalTime, breakTime } = state.config;
   switch (action.type) {
     case START_TIMER:
       return {
@@ -60,12 +59,13 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         timeleft: Math.floor((state.endTime - action.payload) / 1000 + 1),
         endTime: 0
       };
-    case SIGN_OUT_SUCCESS:
     case RESET_TIMER:
       return {
         ...state,
         isTimerStart: false,
-        timeleft: state.isInterval ? intervalTime : breakTime
+        timeleft: state.isInterval
+          ? state.config.intervalTime
+          : state.config.breakTime
       };
     case SKIP_BREAK:
       return {
@@ -73,7 +73,7 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         isTimerStart: false,
         isInterval: true,
         endTime: 0,
-        timeleft: intervalTime
+        timeleft: state.config.intervalTime
       };
     case STOP_AND_SWITCH_FAZE:
       return {
@@ -81,14 +81,16 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         isInterval: !state.isInterval,
         endTime: 0,
         isTimerStart: false,
-        timeleft: !state.isInterval ? intervalTime : breakTime
+        timeleft: !state.isInterval
+          ? state.config.intervalTime
+          : state.config.breakTime
       };
     case SWITCH_TASK_SUCCESS:
       return {
         ...state,
         isTimerStart: false,
         isInterval: true,
-        timeleft: intervalTime
+        timeleft: state.config.intervalTime
       };
     case SHOW_MENU:
       return {
@@ -119,6 +121,14 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
           : action.payload.config.breakTime,
         isFetching: false,
         config: { ...action.payload.config }
+      };
+    case SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        isTimerStart: false,
+        isInterval: true,
+        config: { ...initialState.config },
+        timeleft: initialState.config.intervalTime
       };
     default:
       return state;
