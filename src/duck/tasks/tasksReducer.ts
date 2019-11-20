@@ -8,12 +8,9 @@ import {
   DELETE_TASK_START
 } from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
-import {
-  FETCH_CONFIG_SUCCESS,
-  SKIP_BREAK,
-  STOP_AND_SWITCH_FAZE
-} from '../timer/timerTypes';
+import { SKIP_BREAK, STOP_AND_SWITCH_FAZE } from '../timer/timerTypes';
 import { TasksActionTypes } from './tasksInterfaces';
+import { LOGIN_SUCCESS } from '../users/userTypes';
 
 export interface TasksState {
   tasks: any;
@@ -38,14 +35,6 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
         ...state,
         isLoading: true
       };
-    // case FETCH_CONFIG_SUCCESS:
-    //   const { tasks, selectedTask } = action.initial;
-    //   return {
-    //     ...state,
-    //     tasks,
-    //     selectedTask
-    //   };
-    // add FetchInitialStateAction to TasksActionTypes
     case CREATE_TASK_SUCCESS:
       return {
         ...state,
@@ -102,6 +91,12 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
     //     }
     //   };
     // }
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        tasks: { ...state.tasks, ...action.payload.tasks },
+        selectedTask: action.payload.selectedTask
+      };
     default:
       return state;
   }

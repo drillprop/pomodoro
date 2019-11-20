@@ -1,7 +1,16 @@
+import { database } from '../../utils/firebase/database';
+
 // // import { dataAndRef } from '../../utils/firebase/firestore';
 // import { FieldValue } from '../../utils/firebase/firebase';
 // import { getToday } from '../../utils/helpers';
 // import { getCurrentUser } from '../../utils/firebase/auth';
+export const saveTaskInDB = async (uid: string, task: string) => {
+  try {
+    const tasks = database.ref(`/users/${uid}/tasks`);
+  } catch (error) {
+    return error;
+  }
+};
 
 // export const saveTasksInFirestore = async (task: any) => {
 //   const usr = await getCurrentUser();

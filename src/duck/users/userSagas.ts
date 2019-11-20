@@ -1,4 +1,4 @@
-import { put, call, takeLatest, all } from 'redux-saga/effects';
+import { put, call, takeLatest, all, select } from 'redux-saga/effects';
 import {
   loginFailure,
   loginSuccess,
@@ -15,14 +15,25 @@ import {
   LOGIN_WITH_GOOGLE
 } from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
-// import { addUserToFirestore } from './userUtils';
 import { getCurrentUser, loginWithGoogle } from '../../utils/firebase/auth';
 import {
-  RegisterAndLoginParams,
   RegisterStartAction,
-  LoginStartAction
+  LoginStartAction,
+  UserData
 } from './userInterfaces';
-import { addUserToDB } from './userUtils';
+import { addUserToDB, getConfigAndTasks } from './userUtils';
+import { ReduxState } from '../store';
+
+const selectConfig = ({ timer }: ReduxState) => timer.config;
+const selectTasks = ({ tasks }: ReduxState) => tasks.tasks;
+
+export function* fetchUserInfo(user: UserData) {
+  yield call(addUserToDB, user.uid, user.email);
+  const userSettings = yield call(getConfigAndTasks, user.uid);
+  const { tasks, selectedTask, config } = userSettings;
+  const { email, uid } = user;
+  yield put(loginSuccess({ email, uid, tasks, selectedTask, config }));
+}
 
 // Register
 
@@ -35,8 +46,18 @@ export function* registerWithEmail({ payload }: RegisterStartAction) {
     const { email, password } = payload;
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     yield call(addUserToDB, user.uid, user.email);
+    const config = yield select(selectConfig);
+    const tasks = yield select(selectTasks);
     if (user) {
-      yield put(registerSuccess({ uid: user.uid, email: user.email }));
+      yield put(
+        registerSuccess({
+          uid: user.uid,
+          email: user.email,
+          selectedTask: 'default',
+          tasks,
+          config
+        })
+      );
     }
   } catch (err) {
     console.log(err);
@@ -54,11 +75,7 @@ export function* loginWithEmail({ payload }: LoginStartAction) {
   try {
     const { email, password } = payload;
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    yield call(addUserToDB, user.uid, user.email);
-    if (user) {
-      const { email, uid } = user;
-      yield put(loginSuccess({ email, uid }));
-    }
+    yield call(fetchUserInfo, user);
   } catch (err) {
     yield put(loginFailure(err));
   }
@@ -73,12 +90,7 @@ export function* onLoginGoogleStart() {
 export function* loginGoogle() {
   try {
     const { user } = yield loginWithGoogle();
-    // const data = yield call(userData, user);
-    // yield put(loginSuccess(data));
-    if (user) {
-      const { email, uid } = user;
-      yield put(loginSuccess({ email, uid }));
-    }
+    yield call(fetchUserInfo, user);
   } catch (err) {
     yield put(loginFailure(err));
   }
@@ -110,40 +122,9 @@ export function* checkSession() {
   if (!user) {
     yield signOut();
   } else {
-    yield put(loginSuccess({ uid: user.uid, email: user.email }));
+    yield call(fetchUserInfo, user);
   }
 }
-
-//
-//
-// todo
-//
-//
-export function* updateProfile(displayName: string) {
-  try {
-    const user = yield auth.currentUser;
-    yield user.updateProfile({ displayName });
-  } catch (err) {
-    put(registerFailure(err));
-  }
-}
-
-// export function* userData(user: any) {
-//   try {
-//     const userRef = yield addUserToFirestore(user);
-//     const userSnapshot = yield userRef.get();
-//     const { displayName, email, uid, createdAt } = yield userSnapshot.data();
-//     return {
-//       displayName,
-//       email,
-//       uid,
-//       createdAt
-//     };
-//   } catch (err) {
-//     console.log(err);
-//     return err;
-//   }
-// }
 
 export function* userSagas() {
   yield all([

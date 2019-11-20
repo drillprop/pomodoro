@@ -5,21 +5,17 @@ import {
   PAUSE_TIMER,
   STOP_AND_SWITCH_FAZE,
   SKIP_BREAK,
-  FETCH_CONFIG_START,
-  FETCH_CONFIG_SUCCESS,
-  FETCH_CONFIG_FAILURE,
   SET_TIMERS_DURATION_SUCCES,
   SET_TIMERS_DURATION_FAILURE
 } from './timerTypes';
-
 import { SWITCH_TASK_SUCCESS } from '../tasks/taskTypes';
-import { LOGIN_FAILURE } from '../users/userTypes';
+import { LOGIN_SUCCESS, SIGN_OUT_SUCCESS } from '../users/userTypes';
 import { TimerActionTypes } from './timerInterfaces';
 
-type Config = {
+export interface Config {
   intervalTime: number;
   breakTime: number;
-};
+}
 
 export interface TimerState {
   isMenuVisible: boolean;
@@ -64,6 +60,7 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         timeleft: Math.floor((state.endTime - action.payload) / 1000 + 1),
         endTime: 0
       };
+    case SIGN_OUT_SUCCESS:
     case RESET_TIMER:
       return {
         ...state,
@@ -114,31 +111,15 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         ...state,
         error: action.payload
       };
-    case FETCH_CONFIG_START:
+    case LOGIN_SUCCESS:
       return {
         ...state,
-        isFetching: true
-      };
-    case FETCH_CONFIG_SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
         timeleft: state.isInterval
-          ? action.payload.intervalTime
-          : action.payload.breakTime,
-        config: { ...action.payload }
-      };
-    case FETCH_CONFIG_FAILURE:
-      return {
-        ...state,
+          ? action.payload.config.intervalTime
+          : action.payload.config.breakTime,
         isFetching: false,
-        error: { ...action.payload }
+        config: { ...action.payload.config }
       };
-    // case LOGIN_FAILURE:
-    //   return {
-    //     ...state,
-    //     isFetching: false
-    //   };
     default:
       return state;
   }

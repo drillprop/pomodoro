@@ -6,13 +6,14 @@ import {
   SET_TIMERS_DURATION_START,
   SET_TIMERS_DURATION_SUCCES,
   SET_TIMERS_DURATION_FAILURE,
-  FETCH_CONFIG_START,
-  FETCH_CONFIG_SUCCESS,
-  FETCH_CONFIG_FAILURE,
   SHOW_MENU,
   START_TIMER
 } from './timerTypes';
 import { SwitchTaskSuccessAction } from '../tasks/tasksInterfaces';
+import {
+  LoginSuccessAction,
+  SignOutSuccessAction
+} from '../users/userInterfaces';
 
 export interface StartTimerParams {
   startTime: number;
@@ -75,22 +76,6 @@ export interface SetTimersDurationFailureAction {
   payload: TimerError;
 }
 
-// Should i move these ones to user?
-
-export interface FetchConfigStartAction {
-  type: typeof FETCH_CONFIG_START;
-}
-
-export interface FetchConfigSuccessAction {
-  type: typeof FETCH_CONFIG_SUCCESS;
-  payload: TimeleftsParams;
-}
-
-export interface FetchConfigFailureAction {
-  type: typeof FETCH_CONFIG_FAILURE;
-  payload: TimerError;
-}
-
 export type TimerActionTypes =
   | StartTimerAction
   | PauseTimerAction
@@ -101,7 +86,6 @@ export type TimerActionTypes =
   | SetTimersDurationStartAction
   | SetTimersDurationSuccessAction
   | SetTimersDurationFailureAction
-  | FetchConfigStartAction
-  | FetchConfigSuccessAction
-  | FetchConfigFailureAction
-  | SwitchTaskSuccessAction;
+  | SwitchTaskSuccessAction
+  | LoginSuccessAction
+  | SignOutSuccessAction;

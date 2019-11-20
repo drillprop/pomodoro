@@ -12,6 +12,7 @@ import {
   SWITCH_TASK_SUCCESS,
   SWITCH_TASK_FAILURE
 } from './taskTypes';
+import { LoginSuccessAction } from '../users/userInterfaces';
 
 export interface TaskError {
   code: string;
@@ -95,4 +96,5 @@ export type TasksActionTypes =
   | DeleteTaskFailureAction
   | SwitchTaskStartAction
   | SwitchTaskSuccessAction
-  | SwitchTaskFailureAction;
+  | SwitchTaskFailureAction
+  | LoginSuccessAction;

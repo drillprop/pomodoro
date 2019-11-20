@@ -18,14 +18,10 @@ import {
 import {
   stopTimerAndSwitchFaze,
   setTimersDurationSuccess,
-  setTimersDurationFailure,
-  fetchConfigStart,
-  fetchConfigSuccess,
-  fetchConfigFailure
+  setTimersDurationFailure
 } from './timerActions';
 import { SetTimersDurationStartAction } from './timerInterfaces';
-import { LOGIN_SUCCESS } from '../users/userTypes';
-import { getUserConfig, saveTimersInDB } from './timerUtils';
+import { saveTimersInDB } from './timerUtils';
 import { ReduxState } from '../store';
 
 const userUid = ({ user }: ReduxState) => user.currentUser;
@@ -41,7 +37,6 @@ export function* onStartTimer() {
 
 export function* startTimer({ payload }: any) {
   try {
-    console.log(payload);
     const { isInterval, timeleft } = payload;
     yield delay(timeleft * 1000 + 1000);
     yield put(stopTimerAndSwitchFaze(isInterval));
@@ -65,27 +60,6 @@ export function* setTimersDuration({ payload }: SetTimersDurationStartAction) {
   }
 }
 
-export function* onLoginStart() {
-  yield takeLatest(LOGIN_SUCCESS, fetchConfig);
-}
-
-export function* fetchConfig() {
-  try {
-    yield put(fetchConfigStart());
-    const { uid } = yield select(userUid);
-    const config = yield call(getUserConfig, uid);
-    if (config) {
-      yield put(fetchConfigSuccess(config));
-    } else {
-      yield put(
-        fetchConfigFailure({ code: 'no-config', message: 'Cannot find config' })
-      );
-    }
-  } catch (err) {
-    fetchConfigFailure(err);
-  }
-}
-
 export function* timerSagas() {
-  yield all([call(onStartTimer), call(onSettingTimers), call(onLoginStart)]);
+  yield all([call(onStartTimer), call(onSettingTimers)]);
 }

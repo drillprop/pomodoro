@@ -96,6 +96,7 @@ export const switchTaskSuccess = (
   type: SWITCH_TASK_SUCCESS,
   payload: taskName
 });
+
 export const switchTaskFailure = (
   error: TaskError
 ): SwitchTaskFailureAction => ({

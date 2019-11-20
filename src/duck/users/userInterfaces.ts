@@ -11,10 +11,14 @@ import {
   LOGIN_WITH_GOOGLE,
   CHECK_SESSION
 } from './userTypes';
+import { Config } from '../timer/timerReducer';
 
 export interface UserData {
   uid: string;
   email: string;
+  config: Config;
+  selectedTask: string | 'default';
+  tasks: any | null;
 }
 
 export interface RegisterAndLoginParams {

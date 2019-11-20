@@ -1,20 +1,5 @@
-// import { dataAndRef } from '../../utils/firebase/firestore';
-import { getToday } from '../../utils/helpers';
-// import { addUserToFirestore } from '../users/userUtils';
-// import { firestore } from '../../utils/firebase/firebase';
-import { getCurrentUser } from '../../utils/firebase/auth';
 import { database } from '../../utils/firebase/database';
 import { TimeleftsParams } from './timerInterfaces';
-
-export const getUserConfig = async (uid: string) => {
-  try {
-    const userRef = database.ref(`users/${uid}/config`);
-    const snapShot = await userRef.once('value');
-    return await snapShot.val();
-  } catch (error) {
-    return error;
-  }
-};
 
 export const saveTimersInDB = async (uid: string, config: TimeleftsParams) => {
   try {
