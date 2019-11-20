@@ -1,4 +1,4 @@
-import { call, put, takeLatest, all } from 'redux-saga/effects';
+import { call, put, takeLatest, all, select } from 'redux-saga/effects';
 import {
   CREATE_TASK_START,
   EDIT_TASK_START,
@@ -21,63 +21,70 @@ import {
   DeleteTaskStartAction,
   SwitchTaskStartAction
 } from './tasksInterfaces';
-// import {
-//   saveTasksInFirestore,
-//   updateTaskInFirestore,
-//   deleteTaskFromFirestore,
-//   saveSelectedTask
-// } from './tasksUtils';
+import {
+  saveTaskInDB,
+  editTaskInDB,
+  deleteTaskFromDB,
+  changeSelectedTaskDB
+} from './tasksUtils';
+import { ReduxState } from '../store';
 
-export function* createTaskAsync({ payload }: CreateTaskStartAction) {
+const userUid = ({ user }: ReduxState) => user.currentUser;
+
+export function* onCreateTask() {
+  yield takeLatest(CREATE_TASK_START, createTask);
+}
+
+export function* createTask({ payload }: CreateTaskStartAction) {
   try {
-    // yield call(saveTasksInFirestore, taskName);
+    const { uid } = yield select(userUid);
+    yield call(saveTaskInDB, uid, payload);
     yield put(createTaskSuccess(payload));
   } catch (err) {
     yield put(createTaskFailure(err));
   }
 }
 
-export function* editTaskAsync({ payload }: EditTaskStartAction) {
+export function* onEditTask() {
+  yield takeLatest(EDIT_TASK_START, editTask);
+}
+
+export function* editTask({ payload }: EditTaskStartAction) {
   try {
-    // yield call(updateTaskInFirestore, prevTask, newTask);
+    const { uid } = yield select(userUid);
+    yield call(editTaskInDB, uid, payload.prevTask, payload.newTask);
     yield put(editTaskSuccess({ ...payload }));
   } catch (err) {
     yield put(editTaskFailure(err));
   }
 }
 
-export function* deleteTaskAsync({ payload }: DeleteTaskStartAction) {
+export function* onDeleteTask() {
+  yield takeLatest(DELETE_TASK_START, deleteTask);
+}
+
+export function* deleteTask({ payload }: DeleteTaskStartAction) {
   try {
-    // yield call(deleteTaskFromFirestore, taskName);
+    const { uid } = yield select(userUid);
+    yield call(deleteTaskFromDB, uid, payload);
     yield put(deleteTaskSuccess(payload));
   } catch (err) {
     yield put(deleteTaskFailure(err));
   }
 }
 
-export function* switchTaskAsync({ payload }: SwitchTaskStartAction) {
+export function* onSwitchTask() {
+  yield takeLatest(SWITCH_TASK_START, switchTask);
+}
+
+export function* switchTask({ payload }: SwitchTaskStartAction) {
   try {
-    // yield call(saveSelectedTask, taskName);
+    const { uid } = yield select(userUid);
+    yield call(changeSelectedTaskDB, uid, payload);
     yield put(switchTaskSuccess(payload));
   } catch (err) {
     yield put(switchTaskFailure(err));
   }
-}
-
-export function* onCreateTask() {
-  yield takeLatest(CREATE_TASK_START, createTaskAsync);
-}
-
-export function* onEditTask() {
-  yield takeLatest(EDIT_TASK_START, editTaskAsync);
-}
-
-export function* onDeleteTask() {
-  yield takeLatest(DELETE_TASK_START, deleteTaskAsync);
-}
-
-export function* onSwitchTask() {
-  yield takeLatest(SWITCH_TASK_START, switchTaskAsync);
 }
 
 export function* taskSagas() {
