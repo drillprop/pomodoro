@@ -8,7 +8,7 @@ import {
   DELETE_TASK_START
 } from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
-import { SKIP_BREAK, STOP_AND_SWITCH_FAZE } from '../timer/timerTypes';
+import { STOP_AND_SWITCH_FAZE } from '../timer/timerTypes';
 import { TasksActionTypes } from './tasksInterfaces';
 import { LOGIN_SUCCESS, SIGN_OUT_SUCCESS } from '../users/userTypes';
 
@@ -65,32 +65,22 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
         isLoading: false
       };
     }
-    // case SKIP_BREAK:
-    //   return {
-    //     ...state,
-    //     tasks: {
-    //       ...state.tasks,
-    //       [state.selectedTask]: !action.payload.isInterval
-    //         ? state.tasks[state.selectedTask] + 1
-    //         : state.tasks[state.selectedTask]
-    //     }
-    //   };
     case SWITCH_TASK_SUCCESS:
       return {
         ...state,
         selectedTask: action.payload
       };
-    // case STOP_AND_SWITCH_FAZE: {
-    //   return {
-    //     ...state,
-    //     tasks: {
-    //       ...state.tasks,
-    //       [state.selectedTask]: !action.isInterval
-    //         ? state.tasks[state.selectedTask] + 1
-    //         : state.tasks[state.selectedTask]
-    //     }
-    //   };
-    // }
+    case STOP_AND_SWITCH_FAZE: {
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [state.selectedTask]: action.payload
+            ? state.tasks[state.selectedTask] + 1
+            : state.tasks[state.selectedTask]
+        }
+      };
+    }
     case LOGIN_SUCCESS:
       return {
         ...state,

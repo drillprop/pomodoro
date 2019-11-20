@@ -1,10 +1,10 @@
 import { database } from '../../utils/firebase/database';
+
 export const saveTaskInDB = async (uid: string, task: string) => {
   try {
     const tasks = database.ref(`/users/${uid}/tasks`);
     await tasks.update({ [task]: 0 });
-    const snapShot = await tasks.once('value').then(snap => snap.val());
-    console.log(snapShot);
+    await tasks.once('value').then(snap => snap.val());
   } catch (error) {
     return error;
   }

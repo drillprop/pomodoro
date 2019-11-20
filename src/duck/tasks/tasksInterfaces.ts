@@ -16,6 +16,10 @@ import {
   LoginSuccessAction,
   SignOutSuccessAction
 } from '../users/userInterfaces';
+import {
+  SkipBreakAction,
+  StopTimerAndSwitchFazeAction
+} from '../timer/timerInterfaces';
 
 export interface TaskError {
   code: string;
@@ -101,4 +105,5 @@ export type TasksActionTypes =
   | SwitchTaskSuccessAction
   | SwitchTaskFailureAction
   | LoginSuccessAction
-  | SignOutSuccessAction;
+  | SignOutSuccessAction
+  | StopTimerAndSwitchFazeAction;
