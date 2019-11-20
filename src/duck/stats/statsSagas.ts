@@ -1,4 +1,4 @@
-import { FETCH_INTERVALS_BY_DAY_START } from './statsTypes';
+import { FETCH_STATS_START } from './statsTypes';
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 // import { getIntervalsByDay } from './statsUtils';
 import {
@@ -16,7 +16,7 @@ export function* fetchIntervalsByDay() {
 }
 
 export function* onFetchIntervalsByDayStart() {
-  yield takeLatest(FETCH_INTERVALS_BY_DAY_START, fetchIntervalsByDay);
+  yield takeLatest(FETCH_STATS_START, fetchIntervalsByDay);
 }
 
 export function* statsSagas() {

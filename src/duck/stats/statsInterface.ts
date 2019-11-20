@@ -1,7 +1,7 @@
 import {
-  FETCH_INTERVALS_BY_DAY_START,
-  FETCH_INTERVALS_BY_DAY_SUCCESS,
-  FETCH_INTERVALS_BY_DAY_FAILURE
+  FETCH_STATS_START,
+  FETCH_STATS_SUCCESS,
+  FETCH_STATS_FAILURE
 } from './statsTypes';
 
 export interface StatsError {
@@ -10,14 +10,14 @@ export interface StatsError {
 }
 
 export interface FetchIntervalsByDayStartAction {
-  type: typeof FETCH_INTERVALS_BY_DAY_START;
+  type: typeof FETCH_STATS_START;
 }
 export interface FetchIntervalsByDaySuccessAction {
-  type: typeof FETCH_INTERVALS_BY_DAY_SUCCESS;
+  type: typeof FETCH_STATS_SUCCESS;
   payload: any;
 }
 export interface FetchIntervalsByDayFailureAction {
-  type: typeof FETCH_INTERVALS_BY_DAY_FAILURE;
+  type: typeof FETCH_STATS_FAILURE;
   payload: StatsError;
 }
 
