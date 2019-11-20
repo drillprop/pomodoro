@@ -3,7 +3,7 @@ import { TimeleftsParams } from './timerInterfaces';
 
 export const saveTimersInDB = async (uid: string, config: TimeleftsParams) => {
   try {
-    await database.ref(`users/${uid}`).set({
+    await database.ref(`users/${uid}`).update({
       config: { ...config }
     });
   } catch (error) {

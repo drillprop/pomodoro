@@ -13,7 +13,10 @@ import {
 import { UserActionTypes, SignError, UserData } from './userInterfaces';
 
 export interface UserState {
-  currentUser: UserData | null;
+  currentUser: {
+    email: string;
+    uid: string;
+  } | null;
   isGettingUser: boolean;
   error: SignError | null;
 }
@@ -40,7 +43,7 @@ export default (state = initialState, action: UserActionTypes): UserState => {
       return {
         ...state,
         isGettingUser: false,
-        currentUser: { ...action.payload }
+        currentUser: { email: action.payload.email, uid: action.payload.uid }
       };
     case LOGIN_FAILURE:
     case REGISTER_FAILURE:

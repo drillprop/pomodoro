@@ -8,7 +8,6 @@ export default () => {
   const dispatch = useDispatch();
 
   const initialSeconds = useSelector(({ timer }: ReduxState) => timer.config);
-
   const secondsEntries = Object.entries(initialSeconds);
 
   const reducedToObj = secondsEntries.reduce((acc: any, item: any) => {

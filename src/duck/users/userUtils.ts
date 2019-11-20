@@ -4,11 +4,12 @@ export const addUserToDB = async (uid: string, email: string) => {
   try {
     const userRef = database.ref('users/' + uid);
     const snapShot = await userRef.once('value').then(snap => snap.val());
-    if (!snapShot)
+    if (!snapShot) {
       await userRef.set({
         uid,
         email
       });
+    }
     return snapShot;
   } catch (error) {
     return error;

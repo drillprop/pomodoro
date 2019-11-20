@@ -30,9 +30,19 @@ const selectTasks = ({ tasks }: ReduxState) => tasks.tasks;
 export function* fetchUserInfo(user: UserData) {
   yield call(addUserToDB, user.uid, user.email);
   const userSettings = yield call(getConfigAndTasks, user.uid);
-  const { tasks, selectedTask, config } = userSettings;
   const { email, uid } = user;
-  yield put(loginSuccess({ email, uid, tasks, selectedTask, config }));
+  const { tasks, selectedTask, config } = userSettings;
+  const configIfNull = yield select(selectConfig);
+  const tasksIfNull = yield select(selectTasks);
+  yield put(
+    loginSuccess({
+      email,
+      uid,
+      tasks: tasks || tasksIfNull,
+      selectedTask,
+      config: config || configIfNull
+    })
+  );
 }
 
 // Register
