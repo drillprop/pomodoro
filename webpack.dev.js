@@ -8,5 +8,5 @@ module.exports = webpackMerge(common, {
     overlay: true
   },
   stats: 'minimal',
-  devtool: 'eval'
+  devtool: 'cheap-module-eval-source-map'
 });

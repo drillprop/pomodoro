@@ -7,7 +7,6 @@ const WebpackBundleAnalyzer = require('webpack-bundle-analyzer')
 
 module.exports = webpackMerge(common, {
   mode: 'production',
-  devtool: 'source-map',
   optimization: {
     minimize: true
   },
