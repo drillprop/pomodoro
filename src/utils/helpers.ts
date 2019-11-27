@@ -63,14 +63,13 @@ export const getStorageUser = () => {
   return null;
 };
 
-export const createDaysArray = (daysBackward: number) => {
-  const arr = [];
+export const createDaysObject = (daysBackward: number) => {
+  const obj: any = {};
   for (let i = daysBackward; i >= 0; i--) {
-    arr.push(
-      dayjs()
-        .subtract(i, 'day')
-        .format('DD-MM-YY')
-    );
+    const date: any = dayjs()
+      .subtract(i, 'day')
+      .format('DD-MM-YY');
+    obj[date] = null;
   }
-  return arr;
+  return obj;
 };
