@@ -6,28 +6,28 @@ import {
   INC_INTERVALS_FAILURE
 } from './statsTypes';
 import {
-  FetchIntervalsByDayStartAction,
-  FetchIntervalsByDaySuccessAction,
+  FetchStatsStartAction,
+  FetchStatsSuccessAction,
   StatsError,
-  FetchIntervalsByDayFailureAction,
+  FetchStatsFailureAction,
   IncIntervalsAction,
   IncIntervalsFailureAction
 } from './statsInterface';
 
-export const fetchIntervalsByDayStart = (): FetchIntervalsByDayStartAction => ({
+export const fetchStatsStart = (): FetchStatsStartAction => ({
   type: FETCH_STATS_START
 });
 
-export const fetchIntervalsByDaySuccess = (
+export const fetchStatsSuccess = (
   interValsByDay: any
-): FetchIntervalsByDaySuccessAction => ({
+): FetchStatsSuccessAction => ({
   type: FETCH_STATS_SUCCESS,
   payload: interValsByDay
 });
 
-export const fetchIntervalsByDayFailure = (
+export const fetchStatsFailure = (
   error: StatsError
-): FetchIntervalsByDayFailureAction => ({
+): FetchStatsFailureAction => ({
   type: FETCH_STATS_FAILURE,
   payload: error
 });

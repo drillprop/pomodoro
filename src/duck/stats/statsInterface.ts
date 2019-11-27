@@ -11,14 +11,14 @@ export interface StatsError {
   message: string;
 }
 
-export interface FetchIntervalsByDayStartAction {
+export interface FetchStatsStartAction {
   type: typeof FETCH_STATS_START;
 }
-export interface FetchIntervalsByDaySuccessAction {
+export interface FetchStatsSuccessAction {
   type: typeof FETCH_STATS_SUCCESS;
   payload: any;
 }
-export interface FetchIntervalsByDayFailureAction {
+export interface FetchStatsFailureAction {
   type: typeof FETCH_STATS_FAILURE;
   payload: StatsError;
 }
@@ -31,8 +31,8 @@ export interface IncIntervalsFailureAction {
 }
 
 export type StatsActionTypes =
-  | FetchIntervalsByDayStartAction
-  | FetchIntervalsByDaySuccessAction
-  | FetchIntervalsByDayFailureAction
+  | FetchStatsStartAction
+  | FetchStatsSuccessAction
+  | FetchStatsFailureAction
   | IncIntervalsAction
   | IncIntervalsFailureAction;

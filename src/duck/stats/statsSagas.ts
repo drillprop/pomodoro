@@ -1,8 +1,8 @@
 import { FETCH_STATS_START } from './statsTypes';
 import { takeLatest, put, all, call, select } from 'redux-saga/effects';
 import {
-  fetchIntervalsByDaySuccess,
-  fetchIntervalsByDayFailure,
+  fetchStatsSuccess,
+  fetchStatsFailure,
   incIntervals,
   incIntervalsFailure
 } from './statsActions';
@@ -15,17 +15,17 @@ const selectSelectedTask = ({ tasks }: ReduxState) => tasks.selectedTask;
 const selectIntervalTime = ({ timer }: ReduxState) => timer.config.intervalTime;
 const userUid = ({ user }: ReduxState) => user.currentUser;
 
-export function* onFetchIntervalsByDayStart() {
-  yield takeLatest(FETCH_STATS_START, fetchIntervalsByDay);
+export function* onfetchStatsStart() {
+  yield takeLatest(FETCH_STATS_START, fetchStats);
 }
 
-export function* fetchIntervalsByDay() {
+export function* fetchStats() {
   try {
     const { uid } = yield select(userUid);
     const stats = yield call(fetchStatsDB, uid);
-    yield put(fetchIntervalsByDaySuccess(stats));
+    yield put(fetchStatsSuccess(stats));
   } catch (err) {
-    yield put(fetchIntervalsByDayFailure(err));
+    yield put(fetchStatsFailure(err));
   }
 }
 
@@ -49,5 +49,5 @@ export function* incTaskInterval({
 }
 
 export function* statsSagas() {
-  yield all([call(onFetchIntervalsByDayStart), call(onSwitchFaze)]);
+  yield all([call(onfetchStatsStart), call(onSwitchFaze)]);
 }
