@@ -1,5 +1,5 @@
 import React, { FC, useRef, useEffect } from 'react';
-import { Chart } from 'chart.js';
+import Chart from 'chart.js';
 import { primary } from '../../../../utils/colors';
 import { StatsChartWrapper } from './StatsChartStyles';
 
@@ -31,6 +31,12 @@ const StatsChart: FC<{ statsValues: Array<number>; dates: Array<string> }> = ({
         }
       });
     }
+
+    return () => {
+      if (chart.current) {
+        chart.current.destroy();
+      }
+    };
   }, [canvasRef, statsValues, dates, chart]);
 
   return (

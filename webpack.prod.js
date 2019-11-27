@@ -14,7 +14,7 @@ module.exports = webpackMerge(common, {
     new EnvironmentPlugin({
       NODE_ENV: 'production',
       DEBUG: false
-    }),
-    new WebpackBundleAnalyzer()
+    })
+    // new WebpackBundleAnalyzer()
   ]
 });
