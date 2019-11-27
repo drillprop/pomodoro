@@ -7,8 +7,8 @@ import {
 } from './statsTypes';
 
 export interface StatsError {
-  code: string;
-  message: string;
+  code: string | null;
+  message: string | null;
 }
 
 export interface FetchStatsStartAction {

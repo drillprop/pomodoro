@@ -16,14 +16,11 @@ import {
   LoginSuccessAction,
   SignOutSuccessAction
 } from '../users/userInterfaces';
-import {
-  SkipBreakAction,
-  StopTimerAndSwitchFazeAction
-} from '../timer/timerInterfaces';
+import { StopTimerAndSwitchFazeAction } from '../timer/timerInterfaces';
 
 export interface TaskError {
-  code: string;
-  message: string;
+  code: string | null;
+  message: string | null;
 }
 
 export interface EditTaskParams {

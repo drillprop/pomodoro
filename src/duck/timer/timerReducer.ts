@@ -111,7 +111,10 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
     case SET_TIMERS_DURATION_FAILURE:
       return {
         ...state,
-        error: action.payload
+        error: {
+          message: action.payload.message || null,
+          code: action.payload.code || null
+        }
       };
     case LOGIN_SUCCESS:
       return {

@@ -27,8 +27,8 @@ export interface RegisterAndLoginParams {
 }
 
 export interface SignError {
-  code: string;
-  message: string;
+  code: string | null;
+  message: string | null;
 }
 
 // REGISTER ACTIONS INTERFACES

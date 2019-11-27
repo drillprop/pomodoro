@@ -6,7 +6,7 @@ export const saveTaskInDB = async (uid: string, task: string) => {
     await tasks.update({ [task]: 0 });
     await tasks.once('value').then(snap => snap.val());
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };
 
@@ -26,7 +26,7 @@ export const editTaskInDB = async (
     update[newTask] = await prevTaskValue;
     await tasksRef.update(update);
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };
 
@@ -34,8 +34,8 @@ export const deleteTaskFromDB = async (uid: string, task: string) => {
   try {
     const taskRef = database.ref(`/users/${uid}/tasks/${task}`);
     await taskRef.remove();
-  } catch (err) {
-    return err;
+  } catch (error) {
+    throw new Error(error);
   }
 };
 
@@ -47,6 +47,6 @@ export const changeSelectedTaskDB = async (
     const selectedTaskRef = database.ref(`/users/${uid}/selectedTask`);
     await selectedTaskRef.set(selectedTask);
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };

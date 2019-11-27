@@ -27,8 +27,8 @@ export interface TimeleftsParams {
   breakTime: number;
 }
 export interface TimerError {
-  code: string;
-  message: string;
+  code: string | null;
+  message: string | null;
 }
 
 // TIMER ACTIONS INTERFACES

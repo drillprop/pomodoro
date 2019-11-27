@@ -51,7 +51,10 @@ export default (state = initialState, action: UserActionTypes): UserState => {
       return {
         ...state,
         isGettingUser: false,
-        error: { ...action.payload }
+        error: {
+          message: action.payload.message || null,
+          code: action.payload.code || null
+        }
       };
     case SIGN_OUT_SUCCESS:
       return {

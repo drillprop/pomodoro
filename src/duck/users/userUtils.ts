@@ -12,7 +12,7 @@ export const addUserToDB = async (uid: string, email: string) => {
     }
     return snapShot;
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };
 
@@ -28,6 +28,6 @@ export const getConfigAndTasks = async (uid: string) => {
       selectedTask: selectedTask || 'default'
     };
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };

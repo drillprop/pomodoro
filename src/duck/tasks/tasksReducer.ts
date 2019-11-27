@@ -5,17 +5,22 @@ import {
   SWITCH_TASK_SUCCESS,
   EDIT_TASK_START,
   CREATE_TASK_START,
-  DELETE_TASK_START
+  DELETE_TASK_START,
+  SWITCH_TASK_FAILURE,
+  CREATE_TASK_FAILURE,
+  EDIT_TASK_FAILURE,
+  DELETE_TASK_FAILURE
 } from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
 import { STOP_AND_SWITCH_FAZE } from '../timer/timerTypes';
-import { TasksActionTypes } from './tasksInterfaces';
+import { TasksActionTypes, TaskError } from './tasksInterfaces';
 import { LOGIN_SUCCESS, SIGN_OUT_SUCCESS } from '../users/userTypes';
 
 export interface TasksState {
   tasks: any;
   selectedTask: string;
   isLoading: boolean;
+  error: TaskError | null;
 }
 
 const initialState: TasksState = {
@@ -23,7 +28,8 @@ const initialState: TasksState = {
     default: 0
   },
   selectedTask: 'default',
-  isLoading: false
+  isLoading: false,
+  error: null
 };
 
 export default (state = initialState, action: TasksActionTypes): TasksState => {
@@ -94,6 +100,17 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
           default: 0
         },
         selectedTask: 'default'
+      };
+    case SWITCH_TASK_FAILURE:
+    case CREATE_TASK_FAILURE:
+    case EDIT_TASK_FAILURE:
+    case DELETE_TASK_FAILURE:
+      return {
+        ...state,
+        error: {
+          message: action.payload.message || null,
+          code: action.payload.code || null
+        }
       };
     default:
       return state;
