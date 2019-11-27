@@ -8,7 +8,7 @@ import { fetchStatsStart } from '../../../duck/stats/statsActions';
 
 const StatsChartContainer: FC = () => {
   const dispatch = useDispatch();
-  const stats = useSelector(({ stats }: ReduxState) => stats.intervalsByDay);
+  const stats = useSelector(({ stats }: ReduxState) => stats.statsByDay);
 
   useEffect(() => {
     dispatch(fetchStatsStart());

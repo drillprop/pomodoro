@@ -6,13 +6,13 @@ import {
 import { StatsActionTypes, StatsError } from './statsInterface';
 
 export interface StatsState {
-  intervalsByDay: null | object;
+  statsByDay: null | object;
   error: null | StatsError;
   isFetching: boolean;
 }
 
 const initalState: StatsState = {
-  intervalsByDay: null,
+  statsByDay: null,
   error: null,
   isFetching: false
 };
@@ -25,7 +25,7 @@ export default (state = initalState, action: StatsActionTypes): StatsState => {
       return {
         ...state,
         isFetching: false,
-        intervalsByDay: { ...action.payload }
+        statsByDay: { ...action.payload }
       };
     case FETCH_STATS_FAILURE:
       return { ...state, isFetching: false, error: { ...action.payload } };
