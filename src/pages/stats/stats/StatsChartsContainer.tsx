@@ -2,13 +2,13 @@ import React, { FC, useEffect } from 'react';
 import { SubTitle } from '../../../elements/Titles';
 import StatsChart from './stats-charts-container/StatsChart';
 import { useSelector, useDispatch } from 'react-redux';
-import { ReduxState } from '../../../duck/store';
 import { createDaysObject } from '../../../utils/helpers';
 import { fetchStatsStart } from '../../../duck/stats/statsActions';
+import { selectStatsByDay } from '../../../duck/stats/statsSelectors';
 
 const StatsChartContainer: FC = () => {
   const dispatch = useDispatch();
-  const stats = useSelector(({ stats }: ReduxState) => stats.statsByDay);
+  const stats = useSelector(selectStatsByDay);
 
   useEffect(() => {
     dispatch(fetchStatsStart());

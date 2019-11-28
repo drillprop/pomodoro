@@ -11,25 +11,27 @@ import {
   selectIsInterval
 } from '../../../../duck/timer/timerSelectors';
 import { createStructuredSelector } from 'reselect';
+import { selectSelectedTask } from '../../../../duck/tasks/taskSelectors';
 
 interface Selectors {
   isTimerStart: boolean;
   timeleft: number;
   isInterval: boolean;
+  selectedTask: string;
 }
 
 const playButtonSelector = createStructuredSelector<ReduxState, Selectors>({
   isTimerStart: selectIsTimerStart,
   timeleft: selectTimeleft,
-  isInterval: selectIsInterval
+  isInterval: selectIsInterval,
+  selectedTask: selectSelectedTask
 });
 
 const PlayButton: FC = () => {
   const dispatch = useDispatch();
-  const { isTimerStart, timeleft, isInterval } = useSelector(
+  const { isTimerStart, timeleft, isInterval, selectedTask } = useSelector(
     playButtonSelector
   );
-  const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
 
   const startPause = () => {
     isTimerStart

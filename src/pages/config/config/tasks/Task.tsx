@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteTaskStart } from '../../../../duck/tasks/tasksActions';
 import EditTask from './task/EditTask';
 import { StyledTask, StyledTaskButton } from './Task.styles';
-import { ReduxState } from '../../../../duck/store';
+import { selectIsTasksLoading } from '../../../../duck/tasks/taskSelectors';
 
 const Task: FC<{
   task: string;
 }> = ({ task }) => {
   const dispatch = useDispatch();
-  const { isLoading } = useSelector(({ tasks }: ReduxState) => tasks);
+  const isLoading = useSelector(selectIsTasksLoading);
 
   const [editable, setAsEditable] = useState(false);
 
