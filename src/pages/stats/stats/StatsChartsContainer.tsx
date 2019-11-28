@@ -33,7 +33,6 @@ const StatsChartContainer: FC = () => {
   const intervalStats: any = (daysBackwards: number) => {
     const dates = createDaysObject(daysBackwards);
     const statsWithBlankDates = { ...dates, ...stats };
-    console.log(statsWithBlankDates);
     const values = Object.values(statsWithBlankDates).map((item: any) => {
       if (item) {
         return Object.values(item.tasks).reduce(
