@@ -2,12 +2,24 @@ import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../../../../duck/store';
 import { resetTimer, startTimer } from '../../../../duck/timer/timerActions';
-import useTimerState from '../../../../hooks/useTimerState';
 import { StyledRetryButton } from './RetryButton.styles';
+import {
+  selectTimeleft,
+  selectIsInterval
+} from '../../../../duck/timer/timerSelectors';
+import { createStructuredSelector } from 'reselect';
+
+const retryButtonSelector = createStructuredSelector<
+  ReduxState,
+  { timeleft: number; isInterval: boolean }
+>({
+  timeleft: selectTimeleft,
+  isInterval: selectIsInterval
+});
 
 const RetryButton: FC = () => {
   const dispatch = useDispatch();
-  const { timeleft, isInterval } = useTimerState();
+  const { timeleft, isInterval } = useSelector(retryButtonSelector);
   const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
 
   const retry = async () => {

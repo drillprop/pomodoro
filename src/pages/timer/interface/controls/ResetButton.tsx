@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReduxState } from '../../../../duck/store';
 import { resetTimer, skipBreak } from '../../../../duck/timer/timerActions';
-import useTimerState from '../../../../hooks/useTimerState';
 import { StyledButton } from './ResetButton.styles';
+import { selectIsInterval } from '../../../../duck/timer/timerSelectors';
 
 const ResetButton: FC = () => {
   const dispatch = useDispatch();
-  const { isInterval } = useTimerState();
+  const isInterval = useSelector(selectIsInterval);
 
   const reset = () => {
     isInterval ? dispatch(resetTimer()) : dispatch(skipBreak());

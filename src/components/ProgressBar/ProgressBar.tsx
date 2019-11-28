@@ -1,10 +1,11 @@
 import React from 'react';
 import { ProgressBarWrapper, ProgressBarLine } from './ProgressBar.styles';
 import useTimer from '../../hooks/useTimer';
-import useTimerState from '../../hooks/useTimerState';
+import { useSelector } from 'react-redux';
+import { selectTimeleft } from '../../duck/timer/timerSelectors';
 
 const ProgressBar = () => {
-  const { timeleft } = useTimerState();
+  const timeleft = useSelector(selectTimeleft);
   const count = useTimer();
   let progress = ((timeleft - count) * (100 / timeleft)) / 100;
   return (

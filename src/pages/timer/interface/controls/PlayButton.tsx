@@ -3,13 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../../../../duck/store';
 import { pauseTimer, startTimer } from '../../../../duck/timer/timerActions';
 import Icon from '../../../../components/Icon/Icon';
-import useTimerState from '../../../../hooks/useTimerState';
 import { primary } from '../../../../utils/colors';
 import { Pause, StyledPlayButton } from './PlayButton.styles';
+import {
+  selectTimer,
+  selectIsTimerStart,
+  selectTimeleft,
+  selectIsInterval
+} from '../../../../duck/timer/timerSelectors';
+import { createStructuredSelector } from 'reselect';
+
+const playButtonSelector = createStructuredSelector<
+  ReduxState,
+  { isTimerStart: boolean; timeleft: number; isInterval: boolean }
+>({
+  isTimerStart: selectIsTimerStart,
+  timeleft: selectTimeleft,
+  isInterval: selectIsInterval
+});
 
 const PlayButton: FC = () => {
   const dispatch = useDispatch();
-  const { isTimerStart, timeleft, isInterval } = useTimerState();
+  const { isTimerStart, timeleft, isInterval } = useSelector(
+    playButtonSelector
+  );
   const { selectedTask } = useSelector(({ tasks }: ReduxState) => tasks);
 
   const startPause = () => {
