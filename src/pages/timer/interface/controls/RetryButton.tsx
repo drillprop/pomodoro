@@ -9,10 +9,12 @@ import {
 } from '../../../../duck/timer/timerSelectors';
 import { createStructuredSelector } from 'reselect';
 
-const retryButtonSelector = createStructuredSelector<
-  ReduxState,
-  { timeleft: number; isInterval: boolean }
->({
+interface Selectors {
+  timeleft: number;
+  isInterval: boolean;
+}
+
+const retryButtonSelector = createStructuredSelector<ReduxState, Selectors>({
   timeleft: selectTimeleft,
   isInterval: selectIsInterval
 });

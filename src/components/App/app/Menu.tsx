@@ -9,11 +9,26 @@ import useRouter from '../../../hooks/useRouter';
 import { background } from '../../../utils/colors';
 import { LinkList, StyledNavigation } from './Menu.styles';
 import Profile from './menu/Profile';
+import { selectCurrentUser } from '../../../duck/users/userSelectors';
+import { selectIsMenuVisible } from '../../../duck/timer/timerSelectors';
+import { createStructuredSelector } from 'reselect';
+
+interface Selectors {
+  isMenuVisible: boolean;
+  user: any;
+}
+
+const menuSelectors = createStructuredSelector<ReduxState, Selectors>({
+  user: selectCurrentUser,
+  isMenuVisible: selectIsMenuVisible
+});
 
 const Menu: FC = () => {
   const router = useRouter();
 
   const dispatch = useDispatch();
+  const { user, isMenuVisible } = useSelector(menuSelectors);
+
   const itemIconProps = {
     size: 30,
     style: {
@@ -24,10 +39,7 @@ const Menu: FC = () => {
     color: background
   };
 
-  const user = useSelector(({ user }: ReduxState) => user.currentUser);
-  const toggle = useSelector(({ timer }: ReduxState) => timer.isMenuVisible);
-
-  const transitions = useTransition(toggle, null, {
+  const transitions = useTransition(isMenuVisible, null, {
     from: {
       transform: 'translateX(-500px)'
     },

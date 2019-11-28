@@ -6,13 +6,11 @@ import HamburgerButton from './app/menu/HamburgerButton';
 import Menu from './app/Menu';
 import Router from './app/Router';
 import ProgressBar from '../ProgressBar/ProgressBar';
-import { ReduxState } from '../../duck/store';
 import Loading from '../Loading/Loading';
+import { selectIsGettingUser } from '../../duck/users/userSelectors';
 
 const App: React.FC = () => {
-  const isGettingUser = useSelector(
-    ({ user }: ReduxState) => user.isGettingUser
-  );
+  const isGettingUser = useSelector(selectIsGettingUser);
   const dispatch = useDispatch();
 
   useEffect(() => {

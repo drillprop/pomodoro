@@ -6,17 +6,19 @@ import Icon from '../../../../components/Icon/Icon';
 import { primary } from '../../../../utils/colors';
 import { Pause, StyledPlayButton } from './PlayButton.styles';
 import {
-  selectTimer,
   selectIsTimerStart,
   selectTimeleft,
   selectIsInterval
 } from '../../../../duck/timer/timerSelectors';
 import { createStructuredSelector } from 'reselect';
 
-const playButtonSelector = createStructuredSelector<
-  ReduxState,
-  { isTimerStart: boolean; timeleft: number; isInterval: boolean }
->({
+interface Selectors {
+  isTimerStart: boolean;
+  timeleft: number;
+  isInterval: boolean;
+}
+
+const playButtonSelector = createStructuredSelector<ReduxState, Selectors>({
   isTimerStart: selectIsTimerStart,
   timeleft: selectTimeleft,
   isInterval: selectIsInterval

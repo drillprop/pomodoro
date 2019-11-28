@@ -12,15 +12,14 @@ import { useSelector } from 'react-redux';
 
 const sound = new Audio(require('../assets/sounds/typewriter.mp3'));
 
-const timerSelectors = createStructuredSelector<
-  ReduxState,
-  {
-    isTimerStart: boolean;
-    isInterval: boolean;
-    endTime: number;
-    timeleft: number;
-  }
->({
+interface Selectors {
+  isTimerStart: boolean;
+  isInterval: boolean;
+  endTime: number;
+  timeleft: number;
+}
+
+const timerSelectors = createStructuredSelector<ReduxState, Selectors>({
   isTimerStart: selectIsTimerStart,
   isInterval: selectIsInterval,
   endTime: selectEndTime,
