@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import Icon from '../../../Icon/Icon';
 import { primary } from '../../../../utils/colors';
 import { Avatar, Email, ProfileWrapper } from './Profile.styles';
-import { UserData } from '../../../../duck/users/userInterfaces';
 
 const Profile: FC<{
   user: any;

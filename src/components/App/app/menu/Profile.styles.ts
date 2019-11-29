@@ -28,6 +28,7 @@ export const Name = styled.h1`
 
 export const Email = styled.h2`
   margin: 0;
+  margin-top: 16px;
   font-size: 20px;
   text-transform: lowercase;
   font-family: ${secondFont};
