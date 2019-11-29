@@ -3,10 +3,12 @@ import Chart from 'chart.js';
 import { primary } from '../../../../utils/colors';
 import { StatsChartWrapper } from './StatsChartStyles';
 
-const StatsChart: FC<{ statsValues: Array<number>; dates: Array<string> }> = ({
-  statsValues,
-  dates
-}) => {
+interface Props {
+  statsValues: Array<number>;
+  dates: Array<string>;
+}
+
+const StatsChart: FC<Props> = ({ statsValues, dates }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chart = useRef<Chart>();
 
