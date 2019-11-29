@@ -29,7 +29,9 @@ const Tasks: FC = () => {
       <SubTitle>tasks</SubTitle>
       <StyledUl isLoading={isLoading}>
         {tasks &&
-          Object.keys(tasks).map(task => <Task task={task} key={task} />)}
+          Object.keys(tasks)
+            .filter(task => task !== 'default')
+            .map(task => <Task task={task} key={task} />)}
         <CreateNewTask />
       </StyledUl>
     </>
