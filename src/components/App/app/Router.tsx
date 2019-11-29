@@ -13,6 +13,7 @@ import Sign from '../../../pages/sign/Sign';
 import Interface from '../../../pages/timer/Interface';
 import Loading from '../../Loading/Loading';
 import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
+import Account from '../../../pages/account/Account';
 
 const Stats = lazy(() => import('../../../pages/stats/Stats'));
 
@@ -44,6 +45,7 @@ const Router: FC = () => {
         isAuth={!!user}
         component={() => <Config />}
       />
+      <ProtectedRoute path='/account' isAuth={!!user} component={Account} />
       <Suspense fallback={<Loading />}>
         <ProtectedRoute path='/stats' isAuth={!!user} component={Stats} />
       </Suspense>
