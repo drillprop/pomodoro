@@ -8,7 +8,7 @@ import Icon from '../../Icon/Icon';
 import useRouter from '../../../hooks/useRouter';
 import { background } from '../../../utils/colors';
 import { LinkList, StyledNavigation } from './Menu.styles';
-import Profile from './menu/Profile';
+import ProfileInfo from './menu/ProfileInfo';
 import { selectCurrentUser } from '../../../duck/users/userSelectors';
 import { selectIsMenuVisible } from '../../../duck/timer/timerSelectors';
 import { createStructuredSelector } from 'reselect';
@@ -55,11 +55,13 @@ const Menu: FC = () => {
         ({ item, key, props }) =>
           item && (
             <StyledNavigation key={key} style={props}>
-              <Profile user={user} />
+              <ProfileInfo user={user} />
               <LinkList>
                 <li>
-                  <Icon name='profile' {...itemIconProps} />
-                  profile
+                  <Link to='/account'>
+                    <Icon name='profile' {...itemIconProps} />
+                    account
+                  </Link>
                 </li>
                 <li>
                   <Link to='/stats'>

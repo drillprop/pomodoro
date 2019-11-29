@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { background, secondaryBackground } from '../../../../utils/colors';
 import { secondFont } from '../../../../utils/fonts';
 
-export const ProfileWrapper = styled.div`
+export const ProfileInfoWrapper = styled.div`
   margin-top: 70px;
 `;
 
