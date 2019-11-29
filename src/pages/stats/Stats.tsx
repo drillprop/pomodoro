@@ -7,7 +7,7 @@ const Stats = () => {
   return (
     <StatsWrapper>
       <MainTitle>stats</MainTitle>
-      <StatsChartsContainer />
+      <StatsChartsContainer days={30} />
     </StatsWrapper>
   );
 };

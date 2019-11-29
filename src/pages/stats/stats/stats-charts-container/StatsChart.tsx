@@ -4,7 +4,7 @@ import { primary } from '../../../../utils/colors';
 import { StatsChartWrapper } from './StatsChartStyles';
 
 interface Props {
-  statsValues: Array<number>;
+  statsValues: Array<number | any>;
   dates: Array<string>;
 }
 

@@ -2,7 +2,8 @@ import {
   FETCH_STATS_FAILURE,
   FETCH_STATS_START,
   FETCH_STATS_SUCCESS,
-  INC_INTERVALS_FAILURE
+  INC_INTERVALS_FAILURE,
+  INC_INTERVALS
 } from './statsTypes';
 import { StatsActionTypes, StatsError } from './statsInterface';
 
@@ -37,6 +38,11 @@ export default (state = initalState, action: StatsActionTypes): StatsState => {
           message: action.payload.message || null,
           code: action.payload.code || null
         },
+        statsByDay: null
+      };
+    case INC_INTERVALS:
+      return {
+        ...state,
         statsByDay: null
       };
     default:
