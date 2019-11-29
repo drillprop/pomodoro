@@ -8,6 +8,10 @@ export const selectEveryTasks = createSelector(
   ({ tasks }) => tasks
 );
 
+export const selectTasksForConfig = createSelector([selectTasks], ({ tasks }) =>
+  Object.keys(tasks).filter(task => task !== 'default')
+);
+
 export const selectSelectedTask = createSelector(
   [selectTasks],
   ({ selectedTask }) => selectedTask

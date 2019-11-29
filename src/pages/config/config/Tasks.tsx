@@ -8,16 +8,16 @@ import { StyledUl } from './Tasks.styles';
 import { createStructuredSelector } from 'reselect';
 import {
   selectIsTasksLoading,
-  selectEveryTasks
+  selectTasksForConfig
 } from '../../../duck/tasks/taskSelectors';
 
 interface Selectors {
-  tasks: any;
+  tasks: Array<string>;
   isLoading: boolean;
 }
 
 const tasksSelectors = createStructuredSelector<ReduxState, Selectors>({
-  tasks: selectEveryTasks,
+  tasks: selectTasksForConfig,
   isLoading: selectIsTasksLoading
 });
 
@@ -28,10 +28,9 @@ const Tasks: FC = () => {
     <>
       <SubTitle>tasks</SubTitle>
       <StyledUl isLoading={isLoading}>
-        {tasks &&
-          Object.keys(tasks)
-            .filter(task => task !== 'default')
-            .map(task => <Task task={task} key={task} />)}
+        {tasks.map(task => (
+          <Task task={task} key={task} />
+        ))}
         <CreateNewTask />
       </StyledUl>
     </>
