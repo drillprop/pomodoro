@@ -34,6 +34,13 @@ export const deleteTaskFromDB = async (uid: string, task: string) => {
   try {
     const taskRef = database.ref(`/users/${uid}/tasks/${task}`);
     await taskRef.remove();
+    const selectedTaskRef = database.ref(`/users/${uid}/selectedTask`);
+    const selectedTaskSnap = await selectedTaskRef
+      .once('value')
+      .then(snap => snap.val());
+    if (selectedTaskSnap === task) {
+      await selectedTaskRef.set('default');
+    }
   } catch (error) {
     throw new Error(error);
   }

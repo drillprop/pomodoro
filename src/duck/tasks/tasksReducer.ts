@@ -68,7 +68,9 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
       return {
         ...state,
         tasks: newTasksState,
-        isLoading: false
+        isLoading: false,
+        selectedTask:
+          taskName === state.selectedTask ? 'default' : state.selectedTask
       };
     }
     case SWITCH_TASK_SUCCESS:
