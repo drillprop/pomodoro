@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerStart } from '../../../duck/users/userActions';
 import { SubmitButtom } from '../../../elements/Forms';
@@ -6,16 +6,23 @@ import useForm from '../../../hooks/useForm';
 import Input from '../../../components/Input/Input';
 
 const RegisterForm: FC = () => {
+  const [isPasswordMatch, setMatch] = useState(true);
   const dispatch = useDispatch();
   const [values, handleInput, submit] = useForm({
-    displayName: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    submit(e);
-    dispatch(registerStart(values));
+    const { email, password, confirmPassword } = values;
+    if (password === confirmPassword) {
+      submit(e);
+      dispatch(registerStart({ email, password }));
+    } else {
+      e.preventDefault();
+      setMatch(false);
+    }
   };
 
   return (
@@ -40,7 +47,18 @@ const RegisterForm: FC = () => {
       >
         password
       </Input>
-      <SubmitButtom>login</SubmitButtom>
+      <Input
+        placeholder='password'
+        value={values.confirmPassword}
+        onChange={handleInput}
+        type='password'
+        name='confirmPassword'
+        required
+      >
+        confirm password
+      </Input>
+      {!isPasswordMatch ? <p>Passwords doesn't match</p> : null}
+      <SubmitButtom type='submit'>login</SubmitButtom>
     </form>
   );
 };
