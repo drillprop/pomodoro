@@ -1,12 +1,9 @@
 import React, { FC, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerStart } from '../../../duck/users/userActions';
-import {
-  StyledInput,
-  StyledLabel,
-  SubmitButtom
-} from '../../../elements/Forms';
+import { SubmitButtom } from '../../../elements/Forms';
 import useForm from '../../../hooks/useForm';
+import Input from '../../../components/Input/Input';
 
 const RegisterForm: FC = () => {
   const dispatch = useDispatch();
@@ -16,32 +13,34 @@ const RegisterForm: FC = () => {
     password: ''
   });
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     submit(e);
     dispatch(registerStart(values));
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <StyledLabel htmlFor='email'>Email</StyledLabel>
-      <StyledInput
+      <Input
+        placeholder='email'
         value={values.email}
         onChange={handleInput}
-        name='email'
         type='email'
-        id='email'
-        placeholder='email'
-      />
-      <StyledLabel htmlFor='password'>Password</StyledLabel>
-      <StyledInput
+        name='email'
+        required
+      >
+        email
+      </Input>
+      <Input
+        placeholder='password'
         value={values.password}
         onChange={handleInput}
-        name='password'
         type='password'
-        id='password'
-        placeholder='password'
-      />
-      <SubmitButtom>register</SubmitButtom>
+        name='password'
+        required
+      >
+        password
+      </Input>
+      <SubmitButtom>login</SubmitButtom>
     </form>
   );
 };
