@@ -18,31 +18,6 @@ export const FormParagraph = styled.p`
   cursor: pointer;
 `;
 
-export const StyledLabel = styled.label`
-  font-family: ${primFont};
-  font-size: 14px;
-  text-align: center;
-  margin-right: 20px;
-`;
-
-export const StyledInput = styled.input`
-  display: block;
-  font-family: ${primFont};
-  font-size: 18px;
-  margin: 0 auto;
-  padding: 8px;
-  margin-bottom: 32px;
-  margin-top: 8px;
-  color: ${primary};
-  background-color: ${background};
-  border: solid 1px ${secondary};
-  border-radius: 5px;
-  width: 270px;
-  ::placeholder {
-    color: ${secondary};
-  }
-`;
-
 export const SubmitButtom = styled.button`
   border: none;
   margin-top: 52px;
