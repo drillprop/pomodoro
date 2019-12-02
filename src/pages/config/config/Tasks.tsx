@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { SubTitle } from '../../../elements/Titles';
 import Task from './tasks/Task';
-import CreateNewTask from './CreateNewTask';
+import CreateNewTask from './tasks/CreateNewTask';
 import { useSelector } from 'react-redux';
 import { ReduxState } from '../../../duck/store';
 import { StyledUl } from './Tasks.styles';

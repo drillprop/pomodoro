@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { EditCreateTask } from '../../../elements/Forms';
-import useSubmitTask from '../../../hooks/useSubmitTask';
+import { EditCreateTask } from '../../../../elements/Forms';
+import useSubmitTask from '../../../../hooks/useSubmitTask';
 
 const CreateNewTask: FC<{}> = () => {
   const [input, handleInput, handleSubmit] = useSubmitTask('');
