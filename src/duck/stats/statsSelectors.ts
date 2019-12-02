@@ -34,7 +34,6 @@ export const selectTimeStats = (days: number) =>
 export const selectIntervalStats = (days: number) =>
   createSelector([selectStatsByDay], stats => {
     const dates = createDaysObject(days);
-    console.log(stats);
     const statsWithBlankDates = { ...dates, ...stats };
     const values = Object.values(statsWithBlankDates).map((item: any) => {
       if (item) {
