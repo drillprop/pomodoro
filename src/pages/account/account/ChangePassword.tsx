@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Input from '../../../components/Input/Input';
 import { changePasswordStart } from '../../../duck/users/userActions';
@@ -7,14 +7,22 @@ import { SubTitle } from '../../../elements/Titles';
 import useForm from '../../../hooks/useForm';
 
 const ChangePassword = () => {
+  const [isPasswordMatch, setMatch] = useState(true);
   const dispatch = useDispatch();
   const [values, handleInput, submitForm] = useForm({
     oldPassword: '',
-    newPassword: ''
+    newPassword: '',
+    confirmPassword: ''
   });
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    dispatch(changePasswordStart(values));
-    submitForm(e);
+    const { newPassword, confirmPassword } = values;
+    if (newPassword === confirmPassword) {
+      dispatch(changePasswordStart(values));
+      submitForm(e);
+    } else {
+      e.preventDefault();
+      setMatch(false);
+    }
   };
   return (
     <>
@@ -30,6 +38,7 @@ const ChangePassword = () => {
         >
           old password
         </Input>
+        <br />
         <Input
           value={values.newPassword}
           onChange={handleInput}
@@ -40,6 +49,17 @@ const ChangePassword = () => {
         >
           new password
         </Input>
+        <Input
+          value={values.confirmPassword}
+          onChange={handleInput}
+          placeholder='confirm password'
+          type='password'
+          name='confirmPassword'
+          required
+        >
+          confirm password
+        </Input>
+        {!isPasswordMatch ? <p>Passwords doesn't match</p> : null}
         <SubmitButtom type='submit'>submit</SubmitButtom>
       </form>
     </>
