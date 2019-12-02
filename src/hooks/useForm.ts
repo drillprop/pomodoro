@@ -15,6 +15,11 @@ export default (
 
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const reset = Object.keys(values).reduce((acc: any, key) => {
+      acc[key] = '';
+      return acc;
+    }, {});
+    setForm(reset);
   };
 
   return [values, handleInput, submitForm];
