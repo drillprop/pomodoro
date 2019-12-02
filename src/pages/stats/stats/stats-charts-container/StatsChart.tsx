@@ -29,7 +29,16 @@ const StatsChart: FC<Props> = ({ statsValues, dates }) => {
         },
         options: {
           responsive: true,
-          maintainAspectRatio: true
+          maintainAspectRatio: true,
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
+          }
         }
       });
     }
