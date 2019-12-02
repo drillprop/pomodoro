@@ -8,7 +8,10 @@ import {
   LOGIN_START,
   REGISTER_START,
   LOGIN_WITH_GOOGLE,
-  CHECK_SESSION
+  CHECK_SESSION,
+  CHANGE_PASSWORD_FAILURE,
+  CHANGE_PASSWORD_START,
+  CHANGE_PASSWORD_SUCCESS
 } from './userTypes';
 import { UserActionTypes, SignError, UserData } from './userInterfaces';
 
@@ -16,6 +19,7 @@ export interface UserState {
   currentUser: {
     email: string;
     uid: string;
+    loginProvider: 'password' | 'google.com' | '';
   } | null;
   isGettingUser: boolean;
   error: SignError | null;
@@ -33,21 +37,32 @@ export default (state = initialState, action: UserActionTypes): UserState => {
     case REGISTER_START:
     case CHECK_SESSION:
     case LOGIN_WITH_GOOGLE:
+    case CHANGE_PASSWORD_START:
       return {
         ...state,
         isGettingUser: true,
         error: null
+      };
+    case CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isGettingUser: false
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       return {
         ...state,
         isGettingUser: false,
-        currentUser: { email: action.payload.email, uid: action.payload.uid }
+        currentUser: {
+          email: action.payload.email,
+          uid: action.payload.uid,
+          loginProvider: action.payload.loginProvider
+        }
       };
     case LOGIN_FAILURE:
     case REGISTER_FAILURE:
     case SIGN_OUT_FAILURE:
+    case CHANGE_PASSWORD_FAILURE:
       return {
         ...state,
         isGettingUser: false,

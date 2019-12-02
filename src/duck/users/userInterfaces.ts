@@ -9,7 +9,10 @@ import {
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
   LOGIN_WITH_GOOGLE,
-  CHECK_SESSION
+  CHECK_SESSION,
+  CHANGE_PASSWORD_START,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILURE
 } from './userTypes';
 import { Config } from '../timer/timerReducer';
 
@@ -19,11 +22,17 @@ export interface UserData {
   config: Config;
   selectedTask: string | 'default';
   tasks: any | null;
+  loginProvider: 'password' | 'google.com' | '';
 }
 
 export interface RegisterAndLoginParams {
   email: string;
   password: string;
+}
+
+export interface ChangePasswordParams {
+  oldPassword: string;
+  newPassword: string;
 }
 
 export interface SignError {
@@ -86,6 +95,20 @@ export interface CheckSessionAction {
   type: typeof CHECK_SESSION;
 }
 
+// CHANGE PASSWORD INTERFACE
+
+export interface ChangePasswordStartAction {
+  type: typeof CHANGE_PASSWORD_START;
+  payload: ChangePasswordParams;
+}
+export interface ChangePasswordSuccessAction {
+  type: typeof CHANGE_PASSWORD_SUCCESS;
+}
+export interface ChangePasswordFailureAction {
+  type: typeof CHANGE_PASSWORD_FAILURE;
+  payload: SignError;
+}
+
 export type UserActionTypes =
   | RegisterStartAction
   | RegisterSuccessAction
@@ -97,4 +120,7 @@ export type UserActionTypes =
   | SignOutSuccessAction
   | SignOutFailureAction
   | LoginWithGoogleAction
-  | CheckSessionAction;
+  | CheckSessionAction
+  | ChangePasswordStartAction
+  | ChangePasswordSuccessAction
+  | ChangePasswordFailureAction;

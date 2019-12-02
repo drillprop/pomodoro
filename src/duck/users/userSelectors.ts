@@ -8,6 +8,10 @@ export const selectCurrentUser = createSelector(
   ({ currentUser }) => currentUser
 );
 
+export const selectProvider = createSelector([selectUser], ({ currentUser }) =>
+  currentUser ? currentUser.loginProvider : null
+);
+
 export const selectIsGettingUser = createSelector(
   [selectUser],
   ({ isGettingUser }) => isGettingUser

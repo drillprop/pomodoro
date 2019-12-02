@@ -5,29 +5,37 @@ import {
   registerFailure,
   registerSuccess,
   signOutFailure,
-  signOutSuccess
+  signOutSuccess,
+  changePasswordFailure,
+  changePasswordSuccess
 } from './userActions';
 import {
   LOGIN_START,
   REGISTER_START,
   SIGN_OUT_START,
   CHECK_SESSION,
-  LOGIN_WITH_GOOGLE
+  LOGIN_WITH_GOOGLE,
+  CHANGE_PASSWORD_START
 } from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
 import { getCurrentUser, loginWithGoogle } from '../../utils/firebase/auth';
 import {
   RegisterStartAction,
   LoginStartAction,
-  UserData
+  UserData,
+  ChangePasswordStartAction
 } from './userInterfaces';
-import { addUserToDB, getConfigAndTasks } from './userUtils';
+import {
+  addUserToDB,
+  getConfigAndTasks,
+  changePasswordFirebase
+} from './userUtils';
 import { ReduxState } from '../store';
 
 const selectConfig = ({ timer }: ReduxState) => timer.config;
 const selectTasks = ({ tasks }: ReduxState) => tasks.tasks;
 
-export function* fetchUserInfo(user: UserData) {
+export function* fetchUserInfo(user: any) {
   yield call(addUserToDB, user.uid, user.email);
   const userSettings = yield call(getConfigAndTasks, user.uid);
   const { email, uid } = user;
@@ -40,7 +48,8 @@ export function* fetchUserInfo(user: UserData) {
       uid,
       tasks: tasks || tasksIfNull,
       selectedTask,
-      config: config || configIfNull
+      config: config || configIfNull,
+      loginProvider: user.providerData[0].providerId
     })
   );
 }
@@ -65,7 +74,8 @@ export function* registerWithEmail({ payload }: RegisterStartAction) {
           email: user.email,
           selectedTask: 'default',
           tasks,
-          config
+          config,
+          loginProvider: user.providerData[0].providerId
         })
       );
     }
@@ -136,12 +146,34 @@ export function* checkSession() {
   }
 }
 
+// Change Password
+
+export function* onChangePassword() {
+  yield takeLatest(CHANGE_PASSWORD_START, changePassword);
+}
+
+changePasswordFirebase;
+
+export function* changePassword({ payload }: ChangePasswordStartAction) {
+  try {
+    yield call(
+      changePasswordFirebase,
+      payload.oldPassword,
+      payload.newPassword
+    );
+    yield put(changePasswordSuccess());
+  } catch (error) {
+    yield put(changePasswordFailure(error));
+  }
+}
+
 export function* userSagas() {
   yield all([
     call(onRegisterWithEmailStart),
     call(onLoginWithEmailStart),
     call(onLoginGoogleStart),
     call(onSignOutStart),
-    call(onCheckSession)
+    call(onCheckSession),
+    call(onChangePassword)
   ]);
 }

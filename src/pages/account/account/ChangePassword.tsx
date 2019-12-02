@@ -1,15 +1,19 @@
 import React, { FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
 import Input from '../../../components/Input/Input';
-import { SubTitle } from '../../../elements/Titles';
+import { changePasswordStart } from '../../../duck/users/userActions';
 import { SubmitButtom } from '../../../elements/Forms';
+import { SubTitle } from '../../../elements/Titles';
 import useForm from '../../../hooks/useForm';
 
 const ChangePassword = () => {
+  const dispatch = useDispatch();
   const [values, handleInput, submitForm] = useForm({
     oldPassword: '',
     newPassword: ''
   });
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    dispatch(changePasswordStart(values));
     submitForm(e);
   };
   return (
@@ -36,7 +40,7 @@ const ChangePassword = () => {
         >
           new password
         </Input>
-        <SubmitButtom>submit</SubmitButtom>
+        <SubmitButtom type='submit'>submit</SubmitButtom>
       </form>
     </>
   );

@@ -1,4 +1,7 @@
 import { database } from '../../utils/firebase/database';
+import { getCurrentUser } from '../../utils/firebase/auth';
+import { EmailAuthProvider } from '../../utils/firebase/firebase';
+import 'firebase/auth/';
 
 export const addUserToDB = async (uid: string, email: string) => {
   try {
@@ -27,6 +30,32 @@ export const getConfigAndTasks = async (uid: string) => {
       tasks: tasks || null,
       selectedTask: selectedTask || 'default'
     };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const changePasswordFirebase = async (
+  oldPassword: string,
+  newPassword: string
+) => {
+  try {
+    const user = await getCurrentUser();
+    if (user && user.email && user.providerData[0]) {
+      if (user.providerData[0].providerId === 'password') {
+        const credentials = EmailAuthProvider.credential(
+          user.email,
+          oldPassword
+        );
+        await user.reauthenticateWithCredential(credentials);
+        await user.updatePassword(newPassword);
+      } else {
+        throw new Error(
+          `You cant change password if you didn't register with email and password`
+        );
+      }
+    }
+    return user;
   } catch (error) {
     throw new Error(error);
   }

@@ -9,7 +9,10 @@ import {
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
   CHECK_SESSION,
-  LOGIN_WITH_GOOGLE
+  LOGIN_WITH_GOOGLE,
+  CHANGE_PASSWORD_START,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILURE
 } from './userTypes';
 import {
   RegisterAndLoginParams,
@@ -25,7 +28,11 @@ import {
   SignOutSuccessAction,
   SignOutFailureAction,
   LoginWithGoogleAction,
-  CheckSessionAction
+  CheckSessionAction,
+  ChangePasswordStartAction,
+  ChangePasswordSuccessAction,
+  ChangePasswordFailureAction,
+  ChangePasswordParams
 } from './userInterfaces';
 
 // REGISTER
@@ -91,4 +98,24 @@ export const loginWithGoogle = (): LoginWithGoogleAction => ({
 
 export const checkSession = (): CheckSessionAction => ({
   type: CHECK_SESSION
+});
+
+// CHANGE PASSWORD
+
+export const changePasswordStart = (
+  payload: ChangePasswordParams
+): ChangePasswordStartAction => ({
+  type: CHANGE_PASSWORD_START,
+  payload
+});
+
+export const changePasswordSuccess = (): ChangePasswordSuccessAction => ({
+  type: CHANGE_PASSWORD_SUCCESS
+});
+
+export const changePasswordFailure = (
+  error: SignError
+): ChangePasswordFailureAction => ({
+  type: CHANGE_PASSWORD_FAILURE,
+  payload: error
 });
