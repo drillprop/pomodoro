@@ -2,6 +2,7 @@ import { database } from '../../utils/firebase/database';
 import { getCurrentUser } from '../../utils/firebase/auth';
 import { EmailAuthProvider } from '../../utils/firebase/firebase';
 import 'firebase/auth/';
+import { User } from 'firebase';
 
 export const addUserToDB = async (uid: string, email: string) => {
   try {
@@ -35,14 +36,22 @@ export const getConfigAndTasks = async (uid: string) => {
   }
 };
 
+export const getLoginProvider = (user: User) => {
+  if (user && user.providerData[0]) {
+    return user.providerData[0].providerId;
+  }
+  return null;
+};
+
 export const changePasswordFirebase = async (
   oldPassword: string,
   newPassword: string
 ) => {
   try {
     const user = await getCurrentUser();
-    if (user && user.email && user.providerData[0]) {
-      if (user.providerData[0].providerId === 'password') {
+    if (user && user.email) {
+      const provider = getLoginProvider(user);
+      if (provider === 'password') {
         const credentials = EmailAuthProvider.credential(
           user.email,
           oldPassword
