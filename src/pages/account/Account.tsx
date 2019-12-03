@@ -3,16 +3,16 @@ import { MainTitle } from '../../elements/Titles';
 import { AccountWrapper } from './Account.styles';
 import ChangePassword from './account/ChangePassword';
 import { useSelector } from 'react-redux';
-import { selectProvider } from '../../duck/users/userSelectors';
+import { selectCurrentUser } from '../../duck/users/userSelectors';
+import DeleteAccount from './account/DeleteAccount';
 
 const Account = () => {
-  const provider = useSelector(selectProvider);
+  const user = useSelector(selectCurrentUser);
   return (
     <AccountWrapper>
       <MainTitle>account</MainTitle>
-      {provider === 'password' && <ChangePassword />}
-      <p>Reset Your Stats</p>
-      <p>Delete Account</p>
+      {user && user.loginProvider === 'password' && <ChangePassword />}
+      <DeleteAccount provider={user && user.loginProvider} />
     </AccountWrapper>
   );
 };
