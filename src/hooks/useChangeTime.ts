@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { convertSecToObj } from '../utils/helpers';
+import { convertTimeToObj } from '../utils/helpers';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { setTimersDurationStart } from '../duck/timer/timerActions';
 import { selectConfig } from '../duck/timer/timerSelectors';
@@ -11,7 +11,7 @@ export default () => {
   const secondsEntries = Object.entries(initialSeconds);
 
   const reducedToObj = secondsEntries.reduce((acc: any, item: any) => {
-    const secondsToObj: any = convertSecToObj(item[1]);
+    const secondsToObj: any = convertTimeToObj(item[1]);
 
     secondsToObj.minutes = secondsToObj.minutes + secondsToObj.hours * 60;
     delete secondsToObj.hours;

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-export const convertSecToObj = (seconds: number): any => {
+export const convertTimeToObj = (seconds: number): any => {
   const timerDurationSeconds = seconds % 60;
   const timerDurationMinutes = Math.floor((seconds % (60 * 60)) / 60);
   const timerDurationHours = Math.floor((seconds % (60 * 360)) / 60 / 60);
@@ -11,16 +11,16 @@ export const convertSecToObj = (seconds: number): any => {
   };
 };
 
-export const convertSecToStr = (seconds: number): string => {
-  const timerDurationSeconds = convertSecToObj(seconds)
+export const convertTimeToStr = (seconds: number): string => {
+  const timerDurationSeconds = convertTimeToObj(seconds)
     .seconds.toString()
     .padStart(2, '0');
 
-  const timerDurationMinutes = convertSecToObj(seconds)
+  const timerDurationMinutes = convertTimeToObj(seconds)
     .minutes.toString()
     .padStart(2, '0');
 
-  const timerDurationHours = convertSecToObj(seconds)
+  const timerDurationHours = convertTimeToObj(seconds)
     .hours.toString()
     .padStart(2, '0');
 
