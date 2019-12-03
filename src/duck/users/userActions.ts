@@ -12,7 +12,10 @@ import {
   LOGIN_WITH_GOOGLE,
   CHANGE_PASSWORD_START,
   CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAILURE
+  CHANGE_PASSWORD_FAILURE,
+  DELETE_ACCOUNT_START,
+  DELETE_ACCOUNT_SUCCESS,
+  DELETE_ACCOUNT_FAILURE
 } from './userTypes';
 import {
   RegisterAndLoginParams,
@@ -32,7 +35,10 @@ import {
   ChangePasswordStartAction,
   ChangePasswordSuccessAction,
   ChangePasswordFailureAction,
-  ChangePasswordParams
+  ChangePasswordParams,
+  DeleteAccountStartAction,
+  DeleteAccountSuccessAction,
+  DeleteAccountFailureAction
 } from './userInterfaces';
 
 // REGISTER
@@ -117,5 +123,25 @@ export const changePasswordFailure = (
   error: SignError
 ): ChangePasswordFailureAction => ({
   type: CHANGE_PASSWORD_FAILURE,
+  payload: error
+});
+
+// DELETE ACCOUNT
+
+export const deleteAccountStart = (
+  password: string
+): DeleteAccountStartAction => ({
+  type: DELETE_ACCOUNT_START,
+  payload: password
+});
+
+export const deleteAccountSuccess = (): DeleteAccountSuccessAction => ({
+  type: DELETE_ACCOUNT_SUCCESS
+});
+
+export const deleteAccountFailure = (
+  error: SignError
+): DeleteAccountFailureAction => ({
+  type: DELETE_ACCOUNT_FAILURE,
   payload: error
 });

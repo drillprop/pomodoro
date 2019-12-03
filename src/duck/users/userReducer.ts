@@ -11,7 +11,10 @@ import {
   CHECK_SESSION,
   CHANGE_PASSWORD_FAILURE,
   CHANGE_PASSWORD_START,
-  CHANGE_PASSWORD_SUCCESS
+  CHANGE_PASSWORD_SUCCESS,
+  DELETE_ACCOUNT_SUCCESS,
+  DELETE_ACCOUNT_START,
+  DELETE_ACCOUNT_FAILURE
 } from './userTypes';
 import { UserActionTypes, SignError, UserData } from './userInterfaces';
 
@@ -38,6 +41,7 @@ export default (state = initialState, action: UserActionTypes): UserState => {
     case CHECK_SESSION:
     case LOGIN_WITH_GOOGLE:
     case CHANGE_PASSWORD_START:
+    case DELETE_ACCOUNT_START:
       return {
         ...state,
         isGettingUser: true,
@@ -63,6 +67,7 @@ export default (state = initialState, action: UserActionTypes): UserState => {
     case REGISTER_FAILURE:
     case SIGN_OUT_FAILURE:
     case CHANGE_PASSWORD_FAILURE:
+    case DELETE_ACCOUNT_FAILURE:
       return {
         ...state,
         isGettingUser: false,
@@ -72,6 +77,7 @@ export default (state = initialState, action: UserActionTypes): UserState => {
         }
       };
     case SIGN_OUT_SUCCESS:
+    case DELETE_ACCOUNT_SUCCESS:
       return {
         ...state,
         isGettingUser: false,

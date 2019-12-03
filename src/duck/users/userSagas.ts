@@ -7,7 +7,9 @@ import {
   signOutFailure,
   signOutSuccess,
   changePasswordFailure,
-  changePasswordSuccess
+  changePasswordSuccess,
+  deleteAccountSuccess,
+  deleteAccountFailure
 } from './userActions';
 import {
   LOGIN_START,
@@ -15,7 +17,8 @@ import {
   SIGN_OUT_START,
   CHECK_SESSION,
   LOGIN_WITH_GOOGLE,
-  CHANGE_PASSWORD_START
+  CHANGE_PASSWORD_START,
+  DELETE_ACCOUNT_START
 } from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
 import { getCurrentUser, loginWithGoogle } from '../../utils/firebase/auth';
@@ -23,12 +26,14 @@ import {
   RegisterStartAction,
   LoginStartAction,
   UserData,
-  ChangePasswordStartAction
+  ChangePasswordStartAction,
+  DeleteAccountStartAction
 } from './userInterfaces';
 import {
   addUserToDB,
   getConfigAndTasks,
-  changePasswordFirebase
+  changePasswordFirebase,
+  deleteAuthUser
 } from './userUtils';
 import { ReduxState } from '../store';
 
@@ -167,6 +172,21 @@ export function* changePassword({ payload }: ChangePasswordStartAction) {
   }
 }
 
+// Delete Account
+
+export function* onDeleteAccount() {
+  yield takeLatest(DELETE_ACCOUNT_START, deleteAccount);
+}
+
+export function* deleteAccount({ payload }: DeleteAccountStartAction) {
+  try {
+    yield call(deleteAuthUser, payload);
+    yield put(deleteAccountSuccess());
+  } catch (error) {
+    yield put(deleteAccountFailure(error));
+  }
+}
+
 export function* userSagas() {
   yield all([
     call(onRegisterWithEmailStart),
@@ -174,6 +194,7 @@ export function* userSagas() {
     call(onLoginGoogleStart),
     call(onSignOutStart),
     call(onCheckSession),
-    call(onChangePassword)
+    call(onChangePassword),
+    call(onDeleteAccount)
   ]);
 }
