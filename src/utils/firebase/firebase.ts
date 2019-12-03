@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
-export const { EmailAuthProvider } = firebase.auth;
+export const { EmailAuthProvider, GoogleAuthProvider } = firebase.auth;
 
 export const firebaseConfig = {
   apiKey: process.env.API_KEY,

@@ -2,7 +2,7 @@ import * as firebase from 'firebase/app';
 import { auth } from './firebase';
 import { RegisterAndLoginParams } from '../../duck/users/userInterfaces';
 
-const provider = new firebase.auth.GoogleAuthProvider();
+export const provider = new firebase.auth.GoogleAuthProvider();
 
 provider.setCustomParameters({ prompt: 'select_account' });
 

@@ -1,5 +1,5 @@
 import { database } from '../../utils/firebase/database';
-import { getCurrentUser } from '../../utils/firebase/auth';
+import { getCurrentUser, provider } from '../../utils/firebase/auth';
 import { EmailAuthProvider } from '../../utils/firebase/firebase';
 import 'firebase/auth/';
 import { User } from 'firebase';
@@ -50,8 +50,8 @@ export const changePasswordFirebase = async (
   try {
     const user = await getCurrentUser();
     if (user && user.email) {
-      const provider = getLoginProvider(user);
-      if (provider === 'password') {
+      const loginProvider = getLoginProvider(user);
+      if (loginProvider === 'password') {
         const credentials = EmailAuthProvider.credential(
           user.email,
           oldPassword
@@ -65,6 +65,25 @@ export const changePasswordFirebase = async (
       }
     }
     return user;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const deleteAuthUser = async (password: string = '') => {
+  try {
+    const user = await getCurrentUser();
+    if (user) {
+      const loginProvider = getLoginProvider(user);
+      if (loginProvider === 'password' && user.email) {
+        const credentials = EmailAuthProvider.credential(user.email, password);
+        await user.reauthenticateWithCredential(credentials);
+        await user.delete();
+      } else if (loginProvider === 'google.com') {
+        await user.reauthenticateWithPopup(provider);
+        await user.delete();
+      }
+    }
   } catch (error) {
     throw new Error(error);
   }
