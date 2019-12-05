@@ -4,11 +4,11 @@ Configurable pommodoro app written in React with Typescript.
 
 ## Motivation
 
-The application is created to fight with procrastination, read about pommodoro technique [here](https://en.wikipedia.org/wiki/Pomodoro_Technique).
+The application is created to fight with procrastination using **_pommodoro technique_**. You can read about it [here](https://en.wikipedia.org/wiki/Pomodoro_Technique).
 
 ## Description
 
-Pommodoro has authentication system and realtime database based on **firebase**. Every signed user can track his statistics, manage tasks, configure duration of work intervals(known as _pommodoros_ or _tomatoes_) and breaks.
+Application is using authentication system and realtime database based on **firebase**. Every signed user can track his statistics, manage tasks, configure duration of work intervals(known as _pommodoros_ or _tomatoes_) and breaks.
 
 ## Technologies
 
