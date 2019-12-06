@@ -1,13 +1,13 @@
 import React, { FC, useEffect } from 'react';
-import { SubTitle } from '../../../elements/Titles';
-import StatsChart from './stats-charts-container/StatsChart';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchStatsStart } from '../../../duck/stats/statsActions';
 import {
-  selectTimeStats,
   selectIntervalStats,
-  selectStatsByDay
+  selectStatsByDay,
+  selectTimeStats
 } from '../../../duck/stats/statsSelectors';
+import StatsChart from './stats-charts-container/StatsChart';
+import Heading from '../../../components/Heading/Heading';
 
 const StatsChartContainer: FC<{ days: number }> = ({ days }) => {
   const dispatch = useDispatch();
@@ -23,12 +23,16 @@ const StatsChartContainer: FC<{ days: number }> = ({ days }) => {
 
   return (
     <>
-      <SubTitle>intervals</SubTitle>
+      <Heading level='h2' mtop={28}>
+        intervals
+      </Heading>
       <StatsChart
         dates={intervalStats.dates}
         statsValues={intervalStats.values}
       />
-      <SubTitle>time</SubTitle>
+      <Heading level='h2' mtop={28}>
+        time
+      </Heading>
       <StatsChart dates={timeStats.dates} statsValues={timeStats.values} />
     </>
   );

@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-import { SubTitle } from '../../../elements/Titles';
-import Task from './tasks/Task';
-import CreateNewTask from './tasks/CreateNewTask';
 import { useSelector } from 'react-redux';
-import { ReduxState } from '../../../duck/store';
-import { StyledUl } from './Tasks.styles';
 import { createStructuredSelector } from 'reselect';
+import { ReduxState } from '../../../duck/store';
 import {
   selectIsTasksLoading,
   selectTasksForConfig
 } from '../../../duck/tasks/taskSelectors';
+import { StyledUl } from './Tasks.styles';
+import CreateNewTask from './tasks/CreateNewTask';
+import Task from './tasks/Task';
+import Heading from '../../../components/Heading/Heading';
 
 interface Selectors {
   tasks: Array<string>;
@@ -26,7 +26,9 @@ const Tasks: FC = () => {
 
   return (
     <>
-      <SubTitle>tasks</SubTitle>
+      <Heading level='h2' mtop={28}>
+        tasks
+      </Heading>
       <StyledUl isLoading={isLoading}>
         {tasks.map(task => (
           <Task task={task} key={task} />

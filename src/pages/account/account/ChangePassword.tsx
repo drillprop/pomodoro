@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import Button from '../../../components/Button/Button';
 import Input from '../../../components/Input/Input';
 import { changePasswordStart } from '../../../duck/users/userActions';
-import { SubTitle } from '../../../elements/Titles';
 import useForm from '../../../hooks/useForm';
 import { ButtonGroup } from '../Account.styles';
+import Heading from '../../../components/Heading/Heading';
 
 const ChangePassword = () => {
   const [isPasswordMatch, setMatch] = useState(true);
@@ -37,7 +37,9 @@ const ChangePassword = () => {
 
   return (
     <>
-      <SubTitle>change password</SubTitle>
+      <Heading level='h2' mtop={28}>
+        change password
+      </Heading>
       {!isFormVisible && (
         <Button onClick={() => setVisible(true)}>change password</Button>
       )}

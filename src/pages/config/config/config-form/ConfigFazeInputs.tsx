@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { SubTitle } from '../../../../elements/Titles';
 import {
   StyledConfigInput,
   StyledConfigLabel
 } from './ConfigFazeInputs.styles';
+import Heading from '../../../../components/Heading/Heading';
 
 type ConfigFazeInputs = {
   faze: string;
@@ -14,7 +14,9 @@ type ConfigFazeInputs = {
 const ConfigFazeInputs: FC<ConfigFazeInputs> = ({ faze, timeleft, update }) => {
   return (
     <>
-      <SubTitle>{faze.split('Time')[0]} time</SubTitle>
+      <Heading level='h2' mtop={28}>
+        {faze.split('Time')[0]} time
+      </Heading>
       <StyledConfigLabel htmlFor={`${faze}-min`}>
         <StyledConfigInput
           value={timeleft[faze].minutes}

@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import Button from '../../../components/Button/Button';
 import Input from '../../../components/Input/Input';
 import { deleteAccountStart } from '../../../duck/users/userActions';
-import { SubTitle } from '../../../elements/Titles';
 import useForm from '../../../hooks/useForm';
 import { ButtonGroup } from '../Account.styles';
+import Heading from '../../../components/Heading/Heading';
 
 const DeleteAccount: FC<{ provider: string | null }> = ({ provider }) => {
   const [isFormVisible, showForm] = useState(false);
@@ -25,7 +25,9 @@ const DeleteAccount: FC<{ provider: string | null }> = ({ provider }) => {
   };
   return (
     <>
-      <SubTitle>delete account</SubTitle>
+      <Heading level='h2' mtop={28}>
+        delete account
+      </Heading>
       {!isFormVisible && (
         <Button onClick={() => showForm(isFormVisible => !isFormVisible)}>
           delete account

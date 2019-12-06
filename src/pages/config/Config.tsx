@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { ConfigWrapper, GoBackLink } from './Config.styles';
 import ConfigForm from './config/ConfigForm';
 import Tasks from './config/Tasks';
-import { MainTitle } from '../../elements/Titles';
-import { ConfigWrapper, GoBackLink } from './Config.styles';
+import Heading from '../../components/Heading/Heading';
 
 const Config: FC = () => {
   return (
     <>
       <ConfigWrapper>
-        <MainTitle>config</MainTitle>
+        <Heading level='h1'>config</Heading>
         <Tasks />
         <ConfigForm />
         <GoBackLink>

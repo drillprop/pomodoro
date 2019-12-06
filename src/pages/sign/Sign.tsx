@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginWithGoogle } from '../../duck/users/userActions';
-import { MainTitle } from '../../elements/Titles';
+import { FormParagraph, FormWrapper } from './Sign.styles';
 import LoginForm from './sign/LoginForm';
 import RegisterForm from './sign/RegisterForm';
-import { FormWrapper, FormParagraph } from './Sign.styles';
+import Heading from '../../components/Heading/Heading';
 
 const Sign: FC = () => {
   const dispatch = useDispatch();
@@ -14,12 +14,12 @@ const Sign: FC = () => {
       <FormWrapper>
         {isLogin ? (
           <>
-            <MainTitle>login</MainTitle>
+            <Heading level='h1'>login</Heading>
             <LoginForm />
           </>
         ) : (
           <>
-            <MainTitle>register</MainTitle>
+            <Heading level='h1'>register</Heading>
             <RegisterForm />
           </>
         )}
