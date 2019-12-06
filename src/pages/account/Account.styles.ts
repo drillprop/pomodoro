@@ -5,3 +5,9 @@ export const AccountWrapper = styled.main`
   margin-top: 100px;
   justify-content: center;
 `;
+
+export const ButtonGroup = styled.div`
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: repeat(2, 1fr);
+`;

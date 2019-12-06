@@ -5,25 +5,37 @@ import Input from '../../../components/Input/Input';
 import { deleteAccountStart } from '../../../duck/users/userActions';
 import { SubTitle } from '../../../elements/Titles';
 import useForm from '../../../hooks/useForm';
-import { StyledDeleteForm } from './DeleteAccount.styles';
+import { ButtonGroup } from '../Account.styles';
 
 const DeleteAccount: FC<{ provider: string | null }> = ({ provider }) => {
   const [isFormVisible, showForm] = useState(false);
   const dispatch = useDispatch();
-  const [values, handleInput, sumbitForm] = useForm({ password: '' });
+  const [values, handleInput, sumbitForm, clearForm] = useForm({
+    password: ''
+  });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     sumbitForm(e);
     dispatch(deleteAccountStart(values.password));
   };
 
+  const cancel = () => {
+    clearForm(values);
+    showForm(false);
+  };
   return (
     <>
+      <SubTitle>delete account</SubTitle>
+      {!isFormVisible && (
+        <Button onClick={() => showForm(isFormVisible => !isFormVisible)}>
+          delete account
+        </Button>
+      )}
       {isFormVisible ? (
-        <StyledDeleteForm onSubmit={handleSubmit}>
-          <SubTitle>delete account</SubTitle>
+        <form onSubmit={handleSubmit}>
           {provider === 'password' && (
             <Input
+              mtop={0}
               type='password'
               placeholder='password'
               name='password'
@@ -34,14 +46,16 @@ const DeleteAccount: FC<{ provider: string | null }> = ({ provider }) => {
               confirm with password
             </Input>
           )}
-          <Button invert type='submit'>
-            delete
-          </Button>
-        </StyledDeleteForm>
+          <ButtonGroup>
+            <Button mtop={42} invert type='submit'>
+              delete
+            </Button>
+            <Button type='reset' mtop={42} onClick={cancel}>
+              cancel
+            </Button>
+          </ButtonGroup>
+        </form>
       ) : null}
-      <Button onClick={() => showForm(isFormVisible => !isFormVisible)}>
-        {isFormVisible ? 'cancel' : 'delete account'}
-      </Button>
     </>
   );
 };
