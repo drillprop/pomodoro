@@ -20,7 +20,7 @@ const Input: FC<Props> = ({
   value,
   onChange,
   required = false,
-  mtop,
+  mtop = 32,
   width
 }) => {
   return (
