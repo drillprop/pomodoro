@@ -1,8 +1,8 @@
 import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Button from '../../../components/Button/Button';
 import Input from '../../../components/Input/Input';
 import { changePasswordStart } from '../../../duck/users/userActions';
-import { SubmitButtom } from '../../../elements/Forms';
 import { SubTitle } from '../../../elements/Titles';
 import useForm from '../../../hooks/useForm';
 
@@ -38,7 +38,6 @@ const ChangePassword = () => {
         >
           old password
         </Input>
-        <br />
         <Input
           value={values.newPassword}
           onChange={handleInput}
@@ -60,7 +59,7 @@ const ChangePassword = () => {
           confirm password
         </Input>
         {!isPasswordMatch ? <p>Passwords doesn't match</p> : null}
-        <SubmitButtom type='submit'>submit</SubmitButtom>
+        <Button type='submit'>submit</Button>
       </form>
     </>
   );

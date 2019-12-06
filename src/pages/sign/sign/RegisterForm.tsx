@@ -1,9 +1,9 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registerStart } from '../../../duck/users/userActions';
-import { SubmitButtom } from '../../../elements/Forms';
-import useForm from '../../../hooks/useForm';
+import Button from '../../../components/Button/Button';
 import Input from '../../../components/Input/Input';
+import { registerStart } from '../../../duck/users/userActions';
+import useForm from '../../../hooks/useForm';
 
 const RegisterForm: FC = () => {
   const [isPasswordMatch, setMatch] = useState(true);
@@ -58,7 +58,7 @@ const RegisterForm: FC = () => {
         confirm password
       </Input>
       {!isPasswordMatch ? <p>Passwords doesn't match</p> : null}
-      <SubmitButtom type='submit'>login</SubmitButtom>
+      <Button type='submit'>login</Button>
     </form>
   );
 };

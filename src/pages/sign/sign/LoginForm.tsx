@@ -1,9 +1,9 @@
 import React, { FC, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginStart } from '../../../duck/users/userActions';
-import { SubmitButtom } from '../../../elements/Forms';
-import useForm from '../../../hooks/useForm';
+import Button from '../../../components/Button/Button';
 import Input from '../../../components/Input/Input';
+import { loginStart } from '../../../duck/users/userActions';
+import useForm from '../../../hooks/useForm';
 
 const LoginForm: FC = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const LoginForm: FC = () => {
       >
         password
       </Input>
-      <SubmitButtom>login</SubmitButtom>
+      <Button>login</Button>
     </form>
   );
 };

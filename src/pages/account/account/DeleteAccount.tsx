@@ -1,9 +1,9 @@
-import React, { FormEvent, FC, useState } from 'react';
-import { SubmitButtom } from '../../../elements/Forms';
+import React, { FC, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Button from '../../../components/Button/Button';
 import Input from '../../../components/Input/Input';
-import { SubTitle } from '../../../elements/Titles';
 import { deleteAccountStart } from '../../../duck/users/userActions';
+import { SubTitle } from '../../../elements/Titles';
 import useForm from '../../../hooks/useForm';
 import { StyledDeleteForm } from './DeleteAccount.styles';
 
@@ -34,14 +34,14 @@ const DeleteAccount: FC<{ provider: string | null }> = ({ provider }) => {
               confirm with password
             </Input>
           )}
-          <SubmitButtom invert type='submit'>
+          <Button invert type='submit'>
             delete
-          </SubmitButtom>
+          </Button>
         </StyledDeleteForm>
       ) : null}
-      <SubmitButtom onClick={() => showForm(isFormVisible => !isFormVisible)}>
+      <Button onClick={() => showForm(isFormVisible => !isFormVisible)}>
         {isFormVisible ? 'cancel' : 'delete account'}
-      </SubmitButtom>
+      </Button>
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { SubmitButtom } from '../../../elements/Forms';
 import useChangeTime from '../../../hooks/useChangeTime';
 import ConfigFazeInputs from './config-form/ConfigFazeInputs';
+import Button from '../../../components/Button/Button';
 
 const ConfigForm: FC = () => {
   const [timeleft, update, submit] = useChangeTime();
@@ -14,7 +14,7 @@ const ConfigForm: FC = () => {
         timeleft={timeleft}
       />
       <ConfigFazeInputs faze='breakTime' update={update} timeleft={timeleft} />
-      <SubmitButtom type='submit'>save</SubmitButtom>
+      <Button type='submit'>save</Button>
     </form>
   );
 };
