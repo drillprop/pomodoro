@@ -18,3 +18,7 @@ export const StyledConfigLabel = styled.label`
   font-size: 1.5rem;
   margin-right: 20px;
 `;
+
+export const InputsWrapper = styled.div`
+  margin-top: 28px;
+`;

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import Heading from '../../../components/Heading/Heading';
 import { ReduxState } from '../../../duck/store';
 import {
   selectIsTasksLoading,
@@ -9,7 +10,6 @@ import {
 import { StyledUl } from './Tasks.styles';
 import CreateNewTask from './tasks/CreateNewTask';
 import Task from './tasks/Task';
-import Heading from '../../../components/Heading/Heading';
 
 interface Selectors {
   tasks: Array<string>;
@@ -26,7 +26,7 @@ const Tasks: FC = () => {
 
   return (
     <>
-      <Heading level='h2' mtop={28}>
+      <Heading level='h2' mtop={48}>
         tasks
       </Heading>
       <StyledUl isLoading={isLoading}>

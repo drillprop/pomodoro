@@ -12,7 +12,7 @@ export const EditCreateTask = styled.form`
   display: grid;
   grid-template-columns: 1fr 140px;
   border-radius: 5px;
-  margin-bottom: 16px;
+  margin-top: 20px;
 
   input {
     padding: 10px 12px;

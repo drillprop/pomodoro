@@ -1,9 +1,6 @@
-import styled from 'styled-components';
-
 import { animated } from 'react-spring';
-
+import styled from 'styled-components';
 import { primary, secondaryBackground } from '../../../utils/colors';
-
 import { secondFont } from '../../../utils/fonts';
 
 export const StyledNavigation = styled(animated.nav)`
@@ -27,7 +24,7 @@ export const LinkList = styled.ul`
     color: ${secondaryBackground};
   }
   li {
-    margin-bottom: 20px;
+    margin-top: 20px;
     opacity: 0.6;
     cursor: pointer;
     font-family: ${secondFont};

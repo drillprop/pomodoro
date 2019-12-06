@@ -4,7 +4,7 @@ import Button from '../../../components/Button/Button';
 import Input from '../../../components/Input/Input';
 import { changePasswordStart } from '../../../duck/users/userActions';
 import useForm from '../../../hooks/useForm';
-import { ButtonGroup } from '../Account.styles';
+import { ButtonGroup, StyledForm } from '../Account.styles';
 import Heading from '../../../components/Heading/Heading';
 
 const ChangePassword = () => {
@@ -37,14 +37,16 @@ const ChangePassword = () => {
 
   return (
     <>
-      <Heading level='h2' mtop={28}>
+      <Heading level='h2' mtop={48}>
         change password
       </Heading>
       {!isFormVisible && (
-        <Button onClick={() => setVisible(true)}>change password</Button>
+        <Button mtop={32} onClick={() => setVisible(true)}>
+          change password
+        </Button>
       )}
       {isFormVisible && (
-        <form onSubmit={handleSubmit}>
+        <StyledForm mtop={32} onSubmit={handleSubmit}>
           <Input
             mtop={0}
             value={values.oldPassword}
@@ -85,7 +87,7 @@ const ChangePassword = () => {
               cancel
             </Button>
           </ButtonGroup>
-        </form>
+        </StyledForm>
       )}
     </>
   );

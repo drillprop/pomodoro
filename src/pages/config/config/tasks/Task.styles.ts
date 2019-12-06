@@ -17,7 +17,7 @@ export const StyledTask = styled.li`
   border: solid 1px ${secondary};
   border-radius: 5px;
   font-size: 20px;
-  margin-bottom: 16px;
+  margin-top: 16px;
 `;
 export const StyledTaskButton = styled.button<{ disabled: boolean }>`
   padding: 10px 12px;
