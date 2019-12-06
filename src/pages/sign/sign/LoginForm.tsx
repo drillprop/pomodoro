@@ -39,7 +39,9 @@ const LoginForm: FC = () => {
       >
         password
       </Input>
-      <Button>login</Button>
+      <Button type='submit' mtop={42}>
+        login
+      </Button>
     </form>
   );
 };

@@ -14,7 +14,9 @@ const ConfigForm: FC = () => {
         timeleft={timeleft}
       />
       <ConfigFazeInputs faze='breakTime' update={update} timeleft={timeleft} />
-      <Button type='submit'>save</Button>
+      <Button mtop={32} type='submit'>
+        save
+      </Button>
     </form>
   );
 };

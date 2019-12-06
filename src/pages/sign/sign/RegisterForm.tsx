@@ -58,7 +58,9 @@ const RegisterForm: FC = () => {
         confirm password
       </Input>
       {!isPasswordMatch ? <p>Passwords doesn't match</p> : null}
-      <Button type='submit'>login</Button>
+      <Button mtop={42} type='submit'>
+        login
+      </Button>
     </form>
   );
 };
