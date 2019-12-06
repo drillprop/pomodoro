@@ -5,7 +5,8 @@ export default (
 ): [
   any,
   (e: ChangeEvent<HTMLInputElement>) => void,
-  (e: FormEvent<HTMLFormElement>) => Promise<void>
+  (e: FormEvent<HTMLFormElement>) => void,
+  (state: any) => void
 ] => {
   const [values, setForm] = useState(initValues);
 
@@ -13,14 +14,18 @@ export default (
     setForm({ ...values, [e.target.name]: e.target.value });
   };
 
-  const submitForm = async (e: FormEvent<HTMLFormElement>) => {
+  const submitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const reset = Object.keys(values).reduce((acc: any, key) => {
+    clearForm(values);
+  };
+
+  const clearForm = (state: any) => {
+    const reset = Object.keys(state).reduce((acc: any, key) => {
       acc[key] = '';
       return acc;
     }, {});
     setForm(reset);
   };
 
-  return [values, handleInput, submitForm];
+  return [values, handleInput, submitForm, clearForm];
 };
