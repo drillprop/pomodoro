@@ -5,13 +5,14 @@ import { secondFont } from '../../utils/fonts';
 interface StyledButtonProps {
   invert?: boolean;
   mtop?: number;
+  width?: number;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
   margin-top: ${props => props.mtop}px;
   border: none;
   display: block;
-  width: 100%;
+  width: ${props => (props.width ? `${props.width}px` : '100%')};
   background: ${({ invert = false }) =>
     invert ? primary : secondaryBackground};
   height: 3em;
