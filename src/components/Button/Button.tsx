@@ -6,16 +6,28 @@ export interface Props {
   onClick?: MouseEventHandler;
   type?: 'button' | 'submit' | 'reset' | undefined;
   invert?: boolean;
-  children: any;
+  children?: any;
+  mtop?: number;
+  width?: number;
 }
 
-const Button: FC<Props> = ({ disabled, onClick, type, invert, children }) => {
+const Button: FC<Props> = ({
+  disabled,
+  onClick,
+  type,
+  invert,
+  children,
+  mtop,
+  width
+}) => {
   return (
     <StyledButton
       disabled={disabled}
       onClick={onClick}
       type={type}
       invert={invert}
+      mtop={mtop}
+      width={width}
     >
       {children}
     </StyledButton>
