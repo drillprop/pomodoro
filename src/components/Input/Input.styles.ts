@@ -2,24 +2,29 @@ import styled from 'styled-components';
 import { primFont } from '../../utils/fonts';
 import { background, secondary, primary } from '../../utils/colors';
 
-export const InputWrapper = styled.div`
-  width: 270px;
+interface InputWrapperProps {
+  mtop?: number;
+  width?: number;
+}
+
+export const InputWrapper = styled.div<InputWrapperProps>`
+  width: ${props => props.width}px;
+  margin-top: ${props => props.mtop}px;
 `;
 
 export const StyledLabel = styled.label`
+  display: block;
   font-family: ${primFont};
   font-size: 14px;
   margin-right: 20px;
 `;
 
 export const StyledInput = styled.input`
+  margin-top: 8px;
   display: block;
   font-family: ${primFont};
   font-size: 18px;
-  margin: 0 auto;
   padding: 8px;
-  margin-bottom: 32px;
-  margin-top: 8px;
   color: ${primary};
   background-color: ${background};
   border: solid 1px ${secondary};

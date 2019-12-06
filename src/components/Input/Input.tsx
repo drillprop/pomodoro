@@ -8,6 +8,8 @@ interface Props {
   value?: string | number | string[] | undefined;
   onChange?: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
   required?: boolean;
+  mtop?: number;
+  width?: number;
 }
 
 const Input: FC<Props> = ({
@@ -17,10 +19,12 @@ const Input: FC<Props> = ({
   name,
   value,
   onChange,
-  required = false
+  required = false,
+  mtop,
+  width
 }) => {
   return (
-    <InputWrapper>
+    <InputWrapper mtop={mtop} width={width}>
       <StyledLabel htmlFor={name}>{children}</StyledLabel>
       <StyledInput
         required={required}
