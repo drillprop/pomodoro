@@ -18,22 +18,6 @@ export const FormParagraph = styled.p`
   cursor: pointer;
 `;
 
-export const SubmitButtom = styled.button<{ invert?: boolean }>`
-  border: none;
-  display: block;
-  margin-top: 54px;
-  width: 100%;
-  background: ${({ invert = false }) =>
-    invert ? primary : secondaryBackground};
-  height: 3em;
-  font-size: 1rem;
-  font-family: ${secondFont};
-  color: ${({ invert = false }) => (invert ? secondaryBackground : primary)};
-  font-weight: 700;
-  text-transform: lowercase;
-  border-radius: 5px;
-`;
-
 export const EditCreateTask = styled.form`
   border: solid 1px ${secondary};
   display: grid;
