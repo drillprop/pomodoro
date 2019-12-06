@@ -8,7 +8,7 @@ interface InputWrapperProps {
 }
 
 export const InputWrapper = styled.div<InputWrapperProps>`
-  width: ${props => props.width}px;
+  width: ${props => (props.width ? `${props.width}px` : '100%')};
   margin-top: ${props => props.mtop}px;
 `;
 
@@ -29,6 +29,7 @@ export const StyledInput = styled.input`
   background-color: ${background};
   border: solid 1px ${secondary};
   border-radius: 5px;
+  box-sizing: border-box;
   width: 100%;
   ::placeholder {
     color: ${secondary};
