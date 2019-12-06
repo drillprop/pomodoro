@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
-import { FormParagraph, FormWrapper } from '../../elements/Forms';
+import { useDispatch } from 'react-redux';
+import { loginWithGoogle } from '../../duck/users/userActions';
 import { MainTitle } from '../../elements/Titles';
 import LoginForm from './sign/LoginForm';
 import RegisterForm from './sign/RegisterForm';
-import { useDispatch } from 'react-redux';
-import { loginWithGoogle } from '../../duck/users/userActions';
+import { FormWrapper, FormParagraph } from './Sign.styles';
 
 const Sign: FC = () => {
   const dispatch = useDispatch();
