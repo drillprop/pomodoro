@@ -18,8 +18,8 @@ export const incIntervalDB = async (
     // increment time in stats node
     const timeDailyRef = database.ref(`/stats/${uid}/${today}/time`);
     await timeDailyRef.transaction(count => count + intervalTime);
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw new Error(error);
   }
 };
 
@@ -28,7 +28,7 @@ export const fetchStatsDB = async (uid: string) => {
     const userStatsRef = database.ref(`stats/${uid}`);
     const statsData = await userStatsRef.once('value').then(snap => snap.val());
     return statsData;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw new Error(error);
   }
 };

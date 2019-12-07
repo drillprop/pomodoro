@@ -24,8 +24,8 @@ export function* fetchStats() {
     const { uid } = yield select(userUid);
     const stats = yield call(fetchStatsDB, uid);
     yield put(fetchStatsSuccess(stats));
-  } catch (err) {
-    yield put(fetchStatsFailure(err));
+  } catch (error) {
+    yield put(fetchStatsFailure(error));
   }
 }
 

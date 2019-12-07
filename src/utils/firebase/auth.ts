@@ -7,7 +7,9 @@ export const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
 export const loginWithGoogle = () =>
-  auth.signInWithPopup(provider).catch(err => console.log(err));
+  auth.signInWithPopup(provider).catch(error => {
+    throw new Error(error);
+  });
 
 export function getCurrentUser() {
   return new Promise<firebase.User | null>((resolve, reject) => {
@@ -23,7 +25,7 @@ export const loginToAccount = async (loginParams: RegisterAndLoginParams) => {
   try {
     const loggedUser = await auth.signInWithEmailAndPassword(email, password);
     return loggedUser;
-  } catch (err) {
-    return err;
+  } catch (error) {
+    throw new Error(error);
   }
 };

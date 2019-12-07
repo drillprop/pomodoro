@@ -40,9 +40,9 @@ export function* startTimer({ payload }: any) {
     const { isInterval, timeleft } = payload;
     yield delay(timeleft * 1000 + 1000);
     yield put(stopTimerAndSwitchFaze(isInterval));
-  } catch (err) {
-    console.log(err);
-    return err;
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
   }
 }
 
@@ -55,8 +55,8 @@ export function* setTimersDuration({ payload }: SetTimersDurationStartAction) {
     const { uid } = yield select(userUid);
     yield call(saveTimersInDB, uid, payload);
     yield put(setTimersDurationSuccess(payload));
-  } catch (err) {
-    yield put(setTimersDurationFailure(err));
+  } catch (error) {
+    yield put(setTimersDurationFailure(error));
   }
 }
 

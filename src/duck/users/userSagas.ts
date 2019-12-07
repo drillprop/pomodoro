@@ -84,9 +84,9 @@ export function* registerWithEmail({ payload }: RegisterStartAction) {
         })
       );
     }
-  } catch (err) {
-    console.log(err);
-    yield put(registerFailure(err));
+  } catch (error) {
+    console.log(error);
+    yield put(registerFailure(error));
   }
 }
 
@@ -101,8 +101,8 @@ export function* loginWithEmail({ payload }: LoginStartAction) {
     const { email, password } = payload;
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield call(fetchUserInfo, user);
-  } catch (err) {
-    yield put(loginFailure(err));
+  } catch (error) {
+    yield put(loginFailure(error));
   }
 }
 
@@ -116,8 +116,8 @@ export function* loginGoogle() {
   try {
     const { user } = yield loginWithGoogle();
     yield call(fetchUserInfo, user);
-  } catch (err) {
-    yield put(loginFailure(err));
+  } catch (error) {
+    yield put(loginFailure(error));
   }
 }
 
@@ -131,8 +131,8 @@ export function* signOut() {
   try {
     yield auth.signOut();
     yield put(signOutSuccess());
-  } catch (err) {
-    yield put(signOutFailure(err));
+  } catch (error) {
+    yield put(signOutFailure(error));
   }
 }
 

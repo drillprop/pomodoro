@@ -1,11 +1,11 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '../../../components/Button/Button';
+import Heading from '../../../components/Heading/Heading';
 import Input from '../../../components/Input/Input';
 import { deleteAccountStart } from '../../../duck/users/userActions';
 import useForm from '../../../hooks/useForm';
 import { ButtonGroup, StyledForm } from '../Account.styles';
-import Heading from '../../../components/Heading/Heading';
 
 const DeleteAccount: FC<{ provider: string | null }> = ({ provider }) => {
   const [isFormVisible, showForm] = useState(false);

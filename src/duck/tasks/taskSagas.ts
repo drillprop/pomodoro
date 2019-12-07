@@ -40,8 +40,8 @@ export function* createTask({ payload }: CreateTaskStartAction) {
     const { uid } = yield select(userUid);
     yield call(saveTaskInDB, uid, payload);
     yield put(createTaskSuccess(payload));
-  } catch (err) {
-    yield put(createTaskFailure(err));
+  } catch (error) {
+    yield put(createTaskFailure(error));
   }
 }
 
@@ -54,8 +54,8 @@ export function* editTask({ payload }: EditTaskStartAction) {
     const { uid } = yield select(userUid);
     yield call(editTaskInDB, uid, payload.prevTask, payload.newTask);
     yield put(editTaskSuccess({ ...payload }));
-  } catch (err) {
-    yield put(editTaskFailure(err));
+  } catch (error) {
+    yield put(editTaskFailure(error));
   }
 }
 
@@ -68,8 +68,8 @@ export function* deleteTask({ payload }: DeleteTaskStartAction) {
     const { uid } = yield select(userUid);
     yield call(deleteTaskFromDB, uid, payload);
     yield put(deleteTaskSuccess(payload));
-  } catch (err) {
-    yield put(deleteTaskFailure(err));
+  } catch (error) {
+    yield put(deleteTaskFailure(error));
   }
 }
 
@@ -82,8 +82,8 @@ export function* switchTask({ payload }: SwitchTaskStartAction) {
     const { uid } = yield select(userUid);
     yield call(changeSelectedTaskDB, uid, payload);
     yield put(switchTaskSuccess(payload));
-  } catch (err) {
-    yield put(switchTaskFailure(err));
+  } catch (error) {
+    yield put(switchTaskFailure(error));
   }
 }
 
