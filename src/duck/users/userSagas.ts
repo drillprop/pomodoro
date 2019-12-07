@@ -182,6 +182,7 @@ export function* deleteAccount({ payload }: DeleteAccountStartAction) {
   try {
     yield call(deleteAuthUser, payload);
     yield put(deleteAccountSuccess());
+    yield put(signOutSuccess());
   } catch (error) {
     yield put(deleteAccountFailure(error));
   }
