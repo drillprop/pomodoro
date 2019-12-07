@@ -4,7 +4,6 @@ import { loginWithGoogle } from '../../duck/users/userActions';
 import { FormParagraph, FormWrapper } from './Sign.styles';
 import LoginForm from './sign/LoginForm';
 import RegisterForm from './sign/RegisterForm';
-import Heading from '../../components/Heading/Heading';
 
 const Sign: FC = () => {
   const dispatch = useDispatch();
@@ -13,24 +12,9 @@ const Sign: FC = () => {
     <>
       <FormWrapper>
         {isLogin ? (
-          <>
-            <Heading level='h1'>login</Heading>
-            <LoginForm />
-          </>
+          <LoginForm switchForm={switchForm} />
         ) : (
-          <>
-            <Heading level='h1'>register</Heading>
-            <RegisterForm />
-          </>
-        )}
-        {isLogin ? (
-          <FormParagraph onClick={() => switchForm(false)}>
-            Dont have an account? Create new one
-          </FormParagraph>
-        ) : (
-          <FormParagraph onClick={() => switchForm(true)}>
-            Already have an account? Sign in
-          </FormParagraph>
+          <RegisterForm switchForm={switchForm} />
         )}
         <FormParagraph onClick={() => dispatch(loginWithGoogle())}>
           or sign in with Google
