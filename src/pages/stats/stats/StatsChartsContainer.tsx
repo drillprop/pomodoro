@@ -29,11 +29,19 @@ const StatsChartContainer: FC<{ days: number }> = ({ days }) => {
       <StatsChart
         dates={intervalStats.dates}
         statsValues={intervalStats.values}
+        label='intervals'
+        suggestedMax={15}
       />
       <Heading level='h2' mtop={28}>
         time
       </Heading>
-      <StatsChart dates={timeStats.dates} statsValues={timeStats.values} />
+      <StatsChart
+        dates={timeStats.dates}
+        label='minutes'
+        suggestedMax={200}
+        stepSize={20}
+        statsValues={timeStats.values}
+      />
     </>
   );
 };

@@ -1,14 +1,23 @@
 import React, { FC, useRef, useEffect } from 'react';
 import Chart from 'chart.js';
-import { primary } from '../../../../utils/colors';
+import { primary, buttonColors } from '../../../../utils/colors';
 import { StatsChartWrapper } from './StatsChartStyles';
 
 interface Props {
   statsValues: Array<number | any>;
   dates: Array<string>;
+  suggestedMax?: number;
+  label?: string;
+  stepSize?: number;
 }
 
-const StatsChart: FC<Props> = ({ statsValues, dates }) => {
+const StatsChart: FC<Props> = ({
+  statsValues,
+  dates,
+  suggestedMax = 20,
+  label = '',
+  stepSize = 1
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chart = useRef<Chart>();
 
@@ -21,20 +30,33 @@ const StatsChart: FC<Props> = ({ statsValues, dates }) => {
           labels: dates,
           datasets: [
             {
-              backgroundColor: primary,
+              label,
+              backgroundColor: dates.map((item, index) =>
+                index % 2 === 0 ? primary : buttonColors
+              ),
               borderColor: 'rgb(255, 99, 132)',
               data: statsValues
             }
           ]
         },
         options: {
+          responsiveAnimationDuration: 0,
+          legend: {
+            fullWidth: true,
+            align: 'center'
+          },
+          hover: {
+            animationDuration: 0 // duration of animations when hovering an item
+          },
           responsive: true,
           maintainAspectRatio: true,
           scales: {
             yAxes: [
               {
                 ticks: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  stepSize,
+                  suggestedMax: suggestedMax
                 }
               }
             ]
