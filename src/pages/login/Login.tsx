@@ -7,7 +7,6 @@ import useForm from '../../hooks/useForm';
 import Heading from '../../components/Heading/Heading';
 import { selectUserError } from '../../duck/users/userSelectors';
 import Notification from '../../components/Notification/Notification';
-import { Link } from 'react-router-dom';
 import SignWrapper from '../../components/SignWrapper/SignWrapper';
 import { StyledLink } from './Login.styles';
 

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const StatsWrapper = styled.main`
+export const Layout = styled.div`
   display: grid;
+  grid-template-columns: 300px;
   justify-content: center;
+  margin-top: 100px;
 `;

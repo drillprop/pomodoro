@@ -8,9 +8,16 @@ import Router from './app/Router';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Loading from '../Loading/Loading';
 import { selectIsGettingUser } from '../../duck/users/userSelectors';
+import { useTransition, animated } from 'react-spring';
+import { Layout } from './App.styles';
 
 const App: React.FC = () => {
   const isGettingUser = useSelector(selectIsGettingUser);
+  const transitions = useTransition(isGettingUser, null, {
+    from: { opacity: 0, height: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,8 +29,21 @@ const App: React.FC = () => {
       <ProgressBar />
       <HamburgerButton />
       <Menu />
+
       <GlobalStyle />
-      {isGettingUser ? <Loading /> : <Router />}
+      <Layout>
+        {transitions.map(({ item, key, props }) =>
+          item ? (
+            <animated.div style={props} key={key}>
+              <Loading />
+            </animated.div>
+          ) : (
+            <animated.div style={props} key={key}>
+              <Router />
+            </animated.div>
+          )
+        )}
+      </Layout>
     </>
   );
 };

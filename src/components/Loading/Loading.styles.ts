@@ -3,7 +3,7 @@ import { primary } from '../../utils/colors';
 
 export const LoadingWrapper = styled.main`
   display: grid;
-  height: 80vh;
+  height: 50vh;
   align-content: center;
   justify-content: center;
 `;
