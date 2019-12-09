@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primary, background } from '../../../../utils/colors';
+import { background, primary } from '../../../utils/colors';
 
 export const HamburgerWrapper = styled.div`
   position: absolute;

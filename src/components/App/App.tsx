@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkSession } from '../../duck/users/userActions';
 import GlobalStyle from '../../utils/GlobalStyle';
-import HamburgerButton from './app/menu/HamburgerButton';
+import HamburgerButton from './app/HamburgerButton';
 import Menu from './app/Menu';
 import Router from './app/Router';
 import ProgressBar from '../ProgressBar/ProgressBar';

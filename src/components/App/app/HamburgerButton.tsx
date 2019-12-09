@@ -1,10 +1,10 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showMenu } from '../../../../duck/timer/timerActions';
-import useRouter from '../../../../hooks/useRouter';
+import { createSelector } from 'reselect';
+import { ReduxState } from '../../../duck/store';
+import { showMenu } from '../../../duck/timer/timerActions';
+import useRouter from '../../../hooks/useRouter';
 import { HamburgerWrapper } from './HamburgerButton.styles';
-import { createSelector, createStructuredSelector } from 'reselect';
-import { ReduxState } from '../../../../duck/store';
 
 const selectMenu = createSelector(
   ({ timer }: ReduxState) => timer.isMenuVisible,
