@@ -14,7 +14,8 @@ import {
   CHANGE_PASSWORD_SUCCESS,
   DELETE_ACCOUNT_SUCCESS,
   DELETE_ACCOUNT_START,
-  DELETE_ACCOUNT_FAILURE
+  DELETE_ACCOUNT_FAILURE,
+  CLEAR_USER_ERROR
 } from './userTypes';
 import { UserActionTypes, SignError, UserData } from './userInterfaces';
 
@@ -82,6 +83,11 @@ export default (state = initialState, action: UserActionTypes): UserState => {
         ...state,
         isGettingUser: false,
         currentUser: null
+      };
+    case CLEAR_USER_ERROR:
+      return {
+        ...state,
+        error: null
       };
     default:
       return state;

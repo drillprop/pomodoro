@@ -15,7 +15,8 @@ import {
   CHANGE_PASSWORD_FAILURE,
   DELETE_ACCOUNT_START,
   DELETE_ACCOUNT_SUCCESS,
-  DELETE_ACCOUNT_FAILURE
+  DELETE_ACCOUNT_FAILURE,
+  CLEAR_USER_ERROR
 } from './userTypes';
 import {
   RegisterAndLoginParams,
@@ -38,7 +39,8 @@ import {
   ChangePasswordParams,
   DeleteAccountStartAction,
   DeleteAccountSuccessAction,
-  DeleteAccountFailureAction
+  DeleteAccountFailureAction,
+  ClearUserErrorAction
 } from './userInterfaces';
 
 // REGISTER
@@ -144,4 +146,8 @@ export const deleteAccountFailure = (
 ): DeleteAccountFailureAction => ({
   type: DELETE_ACCOUNT_FAILURE,
   payload: error
+});
+
+export const clearUserError = (): ClearUserErrorAction => ({
+  type: CLEAR_USER_ERROR
 });

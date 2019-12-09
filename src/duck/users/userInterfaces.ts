@@ -15,7 +15,8 @@ import {
   CHANGE_PASSWORD_FAILURE,
   DELETE_ACCOUNT_START,
   DELETE_ACCOUNT_SUCCESS,
-  DELETE_ACCOUNT_FAILURE
+  DELETE_ACCOUNT_FAILURE,
+  CLEAR_USER_ERROR
 } from './userTypes';
 import { Config } from '../timer/timerReducer';
 
@@ -126,6 +127,10 @@ export interface DeleteAccountFailureAction {
   payload: SignError;
 }
 
+export interface ClearUserErrorAction {
+  type: typeof CLEAR_USER_ERROR;
+}
+
 export type UserActionTypes =
   | RegisterStartAction
   | RegisterSuccessAction
@@ -143,4 +148,5 @@ export type UserActionTypes =
   | ChangePasswordFailureAction
   | DeleteAccountStartAction
   | DeleteAccountSuccessAction
-  | DeleteAccountFailureAction;
+  | DeleteAccountFailureAction
+  | ClearUserErrorAction;
