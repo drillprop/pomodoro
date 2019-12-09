@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchStatsStart } from '../../../duck/stats/statsActions';
 import {
@@ -21,20 +21,8 @@ const StatsChartContainer: FC<{ days: number }> = ({ days }) => {
     }
   }, [fetchStatsStart, stats]);
 
-  return (
-    <>
-      <Heading level='h2' mtop={28}>
-        intervals
-      </Heading>
-      <StatsChart
-        dates={intervalStats.dates}
-        statsValues={intervalStats.values}
-        label='intervals'
-        suggestedMax={15}
-      />
-      <Heading level='h2' mtop={28}>
-        time
-      </Heading>
+  const timeStatsComponent = useMemo(() => {
+    return (
       <StatsChart
         dates={timeStats.dates}
         label='minutes'
@@ -42,6 +30,30 @@ const StatsChartContainer: FC<{ days: number }> = ({ days }) => {
         stepSize={20}
         statsValues={timeStats.values}
       />
+    );
+  }, [stats]);
+
+  const intervalStatsComponent = useMemo(() => {
+    return (
+      <StatsChart
+        dates={intervalStats.dates}
+        statsValues={intervalStats.values}
+        label='intervals'
+        suggestedMax={15}
+      />
+    );
+  }, [stats]);
+
+  return (
+    <>
+      <Heading level='h2' mtop={28}>
+        intervals
+      </Heading>
+      {intervalStatsComponent}
+      <Heading level='h2' mtop={28}>
+        time
+      </Heading>
+      {timeStatsComponent}
     </>
   );
 };
