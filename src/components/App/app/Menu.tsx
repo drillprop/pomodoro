@@ -2,16 +2,17 @@ import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTransition } from 'react-spring';
+import { createStructuredSelector } from 'reselect';
 import { ReduxState } from '../../../duck/store';
+import { selectIsMenuVisible } from '../../../duck/timer/timerSelectors';
 import { signOutStart } from '../../../duck/users/userActions';
-import Icon from '../../Icon/Icon';
+import { selectCurrentUser } from '../../../duck/users/userSelectors';
 import useRouter from '../../../hooks/useRouter';
 import { background } from '../../../utils/colors';
+import Icon from '../../Icon/Icon';
 import { LinkList, StyledNavigation } from './Menu.styles';
+import MenuLink from './menu/MenuLink';
 import ProfileInfo from './menu/ProfileInfo';
-import { selectCurrentUser } from '../../../duck/users/userSelectors';
-import { selectIsMenuVisible } from '../../../duck/timer/timerSelectors';
-import { createStructuredSelector } from 'reselect';
 
 interface Selectors {
   isMenuVisible: boolean;
@@ -58,29 +59,19 @@ const Menu: FC = () => {
               <ProfileInfo user={user} />
               <LinkList>
                 <li>
-                  <Link to='/account'>
-                    <Icon name='profile' {...itemIconProps} />
+                  <MenuLink path='/account' iconName='profile'>
                     account
-                  </Link>
+                  </MenuLink>
                 </li>
                 <li>
-                  <Link to='/stats'>
-                    <Icon name='stats2' {...itemIconProps} />
+                  <MenuLink path='/stats' iconName='stats2'>
                     stats
-                  </Link>
+                  </MenuLink>
                 </li>
                 <li>
-                  {router.location.pathname === '/config' ? (
-                    <>
-                      <Icon name='home' {...itemIconProps} />
-                      <Link to='/'>back to app</Link>
-                    </>
-                  ) : (
-                    <>
-                      <Icon name='config' {...itemIconProps} />
-                      <Link to='/config'>config</Link>
-                    </>
-                  )}
+                  <MenuLink path='/config' iconName='config'>
+                    config
+                  </MenuLink>
                 </li>
                 {user ? (
                   <li onClick={() => dispatch(signOutStart())}>
@@ -90,7 +81,7 @@ const Menu: FC = () => {
                 ) : (
                   <li>
                     <Icon name='profile' {...itemIconProps} />
-                    <Link to='/sign'>login</Link>
+                    <Link to='/login'>login</Link>
                   </li>
                 )}
               </LinkList>
