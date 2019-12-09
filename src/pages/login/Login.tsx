@@ -2,7 +2,7 @@ import React, { FC, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
-import { loginStart } from '../../duck/users/userActions';
+import { loginStart, clearUserError } from '../../duck/users/userActions';
 import useForm from '../../hooks/useForm';
 import Heading from '../../components/Heading/Heading';
 import { selectUserError } from '../../duck/users/userSelectors';
@@ -53,7 +53,7 @@ const Login: FC = () => {
         <Button type='submit' mtop={42}>
           login
         </Button>
-        <StyledLink to='register'>
+        <StyledLink to='register' onClick={() => dispatch(clearUserError())}>
           Dont have an account? Create new one
         </StyledLink>
       </form>

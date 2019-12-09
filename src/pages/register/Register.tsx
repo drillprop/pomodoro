@@ -5,7 +5,7 @@ import Heading from '../../components/Heading/Heading';
 import Input from '../../components/Input/Input';
 import Notification from '../../components/Notification/Notification';
 import SignWrapper from '../../components/SignWrapper/SignWrapper';
-import { registerStart } from '../../duck/users/userActions';
+import { registerStart, clearUserError } from '../../duck/users/userActions';
 import { selectUserError } from '../../duck/users/userSelectors';
 import useForm from '../../hooks/useForm';
 import { StyledLink } from '../login/Login.styles';
@@ -72,7 +72,9 @@ const Register: FC = () => {
         <Button mtop={42} type='submit'>
           register
         </Button>
-        <StyledLink to='/login'>Already have account? Sign in here</StyledLink>
+        <StyledLink to='/login' onClick={() => dispatch(clearUserError())}>
+          Already have account? Sign in here
+        </StyledLink>
       </form>
     </SignWrapper>
   );
