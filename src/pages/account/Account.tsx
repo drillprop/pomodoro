@@ -5,6 +5,7 @@ import { selectCurrentUser } from '../../duck/users/userSelectors';
 import { AccountWrapper } from './Account.styles';
 import ChangePassword from './account/ChangePassword';
 import DeleteAccount from './account/DeleteAccount';
+import GoBackLink from '../../components/GoBackLink/GoBackLink';
 
 const Account = () => {
   const user = useSelector(selectCurrentUser);
@@ -13,6 +14,7 @@ const Account = () => {
       <Heading level='h1'>account</Heading>
       {user && user.loginProvider === 'password' && <ChangePassword />}
       <DeleteAccount provider={user && user.loginProvider} />
+      <GoBackLink>back</GoBackLink>
     </AccountWrapper>
   );
 };
