@@ -1,14 +1,10 @@
 import styled from 'styled-components';
-import { secondFont } from '../../utils/fonts';
+import { Link } from 'react-router-dom';
+import { primary } from '../../utils/colors';
 
 export const ConfigWrapper = styled.main`
   display: grid;
+  grid-template-columns: 300px;
   margin-top: 100px;
   justify-content: center;
-`;
-
-export const GoBackLink = styled.h4`
-  font-family: ${secondFont};
-  text-align: right;
-  margin-right: 16px;
 `;

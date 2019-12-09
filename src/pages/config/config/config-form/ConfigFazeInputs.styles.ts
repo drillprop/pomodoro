@@ -6,7 +6,7 @@ export const StyledConfigInput = styled.input`
   font-family: ${primFont};
   font-size: 20px;
   margin: 0 auto;
-  width: 70px;
+  width: 60px;
   padding: 8px;
   color: ${primary};
   background-color: ${background};
@@ -15,7 +15,7 @@ export const StyledConfigInput = styled.input`
   margin-left: 16px;
 `;
 export const StyledConfigLabel = styled.label`
-  font-size: 1.5rem;
+  font-size: 18px;
   margin-right: 20px;
 `;
 

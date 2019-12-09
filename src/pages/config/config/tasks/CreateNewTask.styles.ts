@@ -10,11 +10,13 @@ import { primFont, secondFont } from '../../../../utils/fonts';
 export const EditCreateTask = styled.form`
   border: solid 1px ${secondary};
   display: grid;
-  grid-template-columns: 1fr 140px;
+  grid-template-columns: 1fr 120px;
   border-radius: 5px;
   margin-top: 20px;
 
   input {
+    display: block;
+    width: 100%;
     padding: 10px 12px;
     background-color: ${background};
     font-family: ${primFont};
@@ -23,8 +25,8 @@ export const EditCreateTask = styled.form`
     border: none;
   }
   button {
+    display: block;
     border: none;
-    width: 100%;
     cursor: pointer;
     background: ${secondaryBackground};
     font-family: ${secondFont};
