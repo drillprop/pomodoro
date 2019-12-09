@@ -1,19 +1,19 @@
 import React, { FC, FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import Button from '../../../components/Button/Button';
-import Input from '../../../components/Input/Input';
-import { registerStart } from '../../../duck/users/userActions';
-import useForm from '../../../hooks/useForm';
-import Heading from '../../../components/Heading/Heading';
-import { FormParagraph } from '../Sign.styles';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '../../components/Button/Button';
+import Heading from '../../components/Heading/Heading';
+import Input from '../../components/Input/Input';
+import Notification from '../../components/Notification/Notification';
+import SignWrapper from '../../components/SignWrapper/SignWrapper';
+import { registerStart } from '../../duck/users/userActions';
+import { selectUserError } from '../../duck/users/userSelectors';
+import useForm from '../../hooks/useForm';
+import { StyledLink } from '../login/Login.styles';
 
-interface Props {
-  switchForm: (arg: boolean) => void;
-}
-
-const RegisterForm: FC<Props> = ({ switchForm }) => {
-  const [isPasswordMatch, setMatch] = useState(true);
+const Register: FC = () => {
+  const isError = useSelector(selectUserError);
   const dispatch = useDispatch();
+  const [isPasswordMatch, setMatch] = useState(true);
   const [values, handleInput, submit] = useForm({
     email: '',
     password: '',
@@ -32,8 +32,11 @@ const RegisterForm: FC<Props> = ({ switchForm }) => {
   };
 
   return (
-    <>
+    <SignWrapper>
       <Heading level='h1'>register</Heading>
+      {isError ? (
+        <Notification isError message={isError.message || ''}></Notification>
+      ) : null}
       <form onSubmit={handleSubmit}>
         <Input
           placeholder='email'
@@ -69,12 +72,10 @@ const RegisterForm: FC<Props> = ({ switchForm }) => {
         <Button mtop={42} type='submit'>
           register
         </Button>
-        <FormParagraph onClick={() => switchForm(true)}>
-          Already have an account? Sign in
-        </FormParagraph>
+        <StyledLink to='/login'>Already have account? Sign in here</StyledLink>
       </form>
-    </>
+    </SignWrapper>
   );
 };
 
-export default RegisterForm;
+export default Register;

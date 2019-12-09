@@ -1,17 +1,18 @@
 import React, { FC, FormEvent } from 'react';
-import { useDispatch } from 'react-redux';
-import Button from '../../../components/Button/Button';
-import Input from '../../../components/Input/Input';
-import { loginStart } from '../../../duck/users/userActions';
-import useForm from '../../../hooks/useForm';
-import Heading from '../../../components/Heading/Heading';
-import { FormParagraph } from '../Sign.styles';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '../../components/Button/Button';
+import Input from '../../components/Input/Input';
+import { loginStart } from '../../duck/users/userActions';
+import useForm from '../../hooks/useForm';
+import Heading from '../../components/Heading/Heading';
+import { selectUserError } from '../../duck/users/userSelectors';
+import Notification from '../../components/Notification/Notification';
+import { Link } from 'react-router-dom';
+import SignWrapper from '../../components/SignWrapper/SignWrapper';
+import { StyledLink } from './Login.styles';
 
-interface Props {
-  switchForm: (arg: boolean) => void;
-}
-
-const LoginForm: FC<Props> = ({ switchForm }) => {
+const Login: FC = () => {
+  const isError = useSelector(selectUserError);
   const dispatch = useDispatch();
   const [values, handleInput, submit] = useForm({
     email: '',
@@ -24,8 +25,11 @@ const LoginForm: FC<Props> = ({ switchForm }) => {
   };
 
   return (
-    <>
+    <SignWrapper>
       <Heading level='h1'>login</Heading>
+      {isError ? (
+        <Notification isError message={isError.message || ''}></Notification>
+      ) : null}
       <form onSubmit={handleSubmit}>
         <Input
           placeholder='email'
@@ -50,12 +54,12 @@ const LoginForm: FC<Props> = ({ switchForm }) => {
         <Button type='submit' mtop={42}>
           login
         </Button>
-        <FormParagraph onClick={() => switchForm(false)}>
+        <StyledLink to='register'>
           Dont have an account? Create new one
-        </FormParagraph>
+        </StyledLink>
       </form>
-    </>
+    </SignWrapper>
   );
 };
 
-export default LoginForm;
+export default Login;

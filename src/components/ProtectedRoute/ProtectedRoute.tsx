@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Route,
-  Redirect,
-  RouterProps,
-  RouteProps,
-  RouteComponentProps
-} from 'react-router';
+import { Route, Redirect, RouteProps } from 'react-router';
 
 interface Props {
   path: string;
@@ -24,7 +18,7 @@ const ProtectedRoute: React.FC<Props & RouteProps> = ({
       {...otherProps}
       path={path}
       render={(props: any) =>
-        isAuth ? <Component {...props} /> : <Redirect to='/sign' />
+        isAuth ? <Component {...props} /> : <Redirect to='/login' />
       }
     />
   );

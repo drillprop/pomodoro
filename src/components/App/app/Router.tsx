@@ -1,5 +1,5 @@
-import React, { FC, lazy, Suspense, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { FC, lazy, Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { ReduxState } from '../../../duck/store';
@@ -8,12 +8,13 @@ import {
   selectCurrentUser,
   selectIsGettingUser
 } from '../../../duck/users/userSelectors';
+import Account from '../../../pages/account/Account';
 import Config from '../../../pages/config/Config';
-import Sign from '../../../pages/sign/Sign';
+import Login from '../../../pages/login/Login';
+import Register from '../../../pages/register/Register';
 import Interface from '../../../pages/timer/Interface';
 import Loading from '../../Loading/Loading';
 import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
-import Account from '../../../pages/account/Account';
 
 const Stats = lazy(() => import('../../../pages/stats/Stats'));
 
@@ -30,14 +31,6 @@ const RouterSelectors = createStructuredSelector<ReduxState, Selectors>({
 const Router: FC = () => {
   const { user, isLoading } = useSelector(RouterSelectors);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (user) {
-      //
-    }
-  }, [user]);
-
   return (
     <>
       <ProtectedRoute
@@ -51,14 +44,19 @@ const Router: FC = () => {
       </Suspense>
       <Route
         exact
-        path='/sign'
-        render={() => (!user ? <Sign /> : <Redirect to='/' />)}
+        path='/login'
+        render={() => (!user ? <Login /> : <Redirect to='/' />)}
+      />
+      <Route
+        exact
+        path='/register'
+        render={() => (!user ? <Register /> : <Redirect to='/' />)}
       />
       <Route
         exact
         path='/'
         render={() =>
-          !user && !isLoading ? <Redirect to='/sign' /> : <Interface />
+          !user && !isLoading ? <Redirect to='/login' /> : <Interface />
         }
       />
     </>
