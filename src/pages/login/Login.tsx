@@ -6,7 +6,7 @@ import { loginStart, clearUserError } from '../../duck/users/userActions';
 import useForm from '../../hooks/useForm';
 import Heading from '../../components/Heading/Heading';
 import { selectUserError } from '../../duck/users/userSelectors';
-import Notification from '../../components/Notification/Notification';
+import Error from '../../components/Error/Error';
 import SignWrapper from '../../components/SignWrapper/SignWrapper';
 import { StyledLink } from './Login.styles';
 
@@ -26,9 +26,7 @@ const Login: FC = () => {
   return (
     <SignWrapper>
       <Heading level='h1'>login</Heading>
-      {isError ? (
-        <Notification isError message={isError.message || ''}></Notification>
-      ) : null}
+      {isError ? <Error message={isError.message || ''}></Error> : null}
       <form onSubmit={handleSubmit}>
         <Input
           placeholder='email'

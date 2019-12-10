@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button/Button';
 import Heading from '../../components/Heading/Heading';
 import Input from '../../components/Input/Input';
-import Notification from '../../components/Notification/Notification';
+import Error from '../../components/Error/Error';
 import SignWrapper from '../../components/SignWrapper/SignWrapper';
 import { registerStart, clearUserError } from '../../duck/users/userActions';
 import { selectUserError } from '../../duck/users/userSelectors';
@@ -34,9 +34,7 @@ const Register: FC = () => {
   return (
     <SignWrapper>
       <Heading level='h1'>register</Heading>
-      {isError ? (
-        <Notification isError message={isError.message || ''}></Notification>
-      ) : null}
+      {isError ? <Error message={isError.message || ''}></Error> : null}
       <form onSubmit={handleSubmit}>
         <Input
           placeholder='email'
