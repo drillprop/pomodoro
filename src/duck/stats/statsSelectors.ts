@@ -41,8 +41,9 @@ export const selectIntervalStats = (days: number) =>
           (acc: any, it: any) => (acc += it),
           0
         );
+      } else {
+        return 0;
       }
-      return;
     });
     return {
       dates: Object.keys(statsWithBlankDates),

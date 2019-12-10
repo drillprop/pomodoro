@@ -21,27 +21,12 @@ const StatsChartContainer: FC<{ days: number }> = ({ days }) => {
     }
   }, [fetchStatsStart, stats]);
 
-  const timeStatsComponent = useMemo(() => {
-    return (
-      <StatsChart
-        dates={timeStats.dates}
-        label='minutes'
-        suggestedMax={200}
-        stepSize={20}
-        statsValues={timeStats.values}
-      />
-    );
+  const memoizedIntervalStats = useMemo(() => {
+    return intervalStats;
   }, [stats]);
 
-  const intervalStatsComponent = useMemo(() => {
-    return (
-      <StatsChart
-        dates={intervalStats.dates}
-        statsValues={intervalStats.values}
-        label='intervals'
-        suggestedMax={15}
-      />
-    );
+  const memoizedTimeStats = useMemo(() => {
+    return timeStats;
   }, [stats]);
 
   return (
@@ -49,11 +34,22 @@ const StatsChartContainer: FC<{ days: number }> = ({ days }) => {
       <Heading level='h2' mtop={28}>
         intervals
       </Heading>
-      {intervalStatsComponent}
+      <StatsChart
+        dates={memoizedIntervalStats.dates}
+        statsValues={memoizedIntervalStats.values}
+        label='intervals'
+        suggestedMax={15}
+      />
       <Heading level='h2' mtop={28}>
         time
       </Heading>
-      {timeStatsComponent}
+      <StatsChart
+        dates={memoizedTimeStats.dates}
+        label='minutes'
+        suggestedMax={200}
+        stepSize={20}
+        statsValues={memoizedTimeStats.values}
+      />
     </>
   );
 };
