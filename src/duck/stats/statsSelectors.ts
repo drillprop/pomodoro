@@ -26,7 +26,7 @@ export const selectTimeStats = (days: number) =>
     return {
       dates: Object.keys(statsWithBlankDates),
       values: Object.values(statsWithBlankDates).map((value: any) =>
-        value ? Math.floor((value.time % 3600) / 60) : 0
+        value ? Math.floor(value.time / 60) : 0
       )
     };
   });
