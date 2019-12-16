@@ -52,13 +52,7 @@ const Router: FC = () => {
         path='/register'
         render={() => (!user ? <Register /> : <Redirect to='/' />)}
       />
-      <Route
-        exact
-        path='/'
-        render={() =>
-          !user && !isLoading ? <Redirect to='/login' /> : <Interface />
-        }
-      />
+      <Route exact path='/' render={() => !isLoading && <Interface />} />
     </>
   );
 };
