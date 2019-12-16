@@ -4,16 +4,17 @@ import Icon from '../Icon/Icon';
 
 interface Props {
   message?: string;
+  color?: string;
 }
 
-const Error: FC<Props> = ({ message = 'Something went wrong' }) => {
+const Error: FC<Props> = ({ message = 'Something went wrong', color }) => {
   return (
-    <ErrorWrapper>
+    <ErrorWrapper color={color || 'red'}>
       <Icon
         name='error'
         size={20}
         style={{ position: 'relative', top: '0.25em', marginRight: '10px' }}
-        color={'red'}
+        color={color || 'red'}
       />
       {message}
     </ErrorWrapper>
