@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTransition } from 'react-spring';
@@ -29,6 +29,12 @@ const Menu: FC = () => {
 
   const dispatch = useDispatch();
   const { user, isMenuVisible } = useSelector(menuSelectors);
+
+  useEffect(() => {
+    if (!user) {
+      router.history.push('/login');
+    }
+  }, [user]);
 
   const itemIconProps = {
     size: 30,
