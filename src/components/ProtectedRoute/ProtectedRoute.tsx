@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Redirect, RouteProps } from 'react-router';
+import { Route, RouteProps } from 'react-router';
+import NoUserPage from './protected-route/NoUserPage';
 
 interface Props {
   path: string;
@@ -18,7 +19,7 @@ const ProtectedRoute: React.FC<Props & RouteProps> = ({
       {...otherProps}
       path={path}
       render={(props: any) =>
-        isAuth ? <Component {...props} /> : <Redirect to='/login' />
+        isAuth ? <Component {...props} /> : <NoUserPage />
       }
     />
   );
