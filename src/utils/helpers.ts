@@ -57,12 +57,6 @@ export const getToday = () => {
   return dayjs().format('DD-MM-YY');
 };
 
-export const getStorageUser = () => {
-  const user = localStorage.getItem('usr');
-  if (user) return JSON.parse(user);
-  return null;
-};
-
 export const createDaysObject = (daysBackward: number) => {
   const obj: any = {};
   for (let i = daysBackward; i >= 0; i--) {

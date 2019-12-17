@@ -1,28 +1,26 @@
 import {
-  RESET_TIMER,
-  SHOW_MENU,
-  START_TIMER,
-  PAUSE_TIMER,
-  STOP_AND_SWITCH_FAZE,
-  SKIP_BREAK,
-  SET_TIMERS_DURATION_START,
-  SET_TIMERS_DURATION_SUCCES,
-  SET_TIMERS_DURATION_FAILURE
-} from './timerTypes';
-import {
-  StartTimerParams,
-  StartTimerAction,
   PauseTimerAction,
   ResetTimerAction,
-  SkipBreakAction,
-  StopTimerAndSwitchFazeAction,
-  ShowMenuAction,
-  TimeleftsParams,
+  SetTimersDurationFailureAction,
   SetTimersDurationStartAction,
   SetTimersDurationSuccessAction,
-  TimerError,
-  SetTimersDurationFailureAction
+  SkipBreakAction,
+  StartTimerAction,
+  StartTimerParams,
+  StopTimerAndSwitchFazeAction,
+  TimeleftsParams,
+  TimerError
 } from './timerInterfaces';
+import {
+  PAUSE_TIMER,
+  RESET_TIMER,
+  SET_TIMERS_DURATION_FAILURE,
+  SET_TIMERS_DURATION_START,
+  SET_TIMERS_DURATION_SUCCES,
+  SKIP_BREAK,
+  START_TIMER,
+  STOP_AND_SWITCH_FAZE
+} from './timerTypes';
 
 export const startTimer = (
   startTimerParams: StartTimerParams
@@ -71,21 +69,3 @@ export const setTimersDurationFailure = (
   type: SET_TIMERS_DURATION_FAILURE,
   payload: error
 });
-
-// export const fetchConfigStart = (): FetchConfigStartAction => ({
-//   type: FETCH_CONFIG_START
-// });
-
-// export const fetchConfigSuccess = (
-//   config: TimeleftsParams
-// ): FetchConfigSuccessAction => ({
-//   type: FETCH_CONFIG_SUCCESS,
-//   payload: config
-// });
-
-// export const fetchConfigFailure = (
-//   error: TimerError
-// ): FetchConfigFailureAction => ({
-//   type: FETCH_CONFIG_FAILURE,
-//   payload: error
-// });
