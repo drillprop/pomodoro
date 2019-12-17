@@ -26,7 +26,6 @@ export interface TimerState {
   timeleft: number;
   isFetching: boolean;
   error: any | null;
-  notification: string;
 }
 
 const config: Config = {
@@ -42,8 +41,7 @@ const initialState: TimerState = {
   endTime: 0,
   timeleft: config.intervalTime,
   isFetching: true,
-  error: null,
-  notification: ''
+  error: null
 };
 
 export default (state = initialState, action: TimerActionTypes): TimerState => {
@@ -103,8 +101,7 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         config: {
           ...state.config,
           ...action.payload
-        },
-        notification: 'Settings Have Been Changed Successfully'
+        }
       };
     case SET_TIMERS_DURATION_FAILURE:
       return {
