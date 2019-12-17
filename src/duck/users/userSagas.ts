@@ -25,7 +25,6 @@ import { getCurrentUser, loginWithGoogle } from '../../utils/firebase/auth';
 import {
   RegisterStartAction,
   LoginStartAction,
-  UserData,
   ChangePasswordStartAction,
   DeleteAccountStartAction
 } from './userInterfaces';
@@ -36,6 +35,7 @@ import {
   deleteAuthUser
 } from './userUtils';
 import { ReduxState } from '../store';
+import { createNotification } from '../menu/menuActions';
 
 const selectConfig = ({ timer }: ReduxState) => timer.config;
 const selectTasks = ({ tasks }: ReduxState) => tasks.tasks;
@@ -131,6 +131,7 @@ export function* signOut() {
   try {
     yield auth.signOut();
     yield put(signOutSuccess());
+    yield put(createNotification('Successfully Sign Out'));
   } catch (error) {
     yield put(signOutFailure(error));
   }
@@ -157,8 +158,6 @@ export function* onChangePassword() {
   yield takeLatest(CHANGE_PASSWORD_START, changePassword);
 }
 
-changePasswordFirebase;
-
 export function* changePassword({ payload }: ChangePasswordStartAction) {
   try {
     yield call(
@@ -167,6 +166,7 @@ export function* changePassword({ payload }: ChangePasswordStartAction) {
       payload.newPassword
     );
     yield put(changePasswordSuccess());
+    yield put(createNotification('Successfully Changed Password'));
   } catch (error) {
     yield put(changePasswordFailure(error));
   }
@@ -183,6 +183,7 @@ export function* deleteAccount({ payload }: DeleteAccountStartAction) {
     yield call(deleteAuthUser, payload);
     yield put(deleteAccountSuccess());
     yield put(signOutSuccess());
+    yield put(createNotification('Successfully Deleted Account'));
   } catch (error) {
     yield put(deleteAccountFailure(error));
   }

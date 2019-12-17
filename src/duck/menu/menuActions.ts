@@ -1,5 +1,13 @@
-import { ShowMenuAction } from './menuInterfaces';
-import { SHOW_MENU } from './menuTypes';
+import {
+  ShowMenuAction,
+  CreateNotificationAction,
+  ClearNotificationAction
+} from './menuInterfaces';
+import {
+  SHOW_MENU,
+  CREATE_NOTIFICATION,
+  CLEAR_NOTIFICATION
+} from './menuTypes';
 
 export const showMenu = (isMenuVisible: boolean): ShowMenuAction => {
   return {
@@ -7,3 +15,14 @@ export const showMenu = (isMenuVisible: boolean): ShowMenuAction => {
     payload: isMenuVisible
   };
 };
+
+export const createNotification = (
+  notification: string
+): CreateNotificationAction => ({
+  type: CREATE_NOTIFICATION,
+  payload: notification
+});
+
+export const clearNotification = (): ClearNotificationAction => ({
+  type: CLEAR_NOTIFICATION
+});

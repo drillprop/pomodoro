@@ -23,6 +23,7 @@ import {
 import { SetTimersDurationStartAction } from './timerInterfaces';
 import { saveTimersInDB } from './timerUtils';
 import { ReduxState } from '../store';
+import { createNotification } from '../menu/menuActions';
 
 const userUid = ({ user }: ReduxState) => user.currentUser;
 
@@ -55,6 +56,7 @@ export function* setTimersDuration({ payload }: SetTimersDurationStartAction) {
     const { uid } = yield select(userUid);
     yield call(saveTimersInDB, uid, payload);
     yield put(setTimersDurationSuccess(payload));
+    yield put(createNotification('Successfully Changed Timer'));
   } catch (error) {
     yield put(setTimersDurationFailure(error));
   }
