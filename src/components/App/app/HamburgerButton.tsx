@@ -1,18 +1,12 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
-import { ReduxState } from '../../../duck/store';
-import { showMenu } from '../../../duck/timer/timerActions';
 import useRouter from '../../../hooks/useRouter';
 import { HamburgerWrapper } from './HamburgerButton.styles';
-
-const selectMenu = createSelector(
-  ({ timer }: ReduxState) => timer.isMenuVisible,
-  isMenuVisible => isMenuVisible
-);
+import { selectIsMenuVisible } from '../../../duck/menu/menuSelectors';
+import { showMenu } from '../../../duck/menu/menuActions';
 
 const HamburgerButton: FC = () => {
-  const isMenuVisible = useSelector(selectMenu);
+  const isMenuVisible = useSelector(selectIsMenuVisible);
 
   const route = useRouter();
 

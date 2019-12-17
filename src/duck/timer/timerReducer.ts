@@ -26,6 +26,7 @@ export interface TimerState {
   timeleft: number;
   isFetching: boolean;
   error: any | null;
+  notification: string;
 }
 
 const config: Config = {
@@ -41,7 +42,8 @@ const initialState: TimerState = {
   endTime: 0,
   timeleft: config.intervalTime,
   isFetching: true,
-  error: null
+  error: null,
+  notification: ''
 };
 
 export default (state = initialState, action: TimerActionTypes): TimerState => {
@@ -92,11 +94,6 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         isInterval: true,
         timeleft: state.config.intervalTime
       };
-    case SHOW_MENU:
-      return {
-        ...state,
-        isMenuVisible: action.payload
-      };
     case SET_TIMERS_DURATION_SUCCES:
       return {
         ...state,
@@ -106,7 +103,8 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         config: {
           ...state.config,
           ...action.payload
-        }
+        },
+        notification: 'Settings Have Been Changed Successfully'
       };
     case SET_TIMERS_DURATION_FAILURE:
       return {

@@ -51,13 +51,6 @@ export const stopTimerAndSwitchFaze = (
   payload: isInterval
 });
 
-export const showMenu = (isMenuVisible: boolean): ShowMenuAction => {
-  return {
-    type: SHOW_MENU,
-    payload: isMenuVisible
-  };
-};
-
 export const setTimersDurationStart = (
   timelefts: TimeleftsParams
 ): SetTimersDurationStartAction => ({

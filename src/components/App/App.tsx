@@ -4,6 +4,7 @@ import { checkSession } from '../../duck/users/userActions';
 import GlobalStyle from '../../utils/GlobalStyle';
 import HamburgerButton from './app/HamburgerButton';
 import Menu from './app/Menu';
+import Notification from '../Notification/Notification';
 import Router from './app/Router';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Loading from '../Loading/Loading';
@@ -27,6 +28,7 @@ const App: React.FC = () => {
   return (
     <>
       <ProgressBar />
+      <Notification />
       <HamburgerButton />
       <Menu />
 

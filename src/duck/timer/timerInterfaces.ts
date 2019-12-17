@@ -82,7 +82,6 @@ export type TimerActionTypes =
   | ResetTimerAction
   | SkipBreakAction
   | StopTimerAndSwitchFazeAction
-  | ShowMenuAction
   | SetTimersDurationStartAction
   | SetTimersDurationSuccessAction
   | SetTimersDurationFailureAction

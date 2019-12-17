@@ -3,11 +3,6 @@ import { ReduxState } from '../store';
 
 export const selectTimer = ({ timer }: ReduxState) => timer;
 
-export const selectIsMenuVisible = createSelector(
-  [selectTimer],
-  ({ isMenuVisible }) => isMenuVisible
-);
-
 export const selectConfig = createSelector(
   [selectTimer],
   ({ config }) => config

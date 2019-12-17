@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useTransition } from 'react-spring';
 import { createStructuredSelector } from 'reselect';
 import { ReduxState } from '../../../duck/store';
-import { selectIsMenuVisible } from '../../../duck/timer/timerSelectors';
 import { signOutStart } from '../../../duck/users/userActions';
 import { selectCurrentUser } from '../../../duck/users/userSelectors';
 import useRouter from '../../../hooks/useRouter';
@@ -13,6 +12,7 @@ import Icon from '../../Icon/Icon';
 import { LinkList, StyledNavigation } from './Menu.styles';
 import MenuLink from './menu/MenuLink';
 import ProfileInfo from './menu/ProfileInfo';
+import { selectIsMenuVisible } from '../../../duck/menu/menuSelectors';
 
 interface Selectors {
   isMenuVisible: boolean;
