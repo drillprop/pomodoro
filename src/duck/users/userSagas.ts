@@ -131,7 +131,7 @@ export function* signOut() {
   try {
     yield auth.signOut();
     yield put(signOutSuccess());
-    yield put(createNotification('Successfully Sign Out'));
+    yield put(createNotification('Successfully sign out'));
   } catch (error) {
     yield put(signOutFailure(error));
   }
@@ -166,7 +166,7 @@ export function* changePassword({ payload }: ChangePasswordStartAction) {
       payload.newPassword
     );
     yield put(changePasswordSuccess());
-    yield put(createNotification('Successfully Changed Password'));
+    yield put(createNotification('Successfully change password'));
   } catch (error) {
     yield put(changePasswordFailure(error));
   }
@@ -183,7 +183,7 @@ export function* deleteAccount({ payload }: DeleteAccountStartAction) {
     yield call(deleteAuthUser, payload);
     yield put(deleteAccountSuccess());
     yield put(signOutSuccess());
-    yield put(createNotification('Successfully Deleted Account'));
+    yield put(createNotification('Successfully deleted account'));
   } catch (error) {
     yield put(deleteAccountFailure(error));
   }

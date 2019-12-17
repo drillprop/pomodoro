@@ -10,6 +10,7 @@ import { Layout } from './App.styles';
 import HamburgerButton from './app/HamburgerButton';
 import Menu from './app/Menu';
 import Router from './app/Router';
+import Notification from '../Notification/Notification';
 
 const App: React.FC = () => {
   const isGettingUser = useSelector(selectIsGettingUser);
@@ -26,6 +27,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <Notification />
       <ProgressBar />
       <HamburgerButton />
       <Menu />

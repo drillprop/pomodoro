@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import Error from '../../components/Error/Error';
 import GoBackLink from '../../components/GoBackLink/GoBackLink';
 import Heading from '../../components/Heading/Heading';
-import Notification from '../../components/Notification/Notification';
 import {
   selectCurrentUser,
   selectUserError
@@ -16,7 +15,6 @@ const Account = () => {
   const error = useSelector(selectUserError);
   return (
     <>
-      <Notification />
       <Heading level='h1'>account</Heading>
       {error && <Error message={error.message || ''} />}
       {user && user.loginProvider === 'password' && <ChangePassword />}

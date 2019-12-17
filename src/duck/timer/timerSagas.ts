@@ -56,7 +56,7 @@ export function* setTimersDuration({ payload }: SetTimersDurationStartAction) {
     const { uid } = yield select(userUid);
     yield call(saveTimersInDB, uid, payload);
     yield put(setTimersDurationSuccess(payload));
-    yield put(createNotification('Successfully Changed Timer'));
+    yield put(createNotification('Successfully changed timer'));
   } catch (error) {
     yield put(setTimersDurationFailure(error));
   }
