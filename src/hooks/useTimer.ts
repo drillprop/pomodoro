@@ -32,7 +32,7 @@ export default () => {
   );
 
   const initTime: number = endTime
-    ? Math.floor((endTime - Date.now()) / 1000 + 1)
+    ? Math.floor((endTime - Date.now()) / 1000)
     : timeleft;
 
   let [count, setCount] = useState(initTime);
@@ -48,7 +48,7 @@ export default () => {
       }, 1000);
     }
 
-    if (count <= 0 && isTimerStart) {
+    if (count <= 0) {
       sound.play();
       setCount(0);
       clearTimeout(timeoutTimer);

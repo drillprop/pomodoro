@@ -1,74 +1,59 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { convertTimeToObj } from '../utils/helpers';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { setTimersDurationStart } from '../duck/timer/timerActions';
-import { selectConfig } from '../duck/timer/timerSelectors';
+import { selectConfigAsObj } from '../duck/timer/timerSelectors';
 
 export default () => {
   const dispatch = useDispatch();
 
-  const initialSeconds = useSelector(selectConfig);
-  const secondsEntries = Object.entries(initialSeconds);
+  const initial = useSelector(selectConfigAsObj);
 
-  const reducedToObj = secondsEntries.reduce((acc: any, item: any) => {
-    const secondsToObj: any = convertTimeToObj(item[1]);
-
-    secondsToObj.minutes = secondsToObj.minutes + secondsToObj.hours * 60;
-    delete secondsToObj.hours;
-
-    return {
-      ...acc,
-      [item[0]]: secondsToObj
-    };
-  }, {});
-
-  const [timeleft, setTimeleft] = useState(reducedToObj);
+  const [timeleft, setTimeleft] = useState<any>(initial);
 
   const updateState = (e: ChangeEvent<HTMLInputElement>) => {
     let { name, max, min, value } = e.target;
-
     e.target.value = '';
+
     const maxLength = name.includes('min') ? 3 : 2;
 
-    const spliced = parseInt(
+    const timeUnitValue: number = parseInt(
       value
         .split('')
         .slice(-maxLength)
         .join('')
     );
-    const faze = name.split('-')[0];
-    const propertyName = name.includes('min') ? 'minutes' : 'seconds';
 
-    const maximum: number = parseInt(max);
-    const minimum: number = parseInt(min);
+    const fazeName: string = name.split('-')[0];
+    const timeUnitName: string = name.includes('min') ? 'minutes' : 'seconds';
 
-    if (spliced <= maximum && spliced >= minimum) {
+    const maxInput: number = parseInt(max);
+    const minInput: number = parseInt(min);
+
+    if (timeUnitValue <= maxInput && timeUnitValue >= minInput) {
       setTimeleft({
         ...timeleft,
-        [faze]: { ...timeleft[faze], [propertyName]: spliced }
+        [fazeName]: { ...timeleft[fazeName], [timeUnitName]: timeUnitValue }
       });
-    } else if (spliced > maximum) {
+    } else if (timeUnitValue > maxInput) {
       setTimeleft({
         ...timeleft,
-        [faze]: { ...timeleft[faze], [propertyName]: maximum }
+        [fazeName]: { ...timeleft[fazeName], [timeUnitName]: maxInput }
       });
     } else {
       setTimeleft({
         ...timeleft,
-        [faze]: { ...timeleft[faze], [propertyName]: minimum }
+        [fazeName]: { ...timeleft[fazeName], [timeUnitName]: minInput }
       });
     }
   };
 
   const submitState = (e: FormEvent) => {
     e.preventDefault();
-    const secondsKeys: Array<string> = Object.keys(initialSeconds);
-
-    const newState = secondsKeys.reduce((acc: any, item: any) => {
+    const fazeNames: Array<string> = Object.keys(initial);
+    const newState = fazeNames.reduce((acc: any, item: any) => {
       acc[item] = timeleft[item].seconds + timeleft[item].minutes * 60;
       return acc;
     }, {});
-
     dispatch(setTimersDurationStart(newState));
   };
 

@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { ReduxState } from '../store';
+import { convertTimeToObj } from '../../utils/helpers';
 
 export const selectTimer = ({ timer }: ReduxState) => timer;
 
@@ -32,5 +33,12 @@ export const selectIsFetching = createSelector(
   [selectTimer],
   ({ isFetching }) => isFetching
 );
+
+export const selectConfigAsObj = createSelector([selectTimer], ({ config }) => {
+  return {
+    breakTime: convertTimeToObj(config.breakTime),
+    intervalTime: convertTimeToObj(config.intervalTime)
+  };
+});
 
 export const selectError = createSelector([selectTimer], ({ error }) => error);
