@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { animated, useTransition } from 'react-spring';
 import { checkSession } from '../../duck/users/userActions';
+import { selectIsGettingUser } from '../../duck/users/userSelectors';
 import GlobalStyle from '../../utils/GlobalStyle';
+import Loading from '../Loading/Loading';
+import ProgressBar from '../ProgressBar/ProgressBar';
+import { Layout } from './App.styles';
 import HamburgerButton from './app/HamburgerButton';
 import Menu from './app/Menu';
-import Notification from '../Notification/Notification';
 import Router from './app/Router';
-import ProgressBar from '../ProgressBar/ProgressBar';
-import Loading from '../Loading/Loading';
-import { selectIsGettingUser } from '../../duck/users/userSelectors';
-import { useTransition, animated } from 'react-spring';
-import { Layout } from './App.styles';
 
 const App: React.FC = () => {
   const isGettingUser = useSelector(selectIsGettingUser);
@@ -28,7 +27,6 @@ const App: React.FC = () => {
   return (
     <>
       <ProgressBar />
-      <Notification />
       <HamburgerButton />
       <Menu />
 

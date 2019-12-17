@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
+import GoBackLink from '../../components/GoBackLink/GoBackLink';
+import Heading from '../../components/Heading/Heading';
+import Notification from '../../components/Notification/Notification';
 import ConfigForm from './config/ConfigForm';
 import Tasks from './config/Tasks';
-import Heading from '../../components/Heading/Heading';
-import GoBackLink from '../../components/GoBackLink/GoBackLink';
 
 const Config: FC = () => {
   return (
     <>
+      <Notification />
       <Heading level='h1'>config</Heading>
       <Tasks />
       <ConfigForm />
