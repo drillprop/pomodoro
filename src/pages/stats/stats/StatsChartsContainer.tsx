@@ -13,21 +13,22 @@ const StatsChartContainer: FC<{ days: number }> = ({ days }) => {
   const dispatch = useDispatch();
   const timeStats = useSelector(selectTimeStats(days));
   const intervalStats = useSelector(selectIntervalStats(days));
+
   const stats = useSelector(selectStatsByDay);
 
   useEffect(() => {
     if (!stats) {
       dispatch(fetchStatsStart());
     }
-  }, [fetchStatsStart, stats]);
+  }, [stats]);
 
   const memoizedIntervalStats = useMemo(() => {
     return intervalStats;
-  }, [stats]);
+  }, [stats, intervalStats]);
 
   const memoizedTimeStats = useMemo(() => {
     return timeStats;
-  }, [stats]);
+  }, [stats, timeStats]);
 
   return (
     <>
@@ -46,9 +47,9 @@ const StatsChartContainer: FC<{ days: number }> = ({ days }) => {
       <StatsChart
         dates={memoizedTimeStats.dates}
         label='minutes'
+        statsValues={memoizedTimeStats.values}
         suggestedMax={200}
         stepSize={20}
-        statsValues={memoizedTimeStats.values}
       />
     </>
   );
