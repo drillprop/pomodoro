@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { primFont } from '../../../utils/fonts';
-import { secondary, background } from '../../../utils/colors';
+import { background, secondary } from '../../utils/colors';
+import { primFont } from '../../utils/fonts';
 
-export const Select = styled.select`
+export const StyledSelect = styled.select`
   font-family: ${primFont};
   font-size: 1.5rem;
   display: block;

@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../../../duck/store';
 import { switchTaskStart } from '../../../duck/tasks/tasksActions';
-import { Select } from './SelectTask.styles';
 import { createStructuredSelector } from 'reselect';
 import {
   selectEveryTasks,
   selectSelectedTask
 } from '../../../duck/tasks/taskSelectors';
+import Select from '../../../components/Select/Select';
 
 interface Selectors {
   tasks: any;
@@ -22,14 +22,12 @@ const taskSelectors = createStructuredSelector<ReduxState, Selectors>({
 const SelectTask: FC = () => {
   const dispatch = useDispatch();
   const { tasks, selectedTask } = useSelector(taskSelectors);
-
   return (
     <Select
-      value={selectedTask}
+      selected={selectedTask}
       onChange={e => dispatch(switchTaskStart(e.currentTarget.value))}
-    >
-      {tasks && Object.keys(tasks).map(key => <option key={key}>{key}</option>)}
-    </Select>
+      selectors={Object.keys(tasks)}
+    />
   );
 };
 
