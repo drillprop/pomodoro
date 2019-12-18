@@ -6,7 +6,7 @@ import GoBackLink from '../../components/GoBackLink/GoBackLink';
 import Select from '../../components/Select/Select';
 
 const Stats = () => {
-  const selectors = ['7 days', '14 days', '30 days'];
+  const selectors = ['last 7 days', 'last 14 days', 'last 30 days'];
   const [days, setHowManyDays] = useState(selectors[0]);
   return (
     <StatsWrapper>
@@ -16,7 +16,7 @@ const Stats = () => {
         selectors={selectors}
         onChange={e => setHowManyDays(e.currentTarget.value)}
       />
-      <StatsChartsContainer days={parseInt(days.split(' ')[0])} />
+      <StatsChartsContainer days={parseInt(days.split(' ')[1])} />
       <GoBackLink>back</GoBackLink>
     </StatsWrapper>
   );
