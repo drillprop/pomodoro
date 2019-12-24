@@ -27,9 +27,7 @@ const timerSelectors = createStructuredSelector<ReduxState, Selectors>({
 });
 
 export default () => {
-  const { isTimerStart, isInterval, endTime, timeleft } = useSelector(
-    timerSelectors
-  );
+  const { isTimerStart, endTime, timeleft } = useSelector(timerSelectors);
 
   const initTime: number = endTime
     ? Math.floor((endTime - Date.now()) / 1000)
@@ -39,7 +37,6 @@ export default () => {
 
   useEffect(() => {
     let timeoutTimer: any;
-    let timeoutSwitch: any;
     const left = countTimeLeft(Date.now(), endTime);
 
     if (isTimerStart) {
@@ -48,19 +45,23 @@ export default () => {
       }, 1000);
     }
 
-    if (count <= 0) {
-      sound.play();
+    if (count < 0) {
       setCount(0);
       clearTimeout(timeoutTimer);
     }
 
-    if (!isTimerStart) setCount(timeleft);
+    if (!isTimerStart) {
+      setCount(timeleft);
+    }
+
+    if (!isTimerStart && count === 0) {
+      sound.play();
+    }
 
     return () => {
       clearTimeout(timeoutTimer);
-      clearTimeout(timeoutSwitch);
     };
-  }, [count, isTimerStart, isInterval, endTime, timeleft]);
+  }, [count, isTimerStart, timeleft]);
 
   return count;
 };
