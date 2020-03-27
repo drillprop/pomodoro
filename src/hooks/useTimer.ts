@@ -30,7 +30,7 @@ export default () => {
   const { isTimerStart, endTime, timeleft } = useSelector(timerSelectors);
 
   const initTime: number = endTime
-    ? Math.floor((endTime - Date.now()) / 1000)
+    ? Math.floor((endTime - Date.now()) / 1000 + 1)
     : timeleft;
 
   let [count, setCount] = useState(initTime);
@@ -61,7 +61,7 @@ export default () => {
     return () => {
       clearTimeout(timeoutTimer);
     };
-  }, [count, isTimerStart, timeleft]);
+  }, [count, isTimerStart, endTime, timeleft]);
 
   return count;
 };
