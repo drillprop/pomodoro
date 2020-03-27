@@ -1,6 +1,6 @@
-import React, { FC, useRef, useEffect } from 'react';
 import Chart from 'chart.js';
-import { primary, buttonColors } from '../../../../utils/colors';
+import React, { FC, useEffect, useRef } from 'react';
+import { primary, secondary } from '../../../../utils/colors';
 import { StatsChartWrapper } from './StatsChartStyles';
 
 interface Props {
@@ -32,7 +32,7 @@ const StatsChart: FC<Props> = ({
             {
               label,
               backgroundColor: dates.map((item, index) =>
-                index % 2 === 0 ? primary : buttonColors
+                index % 2 === 0 ? primary : secondary
               ),
               borderColor: 'rgb(255, 99, 132)',
               data: statsValues
