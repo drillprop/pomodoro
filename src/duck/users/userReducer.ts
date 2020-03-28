@@ -17,7 +17,8 @@ import {
   DELETE_ACCOUNT_FAILURE,
   CLEAR_USER_ERROR,
   CHECK_SESSION_SUCCESS,
-  CHECK_SESSION_FAILURE
+  CHECK_SESSION_FAILURE,
+  NOT_LOGGED
 } from './userTypes';
 import { UserActionTypes, SignError, UserData } from './userInterfaces';
 
@@ -51,12 +52,14 @@ export default (state = initialState, action: UserActionTypes): UserState => {
         error: null
       };
     case CHANGE_PASSWORD_SUCCESS:
+    case NOT_LOGGED:
       return {
         ...state,
         isGettingUser: false
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
+    case CHECK_SESSION_SUCCESS:
       return {
         ...state,
         isGettingUser: false,
@@ -66,23 +69,6 @@ export default (state = initialState, action: UserActionTypes): UserState => {
           loginProvider: action.payload.loginProvider
         }
       };
-    case CHECK_SESSION_SUCCESS:
-      if (action.payload) {
-        return {
-          ...state,
-          isGettingUser: false,
-          currentUser: {
-            email: action.payload.email,
-            uid: action.payload.uid,
-            loginProvider: action.payload.loginProvider
-          }
-        };
-      } else {
-        return {
-          ...state,
-          isGettingUser: false
-        };
-      }
     case LOGIN_FAILURE:
     case CHECK_SESSION_FAILURE:
     case REGISTER_FAILURE:
