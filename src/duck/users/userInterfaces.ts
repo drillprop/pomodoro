@@ -16,7 +16,9 @@ import {
   DELETE_ACCOUNT_START,
   DELETE_ACCOUNT_SUCCESS,
   DELETE_ACCOUNT_FAILURE,
-  CLEAR_USER_ERROR
+  CLEAR_USER_ERROR,
+  CHECK_SESSION_SUCCESS,
+  CHECK_SESSION_FAILURE
 } from './userTypes';
 import { Config } from '../timer/timerReducer';
 
@@ -99,6 +101,16 @@ export interface CheckSessionAction {
   type: typeof CHECK_SESSION;
 }
 
+export interface CheckSessionSuccessAction {
+  type: typeof CHECK_SESSION_SUCCESS;
+  payload: UserData;
+}
+
+export interface CheckSessionFailureAction {
+  type: typeof CHECK_SESSION_FAILURE;
+  payload: SignError;
+}
+
 // CHANGE PASSWORD INTERFACE
 
 export interface ChangePasswordStartAction {
@@ -143,6 +155,8 @@ export type UserActionTypes =
   | SignOutFailureAction
   | LoginWithGoogleAction
   | CheckSessionAction
+  | CheckSessionSuccessAction
+  | CheckSessionFailureAction
   | ChangePasswordStartAction
   | ChangePasswordSuccessAction
   | ChangePasswordFailureAction

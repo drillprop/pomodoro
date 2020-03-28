@@ -16,7 +16,9 @@ import {
   DELETE_ACCOUNT_START,
   DELETE_ACCOUNT_SUCCESS,
   DELETE_ACCOUNT_FAILURE,
-  CLEAR_USER_ERROR
+  CLEAR_USER_ERROR,
+  CHECK_SESSION_SUCCESS,
+  CHECK_SESSION_FAILURE
 } from './userTypes';
 import {
   RegisterAndLoginParams,
@@ -40,7 +42,9 @@ import {
   DeleteAccountStartAction,
   DeleteAccountSuccessAction,
   DeleteAccountFailureAction,
-  ClearUserErrorAction
+  ClearUserErrorAction,
+  CheckSessionSuccessAction,
+  CheckSessionFailureAction
 } from './userInterfaces';
 
 // REGISTER
@@ -106,6 +110,20 @@ export const loginWithGoogle = (): LoginWithGoogleAction => ({
 
 export const checkSession = (): CheckSessionAction => ({
   type: CHECK_SESSION
+});
+
+export const checkSessionSuccess = (
+  user: UserData
+): CheckSessionSuccessAction => ({
+  type: CHECK_SESSION_SUCCESS,
+  payload: user
+});
+
+export const checkSessionFailure = (
+  error: SignError
+): CheckSessionFailureAction => ({
+  type: CHECK_SESSION_FAILURE,
+  payload: error
 });
 
 // CHANGE PASSWORD
