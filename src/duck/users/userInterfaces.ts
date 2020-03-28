@@ -103,7 +103,7 @@ export interface CheckSessionAction {
 
 export interface CheckSessionSuccessAction {
   type: typeof CHECK_SESSION_SUCCESS;
-  payload: UserData;
+  payload: UserData | null;
 }
 
 export interface CheckSessionFailureAction {

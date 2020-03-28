@@ -113,7 +113,7 @@ export const checkSession = (): CheckSessionAction => ({
 });
 
 export const checkSessionSuccess = (
-  user: UserData
+  user: UserData | null
 ): CheckSessionSuccessAction => ({
   type: CHECK_SESSION_SUCCESS,
   payload: user
