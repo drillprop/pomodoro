@@ -56,14 +56,3 @@ export const renameProperty = (oldProp: string, newProp: string, obj: any) => {
 export const getToday = () => {
   return dayjs().format('DD-MM-YY');
 };
-
-export const createDaysObject = (daysBackward: number) => {
-  const obj: any = {};
-  for (let i = daysBackward; i >= 0; i--) {
-    const date: any = dayjs()
-      .subtract(i, 'day')
-      .format('DD-MM-YY');
-    obj[date] = null;
-  }
-  return obj;
-};

@@ -1,5 +1,6 @@
 import { database } from '../../utils/firebase/database';
 import { getToday } from '../../utils/helpers';
+import dayjs from 'dayjs';
 
 export const incIntervalDB = async (
   uid: string,
@@ -31,4 +32,24 @@ export const fetchStatsDB = async (uid: string) => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const createDaysObject = (daysBackward: number, stats: any) => {
+  const obj: any = {};
+  // create obj with dates as property and null as value
+  for (let i = daysBackward; i >= 0; i--) {
+    const date: any = dayjs()
+      .subtract(i, 'day')
+      .format('DD-MM-YY');
+    obj[date] = null;
+  }
+  // fill each day with fetched stats
+  if (stats) {
+    Object.keys(stats).forEach(key => {
+      if (obj.hasOwnProperty(key)) {
+        obj[key] = stats[key];
+      }
+    });
+  }
+  return obj;
 };
