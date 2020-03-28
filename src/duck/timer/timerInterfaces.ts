@@ -12,7 +12,8 @@ import {
 import { SwitchTaskSuccessAction } from '../tasks/tasksInterfaces';
 import {
   LoginSuccessAction,
-  SignOutSuccessAction
+  SignOutSuccessAction,
+  CheckSessionSuccessAction
 } from '../users/userInterfaces';
 
 export interface StartTimerParams {
@@ -87,4 +88,5 @@ export type TimerActionTypes =
   | SetTimersDurationFailureAction
   | SwitchTaskSuccessAction
   | LoginSuccessAction
+  | CheckSessionSuccessAction
   | SignOutSuccessAction;
