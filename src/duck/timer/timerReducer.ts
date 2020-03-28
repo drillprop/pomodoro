@@ -29,8 +29,8 @@ export interface TimerState {
 }
 
 const config: Config = {
-  intervalTime: 5,
-  breakTime: 2
+  intervalTime: 1800,
+  breakTime: 300
 };
 
 const initialState: TimerState = {
