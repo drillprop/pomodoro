@@ -1,18 +1,17 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTransition } from 'react-spring';
 import { createStructuredSelector } from 'reselect';
+import { selectIsMenuVisible } from '../../../duck/menu/menuSelectors';
 import { ReduxState } from '../../../duck/store';
 import { signOutStart } from '../../../duck/users/userActions';
 import { selectCurrentUser } from '../../../duck/users/userSelectors';
-import useRouter from '../../../hooks/useRouter';
 import { background } from '../../../utils/colors';
 import Icon from '../../Icon/Icon';
 import { LinkList, StyledNavigation } from './Menu.styles';
 import MenuLink from './menu/MenuLink';
 import ProfileInfo from './menu/ProfileInfo';
-import { selectIsMenuVisible } from '../../../duck/menu/menuSelectors';
 
 interface Selectors {
   isMenuVisible: boolean;
@@ -25,16 +24,8 @@ const menuSelectors = createStructuredSelector<ReduxState, Selectors>({
 });
 
 const Menu: FC = () => {
-  const router = useRouter();
-
   const dispatch = useDispatch();
   const { user, isMenuVisible } = useSelector(menuSelectors);
-
-  useEffect(() => {
-    if (!user) {
-      router.history.push('/login');
-    }
-  }, [user]);
 
   const itemIconProps = {
     size: 30,
