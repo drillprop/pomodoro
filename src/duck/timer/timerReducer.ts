@@ -9,7 +9,11 @@ import {
   SET_TIMERS_DURATION_FAILURE
 } from './timerTypes';
 import { SWITCH_TASK_SUCCESS } from '../tasks/taskTypes';
-import { LOGIN_SUCCESS, SIGN_OUT_SUCCESS } from '../users/userTypes';
+import {
+  LOGIN_SUCCESS,
+  SIGN_OUT_SUCCESS,
+  CHECK_SESSION_SUCCESS
+} from '../users/userTypes';
 import { TimerActionTypes } from './timerInterfaces';
 
 export interface Config {
@@ -112,6 +116,7 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         }
       };
     case LOGIN_SUCCESS:
+    case CHECK_SESSION_SUCCESS:
       return {
         ...state,
         timeleft: state.isInterval
