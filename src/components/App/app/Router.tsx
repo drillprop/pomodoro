@@ -19,20 +19,19 @@ import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
 const Stats = lazy(() => import('../../../pages/stats/Stats'));
 
 interface Selectors {
-  isLoading: boolean;
   user: any;
 }
 
 const RouterSelectors = createStructuredSelector<ReduxState, Selectors>({
-  user: selectCurrentUser,
-  isLoading: selectIsGettingUser || selectIsFetching
+  user: selectCurrentUser
 });
 
 const Router: FC = () => {
-  const { user, isLoading } = useSelector(RouterSelectors);
+  const { user } = useSelector(RouterSelectors);
 
   return (
     <>
+      <Route exact path='/' component={Interface} />
       <ProtectedRoute
         path='/config'
         isAuth={!!user}
@@ -52,7 +51,6 @@ const Router: FC = () => {
         path='/register'
         render={() => (!user ? <Register /> : <Redirect to='/' />)}
       />
-      <Route exact path='/' render={() => !isLoading && <Interface />} />
     </>
   );
 };
