@@ -9,7 +9,9 @@ import {
   changePasswordFailure,
   changePasswordSuccess,
   deleteAccountSuccess,
-  deleteAccountFailure
+  deleteAccountFailure,
+  checkSessionSuccess,
+  checkSessionFailure
 } from './userActions';
 import {
   LOGIN_START,
@@ -47,16 +49,14 @@ export function* fetchUserInfo(user: any) {
   const { tasks, selectedTask, config } = userSettings;
   const configIfNull = yield select(selectConfig);
   const tasksIfNull = yield select(selectTasks);
-  yield put(
-    loginSuccess({
-      email,
-      uid,
-      tasks: tasks || tasksIfNull,
-      selectedTask,
-      config: config || configIfNull,
-      loginProvider: user.providerData[0].providerId
-    })
-  );
+  return {
+    email,
+    uid,
+    tasks: tasks || tasksIfNull,
+    selectedTask,
+    config: config || configIfNull,
+    loginProvider: user.providerData[0].providerId
+  };
 }
 
 // Register
@@ -100,7 +100,8 @@ export function* loginWithEmail({ payload }: LoginStartAction) {
   try {
     const { email, password } = payload;
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    yield call(fetchUserInfo, user);
+    const userInfo = yield call(fetchUserInfo, user);
+    yield put(loginSuccess(userInfo));
   } catch (error) {
     yield put(loginFailure(error));
   }
@@ -115,7 +116,8 @@ export function* onLoginGoogleStart() {
 export function* loginGoogle() {
   try {
     const { user } = yield loginWithGoogle();
-    yield call(fetchUserInfo, user);
+    const userInfo = yield call(fetchUserInfo, user);
+    yield put(loginSuccess(userInfo));
   } catch (error) {
     yield put(loginFailure(error));
   }
@@ -145,10 +147,15 @@ export function* onCheckSession() {
 
 export function* checkSession() {
   const user = yield call(getCurrentUser);
-  if (!user) {
-    yield signOut();
-  } else {
-    yield call(fetchUserInfo, user);
+  try {
+    if (!user) {
+      yield put(checkSessionSuccess(null));
+    } else {
+      const userInfo = yield call(fetchUserInfo, user);
+      yield put(checkSessionSuccess(userInfo));
+    }
+  } catch (error) {
+    yield put(checkSessionFailure(error));
   }
 }
 
