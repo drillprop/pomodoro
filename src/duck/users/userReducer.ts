@@ -56,7 +56,6 @@ export default (state = initialState, action: UserActionTypes): UserState => {
         isGettingUser: false
       };
     case LOGIN_SUCCESS:
-    case CHECK_SESSION_SUCCESS:
     case REGISTER_SUCCESS:
       return {
         ...state,
@@ -67,6 +66,23 @@ export default (state = initialState, action: UserActionTypes): UserState => {
           loginProvider: action.payload.loginProvider
         }
       };
+    case CHECK_SESSION_SUCCESS:
+      if (action.payload) {
+        return {
+          ...state,
+          isGettingUser: false,
+          currentUser: {
+            email: action.payload.email,
+            uid: action.payload.uid,
+            loginProvider: action.payload.loginProvider
+          }
+        };
+      } else {
+        return {
+          ...state,
+          isGettingUser: false
+        };
+      }
     case LOGIN_FAILURE:
     case CHECK_SESSION_FAILURE:
     case REGISTER_FAILURE:
