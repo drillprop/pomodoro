@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --env.mode development --open --config webpack.dev.js --hot",
     "build": "webpack --env.mode production --config webpack.prod.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist --user \"drillprops <drylbartosz@gmail.com>\""
   },
   "keywords": [],
   "author": "",
