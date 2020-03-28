@@ -116,6 +116,7 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         }
       };
     case LOGIN_SUCCESS:
+    case CHECK_SESSION_SUCCESS:
       return {
         ...state,
         timeleft: state.isInterval
@@ -124,19 +125,6 @@ export default (state = initialState, action: TimerActionTypes): TimerState => {
         isFetching: false,
         config: { ...action.payload.config }
       };
-    case CHECK_SESSION_SUCCESS:
-      if (action.payload) {
-        return {
-          ...state,
-          timeleft: state.isInterval
-            ? action.payload.config.intervalTime
-            : action.payload.config.breakTime,
-          isFetching: false,
-          config: { ...action.payload.config }
-        };
-      } else {
-        return { ...state };
-      }
     case SIGN_OUT_SUCCESS:
       return {
         ...state,
