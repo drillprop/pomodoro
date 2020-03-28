@@ -11,7 +11,8 @@ import {
   deleteAccountSuccess,
   deleteAccountFailure,
   checkSessionSuccess,
-  checkSessionFailure
+  checkSessionFailure,
+  notLogged
 } from './userActions';
 import {
   LOGIN_START,
@@ -149,7 +150,7 @@ export function* checkSession() {
   const user = yield call(getCurrentUser);
   try {
     if (!user) {
-      yield put(checkSessionSuccess(null));
+      yield put(notLogged());
     } else {
       const userInfo = yield call(fetchUserInfo, user);
       yield put(checkSessionSuccess(userInfo));
