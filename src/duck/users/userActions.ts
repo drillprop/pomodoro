@@ -18,7 +18,8 @@ import {
   DELETE_ACCOUNT_FAILURE,
   CLEAR_USER_ERROR,
   CHECK_SESSION_SUCCESS,
-  CHECK_SESSION_FAILURE
+  CHECK_SESSION_FAILURE,
+  NOT_LOGGED
 } from './userTypes';
 import {
   RegisterAndLoginParams,
@@ -44,7 +45,8 @@ import {
   DeleteAccountFailureAction,
   ClearUserErrorAction,
   CheckSessionSuccessAction,
-  CheckSessionFailureAction
+  CheckSessionFailureAction,
+  NotLoggedAction
 } from './userInterfaces';
 
 // REGISTER
@@ -113,7 +115,7 @@ export const checkSession = (): CheckSessionAction => ({
 });
 
 export const checkSessionSuccess = (
-  user: UserData | null
+  user: UserData
 ): CheckSessionSuccessAction => ({
   type: CHECK_SESSION_SUCCESS,
   payload: user
@@ -124,6 +126,10 @@ export const checkSessionFailure = (
 ): CheckSessionFailureAction => ({
   type: CHECK_SESSION_FAILURE,
   payload: error
+});
+
+export const notLogged = (): NotLoggedAction => ({
+  type: NOT_LOGGED
 });
 
 // CHANGE PASSWORD

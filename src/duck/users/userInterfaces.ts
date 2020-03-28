@@ -18,7 +18,8 @@ import {
   DELETE_ACCOUNT_FAILURE,
   CLEAR_USER_ERROR,
   CHECK_SESSION_SUCCESS,
-  CHECK_SESSION_FAILURE
+  CHECK_SESSION_FAILURE,
+  NOT_LOGGED
 } from './userTypes';
 import { Config } from '../timer/timerReducer';
 
@@ -103,12 +104,16 @@ export interface CheckSessionAction {
 
 export interface CheckSessionSuccessAction {
   type: typeof CHECK_SESSION_SUCCESS;
-  payload: UserData | null;
+  payload: UserData;
 }
 
 export interface CheckSessionFailureAction {
   type: typeof CHECK_SESSION_FAILURE;
   payload: SignError;
+}
+
+export interface NotLoggedAction {
+  type: typeof NOT_LOGGED;
 }
 
 // CHANGE PASSWORD INTERFACE
@@ -157,6 +162,7 @@ export type UserActionTypes =
   | CheckSessionAction
   | CheckSessionSuccessAction
   | CheckSessionFailureAction
+  | NotLoggedAction
   | ChangePasswordStartAction
   | ChangePasswordSuccessAction
   | ChangePasswordFailureAction
