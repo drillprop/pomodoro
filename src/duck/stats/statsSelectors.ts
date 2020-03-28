@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { ReduxState } from '../store';
-import { createDaysObject } from '../../utils/helpers';
+import { createDaysObject } from './statsUtils';
 
 export const selectStats = ({ stats }: ReduxState) => stats;
 
@@ -20,22 +20,22 @@ export const selectStatsError = createSelector(
 );
 
 export const selectTimeStats = (days: number) =>
-  createSelector([selectStatsByDay], stats => {
-    const dates = createDaysObject(days);
-    const statsWithBlankDates = { ...dates, ...stats };
+  createSelector([selectStatsByDay], (stats: any) => {
+    const dates = createDaysObject(days, stats);
+
     return {
-      dates: Object.keys(statsWithBlankDates),
-      values: Object.values(statsWithBlankDates).map((value: any) =>
+      dates: Object.keys(dates),
+      values: Object.values(dates).map((value: any) =>
         value ? Math.floor(value.time / 60) : 0
       )
     };
   });
 
 export const selectIntervalStats = (days: number) =>
-  createSelector([selectStatsByDay], stats => {
-    const dates = createDaysObject(days);
-    const statsWithBlankDates = { ...dates, ...stats };
-    const values = Object.values(statsWithBlankDates).map((item: any) => {
+  createSelector([selectStatsByDay], (stats: any) => {
+    const dates = createDaysObject(days, stats);
+
+    const values = Object.values(dates).map((item: any) => {
       if (item) {
         return Object.values(item.tasks).reduce(
           (acc: any, it: any) => (acc += it),
@@ -46,7 +46,7 @@ export const selectIntervalStats = (days: number) =>
       }
     });
     return {
-      dates: Object.keys(statsWithBlankDates),
+      dates: Object.keys(dates),
       values
     };
   });
