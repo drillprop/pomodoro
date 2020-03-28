@@ -18,9 +18,9 @@ const Notification: FC<Props> = () => {
   const notification = useSelector(selectNotification);
 
   const transition = useTransition(notification, null, {
-    from: { transform: 'translateY(-100%)' },
+    from: { transform: 'translateY(100%)' },
     enter: { transform: 'translateY(0px)' },
-    leave: { transform: 'translateY(-100%)' }
+    leave: { transform: 'translateY(300%)' }
   });
   return (
     <>
@@ -34,9 +34,7 @@ const Notification: FC<Props> = () => {
                   <CloseButton
                     aria-label='Close Notification'
                     onClick={() => dispatch(clearNotification())}
-                  >
-                    &times;
-                  </CloseButton>
+                  />
                 </>
               )}
             </NotificationWrapper>
