@@ -11,13 +11,14 @@ import HamburgerButton from './app/HamburgerButton';
 import Menu from './app/Menu';
 import Router from './app/Router';
 import Notification from '../Notification/Notification';
+import Logo from './app/Logo';
 
 const App: React.FC = () => {
   const isGettingUser = useSelector(selectIsGettingUser);
   const transitions = useTransition(isGettingUser, null, {
     from: { opacity: 0, height: 0 },
     enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    leave: { opacity: 0 },
   });
   const dispatch = useDispatch();
 
@@ -28,6 +29,7 @@ const App: React.FC = () => {
   return (
     <>
       <Notification />
+      <Logo />
       <ProgressBar />
       <HamburgerButton />
       <Menu />
