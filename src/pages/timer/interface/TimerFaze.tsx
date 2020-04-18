@@ -7,10 +7,18 @@ import { useTransition, animated } from 'react-spring';
 const TimerFaze: React.FC = () => {
   const isInterval = useSelector(selectIsInterval);
   const transition = useTransition(isInterval, null, {
-    from: { transform: 'translate3d(0,-40px,0)', opacity: 0 },
-    enter: { transform: 'translate3d(0,0px,0)', opacity: 1 },
-    leave: { transform: 'translate3d(0,-40px,0)', height: 0, opacity: 0 },
+    from: {
+      transform: 'translate3d(0, 100%, 0) rotateX(-90deg)',
+      opacity: 0,
+    },
+    enter: { transform: 'translate3d(0,0px,0) rotateX(0)', opacity: 1 },
+    leave: {
+      transform: 'translate3d(0, 100%, 0) rotateX(90deg)',
+      opacity: 0,
+      height: 0,
+    },
   });
+
   return (
     <>
       {transition.map(({ item, key, props }) => {
