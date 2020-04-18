@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import useRouter from '../../../../hooks/useRouter';
-import { background } from '../../../../utils/colors';
+import { reds } from '../../../../utils/colors';
 import Icon from '../../../Icon/Icon';
 
 interface Props {
@@ -13,11 +13,10 @@ const MenuLink: FC<Props> = ({ iconName, path, children }) => {
   const itemIconProps = {
     size: 30,
     style: {
-      marginRight: '10px',
+      marginRight: '30px',
       position: 'relative',
-      top: '0.25em'
     },
-    color: background
+    color: reds[0],
   };
   const router = useRouter();
 

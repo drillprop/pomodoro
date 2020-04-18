@@ -1,6 +1,6 @@
 import { animated } from 'react-spring';
 import styled from 'styled-components';
-import { grays, secondaryBackground } from '../../../utils/colors';
+import { grays } from '../../../utils/colors';
 import { secondFont } from '../../../utils/fonts';
 
 export const StyledNavigation = styled(animated.nav)`
@@ -21,11 +21,11 @@ export const LinkList = styled.ul`
   margin-left: 50px;
   li,
   a {
-    color: ${grays[3]};
+    color: ${grays[5]};
   }
   li {
     margin-top: 20px;
-    opacity: 0.6;
+    opacity: 0.8;
     cursor: pointer;
     font-family: ${secondFont};
     font-size: 16px;
@@ -33,16 +33,10 @@ export const LinkList = styled.ul`
     :hover {
       opacity: 1;
     }
-    ::after {
-      content: '';
-      left: 0;
-      margin-top: 42px;
-      margin-left: 30px;
-      width: calc(100% - 60px);
-      height: 1px;
-      position: absolute;
-      opacity: 0.3;
-      background-color: ${secondaryBackground};
+    li,
+    svg {
+      vertical-align: middle;
+      display: inline-block;
     }
   }
 `;

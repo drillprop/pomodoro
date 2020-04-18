@@ -7,7 +7,7 @@ import { selectIsMenuVisible } from '../../../duck/menu/menuSelectors';
 import { ReduxState } from '../../../duck/store';
 import { signOutStart } from '../../../duck/users/userActions';
 import { selectCurrentUser } from '../../../duck/users/userSelectors';
-import { background } from '../../../utils/colors';
+import { reds } from '../../../utils/colors';
 import Icon from '../../Icon/Icon';
 import { LinkList, StyledNavigation } from './Menu.styles';
 import MenuLink from './menu/MenuLink';
@@ -20,7 +20,7 @@ interface Selectors {
 
 const menuSelectors = createStructuredSelector<ReduxState, Selectors>({
   user: selectCurrentUser,
-  isMenuVisible: selectIsMenuVisible
+  isMenuVisible: selectIsMenuVisible,
 });
 
 const Menu: FC = () => {
@@ -30,21 +30,20 @@ const Menu: FC = () => {
   const itemIconProps = {
     size: 30,
     style: {
-      marginRight: '10px',
+      marginRight: '30px',
       position: 'relative',
-      top: '0.25em'
     },
-    color: background
+    color: reds[0],
   };
 
   const transitions = useTransition(isMenuVisible, null, {
     from: {
-      transform: 'translateX(-500px)'
+      transform: 'translateX(-500px)',
     },
     enter: {
-      transform: 'translateX(0)'
+      transform: 'translateX(0)',
     },
-    leave: { transform: 'translateX(-500px)' }
+    leave: { transform: 'translateX(-500px)' },
   });
 
   return (
