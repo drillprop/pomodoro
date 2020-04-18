@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReduxState } from '../../../../duck/store';
-import { pauseTimer, startTimer } from '../../../../duck/timer/timerActions';
+import { createStructuredSelector } from 'reselect';
 import Icon from '../../../../components/Icon/Icon';
-import { primary } from '../../../../utils/colors';
-import { Pause, StyledPlayButton } from './PlayButton.styles';
+import { ReduxState } from '../../../../duck/store';
+import { selectSelectedTask } from '../../../../duck/tasks/taskSelectors';
+import { pauseTimer, startTimer } from '../../../../duck/timer/timerActions';
 import {
+  selectIsInterval,
   selectIsTimerStart,
   selectTimeleft,
-  selectIsInterval
 } from '../../../../duck/timer/timerSelectors';
-import { createStructuredSelector } from 'reselect';
-import { selectSelectedTask } from '../../../../duck/tasks/taskSelectors';
+import { reds } from '../../../../utils/colors';
+import { Pause, StyledPlayButton } from './PlayButton.styles';
 
 interface Selectors {
   isTimerStart: boolean;
@@ -24,7 +24,7 @@ const playButtonSelector = createStructuredSelector<ReduxState, Selectors>({
   isTimerStart: selectIsTimerStart,
   timeleft: selectTimeleft,
   isInterval: selectIsInterval,
-  selectedTask: selectSelectedTask
+  selectedTask: selectSelectedTask,
 });
 
 const PlayButton: FC = () => {
@@ -41,14 +41,14 @@ const PlayButton: FC = () => {
             startTime: Date.now(),
             timeleft,
             selectedTask,
-            isInterval
+            isInterval,
           })
         );
   };
 
   return (
     <StyledPlayButton isTimerStart={isTimerStart} onClick={startPause}>
-      {isTimerStart ? <Pause /> : <Icon name='play' color={primary} />}
+      {isTimerStart ? <Pause /> : <Icon name='play' color={reds[3]} />}
     </StyledPlayButton>
   );
 };

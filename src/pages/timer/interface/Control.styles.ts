@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { secondaryBackground, primary } from '../../../utils/colors';
+import { background, reds } from '../../../utils/colors';
 import { secondFont } from '../../../utils/fonts';
 
 export const ResetandRetryButtons = styled.button`
   border: none;
-  background: ${secondaryBackground};
+  background: ${reds[3]};
   width: 140px;
   height: 3em;
   font-size: 1rem;
   font-family: ${secondFont};
-  color: ${primary};
+  color: ${background};
   font-weight: 700;
   text-transform: lowercase;
   align-self: center;
@@ -17,7 +17,7 @@ export const ResetandRetryButtons = styled.button`
 `;
 
 export const ControlsWrapper = styled.div`
-  margin-top: 50px;
+  margin-top: -10px;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(2, 140px);
