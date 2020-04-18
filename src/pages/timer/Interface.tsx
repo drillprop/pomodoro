@@ -8,14 +8,10 @@ import TimerFaze from './interface/TimerFaze';
 const Interface: React.FC = () => {
   return (
     <InterfaceWrapper>
-      <div>
-        <TimerFaze />
-        <SelectTask />
-      </div>
-      <div>
-        <Timer />
-        <Controls />
-      </div>
+      <TimerFaze />
+      <SelectTask />
+      <Timer />
+      <Controls />
     </InterfaceWrapper>
   );
 };
