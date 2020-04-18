@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { background, primary } from './colors';
+import { background, grays } from './colors';
 import { primFont } from './fonts';
 
 const GlobalStyle = createGlobalStyle`
@@ -9,7 +9,7 @@ html {
 }
 body {
   background: ${background};
-  color: ${primary};
+  color: ${grays[0]};
   font-family:${primFont};
   margin:0;
   padding:0;
