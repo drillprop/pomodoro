@@ -1,6 +1,6 @@
 import { animated } from 'react-spring';
 import styled from 'styled-components';
-import { primary, secondaryBackground } from '../../../utils/colors';
+import { grays, secondaryBackground } from '../../../utils/colors';
 import { secondFont } from '../../../utils/fonts';
 
 export const StyledNavigation = styled(animated.nav)`
@@ -9,7 +9,7 @@ export const StyledNavigation = styled(animated.nav)`
   top: 0;
   height: 100%;
   width: 400px;
-  background-color: ${primary};
+  background-color: ${grays[0]};
   @media (max-width: 500px) {
     width: 100vw;
   }
@@ -21,7 +21,7 @@ export const LinkList = styled.ul`
   margin-left: 50px;
   li,
   a {
-    color: ${secondaryBackground};
+    color: ${grays[3]};
   }
   li {
     margin-top: 20px;
