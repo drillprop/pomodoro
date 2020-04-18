@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TimerWrapper = styled.section`
-  margin-top: 50px;
+  margin-top: 110px;
   text-align: center;
 `;
 
