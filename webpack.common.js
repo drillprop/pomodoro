@@ -7,15 +7,15 @@ const styledComponentsTransformer = createStyledComponentsTransformer();
 
 module.exports = {
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.ts', '.tsx', '.js'],
   },
   entry: './src/index.tsx',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   externals: {
-    moment: 'moment'
+    moment: 'moment',
   },
   module: {
     rules: [
@@ -25,20 +25,21 @@ module.exports = {
         exclude: /node_modules/,
         options: {
           getCustomTransformers: () => ({
-            before: [styledComponentsTransformer]
-          })
-        }
+            before: [styledComponentsTransformer],
+          }),
+        },
       },
       {
         test: /\.mp3$/,
-        loader: 'file-loader'
-      }
-    ]
+        loader: 'file-loader',
+      },
+    ],
   },
   plugins: [
     new DotEnv(),
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
-    })
-  ]
+      template: './src/index.html',
+      favicon: './src/public/favicon.ico',
+    }),
+  ],
 };
