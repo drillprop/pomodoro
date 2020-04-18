@@ -1,6 +1,6 @@
 import Chart from 'chart.js';
 import React, { FC, useEffect, useRef } from 'react';
-import { primary, secondary } from '../../../../utils/colors';
+import { grays, reds } from '../../../../utils/colors';
 import { StatsChartWrapper } from './StatsChartStyles';
 
 interface Props {
@@ -16,7 +16,7 @@ const StatsChart: FC<Props> = ({
   dates,
   suggestedMax = 20,
   label = '',
-  stepSize = 1
+  stepSize = 1,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chart = useRef<Chart>();
@@ -32,21 +32,21 @@ const StatsChart: FC<Props> = ({
             {
               label,
               backgroundColor: dates.map((item, index) =>
-                index % 2 === 0 ? primary : secondary
+                index % 2 === 0 ? grays[0] : reds[0]
               ),
               borderColor: 'rgb(255, 99, 132)',
-              data: statsValues
-            }
-          ]
+              data: statsValues,
+            },
+          ],
         },
         options: {
           responsiveAnimationDuration: 0,
           legend: {
             fullWidth: true,
-            align: 'center'
+            align: 'center',
           },
           hover: {
-            animationDuration: 0 // duration of animations when hovering an item
+            animationDuration: 0, // duration of animations when hovering an item
           },
           responsive: true,
           maintainAspectRatio: true,
@@ -56,12 +56,12 @@ const StatsChart: FC<Props> = ({
                 ticks: {
                   beginAtZero: true,
                   stepSize,
-                  suggestedMax: suggestedMax
-                }
-              }
-            ]
-          }
-        }
+                  suggestedMax: suggestedMax,
+                },
+              },
+            ],
+          },
+        },
       });
     }
 
