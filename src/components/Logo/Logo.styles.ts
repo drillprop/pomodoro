@@ -8,13 +8,13 @@ export const StyledLogo = styled.h1`
   line-height: 0.8;
   color: ${grays[0]};
   font-family: ${secondFont};
-  font-size: 45px;
+  font-size: 35px;
   position: absolute;
   top: 30px;
   left: 40px;
   svg {
     position: absolute;
-    left: 27px;
+    left: 22px;
     top: 0;
   }
   @media (max-width: 700px) {

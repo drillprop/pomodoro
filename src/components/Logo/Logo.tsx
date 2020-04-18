@@ -10,8 +10,8 @@ const Logo = () => {
         p &nbsp; mo
         <br />
         &nbsp; &nbsp;doro
-        <TomatoIcon size='39px' fill='white' />
-        <TomatoIcon size='35px' fill={reds[1]} />
+        <TomatoIcon size='29px' fill='white' />
+        <TomatoIcon size='25px' fill={reds[1]} />
       </StyledLogo>
     </>
   );
