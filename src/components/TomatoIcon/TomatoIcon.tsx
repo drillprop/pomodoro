@@ -12,7 +12,7 @@ const TomatoIcon: React.FC<Props> = ({ size, fill, coverage }) => {
   return (
     <>
       <StyledSvg
-        viewBox={`0 0 50 ${calculatedCoverage || 50}`}
+        viewBox={`0 0 50 ${calculatedCoverage ?? 50}`}
         size={size}
         fill={fill}
       >
