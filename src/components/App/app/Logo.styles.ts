@@ -17,4 +17,7 @@ export const StyledLogo = styled.h1`
     left: 27px;
     top: 0;
   }
+  @media (max-width: 700px) {
+    transform: scale(0.8);
+  }
 `;
