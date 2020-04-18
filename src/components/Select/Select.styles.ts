@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { background, secondary } from '../../utils/colors';
+import { background, grays } from '../../utils/colors';
 import { primFont } from '../../utils/fonts';
 
 export const StyledSelect = styled.select`
@@ -7,7 +7,7 @@ export const StyledSelect = styled.select`
   font-size: 1.5rem;
   display: block;
   margin: 0 auto;
-  color: ${secondary};
+  color: ${grays[1]};
   background: none;
   border: none;
   padding: 0;
@@ -15,7 +15,7 @@ export const StyledSelect = styled.select`
   padding: 0.3em 1em;
   text-align-last: center;
   :focus {
-    outline-color: ${secondary};
+    outline-color: ${grays[3]};
   }
 
   option {
