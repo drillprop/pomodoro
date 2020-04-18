@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { background, primary, secondary } from '../../../../utils/colors';
+import {
+  background,
+  primary,
+  secondary,
+  grays,
+} from '../../../../utils/colors';
 import { primFont } from '../../../../utils/fonts';
 
 export const StyledConfigInput = styled.input`
@@ -10,7 +15,7 @@ export const StyledConfigInput = styled.input`
   padding: 8px;
   color: ${primary};
   background-color: ${background};
-  border: solid 1px ${secondary};
+  border: solid 1px ${grays[4]};
   border-radius: 5px;
   margin-left: 16px;
 `;
