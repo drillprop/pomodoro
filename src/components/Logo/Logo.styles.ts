@@ -14,7 +14,7 @@ export const StyledLogo = styled.h1`
   left: 40px;
   svg {
     position: absolute;
-    left: 22px;
+    left: 20px;
     top: 0;
   }
   @media (max-width: 700px) {
