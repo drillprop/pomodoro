@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { grays } from '../../../utils/colors';
-import { secondFont } from '../../../utils/fonts';
+import { grays } from '../../utils/colors';
+import { secondFont } from '../../utils/fonts';
 
 export const StyledLogo = styled.h1`
   margin: 0;

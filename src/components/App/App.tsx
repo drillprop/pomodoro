@@ -11,7 +11,7 @@ import HamburgerButton from './app/HamburgerButton';
 import Menu from './app/Menu';
 import Router from './app/Router';
 import Notification from '../Notification/Notification';
-import Logo from './app/Logo';
+import Logo from '../Logo/Logo';
 
 const App: React.FC = () => {
   const isGettingUser = useSelector(selectIsGettingUser);

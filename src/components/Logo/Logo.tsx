@@ -1,6 +1,6 @@
 import React from 'react';
-import { reds } from '../../../utils/colors';
-import TomatoIcon from '../../TomatoIcon/TomatoIcon';
+import { reds } from '../../utils/colors';
+import TomatoIcon from '../TomatoIcon/TomatoIcon';
 import { StyledLogo } from './Logo.styles';
 
 const Logo = () => {
