@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { background, primary } from '../../../utils/colors';
+import { background, reds, grays } from '../../../utils/colors';
 
 export const HamburgerWrapper = styled.div`
   position: absolute;
@@ -13,7 +13,7 @@ export const HamburgerWrapper = styled.div`
     position: absolute;
     width: 35px;
     height: 7px;
-    background-color: ${primary};
+    background-color: ${grays[0]};
     transition: transform 200ms;
     ::before,
     ::after {
@@ -21,7 +21,7 @@ export const HamburgerWrapper = styled.div`
       position: absolute;
       width: 35px;
       height: 7px;
-      background-color: ${primary};
+      background-color: ${grays[0]};
     }
     ::before {
       top: -14px;
@@ -40,17 +40,13 @@ export const HamburgerWrapper = styled.div`
     height: 40px;
     :checked + div {
       transform: rotate(135deg);
-      @media (max-width: 500px) {
-        background-color: ${background};
-      }
+      background-color: ${reds[0]};
     }
     :checked + div:after,
     :checked + div:before {
       top: 0;
       transform: rotate(90deg);
-      @media (max-width: 500px) {
-        background-color: ${background};
-      }
+      background-color: ${reds[0]};
     }
   }
 `;
