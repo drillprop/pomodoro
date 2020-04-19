@@ -10,11 +10,12 @@ import {
   DELETE_TASK_FAILURE,
   SWITCH_TASK_START,
   SWITCH_TASK_SUCCESS,
-  SWITCH_TASK_FAILURE
+  SWITCH_TASK_FAILURE,
 } from './taskTypes';
 import {
   LoginSuccessAction,
-  SignOutSuccessAction
+  SignOutSuccessAction,
+  CheckSessionSuccessAction,
 } from '../users/userInterfaces';
 import { StopTimerAndSwitchFazeAction } from '../timer/timerInterfaces';
 
@@ -102,5 +103,6 @@ export type TasksActionTypes =
   | SwitchTaskSuccessAction
   | SwitchTaskFailureAction
   | LoginSuccessAction
+  | CheckSessionSuccessAction
   | SignOutSuccessAction
   | StopTimerAndSwitchFazeAction;

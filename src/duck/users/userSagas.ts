@@ -12,7 +12,7 @@ import {
   deleteAccountFailure,
   checkSessionSuccess,
   checkSessionFailure,
-  notLogged
+  notLogged,
 } from './userActions';
 import {
   LOGIN_START,
@@ -21,7 +21,7 @@ import {
   CHECK_SESSION,
   LOGIN_WITH_GOOGLE,
   CHANGE_PASSWORD_START,
-  DELETE_ACCOUNT_START
+  DELETE_ACCOUNT_START,
 } from './userTypes';
 import { auth } from '../../utils/firebase/firebase';
 import { getCurrentUser, loginWithGoogle } from '../../utils/firebase/auth';
@@ -29,13 +29,13 @@ import {
   RegisterStartAction,
   LoginStartAction,
   ChangePasswordStartAction,
-  DeleteAccountStartAction
+  DeleteAccountStartAction,
 } from './userInterfaces';
 import {
   addUserToDB,
   getConfigAndTasks,
   changePasswordFirebase,
-  deleteAuthUser
+  deleteAuthUser,
 } from './userUtils';
 import { ReduxState } from '../store';
 import { createNotification } from '../menu/menuActions';
@@ -56,7 +56,7 @@ export function* fetchUserInfo(user: any) {
     tasks: tasks || tasksIfNull,
     selectedTask,
     config: config || configIfNull,
-    loginProvider: user.providerData[0].providerId
+    loginProvider: user.providerData[0].providerId,
   };
 }
 
@@ -81,7 +81,7 @@ export function* registerWithEmail({ payload }: RegisterStartAction) {
           selectedTask: 'default',
           tasks,
           config,
-          loginProvider: user.providerData[0].providerId
+          loginProvider: user.providerData[0].providerId,
         })
       );
     }
@@ -205,6 +205,6 @@ export function* userSagas() {
     call(onSignOutStart),
     call(onCheckSession),
     call(onChangePassword),
-    call(onDeleteAccount)
+    call(onDeleteAccount),
   ]);
 }

@@ -9,12 +9,16 @@ import {
   SWITCH_TASK_FAILURE,
   CREATE_TASK_FAILURE,
   EDIT_TASK_FAILURE,
-  DELETE_TASK_FAILURE
+  DELETE_TASK_FAILURE,
 } from './taskTypes';
 import { renameProperty } from '../../utils/helpers';
 import { STOP_AND_SWITCH_FAZE } from '../timer/timerTypes';
 import { TasksActionTypes, TaskError } from './tasksInterfaces';
-import { LOGIN_SUCCESS, SIGN_OUT_SUCCESS } from '../users/userTypes';
+import {
+  LOGIN_SUCCESS,
+  SIGN_OUT_SUCCESS,
+  CHECK_SESSION_SUCCESS,
+} from '../users/userTypes';
 
 export interface TasksState {
   tasks: any;
@@ -25,11 +29,11 @@ export interface TasksState {
 
 const initialState: TasksState = {
   tasks: {
-    default: 0
+    default: 0,
   },
   selectedTask: 'default',
   isLoading: false,
-  error: null
+  error: null,
 };
 
 export default (state = initialState, action: TasksActionTypes): TasksState => {
@@ -39,16 +43,16 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
     case DELETE_TASK_START:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     case CREATE_TASK_SUCCESS:
       return {
         ...state,
         tasks: {
           ...state.tasks,
-          [action.payload]: 0
+          [action.payload]: 0,
         },
-        isLoading: false
+        isLoading: false,
       };
     case EDIT_TASK_SUCCESS:
       const { prevTask, newTask } = action.payload;
@@ -58,7 +62,7 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
         tasks: { ...newTasksObj },
         selectedTask:
           prevTask === state.selectedTask ? newTask : state.selectedTask,
-        isLoading: false
+        isLoading: false,
       };
     case DELETE_TASK_SUCCESS: {
       const taskName = action.payload;
@@ -70,13 +74,13 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
         tasks: newTasksState,
         isLoading: false,
         selectedTask:
-          taskName === state.selectedTask ? 'default' : state.selectedTask
+          taskName === state.selectedTask ? 'default' : state.selectedTask,
       };
     }
     case SWITCH_TASK_SUCCESS:
       return {
         ...state,
-        selectedTask: action.payload
+        selectedTask: action.payload,
       };
     case STOP_AND_SWITCH_FAZE: {
       return {
@@ -85,23 +89,24 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
           ...state.tasks,
           [state.selectedTask]: action.payload
             ? state.tasks[state.selectedTask] + 1
-            : state.tasks[state.selectedTask]
-        }
+            : state.tasks[state.selectedTask],
+        },
       };
     }
     case LOGIN_SUCCESS:
+    case CHECK_SESSION_SUCCESS:
       return {
         ...state,
         tasks: { ...state.tasks, ...action.payload.tasks },
-        selectedTask: action.payload.selectedTask
+        selectedTask: action.payload.selectedTask,
       };
     case SIGN_OUT_SUCCESS:
       return {
         ...state,
         tasks: {
-          default: 0
+          default: 0,
         },
-        selectedTask: 'default'
+        selectedTask: 'default',
       };
     case SWITCH_TASK_FAILURE:
     case CREATE_TASK_FAILURE:
@@ -111,8 +116,8 @@ export default (state = initialState, action: TasksActionTypes): TasksState => {
         ...state,
         error: {
           message: action.payload.message || null,
-          code: action.payload.code || null
-        }
+          code: action.payload.code || null,
+        },
       };
     default:
       return state;
