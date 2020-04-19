@@ -55,11 +55,6 @@ const Menu: FC = () => {
               <ProfileInfo user={user} />
               <LinkList>
                 <li>
-                  <MenuLink path='/account' iconName='profile'>
-                    account
-                  </MenuLink>
-                </li>
-                <li>
                   <MenuLink path='/stats' iconName='stats2'>
                     stats
                   </MenuLink>
