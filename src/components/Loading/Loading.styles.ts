@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primary } from '../../utils/colors';
+import { grays, reds } from '../../utils/colors';
 
 export const LoadingWrapper = styled.main`
   display: grid;
@@ -9,14 +9,14 @@ export const LoadingWrapper = styled.main`
 `;
 
 export const Spinner = styled.div`
-  background: ${primary};
+  background: ${grays[0]};
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
 
   ::before,
   ::after {
-    background: ${primary};
+    background: ${grays[0]};
     animation: load1 1s infinite ease-in-out;
     width: 1em;
     height: 4em;
@@ -44,11 +44,11 @@ export const Spinner = styled.div`
     0%,
     80%,
     100% {
-      box-shadow: 0 0;
+      box-shadow: 0 0 ${reds[0]};
       height: 4em;
     }
     40% {
-      box-shadow: 0 -2em;
+      box-shadow: 0 -2em ${reds[0]};
       height: 5em;
     }
   }
