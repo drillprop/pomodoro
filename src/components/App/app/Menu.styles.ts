@@ -1,6 +1,6 @@
 import { animated } from 'react-spring';
 import styled from 'styled-components';
-import { grays } from '../../../utils/colors';
+import { grays, reds } from '../../../utils/colors';
 import { secondFont } from '../../../utils/fonts';
 
 export const StyledNavigation = styled(animated.nav)`
@@ -38,5 +38,18 @@ export const LinkList = styled.ul`
       vertical-align: middle;
       display: inline-block;
     }
+  }
+`;
+
+export const NotLogged = styled.p`
+  margin: 0 auto;
+  width: 250px;
+  line-height: 2;
+  margin-top: 50px;
+  font-family: ${secondFont};
+  font-weight: normal;
+  color: ${grays[3]};
+  a {
+    color: ${reds[0]};
   }
 `;

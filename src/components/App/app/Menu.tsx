@@ -9,7 +9,7 @@ import { signOutStart } from '../../../duck/users/userActions';
 import { selectCurrentUser } from '../../../duck/users/userSelectors';
 import { reds } from '../../../utils/colors';
 import Icon from '../../Icon/Icon';
-import { LinkList, StyledNavigation } from './Menu.styles';
+import { LinkList, NotLogged, StyledNavigation } from './Menu.styles';
 import MenuLink from './menu/MenuLink';
 import ProfileInfo from './menu/ProfileInfo';
 
@@ -53,29 +53,37 @@ const Menu: FC = () => {
           item && (
             <StyledNavigation key={key} style={props}>
               <ProfileInfo user={user} />
-              <LinkList>
-                <li>
-                  <MenuLink path='/stats' iconName='stats2'>
-                    stats
-                  </MenuLink>
-                </li>
-                <li>
-                  <MenuLink path='/config' iconName='config'>
-                    config
-                  </MenuLink>
-                </li>
-                {user ? (
-                  <li onClick={() => dispatch(signOutStart())}>
-                    <Icon name='logout' {...itemIconProps} />
-                    logout
-                  </li>
-                ) : (
+              {user ? (
+                <LinkList>
                   <li>
-                    <Icon name='profile' {...itemIconProps} />
-                    <Link to='/login'>login</Link>
+                    <MenuLink path='/stats' iconName='stats2'>
+                      stats
+                    </MenuLink>
                   </li>
-                )}
-              </LinkList>
+                  <li>
+                    <MenuLink path='/config' iconName='config'>
+                      config
+                    </MenuLink>
+                  </li>
+                  {user ? (
+                    <li onClick={() => dispatch(signOutStart())}>
+                      <Icon name='logout' {...itemIconProps} />
+                      logout
+                    </li>
+                  ) : (
+                    <li>
+                      <Icon name='profile' {...itemIconProps} />
+                      <Link to='/login'>login</Link>
+                    </li>
+                  )}
+                </LinkList>
+              ) : (
+                <NotLogged>
+                  <Link to='/login'>sign in</Link> or{' '}
+                  <Link to='/register'>register</Link> for your account to track
+                  your stats and setup your timers
+                </NotLogged>
+              )}
             </StyledNavigation>
           )
       )}
