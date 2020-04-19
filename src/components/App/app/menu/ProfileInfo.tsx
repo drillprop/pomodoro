@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
+import { grays, reds } from '../../../../utils/colors';
 import Icon from '../../../Icon/Icon';
-import { primary } from '../../../../utils/colors';
 import { Avatar, Email, ProfileInfoWrapper } from './ProfileInfo.styles';
 
 const ProfileInfo: FC<{
@@ -9,9 +9,9 @@ const ProfileInfo: FC<{
   return (
     <ProfileInfoWrapper>
       <Avatar>
-        <Icon size={100} color={primary} name='profile' />
+        <Icon size={100} color={user ? reds[0] : grays[2]} name='profile' />
       </Avatar>
-      <Email>{user && user.email}</Email>
+      <Email>{user ? user.email : `you're not logged in`}</Email>
     </ProfileInfoWrapper>
   );
 };

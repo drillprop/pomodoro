@@ -33,6 +33,7 @@ export const HamburgerWrapper = styled.div`
     }
   }
   input {
+    cursor: pointer;
     z-index: 10;
     margin: 0;
     opacity: 0;

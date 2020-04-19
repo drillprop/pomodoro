@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { background, secondaryBackground } from '../../../../utils/colors';
+import { background, grays } from '../../../../utils/colors';
 import { secondFont } from '../../../../utils/fonts';
 
 export const ProfileInfoWrapper = styled.div`
@@ -12,7 +12,7 @@ export const Avatar = styled.div`
   height: 100px;
   border-radius: 100%;
   background-color: ${background};
-  border: 10px solid ${secondaryBackground};
+  border: 10px solid ${grays[4]};
 `;
 
 export const Name = styled.h1`
@@ -33,6 +33,6 @@ export const Email = styled.h2`
   text-transform: lowercase;
   font-family: ${secondFont};
   font-weight: 400;
-  color: ${secondaryBackground};
+  color: ${background};
   text-align: center;
 `;
