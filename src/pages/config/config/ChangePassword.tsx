@@ -4,8 +4,8 @@ import Button from '../../../components/Button/Button';
 import Input from '../../../components/Input/Input';
 import { changePasswordStart } from '../../../duck/users/userActions';
 import useForm from '../../../hooks/useForm';
-import { ButtonGroup, StyledForm } from '../Account.styles';
 import Heading from '../../../components/Heading/Heading';
+import { StyledForm, ButtonGroup } from '../Config.styles';
 
 const ChangePassword = () => {
   const [isPasswordMatch, setMatch] = useState(true);
@@ -17,7 +17,7 @@ const ChangePassword = () => {
   const [values, handleInput, submitForm, clearForm] = useForm({
     oldPassword: '',
     newPassword: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

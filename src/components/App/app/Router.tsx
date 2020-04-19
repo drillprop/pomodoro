@@ -3,12 +3,7 @@ import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { ReduxState } from '../../../duck/store';
-import { selectIsFetching } from '../../../duck/timer/timerSelectors';
-import {
-  selectCurrentUser,
-  selectIsGettingUser
-} from '../../../duck/users/userSelectors';
-import Account from '../../../pages/account/Account';
+import { selectCurrentUser } from '../../../duck/users/userSelectors';
 import Config from '../../../pages/config/Config';
 import Login from '../../../pages/login/Login';
 import Register from '../../../pages/register/Register';
@@ -23,7 +18,7 @@ interface Selectors {
 }
 
 const RouterSelectors = createStructuredSelector<ReduxState, Selectors>({
-  user: selectCurrentUser
+  user: selectCurrentUser,
 });
 
 const Router: FC = () => {
@@ -37,7 +32,6 @@ const Router: FC = () => {
         isAuth={!!user}
         component={() => <Config />}
       />
-      <ProtectedRoute path='/account' isAuth={!!user} component={Account} />
       <Suspense fallback={<Loading />}>
         <ProtectedRoute path='/stats' isAuth={!!user} component={Stats} />
       </Suspense>

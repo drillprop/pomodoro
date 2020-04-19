@@ -5,13 +5,13 @@ import Heading from '../../../components/Heading/Heading';
 import Input from '../../../components/Input/Input';
 import { deleteAccountStart } from '../../../duck/users/userActions';
 import useForm from '../../../hooks/useForm';
-import { ButtonGroup, StyledForm } from '../Account.styles';
+import { StyledForm, ButtonGroup } from '../Config.styles';
 
 const DeleteAccount: FC<{ provider: string | null }> = ({ provider }) => {
   const [isFormVisible, showForm] = useState(false);
   const dispatch = useDispatch();
   const [values, handleInput, sumbitForm, clearForm] = useForm({
-    password: ''
+    password: '',
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -25,13 +25,13 @@ const DeleteAccount: FC<{ provider: string | null }> = ({ provider }) => {
   };
   return (
     <>
-      <Heading level='h2' mtop={72}>
+      <Heading level='h2' mtop={48}>
         delete account
       </Heading>
       {!isFormVisible && (
         <Button
           mtop={32}
-          onClick={() => showForm(isFormVisible => !isFormVisible)}
+          onClick={() => showForm((isFormVisible) => !isFormVisible)}
         >
           delete account
         </Button>
