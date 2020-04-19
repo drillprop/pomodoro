@@ -1,6 +1,6 @@
 import styled from 'styled-components';
+import { background, grays } from '../../utils/colors';
 import { primFont } from '../../utils/fonts';
-import { background, secondary, primary } from '../../utils/colors';
 
 interface InputWrapperProps {
   mtop?: number;
@@ -8,8 +8,8 @@ interface InputWrapperProps {
 }
 
 export const InputWrapper = styled.div<InputWrapperProps>`
-  width: ${props => (props.width ? `${props.width}px` : '100%')};
-  margin-top: ${props => props.mtop}px;
+  width: ${(props) => (props.width ? `${props.width}px` : '100%')};
+  margin-top: ${(props) => props.mtop}px;
 `;
 
 export const StyledLabel = styled.label`
@@ -25,13 +25,13 @@ export const StyledInput = styled.input`
   font-family: ${primFont};
   font-size: 18px;
   padding: 8px;
-  color: ${primary};
+  color: ${grays[0]};
   background-color: ${background};
-  border: solid 1px ${secondary};
+  border: solid 1px ${grays[4]};
   border-radius: 5px;
   box-sizing: border-box;
   width: 100%;
   ::placeholder {
-    color: ${secondary};
+    color: ${grays[4]};
   }
 `;

@@ -1,20 +1,16 @@
 import styled from 'styled-components';
-import {
-  primary,
-  secondary,
-  secondaryBackground
-} from '../../../../utils/colors';
+import { grays } from '../../../../utils/colors';
 import { primFont, secondFont } from '../../../../utils/fonts';
 
 export const StyledTask = styled.li`
   display: grid;
   grid-template-columns: 1fr 140px;
-  background: ${secondaryBackground};
+  background: ${grays[5]};
   padding-left: 12px;
   justify-content: space-between;
   align-items: center;
   font-family: ${primFont};
-  border: solid 1px ${secondary};
+  border: solid 1px ${grays[4]};
   border-radius: 5px;
   font-size: 20px;
   margin-top: 16px;
@@ -24,9 +20,9 @@ export const StyledTaskButton = styled.button<{ disabled: boolean }>`
   width: 50%;
   border: none;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  background: ${secondaryBackground};
+  background: ${grays[5]};
   font-family: ${secondFont};
-  color: ${primary};
+  color: ${grays[0]};
   font-weight: 700;
   text-transform: lowercase;
 `;

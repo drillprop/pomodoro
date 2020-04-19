@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primary } from '../../utils/colors';
+import { reds } from '../../utils/colors';
 
 interface StyledSvgProps {
   size?: string;
@@ -7,6 +7,6 @@ interface StyledSvgProps {
 }
 
 export const StyledSvg = styled.svg<StyledSvgProps>`
-  fill: ${(props) => props.fill || primary};
+  fill: ${(props) => props.fill || reds[0]};
   width: ${({ size = '50px' }) => size};
 `;

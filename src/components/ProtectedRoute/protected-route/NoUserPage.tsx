@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
-import { NoUserWrapper } from './NoUserPage.styles';
+import { Link } from 'react-router-dom';
+import { grays } from '../../../utils/colors';
 import Button from '../../Button/Button';
 import Error from '../../Error/Error';
 import Heading from '../../Heading/Heading';
-import { primary } from '../../../utils/colors';
-import { Link } from 'react-router-dom';
+import { NoUserWrapper } from './NoUserPage.styles';
 
 const NoUser: FC = () => {
   return (
     <NoUserWrapper>
       <Heading level='h1'>oops</Heading>
       <Error
-        color={primary}
+        color={grays[0]}
         message='This section is only avalaible for signed users. Sign in or create new account'
       />
       <Link to='/login'>

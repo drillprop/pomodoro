@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primary, reds } from '../../utils/colors';
+import { reds } from '../../utils/colors';
 
 export const ProgressBarWrapper = styled.div`
   position: fixed;
