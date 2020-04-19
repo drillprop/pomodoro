@@ -1,11 +1,14 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button/Button';
+import Error from '../../components/Error/Error';
 import Heading from '../../components/Heading/Heading';
 import Input from '../../components/Input/Input';
-import Error from '../../components/Error/Error';
-import SignWrapper from '../../components/SignWrapper/SignWrapper';
-import { registerStart, clearUserError } from '../../duck/users/userActions';
+import {
+  clearUserError,
+  loginWithGoogle,
+  registerStart,
+} from '../../duck/users/userActions';
 import { selectUserError } from '../../duck/users/userSelectors';
 import useForm from '../../hooks/useForm';
 import { StyledLink } from '../login/Login.styles';
@@ -17,7 +20,7 @@ const Register: FC = () => {
   const [values, handleInput, submit] = useForm({
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -32,7 +35,7 @@ const Register: FC = () => {
   };
 
   return (
-    <SignWrapper>
+    <>
       <Heading level='h1'>register</Heading>
       {isError ? <Error message={isError.message || ''}></Error> : null}
       <form onSubmit={handleSubmit}>
@@ -71,10 +74,13 @@ const Register: FC = () => {
           register
         </Button>
         <StyledLink to='/login' onClick={() => dispatch(clearUserError())}>
-          Already have account? Sign in here
+          Already have account? <span>Sign in here</span> or{' '}
+          <span onClick={() => dispatch(loginWithGoogle())}>
+            sign in with google
+          </span>
         </StyledLink>
       </form>
-    </SignWrapper>
+    </>
   );
 };
 

@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { primary } from '../../utils/colors';
+import { grays, reds } from '../../utils/colors';
 
 export const StyledLink = styled(Link)`
   display: block;
   margin-top: 24px;
+  line-height: 1.5;
   text-decoration: none;
-  color: ${primary};
+  color: ${grays[0]};
+  span {
+    color: ${reds[0]};
+  }
 `;
