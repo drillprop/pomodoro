@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import {
   NotificationWrapper,
   CloseButton,
-  NotificationMessage
+  NotificationMessage,
 } from './Notification.styles';
 import { useTransition } from 'react-spring';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,7 +20,7 @@ const Notification: FC<Props> = () => {
   const transition = useTransition(notification, null, {
     from: { transform: 'translateY(100%)' },
     enter: { transform: 'translateY(0px)' },
-    leave: { transform: 'translateY(300%)' }
+    leave: { transform: 'translateY(300%)' },
   });
   return (
     <>
@@ -28,15 +28,13 @@ const Notification: FC<Props> = () => {
         ({ item, key, props }) =>
           item && (
             <NotificationWrapper key={key} style={props}>
-              {notification && (
-                <>
-                  <NotificationMessage>{notification}</NotificationMessage>
-                  <CloseButton
-                    aria-label='Close Notification'
-                    onClick={() => dispatch(clearNotification())}
-                  />
-                </>
-              )}
+              <>
+                <NotificationMessage>{notification}</NotificationMessage>
+                <CloseButton
+                  aria-label='Close Notification'
+                  onClick={() => dispatch(clearNotification())}
+                />
+              </>
             </NotificationWrapper>
           )
       )}
