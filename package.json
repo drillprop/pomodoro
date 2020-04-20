@@ -35,13 +35,13 @@
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.2",
-    "workbox-webpack-plugin": "^4.3.1"
+    "workbox-webpack-plugin": "^5.1.2"
   },
   "dependencies": {
     "chart.js": "^2.9.3",
     "dayjs": "^1.8.17",
     "dotenv": "^8.1.0",
-    "firebase": "^6.4.0",
+    "firebase": "^7.14.1",
     "gh-pages": "^2.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
