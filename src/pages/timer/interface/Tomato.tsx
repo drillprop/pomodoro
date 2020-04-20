@@ -21,8 +21,8 @@ const Tomato: React.FC<Props> = ({ count }) => {
   const props = useSpring({ number: isTimerStart ? progress : 50 });
   return (
     <TomatoWrapper>
-      <TomatoIcon size='280px' fill={reds[4]} />
-      <TomatoIcon size='280px' fill={reds[3]} coverage={props.number} />
+      <TomatoIcon size='270px' fill={reds[4]} />
+      <TomatoIcon size='270px' fill={reds[3]} coverage={props.number} />
     </TomatoWrapper>
   );
 };

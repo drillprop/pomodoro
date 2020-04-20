@@ -5,7 +5,7 @@ import { secondFont } from '../../../utils/fonts';
 export const ResetandRetryButtons = styled.button`
   border: none;
   background: ${reds[3]};
-  width: 140px;
+  width: 130px;
   height: 3em;
   font-size: 1rem;
   font-family: ${secondFont};
@@ -20,6 +20,6 @@ export const ControlsWrapper = styled.div`
   margin-top: -10px;
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(2, 140px);
+  grid-template-columns: repeat(2, 130px);
   grid-template-rows: 60px;
 `;

@@ -7,7 +7,7 @@ export const StyledSelect = styled.select`
   font-size: 1.5rem;
   display: block;
   margin: 0 auto;
-  color: ${grays[1]};
+  color: ${grays[2]};
   background: none;
   border: none;
   padding: 0;
@@ -15,7 +15,7 @@ export const StyledSelect = styled.select`
   padding: 0.3em 1em;
   text-align-last: center;
   :focus {
-    outline-color: ${grays[3]};
+    outline-color: ${grays[4]};
   }
 
   option {
