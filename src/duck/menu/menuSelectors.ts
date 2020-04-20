@@ -10,5 +10,8 @@ export const selectIsMenuVisible = createSelector(
 
 export const selectNotification = createSelector(
   [selectMenu],
-  ({ notification }) => notification
+  ({ notification, isNotificationVisible }) => ({
+    notification,
+    isNotificationVisible,
+  })
 );

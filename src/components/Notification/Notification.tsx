@@ -7,7 +7,7 @@ import {
 import { useTransition } from 'react-spring';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectNotification } from '../../duck/menu/menuSelectors';
-import { clearNotification } from '../../duck/menu/menuActions';
+import { hideNotification } from '../../duck/menu/menuActions';
 
 interface Props {
   message?: string;
@@ -15,9 +15,11 @@ interface Props {
 
 const Notification: FC<Props> = () => {
   const dispatch = useDispatch();
-  const notification = useSelector(selectNotification);
+  const { notification, isNotificationVisible } = useSelector(
+    selectNotification
+  );
 
-  const transition = useTransition(notification, null, {
+  const transition = useTransition(isNotificationVisible, null, {
     from: { transform: 'translateY(100%)' },
     enter: { transform: 'translateY(0px)' },
     leave: { transform: 'translateY(300%)' },
@@ -32,7 +34,7 @@ const Notification: FC<Props> = () => {
                 <NotificationMessage>{notification}</NotificationMessage>
                 <CloseButton
                   aria-label='Close Notification'
-                  onClick={() => dispatch(clearNotification())}
+                  onClick={() => dispatch(hideNotification())}
                 />
               </>
             </NotificationWrapper>

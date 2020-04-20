@@ -1,29 +1,38 @@
 import {
-  takeLatest,
-  delay,
-  put,
   all,
   call,
+  delay,
+  put,
   race,
-  take
+  take,
+  takeLatest,
 } from 'redux-saga/effects';
-import { CREATE_NOTIFICATION, CLEAR_NOTIFICATION } from './menuTypes';
-import { clearNotification } from './menuActions';
+import { clearNotification, hideNotification } from './menuActions';
+import { CREATE_NOTIFICATION, HIDE_NOTIFICATION } from './menuTypes';
 
 export function* createNotificationSaga() {
-  yield delay(5000);
-  yield put(clearNotification());
+  yield delay(4000);
+  yield put(hideNotification());
 }
 
 export function* onCreateNotification() {
-  yield takeLatest(CREATE_NOTIFICATION, function*(...args) {
+  yield takeLatest(CREATE_NOTIFICATION, function* (...args) {
     yield race({
       start: call(createNotificationSaga),
-      cancel: take([CLEAR_NOTIFICATION])
+      cancel: take([HIDE_NOTIFICATION]),
     });
   });
 }
 
+export function* onHideNotification() {
+  yield takeLatest(HIDE_NOTIFICATION, hideNotificationSaga);
+}
+
+export function* hideNotificationSaga() {
+  yield delay(500);
+  yield put(clearNotification());
+}
+
 export function* menuSagas() {
-  yield all([call(onCreateNotification)]);
+  yield all([call(onCreateNotification), call(onHideNotification)]);
 }
