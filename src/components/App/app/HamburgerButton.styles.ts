@@ -1,34 +1,39 @@
 import styled from 'styled-components';
-import { background, reds, grays } from '../../../utils/colors';
+import { grays, reds, background } from '../../../utils/colors';
 
 export const HamburgerWrapper = styled.div`
-  position: absolute;
+  padding: 8px;
+  background-color: ${background};
+  border-radius: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 6;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 35px;
-  right: 35px;
+  top: 30px;
+  right: 30px;
   div {
     z-index: 7;
     position: absolute;
-    width: 35px;
-    height: 7px;
+    width: 30px;
+    height: 6px;
     background-color: ${grays[0]};
     transition: transform 200ms;
     ::before,
     ::after {
       content: '';
       position: absolute;
-      width: 35px;
-      height: 7px;
+      width: 30px;
+      height: 6px;
       background-color: ${grays[0]};
     }
     ::before {
-      top: -14px;
+      top: -12px;
       left: 0;
     }
     ::after {
-      top: 14px;
+      top: 12px;
       left: 0;
     }
   }
