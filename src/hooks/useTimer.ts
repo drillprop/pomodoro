@@ -6,7 +6,7 @@ import {
   selectIsTimerStart,
   selectIsInterval,
   selectEndTime,
-  selectTimeleft
+  selectTimeleft,
 } from '../duck/timer/timerSelectors';
 import { useSelector } from 'react-redux';
 
@@ -23,7 +23,7 @@ const timerSelectors = createStructuredSelector<ReduxState, Selectors>({
   isTimerStart: selectIsTimerStart,
   isInterval: selectIsInterval,
   endTime: selectEndTime,
-  timeleft: selectTimeleft
+  timeleft: selectTimeleft,
 });
 
 export default () => {
@@ -54,7 +54,7 @@ export default () => {
       setCount(timeleft);
     }
 
-    if (!isTimerStart && count === 0) {
+    if (isTimerStart && count === 0) {
       sound.play();
     }
 
