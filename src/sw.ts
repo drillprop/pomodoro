@@ -10,6 +10,22 @@ const initialize = (service: ServiceWorkerGlobalScope): void => {
         .catch((err) => console.error(err))
     );
   });
+
+  service.addEventListener('activate', (e) => {
+    // clear previous cache
+    e.waitUntil(
+      caches.keys().then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cache) => {
+            if (cache !== cacheName) {
+              return caches.delete(cache);
+            }
+            return;
+          })
+        );
+      })
+    );
+  });
 };
 
 initialize(self as any);
