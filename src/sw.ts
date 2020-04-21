@@ -1,5 +1,5 @@
 const cacheName = 'v1';
-const cacheAssets = ['index.html'];
+const cacheAssets = ['index.html', 'main.js', 'sw.js'];
 
 const initialize = (service: ServiceWorkerGlobalScope): void => {
   service.addEventListener('install', (e) => {
@@ -24,6 +24,14 @@ const initialize = (service: ServiceWorkerGlobalScope): void => {
           })
         );
       })
+    );
+  });
+
+  service.addEventListener('fetch', (e) => {
+    e.respondWith(
+      fetch(e.request).catch(
+        () => caches.match(e.request) as Response | Promise<Response>
+      )
     );
   });
 };
