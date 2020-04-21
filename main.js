@@ -721,6 +721,7 @@ html {
   overflow-y: scroll;
 }
 body {
+  overscroll-behavior-y: contain;
   background: ${ot.a};
   color: ${ot.b[0]};
   font-family:${at.a};
