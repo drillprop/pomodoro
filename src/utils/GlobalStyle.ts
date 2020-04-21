@@ -8,6 +8,7 @@ html {
   overflow-y: scroll;
 }
 body {
+  overscroll-behavior-y: contain;
   background: ${background};
   color: ${grays[0]};
   font-family:${primFont};
