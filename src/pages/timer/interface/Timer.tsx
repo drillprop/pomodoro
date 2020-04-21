@@ -7,7 +7,8 @@ import Tomato from './Tomato';
 const Timer: React.FC = () => {
   const count = useTimer();
 
-  const timeAsString = convertTimeToStr(count);
+  const timeAsString =
+    count > 0 ? convertTimeToStr(count) : convertTimeToStr(0);
   return (
     <>
       <Tomato count={count} />
