@@ -1,0 +1,39 @@
+{
+  "icons": [
+    {
+      "src": "icon_192x192.9019489fb759c3296516be4bcf059aae.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_144x144.06e0b61bd47b9eb61bbd332a55304c1f.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_96x96.19fbb91f7e8fb1596f422149f17c1823.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_72x72.85fcc5a40933fabd5139ceaca2676749.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_48x48.6b18a0f0ea2c855c55185e92c5f7d84e.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_36x36.6d55c42e8db1bb52ff33f6e20d554a56.png",
+      "sizes": "36x36",
+      "type": "image/png"
+    }
+  ],
+  "name": "Pomodoro",
+  "short_name": "Pomodoro",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": "."
+}
