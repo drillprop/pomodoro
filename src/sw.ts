@@ -19,14 +19,23 @@ const initialize = (service: ServiceWorkerGlobalScope): void => {
   });
 
   service.addEventListener('fetch', (e) => {
-    const response = fetch(e.request)
-      .then((res) => {
-        const resClone = res.clone();
-        caches.open(cacheName).then((cache) => cache.put(e.request, resClone));
-        return res;
-      })
-      .catch(() => caches.match(e.request).then((res) => res));
-    e.respondWith(response as Response | Promise<Response>);
+    if (e.request.method !== 'GET') {
+      Promise.reject('no-match');
+    } else {
+      const response = fetch(e.request)
+        .then((res) => {
+          const resClone = res.clone();
+          caches.open(cacheName).then((cache) => {
+            if (e.request.method !== 'GET') {
+              Promise.reject('no-match');
+            }
+            cache.put(e.request, resClone);
+          });
+          return res;
+        })
+        .catch(() => caches.match(e.request).then((res) => res));
+      e.respondWith(response as Response | Promise<Response>);
+    }
   });
 };
 
