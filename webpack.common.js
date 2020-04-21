@@ -10,9 +10,12 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
-  entry: './src/index.tsx',
+  entry: {
+    main: './src/index.tsx',
+    sw: './src/sw.ts',
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   externals: {
