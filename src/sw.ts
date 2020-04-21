@@ -2,15 +2,6 @@ const cacheName = 'v1';
 const cacheAssets = ['index.html', 'main.js', 'sw.js'];
 
 const initialize = (service: ServiceWorkerGlobalScope): void => {
-  service.addEventListener('install', (e) => {
-    e.waitUntil(
-      caches
-        .open(cacheName)
-        .then((cache) => cache.addAll(cacheAssets))
-        .catch((err) => console.error(err))
-    );
-  });
-
   service.addEventListener('activate', (e) => {
     // clear previous cache
     e.waitUntil(
@@ -28,11 +19,14 @@ const initialize = (service: ServiceWorkerGlobalScope): void => {
   });
 
   service.addEventListener('fetch', (e) => {
-    e.respondWith(
-      fetch(e.request).catch(
-        () => caches.match(e.request) as Response | Promise<Response>
-      )
-    );
+    const response = fetch(e.request)
+      .then((res) => {
+        const resClone = res.clone();
+        caches.open(cacheName).then((cache) => cache.put(e.request, resClone));
+        return res;
+      })
+      .catch(() => caches.match(e.request).then((res) => res));
+    e.respondWith(response as Response | Promise<Response>);
   });
 };
 
