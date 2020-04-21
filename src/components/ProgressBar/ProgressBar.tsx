@@ -12,7 +12,7 @@ const ProgressBar = () => {
   const timeleft = useSelector(selectTimeleft);
   const isTimerStart = useSelector(selectIsTimerStart);
   const count = useTimer();
-  const progress = Math.abs((count / timeleft) * 100 - 100);
+  const progress = Math.abs(((count - 1) / (timeleft - 1)) * 100 - 100);
 
   const props = useSpring({
     number: progress + '%',
