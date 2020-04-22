@@ -5,10 +5,10 @@ import { primFont } from './fonts';
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Lato:700,900|Poppins:400,600&display=swap');
 html {
+  overscroll-behavior-y: none;
   overflow-y: scroll;
 }
 body {
-  overscroll-behavior-y: none;
   background: ${background};
   color: ${grays[0]};
   font-family:${primFont};
