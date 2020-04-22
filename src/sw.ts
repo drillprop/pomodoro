@@ -8,9 +8,7 @@ const initialize = (service: ServiceWorkerGlobalScope): void => {
       caches.keys().then((cacheNames) => {
         return Promise.all(
           cacheNames.map((cache) => {
-            if (cache !== cacheName) {
-              return caches.delete(cache);
-            }
+            if (cache !== cacheName) return caches.delete(cache);
             return;
           })
         );
@@ -19,23 +17,15 @@ const initialize = (service: ServiceWorkerGlobalScope): void => {
   });
 
   service.addEventListener('fetch', (e) => {
-    if (e.request.method !== 'GET') {
-      Promise.reject('no-match');
-    } else {
-      const response = fetch(e.request)
-        .then((res) => {
-          const resClone = res.clone();
-          caches.open(cacheName).then((cache) => {
-            if (e.request.method !== 'GET') {
-              Promise.reject('no-match');
-            }
-            cache.put(e.request, resClone);
-          });
-          return res;
-        })
-        .catch(() => caches.match(e.request).then((res) => res));
-      e.respondWith(response as Response | Promise<Response>);
-    }
+    if (e.request.method !== 'GET') return;
+    const response = fetch(e.request)
+      .then((res) => {
+        const resClone = res.clone();
+        caches.open(cacheName).then((cache) => cache.put(e.request, resClone));
+        return res;
+      })
+      .catch(() => caches.match(e.request).then((res) => res));
+    e.respondWith(response as Response | Promise<Response>);
   });
 };
 
