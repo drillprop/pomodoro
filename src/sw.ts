@@ -1,5 +1,4 @@
 const cacheName = 'v1';
-const cacheAssets = ['index.html', 'main.js', 'sw.js'];
 
 const initialize = (service: ServiceWorkerGlobalScope): void => {
   service.addEventListener('activate', (e) => {
@@ -17,7 +16,11 @@ const initialize = (service: ServiceWorkerGlobalScope): void => {
   });
 
   service.addEventListener('fetch', (e) => {
-    if (e.request.method !== 'GET') return;
+    const { method, url } = e.request;
+
+    const filesToIgnore = /(chrome-extension|sockjs-node|sw.js)/i;
+    if (method !== 'GET' || url.match(filesToIgnore)) return;
+
     const response = fetch(e.request)
       .then((res) => {
         const resClone = res.clone();
