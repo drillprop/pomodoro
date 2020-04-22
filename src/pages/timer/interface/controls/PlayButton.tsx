@@ -47,7 +47,12 @@ const PlayButton: FC = () => {
   };
 
   return (
-    <StyledPlayButton isTimerStart={isTimerStart} onClick={startPause}>
+    <StyledPlayButton
+      type='button'
+      isTimerStart={isTimerStart}
+      onClick={startPause}
+      aria-label={isTimerStart ? 'pause timer' : 'play timer'}
+    >
       {isTimerStart ? <Pause /> : <Icon name='play' color={reds[3]} />}
     </StyledPlayButton>
   );

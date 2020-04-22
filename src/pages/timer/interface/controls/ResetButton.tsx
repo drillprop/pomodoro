@@ -12,7 +12,9 @@ const ResetButton: FC = () => {
     isInterval ? dispatch(resetTimer()) : dispatch(skipBreak());
   };
   return (
-    <StyledButton onClick={reset}>{isInterval ? 'Reset' : 'Skip'}</StyledButton>
+    <StyledButton type='button' onClick={reset} aria-label='reset timer'>
+      {isInterval ? 'Reset' : 'Skip'}
+    </StyledButton>
   );
 };
 

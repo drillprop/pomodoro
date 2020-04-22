@@ -5,7 +5,7 @@ import { resetTimer, startTimer } from '../../../../duck/timer/timerActions';
 import { StyledRetryButton } from './RetryButton.styles';
 import {
   selectTimeleft,
-  selectIsInterval
+  selectIsInterval,
 } from '../../../../duck/timer/timerSelectors';
 import { createStructuredSelector } from 'reselect';
 import { selectSelectedTask } from '../../../../duck/tasks/taskSelectors';
@@ -19,7 +19,7 @@ interface Selectors {
 const retryButtonSelector = createStructuredSelector<ReduxState, Selectors>({
   timeleft: selectTimeleft,
   isInterval: selectIsInterval,
-  selectedTask: selectSelectedTask
+  selectedTask: selectSelectedTask,
 });
 
 const RetryButton: FC = () => {
@@ -35,7 +35,11 @@ const RetryButton: FC = () => {
     );
   };
 
-  return <StyledRetryButton onClick={retry}>Retry</StyledRetryButton>;
+  return (
+    <StyledRetryButton type='button' onClick={retry} aria-label='retry timer'>
+      Retry
+    </StyledRetryButton>
+  );
 };
 
 export default RetryButton;
