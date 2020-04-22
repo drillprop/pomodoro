@@ -8,7 +8,8 @@ import {
   selectEndTime,
   selectTimeleft,
 } from '../duck/timer/timerSelectors';
-import { useSelector } from 'react-redux';
+import { stopTimerAndSwitchFaze } from '../duck/timer/timerActions';
+import { useSelector, useDispatch } from 'react-redux';
 
 const sound = new Audio(require('../assets/sounds/typewriter.mp3'));
 
@@ -27,7 +28,10 @@ const timerSelectors = createStructuredSelector<ReduxState, Selectors>({
 });
 
 export default () => {
-  const { isTimerStart, endTime, timeleft } = useSelector(timerSelectors);
+  const dispatch = useDispatch();
+  const { isTimerStart, endTime, timeleft, isInterval } = useSelector(
+    timerSelectors
+  );
 
   const initTime: number = endTime
     ? Math.floor((endTime - Date.now()) / 1000 + 1)
@@ -56,12 +60,13 @@ export default () => {
 
     if (isTimerStart && count === 0) {
       sound.play();
+      dispatch(stopTimerAndSwitchFaze(isInterval));
     }
 
     return () => {
       clearTimeout(timeoutTimer);
     };
-  }, [count, isTimerStart, endTime, timeleft]);
+  }, [count, isTimerStart, endTime, timeleft, isInterval]);
 
   return count;
 };
