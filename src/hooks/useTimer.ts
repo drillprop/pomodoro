@@ -47,18 +47,12 @@ export default () => {
       timeoutTimer = setTimeout(() => {
         setCount(left);
       }, 1000);
-    }
-
-    if (count < 0) {
-      setCount(0);
-      clearTimeout(timeoutTimer);
-    }
-
-    if (!isTimerStart) {
+    } else {
       setCount(timeleft);
     }
 
-    if (isTimerStart && count === 0) {
+    if (isTimerStart && count <= 0) {
+      clearTimeout(timeoutTimer);
       sound.play();
       dispatch(stopTimerAndSwitchFaze(isInterval));
     }
