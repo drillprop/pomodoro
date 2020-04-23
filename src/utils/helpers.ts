@@ -7,7 +7,7 @@ export const convertTimeToObj = (seconds: number): any => {
   return {
     hours: timerDurationHours,
     minutes: timerDurationMinutes,
-    seconds: timerDurationSeconds
+    seconds: timerDurationSeconds,
   };
 };
 
@@ -36,14 +36,14 @@ export const countTimeLeft = (now: number, future: number): number => {
 
   const difference = dayJsFuture.diff(dayJsNow, 'second');
 
-  return difference;
+  return difference < 0 ? 0 : difference;
 };
 
 export const renameProperty = (oldProp: string, newProp: string, obj: any) => {
   // convert obj to array to keep order of properties in tasks
   const objEntries = Object.entries(obj);
 
-  const arrWithChangedProp = objEntries.map(arr => {
+  const arrWithChangedProp = objEntries.map((arr) => {
     if (arr.includes(oldProp)) {
       arr[0] = newProp;
     }
