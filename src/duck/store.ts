@@ -15,12 +15,14 @@ const reducer = combineReducers({
   tasks: tasksReducer,
   user: userReducer,
   stats: statsReducer,
-  menu: menuReducer
+  menu: menuReducer,
 });
 
 const store = createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware))
+  process.env.NODE_ENV === 'development'
+    ? composeWithDevTools(applyMiddleware(sagaMiddleware))
+    : applyMiddleware(sagaMiddleware)
 );
 
 export interface ReduxState {
