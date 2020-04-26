@@ -30,6 +30,32 @@ export const convertTimeToStr = (seconds: number): string => {
     return `${timerDurationHours}:${timerDurationMinutes}:${timerDurationSeconds}`;
 };
 
+interface FazeTimes {
+  breakTime: {
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
+  intervalTime: {
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
+}
+
+interface FazeTimesSeconds {
+  breakTime: number;
+  intervalTime: number;
+}
+
+export const convertFazeTimesToSeconds = (fazeTimes: FazeTimes) => {
+  const fazeNames: Array<any> = Object.keys(fazeTimes);
+  return fazeNames.reduce((acc: FazeTimesSeconds, item: keyof FazeTimes) => {
+    acc[item] = fazeTimes[item].seconds + fazeTimes[item].minutes * 60;
+    return acc;
+  }, {});
+};
+
 export const countTimeLeft = (now: number, future: number): number => {
   const dayJsNow = dayjs(now);
   const dayJsFuture = dayjs(future);
