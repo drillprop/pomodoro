@@ -17,8 +17,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   height: 3em;
   font-size: 1rem;
   font-family: ${secondFont};
-  color: ${({ invert = false }) => (invert ? reds[0] : grays[0])};
+  color: ${({ invert = false }) => (invert ? grays[5] : grays[0])};
   font-weight: 700;
   text-transform: lowercase;
   border-radius: 5px;
+  transition: color 500ms, background-color 500ms;
 `;
