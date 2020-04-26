@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { setTimersDurationStart } from '../duck/timer/timerActions';
 import { selectConfigAsObj } from '../duck/timer/timerSelectors';
+import { convertFazeTimesToSeconds } from '../utils/helpers';
 
 export default () => {
   const dispatch = useDispatch();
@@ -17,10 +18,7 @@ export default () => {
     const maxLength = name.includes('min') ? 3 : 2;
 
     const timeUnitValue: number = parseInt(
-      value
-        .split('')
-        .slice(-maxLength)
-        .join('')
+      value.split('').slice(-maxLength).join('')
     );
 
     const fazeName: string = name.split('-')[0];
@@ -32,30 +30,35 @@ export default () => {
     if (timeUnitValue <= maxInput && timeUnitValue >= minInput) {
       setTimeleft({
         ...timeleft,
-        [fazeName]: { ...timeleft[fazeName], [timeUnitName]: timeUnitValue }
+        [fazeName]: { ...timeleft[fazeName], [timeUnitName]: timeUnitValue },
       });
     } else if (timeUnitValue > maxInput) {
       setTimeleft({
         ...timeleft,
-        [fazeName]: { ...timeleft[fazeName], [timeUnitName]: maxInput }
+        [fazeName]: { ...timeleft[fazeName], [timeUnitName]: maxInput },
       });
     } else {
       setTimeleft({
         ...timeleft,
-        [fazeName]: { ...timeleft[fazeName], [timeUnitName]: minInput }
+        [fazeName]: { ...timeleft[fazeName], [timeUnitName]: minInput },
       });
     }
   };
 
+  const initialFazeTimes = convertFazeTimesToSeconds(initial);
+  const updatedFazeTimes = convertFazeTimesToSeconds(timeleft);
+
+  const isFazeTimeChange =
+    initialFazeTimes.breakTime !== updatedFazeTimes.breakTime ||
+    initialFazeTimes.intervalTime !== updatedFazeTimes.intervalTime;
+
   const submitState = (e: FormEvent) => {
     e.preventDefault();
-    const fazeNames: Array<string> = Object.keys(initial);
-    const newState = fazeNames.reduce((acc: any, item: any) => {
-      acc[item] = timeleft[item].seconds + timeleft[item].minutes * 60;
-      return acc;
-    }, {});
-    dispatch(setTimersDurationStart(newState));
+
+    if (isFazeTimeChange) {
+      dispatch(setTimersDurationStart(updatedFazeTimes));
+    }
   };
 
-  return [timeleft, updateState, submitState];
+  return [timeleft, updateState, submitState, isFazeTimeChange];
 };

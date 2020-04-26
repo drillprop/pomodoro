@@ -4,8 +4,7 @@ import ConfigFazeInputs from './config-form/ConfigFazeInputs';
 import Button from '../../../components/Button/Button';
 
 const ConfigForm: FC = () => {
-  const [timeleft, update, submit] = useChangeTime();
-
+  const [timeleft, update, submit, isFazeTimeChanged] = useChangeTime();
   return (
     <form style={{ marginTop: '30px' }} onSubmit={submit}>
       <ConfigFazeInputs
@@ -14,7 +13,7 @@ const ConfigForm: FC = () => {
         timeleft={timeleft}
       />
       <ConfigFazeInputs faze='breakTime' update={update} timeleft={timeleft} />
-      <Button mtop={32} type='submit'>
+      <Button mtop={32} type='submit' invert={isFazeTimeChanged}>
         save
       </Button>
     </form>
