@@ -1,7 +1,7 @@
 {
-  "name": "pommo",
+  "name": "pomodoro",
   "version": "1.0.0",
-  "homepage": "https://drillprop.github.io/pommodoro/",
+  "homepage": "https://drillprop.github.io/pomodoro/",
   "description": "",
   "main": "index.js",
   "scripts": {
