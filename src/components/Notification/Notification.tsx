@@ -29,7 +29,11 @@ const Notification: FC<Props> = () => {
       {transition.map(
         ({ item, key, props }) =>
           item && (
-            <NotificationWrapper key={key} style={props}>
+            <NotificationWrapper
+              key={key}
+              style={props}
+              onClick={() => dispatch(hideNotification())}
+            >
               <>
                 <NotificationMessage>{notification}</NotificationMessage>
                 <CloseButton
