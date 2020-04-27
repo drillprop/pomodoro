@@ -2,6 +2,10 @@
 
 **Progressive Web Application** written in React with Typescript.
 
+## Screenshot
+
+![screenshot](https://user-images.githubusercontent.com/51168865/80403906-ae719880-88c0-11ea-9228-22340bf3d8ea.png)
+
 ## Motivation
 
 The pomodoro application is created to fight with procrastination using **_pomodoro technique_**. If you don't know what is it and how it works, you can read about [this technique here](https://en.wikipedia.org/wiki/Pomodoro_Technique).
