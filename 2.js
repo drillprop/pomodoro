@@ -1,7 +1,7 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{71:function(e,t,a){"use strict";a.r(t);var s=a(0),n=a.n(s),c=a(10),r=a(2);const l=r.c.main.withConfig({displayName:"StatsWrapper",componentId:"sc-17i8t3x"})`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{72:function(e,t,a){"use strict";a.r(t);var s=a(0),n=a.n(s),c=a(10),r=a(2);const l=r.c.main.withConfig({displayName:"StatsWrapper",componentId:"sc-17i8t3x"})`
   display: grid;
   justify-content: center;
-`;var i=a(4),o=a(24),u=a(6),b=a(31);const d=({stats:e})=>e,m=Object(u.a)([d],({statsByDay:e})=>e);Object(u.a)([d],({isFetching:e})=>e),Object(u.a)([d],({error:e})=>e);var p=a(70),j=a.n(p),v=a(1);const O=r.c.div.withConfig({displayName:"StatsChartWrapper",componentId:"sc-iczysd"})`
+`;var i=a(3),o=a(24),u=a(6),b=a(31);const d=({stats:e})=>e,m=Object(u.a)([d],({statsByDay:e})=>e);Object(u.a)([d],({isFetching:e})=>e),Object(u.a)([d],({error:e})=>e);var p=a(71),j=a.n(p),v=a(1);const O=r.c.div.withConfig({displayName:"StatsChartWrapper",componentId:"sc-iczysd"})`
   position: relative;
   width: 90vw;
   max-width: 700px;
