@@ -12,6 +12,8 @@ import { stopTimerAndSwitchFaze } from '../duck/timer/timerActions';
 import { useSelector, useDispatch } from 'react-redux';
 
 const sound = new Audio(require('../assets/sounds/typewriter.mp3'));
+const blank = new Audio(require('../assets/sounds/blank.ogg'));
+blank.playbackRate = 0.1;
 
 interface Selectors {
   isTimerStart: boolean;
@@ -38,6 +40,15 @@ export default () => {
     : timeleft;
 
   let [count, setCount] = useState(initTime);
+
+  useEffect(() => {
+    if (isTimerStart) {
+      blank.play();
+    } else {
+      blank.pause();
+      blank.currentTime = 0;
+    }
+  }, [isTimerStart]);
 
   useEffect(() => {
     let timeoutTimer: any;
