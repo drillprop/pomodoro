@@ -70,7 +70,11 @@ const Register: FC = () => {
           confirm password
         </Input>
         {!isPasswordMatch ? <p>Passwords doesn't match</p> : null}
-        <Button mtop={42} type='submit'>
+        <Button
+          mtop={42}
+          type='submit'
+          invert={values.password && values.confirmPassword && values.email}
+        >
           register
         </Button>
         <StyledLink to='/login' onClick={() => dispatch(clearUserError())}>

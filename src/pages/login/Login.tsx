@@ -51,7 +51,11 @@ const Login: FC = () => {
         >
           password
         </Input>
-        <Button type='submit' mtop={42}>
+        <Button
+          type='submit'
+          mtop={42}
+          invert={values.password && values.email}
+        >
           login
         </Button>
         <StyledLink to='register' onClick={() => dispatch(clearUserError())}>
