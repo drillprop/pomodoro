@@ -23,7 +23,7 @@ if ('serviceWorker' in navigator) {
       .register(
         process.env.NODE_ENV === 'development'
           ? '/sw.js'
-          : 'https://drillprop.github.io/pommodoro/sw.js'
+          : 'https://drillprop.github.io/pomodoro/sw.js'
       )
       .catch((err) => console.error(err));
   });
