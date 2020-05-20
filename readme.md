@@ -12,7 +12,13 @@ The pomodoro application is created to fight with procrastination using **_pomod
 
 ## Description
 
-Application is using authentication system and realtime database based on **firebase**. Every signed user can track his statistics, manage tasks, configure duration of work intervals(known as _pomodoros_ or _tomatoes_) and breaks.
+Application is using authentication system and firebase realtime database. Every signed user can track his statistics, manage tasks, configure duration of work intervals(known as _pomodoros_ or _tomatoes_) and breaks.
+
+### Why application playing silent sound when timer start?
+
+If you try this app on phone you will notice that when timer starts, the application will play silent sound. It's not a bug and it's completely intentional. Because of nature of PWA, right now, there is no way to wake up your phone and play alert when timer ends. That's why I decided to add blank sound to keep phone in some kind of "awake state". Even if you turn off your screen, **pomodoro** will ring the alarm when timer ends.
+
+Also, I know that, a much better solution would be just create native app, but i haven't tried any native technologies yet.
 
 ## Technologies
 
